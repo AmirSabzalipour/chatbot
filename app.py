@@ -13,12 +13,24 @@ st.set_page_config(page_title=BOT_NAME, page_icon=BOT_ICON_PATH, layout="centere
 
 st.markdown("""
 <style>
-.block-container {padding-top: 2rem; max-width: 900px;}
-.stChatMessage {border-radius: 14px; padding: 6px 10px;}
-[data-testid="stChatInput"] textarea {border-radius: 14px;}
-.model-pill {display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid #ddd;font-size:0.9rem;}
+/* Page background */
+.stApp { background-color: #f0f0f0; }
+
+/* Main container */
+.block-container { padding-top: 2rem; max-width: 900px; }
+
+/* Chat UI */
+.stChatMessage { border-radius: 14px; padding: 6px 10px; }
+[data-testid="stChatInput"] textarea { border-radius: 14px; }
+
+/* Hide the model pill under the title */
+.model-pill { display: none !important; }
+
+/* Optional: soften sidebar too */
+section[data-testid="stSidebar"] { background-color: #e8e8e8; }
 </style>
 """, unsafe_allow_html=True)
+
 
 # ---------------- DOC (from file) ----------------
 DOC_PATH = Path("data/document.txt")
@@ -108,13 +120,15 @@ with st.sidebar:
 
 # ---------------- HEADER ----------------
 st.title(f"{BOT_NAME}")
-st.markdown(f"<div class='model-pill'>{MODEL_NAME}</div>", unsafe_allow_html=True)
 
 # ---------------- PASSWORD GATE ----------------
 pw_required = st.secrets.get("APP_PASSWORD", "")
 if pw_required:
-    st.markdown("### 👋 Welcome to OrcaBot")
-    st.write("Please insert your password, dear 🙂")
+    pw = st.text_input("Password", type="password", placeholder="Enter password…")
+    if pw != pw_required:
+        st.stop()
+
+    
 
     pw = st.text_input("Password", type="password", placeholder="Enter password…")
     if pw != pw_required:
