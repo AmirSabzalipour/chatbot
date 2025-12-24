@@ -13,29 +13,42 @@ st.set_page_config(page_title=BOT_NAME, page_icon=BOT_ICON_PATH, layout="centere
 
 st.markdown("""
 <style>
-/* Page + default text color */
-.stApp { background-color: #f0f0f0; color: #000000 !important; }
-
-/* Force most Streamlit text to black */
-.stApp, .stApp * { color: #000000 !important; }
+/* Page + text */
+.stApp { background-color: #f0f0f0; color: #000 !important; }
+.stApp, .stApp * { color: #000 !important; }
 
 /* Sidebar background */
 section[data-testid="stSidebar"] { background-color: #e8e8e8 !important; }
 
-/* Inputs */
-input, textarea { color: #000000 !important; }
+/* Make inputs/selects look white (password + chat input + selectbox) */
+input, textarea { 
+  background: #ffffff !important; 
+  color: #000000 !important; 
+  border: 1px solid #cfcfcf !important;
+}
+div[data-baseweb="select"] > div {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #cfcfcf !important;
+}
+
+/* Fix dropdown menu itself */
+div[role="listbox"] { background: #ffffff !important; }
+div[role="option"] { background: #ffffff !important; color: #000000 !important; }
 
 /* Main container */
 .block-container { padding-top: 2rem; max-width: 900px; }
 
-/* Chat UI */
+/* Chat bubbles */
 .stChatMessage { border-radius: 14px; padding: 6px 10px; }
-[data-testid="stChatInput"] textarea { border-radius: 14px; }
 
-/* Hide the model pill under the title (if any) */
-.model-pill { display: none !important; }
+/* Chat input container (sometimes stays dark without this) */
+[data-testid="stChatInput"] {
+  background: transparent !important;
+}
 </style>
 """, unsafe_allow_html=True)
+
 
 
 # ---------------- DOC (from file) ----------------
@@ -105,8 +118,20 @@ def rag_answer(llm, embedder, col, query, model_name, top_k=5):
 
 # ---------------- SIDEBAR (Model + Debug) ----------------
 with st.sidebar:
+    st.markdown("""
+    <style>
+    /* Reduce space under the sidebar image and above the title */
+    .sidebar-orca img { margin-bottom: -12px !important; }
+    .sidebar-title { margin-top: 0px !important; margin-bottom: 0px !important; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<div class="sidebar-orca">', unsafe_allow_html=True)
     st.image(BOT_ICON_PATH, width=48)
-    st.markdown(f"## {BOT_NAME}")
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    st.markdown(f'<div class="sidebar-title"><h2>{BOT_NAME}</h2></div>', unsafe_allow_html=True)
+
     st.caption("Private demo")
     st.divider()
 
@@ -125,7 +150,7 @@ with st.sidebar:
     DEBUG = st.toggle("Show retrieved context", value=False)
 
 # ---------------- HEADER ----------------
-st.title(f"{BOT_NAME}")
+st.title(BOT_NAME)
 
 # ---------------- PASSWORD GATE ----------------
 pw_required = st.secrets.get("APP_PASSWORD", "")
