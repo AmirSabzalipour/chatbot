@@ -6,10 +6,10 @@ import time
 from pathlib import Path
 
 # ---------------- UI CONFIG ----------------
-BOT_NAME = "AmirBot"
-BOT_ICON = "🤖"
+BOT_NAME = "Orcabot"
+BOT_ICON_PATH = "assets/orca.png"
 
-st.set_page_config(page_title=BOT_NAME, page_icon=BOT_ICON, layout="centered")
+st.set_page_config(page_title=BOT_NAME, page_icon=BOT_ICON_PATH, layout="centered")
 
 st.markdown("""
 <style>
@@ -71,7 +71,8 @@ def build_rag(document_text: str):
 def rag_answer(llm, embedder, col, query, model_name, top_k=5):
     q = embedder.encode([query], convert_to_numpy=True)[0]
     res = col.query(query_embeddings=[q], n_results=top_k)
-    ctx = "\n\n---\n\n".join(dedup_near(res["documents"][0]))
+    chunks = dedup_near(res["documents"][0])
+    ctx = "\n\n---\n\n".join(chunks)
 
     r = llm.chat.completions.create(
         model=model_name,
@@ -82,11 +83,12 @@ def rag_answer(llm, embedder, col, query, model_name, top_k=5):
         max_tokens=250,
         temperature=0.2,
     )
-    return r.choices[0].message.content
+    return r.choices[0].message.content, chunks
 
-# ---------------- SIDEBAR (Model) ----------------
+# ---------------- SIDEBAR (Model + Debug) ----------------
 with st.sidebar:
-    st.markdown(f"## {BOT_ICON} {BOT_NAME}")
+    st.image(BOT_ICON_PATH, width=48)
+    st.markdown(f"## {BOT_NAME}")
     st.caption("Private demo")
     st.divider()
 
@@ -101,8 +103,11 @@ with st.sidebar:
         label_visibility="collapsed",
     )
 
+    st.divider()
+    DEBUG = st.toggle("Show retrieved context", value=False)
+
 # ---------------- HEADER ----------------
-st.title(f"{BOT_ICON} {BOT_NAME}")
+st.title(f"{BOT_NAME}")
 st.caption("Ask your question. If it’s not in the doc, I’ll say I don’t know.")
 st.markdown(f"<div class='model-pill'>{MODEL_NAME}</div>", unsafe_allow_html=True)
 
@@ -184,7 +189,11 @@ if prompt:
 
     with st.chat_message("assistant"):
         with st.spinner("Thinking…"):
-            ans = rag_answer(llm, embedder, col, prompt, model_name=MODEL_NAME)
+            ans, retrieved_chunks = rag_answer(llm, embedder, col, prompt, model_name=MODEL_NAME)
         st.markdown(ans)
+
+        if DEBUG:
+            with st.expander("Retrieved context"):
+                st.write(retrieved_chunks)
 
     messages.append({"role": "assistant", "content": ans})
