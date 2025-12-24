@@ -108,18 +108,16 @@ with st.sidebar:
 
 # ---------------- HEADER ----------------
 st.title(f"{BOT_NAME}")
-st.caption("Ask your question. If it’s not in the doc, I’ll say I don’t know.")
 st.markdown(f"<div class='model-pill'>{MODEL_NAME}</div>", unsafe_allow_html=True)
 
 # ---------------- PASSWORD GATE ----------------
 pw_required = st.secrets.get("APP_PASSWORD", "")
 if pw_required:
-    st.markdown("### 👋 Welcome to AmirBot")
+    st.markdown("### 👋 Welcome to OrcaBot")
     st.write("Please insert your password, dear 🙂")
 
     pw = st.text_input("Password", type="password", placeholder="Enter password…")
     if pw != pw_required:
-        st.info("If you don’t have the password, message Amir.")
         st.stop()
 
 # ---------------- RAG INIT (rebuilds when document changes) ----------------
@@ -133,7 +131,7 @@ if "active_session" not in st.session_state:
     sid = str(int(time.time()))
     st.session_state.sessions[sid] = {
         "name": "Chat 1",
-        "messages": [{"role": "assistant", "content": "Hi! Ask me anything about the document 🙂"}],
+        "messages": [{"role": "assistant", "content": "Hi! I am here to help you 🙂"}],
     }
     st.session_state.active_session = sid
 
