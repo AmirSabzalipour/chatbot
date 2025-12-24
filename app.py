@@ -213,10 +213,7 @@ with st.sidebar:
     st.markdown("**Try these:**")
     st.markdown("- How can users export reports?\n- What can admins do?\n- What is the pricing?")
 
-    st.divider()
-    if st.button("Clear chat"):
-        st.session_state.messages = []
-        st.rerun()
+    
 
 # ---------------- HEADER ----------------
 st.title(f"{BOT_ICON} {BOT_NAME}")
