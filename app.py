@@ -224,26 +224,82 @@ st.caption("Ask questions about the document. If it’s not in the doc, I’ll s
 st.markdown(f"<div class='model-pill'>{MODEL_NAME}</div>", unsafe_allow_html=True)
 
 # ---------------- PASSWORD GATE ----------------
+# ---------------- PASSWORD GATE ----------------
 pw_required = st.secrets.get("APP_PASSWORD", "")
 if pw_required:
-    pw = st.text_input("Password", type="password")
+    st.markdown("### 👋 Welcome to AmirBot")
+    st.write("Please insert your password, dear 🙂")
+
+    pw = st.text_input("Password", type="password", placeholder="Enter password…")
     if pw != pw_required:
+        st.info("If you don’t have the password, message Amir.")
         st.stop()
 
 # ---------------- RAG INIT ----------------
-llm, embedder, col = build_rag()
+llm, embedder, col = build_rag()  # shows 🔄 Thinking… while building (via @st.cache_resource)
 
-# ---------------- CHAT ----------------
-if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "Hi! Ask me anything about the document 🙂"}]
+# ---------------- CHAT HISTORY (multi-session) ----------------
+import time
 
-for m in st.session_state.messages:
+if "sessions" not in st.session_state:
+    st.session_state.sessions = {}
+
+if "active_session" not in st.session_state:
+    sid = str(int(time.time()))
+    st.session_state.sessions[sid] = {
+        "name": "Chat 1",
+        "messages": [{"role": "assistant", "content": "Hi! Ask me anything about the document 🙂"}],
+    }
+    st.session_state.active_session = sid
+
+def new_chat():
+    sid = str(int(time.time()))
+    n = len(st.session_state.sessions) + 1
+    st.session_state.sessions[sid] = {
+        "name": f"Chat {n}",
+        "messages": [{"role": "assistant", "content": "Hi! Ask me anything about the document 🙂"}],
+    }
+    st.session_state.active_session = sid
+    st.rerun()
+
+with st.sidebar:
+    st.subheader("Chat history")
+    if st.button("➕ New chat"):
+        new_chat()
+
+    session_ids = list(st.session_state.sessions.keys())[::-1]  # newest first
+    chosen = st.radio(
+        "Sessions",
+        options=session_ids,
+        format_func=lambda x: st.session_state.sessions[x]["name"],
+        label_visibility="collapsed",
+    )
+    st.session_state.active_session = chosen
+
+    st.session_state.sessions[chosen]["name"] = st.text_input(
+        "Rename chat",
+        value=st.session_state.sessions[chosen]["name"],
+    )
+
+    if st.button("🗑️ Delete this chat"):
+        del st.session_state.sessions[chosen]
+        if not st.session_state.sessions:
+            new_chat()
+        else:
+            st.session_state.active_session = list(st.session_state.sessions.keys())[-1]
+            st.rerun()
+
+# Use active session messages
+messages = st.session_state.sessions[st.session_state.active_session]["messages"]
+
+# ---------------- CHAT UI ----------------
+for m in messages:
     with st.chat_message(m["role"]):
         st.markdown(m["content"])
 
 prompt = st.chat_input("Ask about the document…")
 if prompt:
-    st.session_state.messages.append({"role": "user", "content": prompt})
+    messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
@@ -252,4 +308,4 @@ if prompt:
             ans = rag_answer(llm, embedder, col, prompt, model_name=MODEL_NAME)
         st.markdown(ans)
 
-    st.session_state.messages.append({"role": "assistant", "content": ans})
+    messages.append({"role": "assistant", "content": ans})
