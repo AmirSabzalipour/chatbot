@@ -47,10 +47,12 @@ div[role="option"] { background: #ffffff !important; color: #000000 !important; 
 /* Chat input container (sometimes stays dark without this) */
 [data-testid="stChatInput"] { background: transparent !important; }
 
-/* --- Hide Streamlit top toolbar/decoration (removes the black top bar) --- */
-[data-testid="stToolbar"] { display: none !important; }
+/* --- Keep header so top-left arrows stay visible --- */
+header { background: #f0f0f0 !important; }
+
+/* Hide Streamlit decoration + toolbar (removes black top bar + share/star/menu) */
 [data-testid="stDecoration"] { display: none !important; }
-header { display: none !important; }
+[data-testid="stToolbar"] { display: none !important; }
 
 /* ---------- Force WHITE backgrounds for Streamlit widgets ---------- */
 
@@ -102,6 +104,7 @@ div[data-baseweb="button"] button{
 }
 </style>
 """, unsafe_allow_html=True)
+
 
 # ---------------- DOC (from file) ----------------
 DOC_PATH = Path("data/document.txt")
