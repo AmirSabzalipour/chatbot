@@ -13,7 +13,7 @@ st.set_page_config(page_title=BOT_NAME, page_icon=BOT_ICON_PATH, layout="centere
 
 st.markdown("""
 <style>
-/* Page + text */
+/* --- Global background + text --- */
 .stApp { background-color: #f0f0f0; color: #000 !important; }
 .stApp, .stApp * { color: #000 !important; }
 
@@ -21,9 +21,9 @@ st.markdown("""
 section[data-testid="stSidebar"] { background-color: #e8e8e8 !important; }
 
 /* Make inputs/selects look white (password + chat input + selectbox) */
-input, textarea { 
-  background: #ffffff !important; 
-  color: #000000 !important; 
+input, textarea {
+  background: #ffffff !important;
+  color: #000000 !important;
   border: 1px solid #cfcfcf !important;
 }
 div[data-baseweb="select"] > div {
@@ -43,22 +43,29 @@ div[role="option"] { background: #ffffff !important; color: #000000 !important; 
 .stChatMessage { border-radius: 14px; padding: 6px 10px; }
 
 /* Chat input container (sometimes stays dark without this) */
-[data-testid="stChatInput"] {
-  background: transparent !important;
-}
+[data-testid="stChatInput"] { background: transparent !important; }
+
+/* --- Hide Streamlit top toolbar/decoration (usually removes the black top bar) --- */
+[data-testid="stToolbar"] { display: none !important; }
+[data-testid="stDecoration"] { display: none !important; }
+header { display: none !important; }
 </style>
 """, unsafe_allow_html=True)
-
-
 
 # ---------------- DOC (from file) ----------------
 DOC_PATH = Path("data/document.txt")
 
 @st.cache_data
 def load_document(path: str) -> str:
-    return Path(path).read_text(encoding="utf-8").strip()
+    p = Path(path)
+    if not p.exists():
+        return ""
+    return p.read_text(encoding="utf-8").strip()
 
 DOCUMENT = load_document(str(DOC_PATH))
+if not DOCUMENT:
+    st.error("Document not found. Please add your file at: data/document.txt")
+    st.stop()
 
 # ---------------- HELPERS ----------------
 def chunk_text_words(text, chunk_size=120, overlap=30):
@@ -116,58 +123,6 @@ def rag_answer(llm, embedder, col, query, model_name, top_k=5):
     )
     return r.choices[0].message.content, chunks
 
-# ---------------- SIDEBAR (Model + Debug) ----------------
-with st.sidebar:
-    st.markdown("""
-    <style>
-    /* Reduce space under the sidebar image and above the title */
-    .sidebar-orca img { margin-bottom: -12px !important; }
-    .sidebar-title { margin-top: 0px !important; margin-bottom: 0px !important; }
-    </style>
-    """, unsafe_allow_html=True)
-
-    st.markdown('<div class="sidebar-orca">', unsafe_allow_html=True)
-    st.image(BOT_ICON_PATH, width=48)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    st.markdown(f'<div class="sidebar-title"><h2>{BOT_NAME}</h2></div>', unsafe_allow_html=True)
-
-    st.caption("Private demo")
-    st.divider()
-
-    st.markdown("### Model")
-    MODEL_NAME = st.selectbox(
-        "Choose model",
-        [
-            "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
-            "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
-        ],
-        index=0,
-        label_visibility="collapsed",
-    )
-
-    st.divider()
-    DEBUG = st.toggle("Show retrieved context", value=False)
-
-# ---------------- HEADER ----------------
-st.title(BOT_NAME)
-
-# ---------------- PASSWORD GATE ----------------
-pw_required = st.secrets.get("APP_PASSWORD", "")
-if pw_required:
-    pw = st.text_input("Password", type="password", placeholder="Enter password…")
-    if pw != pw_required:
-        st.stop()
-
-    
-
-    pw = st.text_input("Password", type="password", placeholder="Enter password…")
-    if pw != pw_required:
-        st.stop()
-
-# ---------------- RAG INIT (rebuilds when document changes) ----------------
-llm, embedder, col = build_rag(DOCUMENT)
-
 # ---------------- CHAT HISTORY (multi-session) ----------------
 if "sessions" not in st.session_state:
     st.session_state.sessions = {}
@@ -185,14 +140,45 @@ def new_chat():
     n = len(st.session_state.sessions) + 1
     st.session_state.sessions[sid] = {
         "name": f"Chat {n}",
-        "messages": [{"role": "assistant", "content": "Hi! Ask me anything about the document 🙂"}],
+        "messages": [{"role": "assistant", "content": "Hi! I am here to help you 🙂"}],
     }
     st.session_state.active_session = sid
     st.rerun()
 
+# ---------------- SIDEBAR (ALL-IN-ONE: logo + model + chat history + debug) ----------------
 with st.sidebar:
+    st.markdown("""
+    <style>
+    .sidebar-orca img { margin-bottom: -12px !important; }
+    .sidebar-title { margin-top: 0px !important; margin-bottom: 0px !important; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<div class="sidebar-orca">', unsafe_allow_html=True)
+    st.image(BOT_ICON_PATH, width=48)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    st.markdown(f'<div class="sidebar-title"><h2>{BOT_NAME}</h2></div>', unsafe_allow_html=True)
+    st.caption("Private demo")
+    st.divider()
+
+    st.markdown("### Model")
+    MODEL_NAME = st.selectbox(
+        "Choose model",
+        [
+            "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+            "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
+        ],
+        index=0,
+        label_visibility="collapsed",
+        key="model_select",
+    )
+
+    DEBUG = st.toggle("Show retrieved context", value=False, key="debug_toggle")
+    st.divider()
+
     st.subheader("Chat history")
-    if st.button("➕ New chat"):
+    if st.button("➕ New chat", key="new_chat_btn"):
         new_chat()
 
     session_ids = list(st.session_state.sessions.keys())[::-1]  # newest first
@@ -201,15 +187,17 @@ with st.sidebar:
         options=session_ids,
         format_func=lambda x: st.session_state.sessions[x]["name"],
         label_visibility="collapsed",
+        key="session_radio",
     )
     st.session_state.active_session = chosen
 
     st.session_state.sessions[chosen]["name"] = st.text_input(
         "Rename chat",
         value=st.session_state.sessions[chosen]["name"],
+        key=f"rename_{chosen}",
     )
 
-    if st.button("🗑️ Delete this chat"):
+    if st.button("🗑️ Delete this chat", key="delete_chat_btn"):
         del st.session_state.sessions[chosen]
         if not st.session_state.sessions:
             new_chat()
@@ -217,6 +205,25 @@ with st.sidebar:
             st.session_state.active_session = list(st.session_state.sessions.keys())[-1]
             st.rerun()
 
+# ---------------- HEADER ----------------
+st.title(BOT_NAME)
+
+# ---------------- PASSWORD GATE ----------------
+pw_required = st.secrets.get("APP_PASSWORD", "")
+if pw_required:
+    pw = st.text_input(
+        "Password",
+        type="password",
+        placeholder="Enter password…",
+        key="password_input_main",
+    )
+    if pw != pw_required:
+        st.stop()
+
+# ---------------- RAG INIT ----------------
+llm, embedder, col = build_rag(DOCUMENT)
+
+# Use active session messages
 messages = st.session_state.sessions[st.session_state.active_session]["messages"]
 
 # ---------------- CHAT UI ----------------
