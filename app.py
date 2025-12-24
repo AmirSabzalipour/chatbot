@@ -2,6 +2,7 @@ import streamlit as st
 from together import Together
 import chromadb
 from sentence_transformers import SentenceTransformer
+import time
 
 # ---------------- UI CONFIG ----------------
 BOT_NAME = "AmirBot"
@@ -14,7 +15,6 @@ st.markdown("""
 .block-container {padding-top: 2rem; max-width: 900px;}
 .stChatMessage {border-radius: 14px; padding: 6px 10px;}
 [data-testid="stChatInput"] textarea {border-radius: 14px;}
-/* Small pill style */
 .model-pill {display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid #ddd;font-size:0.9rem;}
 </style>
 """, unsafe_allow_html=True)
@@ -39,7 +39,7 @@ Analytical / Characterization Techniques:
 - Biochemical Oxygen Demand (BOD)
 - Chemical Oxygen Demand (COD)
 - Electron Paramagnetic Resonance (EPR)
- ' Infrared (IR)
+- Infrared (IR)
 - Ultraviolet-Visible (UV-Vis)
 - Diffuse Reflectance Spectroscopy (DRS-UV)
 - BET surface area analysis
@@ -139,7 +139,6 @@ EDUCATION
 ADDITIONAL NOTES
 - Flexible to relocate or commute as needed
 - Happy to travel for work and engage in international collaborations
-
 """.strip()
 
 # ---------------- HELPERS ----------------
@@ -160,10 +159,11 @@ def dedup_near(texts, overlap_threshold=0.9):
         w = set(t.lower().split())
         if any((len(w & ws) / max(1, min(len(w), len(ws)))) >= overlap_threshold for ws in kept_sets):
             continue
-        kept.append(t); kept_sets.append(w)
+        kept.append(t)
+        kept_sets.append(w)
     return [t for t in original if t in kept]
 
-@st.cache_resource
+@st.cache_resource(show_spinner="🔄 Thinking…")
 def build_rag():
     embedder = SentenceTransformer("all-MiniLM-L6-v2")
     chunks = chunk_text_words(DOCUMENT, 80, 20)
@@ -171,7 +171,11 @@ def build_rag():
 
     db = chromadb.Client()
     col = db.get_or_create_collection("rag", metadata={"hnsw:space": "cosine"})
-    col.add(ids=[str(i) for i in range(len(chunks))], documents=chunks, embeddings=embs.tolist())
+    col.add(
+        ids=[str(i) for i in range(len(chunks))],
+        documents=chunks,
+        embeddings=embs.tolist(),
+    )
 
     llm = Together(api_key=st.secrets["TOGETHER_API_KEY"])
     return llm, embedder, col
@@ -208,14 +212,12 @@ with st.sidebar:
         index=0,
         label_visibility="collapsed",
     )
-    
 
 # ---------------- HEADER ----------------
 st.title(f"{BOT_ICON} {BOT_NAME}")
-st.caption("Ask your question.If it’s not in the doc, I’ll say I don’t know.")
+st.caption("Ask your question. If it’s not in the doc, I’ll say I don’t know.")
 st.markdown(f"<div class='model-pill'>{MODEL_NAME}</div>", unsafe_allow_html=True)
 
-# ---------------- PASSWORD GATE ----------------
 # ---------------- PASSWORD GATE ----------------
 pw_required = st.secrets.get("APP_PASSWORD", "")
 if pw_required:
@@ -228,11 +230,9 @@ if pw_required:
         st.stop()
 
 # ---------------- RAG INIT ----------------
-llm, embedder, col = build_rag()  # shows 🔄 Thinking… while building (via @st.cache_resource)
+llm, embedder, col = build_rag()
 
 # ---------------- CHAT HISTORY (multi-session) ----------------
-import time
-
 if "sessions" not in st.session_state:
     st.session_state.sessions = {}
 
@@ -281,7 +281,6 @@ with st.sidebar:
             st.session_state.active_session = list(st.session_state.sessions.keys())[-1]
             st.rerun()
 
-# Use active session messages
 messages = st.session_state.sessions[st.session_state.active_session]["messages"]
 
 # ---------------- CHAT UI ----------------
