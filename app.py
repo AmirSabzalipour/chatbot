@@ -195,7 +195,7 @@ def rag_answer(llm, embedder, col, query, model_name, top_k=5):
 # ---------------- SIDEBAR (Model + Controls) ----------------
 with st.sidebar:
     st.markdown(f"## {BOT_ICON} {BOT_NAME}")
-    st.caption("Private demo for feedback")
+    st.caption("Private demo")
     st.divider()
 
     st.markdown("### Model")
@@ -208,16 +208,11 @@ with st.sidebar:
         index=0,
         label_visibility="collapsed",
     )
-
-    st.divider()
-    st.markdown("**Try these:**")
-    st.markdown("- How can users export reports?\n- What can admins do?\n- What is the pricing?")
-
     
 
 # ---------------- HEADER ----------------
 st.title(f"{BOT_ICON} {BOT_NAME}")
-st.caption("Ask questions about the document. If it’s not in the doc, I’ll say I don’t know.")
+st.caption("Ask your question.If it’s not in the doc, I’ll say I don’t know.")
 st.markdown(f"<div class='model-pill'>{MODEL_NAME}</div>", unsafe_allow_html=True)
 
 # ---------------- PASSWORD GATE ----------------
