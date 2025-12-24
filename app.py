@@ -26,6 +26,8 @@ input, textarea {
   color: #000000 !important;
   border: 1px solid #cfcfcf !important;
 }
+
+/* Selectbox (BaseWeb) */
 div[data-baseweb="select"] > div {
   background: #ffffff !important;
   color: #000000 !important;
@@ -45,10 +47,59 @@ div[role="option"] { background: #ffffff !important; color: #000000 !important; 
 /* Chat input container (sometimes stays dark without this) */
 [data-testid="stChatInput"] { background: transparent !important; }
 
-/* --- Hide Streamlit top toolbar/decoration (usually removes the black top bar) --- */
+/* --- Hide Streamlit top toolbar/decoration (removes the black top bar) --- */
 [data-testid="stToolbar"] { display: none !important; }
 [data-testid="stDecoration"] { display: none !important; }
 header { display: none !important; }
+
+/* ---------- Force WHITE backgrounds for Streamlit widgets ---------- */
+
+/* Buttons (New chat / Delete) */
+.stButton > button,
+button[kind="primary"],
+button[kind="secondary"]{
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #cfcfcf !important;
+  box-shadow: none !important;
+}
+.stButton > button:hover{
+  background: #f7f7f7 !important;
+}
+
+/* Radio items (Chat 1 selector pill background) */
+div[role="radiogroup"] label{
+  background: #ffffff !important;
+  border: 1px solid #cfcfcf !important;
+  border-radius: 10px !important;
+  padding: 8px 10px !important;
+  margin-bottom: 8px !important;
+}
+div[role="radiogroup"] label:hover{
+  background: #f7f7f7 !important;
+}
+
+/* Selected radio item (safe override) */
+div[role="radiogroup"] input:checked + div{
+  background: #ffffff !important;
+}
+
+/* Password input container + the eye icon container */
+div[data-testid="stTextInput"] > div{
+  background: #ffffff !important;
+  border-radius: 10px !important;
+}
+div[data-testid="stTextInput"] button{
+  background: #ffffff !important;
+  border: 0 !important;
+}
+
+/* Also force any "BaseWeb" button surfaces to white */
+div[data-baseweb="button"] button{
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #cfcfcf !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
