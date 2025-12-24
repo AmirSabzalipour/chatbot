@@ -13,8 +13,17 @@ st.set_page_config(page_title=BOT_NAME, page_icon=BOT_ICON_PATH, layout="centere
 
 st.markdown("""
 <style>
-/* Page background */
-.stApp { background-color: #f0f0f0; }
+/* Page + default text color */
+.stApp { background-color: #f0f0f0; color: #000000 !important; }
+
+/* Force most Streamlit text to black */
+.stApp, .stApp * { color: #000000 !important; }
+
+/* Sidebar background */
+section[data-testid="stSidebar"] { background-color: #e8e8e8 !important; }
+
+/* Inputs */
+input, textarea { color: #000000 !important; }
 
 /* Main container */
 .block-container { padding-top: 2rem; max-width: 900px; }
@@ -23,11 +32,8 @@ st.markdown("""
 .stChatMessage { border-radius: 14px; padding: 6px 10px; }
 [data-testid="stChatInput"] textarea { border-radius: 14px; }
 
-/* Hide the model pill under the title */
+/* Hide the model pill under the title (if any) */
 .model-pill { display: none !important; }
-
-/* Optional: soften sidebar too */
-section[data-testid="stSidebar"] { background-color: #e8e8e8; }
 </style>
 """, unsafe_allow_html=True)
 
