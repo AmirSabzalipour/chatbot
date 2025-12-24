@@ -4,6 +4,12 @@ import chromadb
 from sentence_transformers import SentenceTransformer
 import time
 from pathlib import Path
+import base64
+
+
+
+with st.sidebar:
+    logo_b64 = img_to_base64(BOT_ICON_PATH)
 
 # ---------------- UI CONFIG ----------------
 BOT_NAME = "Orcabot"
@@ -201,15 +207,24 @@ def new_chat():
     }
     st.session_state.active_session = sid
     st.rerun()
-
+  
+def img_to_base64(path: str) -> str:
+    return base64.b64encode(Path(path).read_bytes()).decode()
 # ---------------- SIDEBAR (ALL-IN-ONE: logo + model + chat history + debug) ----------------
 with st.sidebar:
-    st.markdown("""
-    <style>
-    .sidebar-orca img { margin-bottom: -12px !important; }
-    .sidebar-title { margin-top: 0px !important; margin-bottom: 0px !important; }
-    </style>
-    """, unsafe_allow_html=True)
+    logo_b64 = img_to_base64(BOT_ICON_PATH)
+
+    st.markdown(
+        f"""
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+          <img src="data:image/png;base64,{logo_b64}" style="width:48px; height:auto; margin:0;" />
+          <div style="font-size:28px; font-weight:700; margin:0; line-height:1;">{BOT_NAME}</div>
+          <div style="margin-top:0px; opacity:0.75;">Private demo</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 
     st.markdown('<div class="sidebar-orca">', unsafe_allow_html=True)
     st.image(BOT_ICON_PATH, width=48)
