@@ -21,124 +21,170 @@ st.markdown("""
 
 # ---------------- DOC ----------------
 DOCUMENT = """
-CV — Fardokht Rezayi
-Last update: 12/2025
+Here is the CV in plain text:
 
-CONTACT
-- Name: Fardokht Rezayi
-- Title: Researcher in Chemistry
-- Email: Rezayisf@gmail.com
-- LinkedIn: linkedin.com/in/fardokhtrz
-- Phone: +32 484412315
-- Location: 2000 Antwerpen, Belgium
-- Work authorization: Valid work permit
-- Driving license: Belgian driving license
+Ali ARAMESH Test Engineer (+32) 483 46 19 30 aliaramesh85@gmail.com Rue du moulin 105, 4684 Haccourt, Belgium linkedin.com/in/aliaramesh github.com/aramesh
 
-TECHNICAL EXPERTISE
-Analytical / Characterization Techniques:
-- Biochemical Oxygen Demand (BOD)
-- Chemical Oxygen Demand (COD)
-- Electron Paramagnetic Resonance (EPR)
-- Infrared (IR)
-- Ultraviolet-Visible (UV-Vis)
-- Diffuse Reflectance Spectroscopy (DRS-UV)
-- BET surface area analysis
-- High-Performance Liquid Chromatography (HPLC)
+CAREER SUMMARY/ACCOMPLISHED PROJECTS
 
-PROFILE SUMMARY
-Proactive and internationally minded chemist with 5+ years of experience in spectroscopy, catalysis, and porous material chemistry. Skilled in experimental design, data analysis, and interdisciplinary research. Initiated an internship at Pidpa in the water sector; gained experience in an ISO-certified laboratory environment and improved Dutch proficiency to navigate local environmental policies and regulations. Focused on sustainability, process optimization, and data-driven decision-making in R&D environments.
+Ongoing Test Rig Engineer | Stellantis, e-transmission, SINT-TRUIDEN, Belgium
+March 2025
+Responsibilities:
 
-WORK EXPERIENCE
+    Preparation and execution of different tests on Dual clutch transmissions including: (High Cycle Fatigue, Friction Plate Durability, Park Lock Rattle/Actiation Durability, Cold/Hot Efficiency, Gear Actuation, Electric Motor Durability, etc)
+    Modifying the script to be adapted with the test request and the load collective
+    Preparing test benches and CAN communication
+    Adding a layer of safety to a sofisticated roll-pitch bench
+    Building up the transmission into the bench
+    Checking out a working copy, updating to the latest revision, make changes to the script adapted to teh TREQ and load collective and commit to the SVN repository browser
 
-1) Trainee – Laboratory (Inorganic Analysis)
-- Company: Pidpa
-- Location: Antwerp, Belgium
-- Type: Part-time
-- Dates: 07/2025 – 12/2025 (ongoing)
-Responsibilities / Achievements:
-- Inorganic water quality analyses (Cl⁻, SO₄²⁻, NO₂⁻, NO₃⁻, NH₄⁺) using Discrete Analysis technique
-- BOD and COD testing; measurement of suspended solids in wastewater and TAM
-- Worked with ISO 17025 and WAC documentation; LIMS registration
-- Supported environmental monitoring and accurate reporting for wastewater and drinking water safety
+Skills: CANape, Control Desk, Validation, EPLAN, SVN tortoise, Test report, CAN communication, Jira, FEA, Siemens PLC & pilz relay troubleshooting, CFD & FEA analysis in dual-clutch transmission, TCU, PHEV integration
 
-2) Chemistry Private Tutor
-- Company: Dr Ship Tutoring & Consulting
-- Type: Part-time
-- Dates: 11/2023 – 10/2025
-Responsibilities / Achievements:
-- Simplified chemistry concepts to build strong foundations
-- Developed critical thinking via tailored, progressively challenging questions
+Senior Electrical Design & Project Engineer | TOYOTA, ZAVENTEM, Belgium
+February 2024 - February 2025
+Responsibilities:
 
-3) PhD Researcher — Spectroscopy and Catalysis Chemistry
-- Institution: Cardiff University (UK) – University of Antwerp (Belgium)
-- Dates: 07/2019 – 06/2024
-Responsibilities / Achievements:
-- Operated and troubleshot advanced techniques: EPR, IR, UV-Vis, DRS-UV, BET, HPLC
-- Designed and optimized catalytic processes (Design of Experiments / DOE); catalyst synthesis
-- Project work with multidisciplinary teams and external partners
-- Data analysis, reporting, publications, presentations
-- Expertise: glycerol valorisation with homo/heterogeneous catalysts
+    Spreadheaded the development of an advanced UWB-based anti-theft system
+    Led the redesign of the wire-harness and connectors for C-HR
+    Preparing removal and installation manuals for C-HR
+    Managed cross-functional teams, ensuring project milestones were met on time and within budget
+    Coordinated with stakeholders for seamless integration of design and manufacturing process
 
-4) Sales Engineer (B2B) — Technical Machinery Solutions (Pharma Industry)
-- Company: Amiz Sazan Ari (Official Representative of ACG Pharma)
-- Location: Tehran, Iran
-- Dates: 03/2017 – 02/2019
-Responsibilities / Achievements:
-- Introduced machines to 20+ pharma companies
-- 4+ on-site installations with ACG engineers
-- Prepared technical documentation and reports for management
+Skills: Project Management (PM), CATIA, Vehile Specification Documentation, System integration, Wire harness design, Electrical Wire Diagram (EWD), Manual & rework documentation
 
-TRAININGS AND SKILLS
+Powertrain Engineer | TOYOTA, ZAVENTEM, Belgium
+April 2023 - January 2024
+Responsibilities:
 
-Soft Skills:
-- Excellent organisational, communication, and interpersonal abilities
-- Fast learner; scientific curiosity; self-steering; flexible; creative
+    Prepared RDDP (Resuest for design & development process)
+    Redesign according to RDDP drawings
+    NVH benchmarking on BEVs (Audi e-tron, Volvo XC40, bz4X)
+    Order tracking on different powertrain components of the BEVs
+    TPA analysis to identify powertrain's contribution to final comfort
+    Design of interior permanent magnet (IPM) motor for BEVs
 
-Laboratory / Practical Skills:
-- Setup, maintenance, troubleshooting of cryogenic systems (liquid helium/nitrogen setups, pumps, compressors)
-- Operating batch pressure reactors
-- In-situ and ex-situ analysis of reaction products
+Skills: CATIA V5, Ansys Motor-CAD, Ansys Maxwell, Battery Management System (BMS), TPA (Transfer Path Analysis), Benchmarking, Order tracking, Body Sensitivity, Body Acoustic Sensitivity, FEA, CFD
 
-Trainings:
-- Industrial aspect of catalytic process — LyondellBasell (Online), Italy — 02/2021
-- EPR spectroscopy — Bruker (Online), Germany — 11/2020
-- LCA (Life Cycle Assessment) — Zaragoza University, Spain — 09/2020
-- Self-study: Circular Economy — Sustainable Materials Management (Coursera)
+Test Engineer | Capacitor lab/Hitachi Energy ABB via consultant, CHARLEROI, Belgium
+June 2022 - March 2023
 
-Languages:
-- English: Full professional proficiency
-- Persian: Native or bilingual proficiency
-- Dutch: Professional working proficiency
-- French: Limited working proficiency
+    Tear-down analysis on film capacitors
+    Implementing different tests on film capacitors including ageing, humidity, thermal, DC leakage current measurement
+    No-cause test on metalised film before winding including film thickness, resistivity, free margin and segmented, active region
+    Report and documenting the analysis result
+    Participation in daily meeting on RCA (Root Cause) analysis
 
-Software:
-- LIMSLink (LIMS)
-- MATLAB (EasySpin toolbox)
-- ChemDraw
-- Avogadro
-- Origin
-- Microsoft Office
+Skills: Metallization slitting, Winding, Schoopage, Thermal treatment (analysis), Self-healing zinc projection, Vibration testing, Manufacturing via cleanroom, Short-circuit destruction testing on film capacitors (20KA), test report documentation
+
+System Engineer | Power electronics lab - HIL testing, HITACHI ENERGY ABB VIA CONSULTANT, Charleroi, Belgium
+April 2022 - March 2023
+
+    Executed Hardware-in-the-loop (HIL) tests for active filters (PQactiF)
+    Tested IGBT drives, AC/DC power modules, and control PCBs under real-world grid conditions, ensuring compliance with IEC 61000-3-2/IEEE 519 standards
+    Evaluating various control algorithms under load conditions using Typhoon HIL device
+    Assembled and debugged PQactiF systems (similar to e-transmission drive packages), including PCB rework (microscope-level soldering) and functional testing
+    Scripted in python to automate multiple tests, with results generated and reported in the Allure framework
+
+Skills: dSPACE, Harmonic filtering, Load balancing, Reactive power compensation, PCB rework functional testing, Typhoon-HIL, Block diagram & Schematic drawing
+
+Master Thesis | Driveline/Machatronics lab, ANTWERPEN, Belgium
+February 2021 - September 2021
+Suppressing shock and vibration in a driveline by means of redesignig speed controller and utilizing flexible coupling:
+
+    Building two identical drivelines on mobile chassis
+    Commissioning the drivelines by servo drives
+    Applying different tunning methods to design the speed controller
+
+Skills: Siemens starter S120 servo drives, Matlab, PI-controller, Flexible coupling
+
+System Engineering Intern | Model-Based Testing & Validation, Siemens, LEUVEN, Belgium
+September 2019 - February 2020
+
+    Contributed to the V-cycle development process for a hybrid hydraulic powertrain system combining internal combustion engine (ICE) and hydraulic actuation
+    Derived and implemented test cases from system-level requirements, focusing on validating mode transitions and control logic behavior
+    Executed Model-in-the-Loop (MiL) and Software-in-the-Loop (SiL) simulations in Simulink, ensuring model accuracy and behavioral integrity
+    Automated test case execution using Jenkins, achieving 100% maturity for multiple test scenarios through decision and condition coverage
+    Utilized Polarion for traceability between requirements, test cases, and validation outcomes in alignment with ALM processes
+    Simulated operational scenarios including transitions such as Combined mode to Hydraulic mode, and Brake to Drive, ensuring compliance with expected functional performance
+    Supported verification activities at the left-hand side of the V-model, contributing to system robustness before integration phases
+
+Skills: Model-based design principles, V-cycle systems engineering, Automotive software quality standards, ALM polarion, Simulink, Matlab, Jenkins, SVN tortoise
+
+HV MV Commissioning and Test Engineer, METANIR, Tehran, Iran
+October 2011 - October 2015
+
+    Commissioning and maintenance testing of HV & MV switchgear
+    Assessment of ESB, manufacturer and contractor test results and documentation
+    Maintenance and commissioning testing of protection relays
+    Restoring power and channels of pilz relays in case of trip or fault (X3.10P & XV2P PNOZ Pilz relays)
+    Verification of SCADA systems and associated instrumentation loops and transducers
+    EPLAN redesign in case of minor modification into the control cabinet
+
+Skills: Block diagrams, Schematic drawing, LV cabling, Data acquisition system, Protection relay wiring, EPLAN, JIRA
+
+PROJECTS
+
+DESIGN OF INTERIOR PERMANNET MAGNET (IPM) MOTOR FOR EV VEHICLES
+NOV 2024 - FEB 2024
+github.com/ArameshAli/IPM- Motor technology
+In this project we are designing interior Permanent Magnet (IPM) technology for EVs. IPM motors offer superior power density and efficiency, delivering higher torque across a broad speed range. By enhancing reluctance torque, they achieve increased performance at high speeds, making them ideal for EV applications.
+Tools: ANSYS Motor-CAD
+
+VIBROACOUSTIC COMFORT IN ELECTRIC VEHICLES
+APRIL 2019 - JUNE 2019
+github.com/ArameshAli/Half-Vehicle-Model/blob/main/HalfVM.m - Half Vehicle model
+The half vehicle modal is the most popular method of analysing comfort and perform mathematical modelling of a vehicle. Objectives are: 1. Obtain engine modal excitation data from Ansys. 2. To determine the transmissibility function of the HVM. 3. Validate obtained/observed acceleration function from the modal with real Twizy experimental values.
+Tools: Ansys, simulink
+
+SUSTAINABLE VEHICLE POWERTRAINS
+JAN 2019 - MARCH 2019
+github.com/ArameshAli/Battery - Battery pack specification
+The aim of this project is to characterise the performance of commercial Lithium ion automotive battery cells and use experimental data to create the design specification for a battery electric vehicle.
+
+POWERTRAIN CALIBRATION OPTIMISATION
+JAN 2019 - MARCH 2019
+github.com/ArameshAli/NOx-modeling/blob/main/Project1.m - NOx simulation
+We will reduce NOx emissions in this project. The goal is to reduce NOx while increasing particulate matter (PM), which is unavoidable. There is a tradeoff between NOx and PM. While NOx levels have decreased, PM levels have increased.
+Techniques: mixed-integer linear programming, quadratic programming, nonlinear optimisation
+
+SUSTAINABLE VEHICLE POWERTRAIN
+JAN 2019 - MARCH 2019
+github.com/ArameshAli/NOx-modeling/blob/main/Project1.m - Hybrid Vehicle Modelling & Analysis
+In the future, cars will be characterised by an increasing degree of hybridisation. They use increasing levels of hybridisation, and the expectation is that this improves the fuel economy. The purpose of this project is to look at the impact of vehicle architectures, to understand how and why fuel economy can be improved, and at finding the right control strategy for a hybrid powertrain.
+Tools: WLTP, CADC, Elvio (ELectrified Vehicle library for sImulation and Optimisation) Toolbox
+
+CORE SKILLS & LANGUAGES
+
+System Engineerng Tools: ALM Pomarion, V-cycle
+Simulation/Modeling/CAD: MATLAB/Simulink, Typhoon HIL, dSPACE, CANape, control desk, Ansys Motor-CAD, CATIA V5
+Problem-Solving: 8D/QRQC, six sigma, FMEA, sisk assessment
+Core skills: Automation, optimization, control design for industrial applications
+Strengths: Goal-oriented, analytical mindset, industrious, cross-functional, team member, problem solver
+Methodologies: Kaizen, Design review based on failure mode (DRBFM), Mizen boushi
+Languages: French, English, Basic Japanease
 
 EDUCATION
 
-1) PhD in Chemistry (MSCA Joint Program: PARACAT)
-- Institutions: Cardiff University, UK — University of Antwerp, Belgium
-- Dates: 07/2019 – 06/2024
-- Thesis: Advanced EPR Investigation of Copper Complexes in Catalysis
-- Publication: Book chapter
+2018-2021
+Joint master's degree in sustainable automotive engineering
+Universiteit Antwerpen, Loughborough University, Universidad de Deusto, Université de Bordeaux
+Thesis subject: A comparison of different tuning methods to design a speed controller for a driveline
 
-2) M.Sc. in Organic Chemistry
-- Institution: Kharazmi University, Tehran, Iran
-- Dates: 01/2015 – 01/2017
-- Publication: Thesis project paper on a bi-functional metal/solid acid catalyst for direct reductive amination of nitroarenes on mesoporous carbon (CMK-8)
+2017-2018
+MS.c in Electrical Engineering (Electric power and energy systems) (60 ECTS)
+Université de Liège
 
-3) B.Sc. in Chemistry
-- Institution: University of Arak, Arak, Iran
-- Dates: 02/2009 – 02/2013
+2016-2017
+Preparatory year for the master's degree in computer science
+Université de Liège
 
-ADDITIONAL NOTES
-- Flexible to relocate or commute as needed
-- Happy to travel for work and engage in international collaborations
+2008-2012
+BS.c in electrical and Electronics Engineeirng
+Azad University - Central Tehran Branch (iauctb)
+Control the speed and direction of a DC motor
+
+REFERENCES
+Available upon request
 """.strip()
 
 # ---------------- HELPERS ----------------
