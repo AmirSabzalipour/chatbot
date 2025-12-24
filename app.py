@@ -6,18 +6,14 @@ import time
 from pathlib import Path
 import base64
 
-
-
-with st.sidebar:
-    logo_b64 = img_to_base64(BOT_ICON_PATH)
-
 # ---------------- UI CONFIG ----------------
 BOT_NAME = "Orcabot"
 BOT_ICON_PATH = "assets/orca.png"
 
 st.set_page_config(page_title=BOT_NAME, page_icon=BOT_ICON_PATH, layout="centered")
 
-st.markdown("""
+st.markdown(
+    """
 <style>
 /* --- Global background + text --- */
 .stApp { background-color: #f0f0f0; color: #000 !important; }
@@ -54,7 +50,7 @@ div[role="option"] { background: #ffffff !important; color: #000000 !important; 
 [data-testid="stChatInput"] { background: transparent !important; }
 
 /* ---- IMPORTANT: Keep header/toolbar so sidebar + arrows stay ---- */
-header { 
+header {
   background: #f0f0f0 !important;
   box-shadow: none !important;
 }
@@ -79,9 +75,7 @@ button[kind="secondary"]{
   border: 1px solid #cfcfcf !important;
   box-shadow: none !important;
 }
-.stButton > button:hover{
-  background: #f7f7f7 !important;
-}
+.stButton > button:hover{ background: #f7f7f7 !important; }
 
 /* Radio items (Chat selector) */
 div[role="radiogroup"] label{
@@ -91,9 +85,7 @@ div[role="radiogroup"] label{
   padding: 8px 10px !important;
   margin-bottom: 8px !important;
 }
-div[role="radiogroup"] label:hover{
-  background: #f7f7f7 !important;
-}
+div[role="radiogroup"] label:hover{ background: #f7f7f7 !important; }
 
 /* Password input container + eye button */
 div[data-testid="stTextInput"] > div{
@@ -112,8 +104,13 @@ div[data-baseweb="button"] button{
   border: 1px solid #cfcfcf !important;
 }
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
+# ---------------- UTIL ----------------
+def img_to_base64(path: str) -> str:
+    return base64.b64encode(Path(path).read_bytes()).decode()
 
 # ---------------- DOC (from file) ----------------
 DOC_PATH = Path("data/document.txt")
@@ -207,13 +204,12 @@ def new_chat():
     }
     st.session_state.active_session = sid
     st.rerun()
-  
-def img_to_base64(path: str) -> str:
-    return base64.b64encode(Path(path).read_bytes()).decode()
+
 # ---------------- SIDEBAR (ALL-IN-ONE: logo + model + chat history + debug) ----------------
 with st.sidebar:
     logo_b64 = img_to_base64(BOT_ICON_PATH)
 
+    # ✅ SINGLE header block (this is the "image closer to name" solution)
     st.markdown(
         f"""
         <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
@@ -222,16 +218,9 @@ with st.sidebar:
           <div style="margin-top:0px; opacity:0.75;">Private demo</div>
         </div>
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
 
-
-    st.markdown('<div class="sidebar-orca">', unsafe_allow_html=True)
-    st.image(BOT_ICON_PATH, width=48)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    st.markdown(f'<div class="sidebar-title"><h2>{BOT_NAME}</h2></div>', unsafe_allow_html=True)
-    st.caption("Private demo")
     st.divider()
 
     st.markdown("### Model")
