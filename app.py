@@ -17,7 +17,7 @@ st.markdown("""
 .stApp { background-color: #f0f0f0; color: #000 !important; }
 .stApp, .stApp * { color: #000 !important; }
 
-/* Sidebar background */
+/* Sidebar background (keep sidebar visible!) */
 section[data-testid="stSidebar"] { background-color: #e8e8e8 !important; }
 
 /* Make inputs/selects look white (password + chat input + selectbox) */
@@ -34,7 +34,7 @@ div[data-baseweb="select"] > div {
   border: 1px solid #cfcfcf !important;
 }
 
-/* Fix dropdown menu itself */
+/* Dropdown menu itself */
 div[role="listbox"] { background: #ffffff !important; }
 div[role="option"] { background: #ffffff !important; color: #000000 !important; }
 
@@ -44,15 +44,23 @@ div[role="option"] { background: #ffffff !important; color: #000000 !important; 
 /* Chat bubbles */
 .stChatMessage { border-radius: 14px; padding: 6px 10px; }
 
-/* Chat input container (sometimes stays dark without this) */
+/* Chat input container */
 [data-testid="stChatInput"] { background: transparent !important; }
 
-/* --- Keep header so top-left arrows stay visible --- */
-header { background: #f0f0f0 !important; }
+/* ---- IMPORTANT: Keep header/toolbar so sidebar + arrows stay ---- */
+header { 
+  background: #f0f0f0 !important;
+  box-shadow: none !important;
+}
 
-/* Hide Streamlit decoration + toolbar (removes black top bar + share/star/menu) */
+/* Remove only the thin "decoration" strip (often the dark bar) */
 [data-testid="stDecoration"] { display: none !important; }
-[data-testid="stToolbar"] { display: none !important; }
+
+/* Toolbar stays visible but match the page background */
+[data-testid="stToolbar"] {
+  background: #f0f0f0 !important;
+  box-shadow: none !important;
+}
 
 /* ---------- Force WHITE backgrounds for Streamlit widgets ---------- */
 
@@ -69,7 +77,7 @@ button[kind="secondary"]{
   background: #f7f7f7 !important;
 }
 
-/* Radio items (Chat 1 selector pill background) */
+/* Radio items (Chat selector) */
 div[role="radiogroup"] label{
   background: #ffffff !important;
   border: 1px solid #cfcfcf !important;
@@ -81,12 +89,7 @@ div[role="radiogroup"] label:hover{
   background: #f7f7f7 !important;
 }
 
-/* Selected radio item (safe override) */
-div[role="radiogroup"] input:checked + div{
-  background: #ffffff !important;
-}
-
-/* Password input container + the eye icon container */
+/* Password input container + eye button */
 div[data-testid="stTextInput"] > div{
   background: #ffffff !important;
   border-radius: 10px !important;
@@ -96,7 +99,7 @@ div[data-testid="stTextInput"] button{
   border: 0 !important;
 }
 
-/* Also force any "BaseWeb" button surfaces to white */
+/* BaseWeb buttons */
 div[data-baseweb="button"] button{
   background: #ffffff !important;
   color: #000000 !important;
