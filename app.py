@@ -263,7 +263,7 @@ def dedup_near(texts: list, overlap_threshold: float = 0.85) -> list:
     return [t for t in original if t in kept]
 
 
-@st.cache_resource(show_spinner="🔄 Initializing AI models…")
+@st.cache_resource(show_spinner=False)
 def build_rag(document_text: str):
     """Build RAG system with embeddings and vector database."""
     try:
