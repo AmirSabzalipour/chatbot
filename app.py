@@ -49,25 +49,25 @@ div[role="option"] { background: #ffffff !important; color: #000000 !important; 
 /* Chat bubbles */
 .stChatMessage { border-radius: 14px; padding: 6px 10px; }
 
-/* Chat input container - WHITE BACKGROUND FIX */
-[data-testid="stChatInput"] { 
+/* CRITICAL: Chat input - force white background on ALL elements */
+[data-testid="stChatInput"],
+[data-testid="stChatInput"] *,
+[data-testid="stChatInput"] > div,
+[data-testid="stChatInput"] input,
+[data-testid="stChatInput"] textarea,
+.stChatInputContainer,
+.stChatInputContainer * {
   background: #ffffff !important;
+  background-color: #ffffff !important;
+}
+
+/* Chat input wrapper positioning */
+[data-testid="stChatInput"] {
   border-radius: 10px !important;
   padding: 10px !important;
   margin-bottom: 20px !important;
-  margin-right: 180px !important;  /* Space from Manage app button */
-}
-
-/* Chat input inner container */
-[data-testid="stChatInput"] > div {
-  background: #ffffff !important;
-}
-
-/* The actual input field inside chat */
-[data-testid="stChatInput"] input,
-[data-testid="stChatInput"] textarea {
-  background: #ffffff !important;
-  color: #000000 !important;
+  margin-right: 180px !important;
+  border: 1px solid #cfcfcf !important;
 }
 
 /* ---- IMPORTANT: Keep header/toolbar so sidebar + arrows stay ---- */
