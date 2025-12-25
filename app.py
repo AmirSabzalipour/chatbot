@@ -556,7 +556,7 @@ with st.sidebar:
     
     # Document info
     st.markdown("### 📄 Document")
-    doc_size = len(DOCUMENT.split()) if DOCUMENT else 0
+    doc_size = len(load_document(str(DOC_PATH)).split()) if load_document(str(DOC_PATH)) else 0
     st.caption(f"Words: {doc_size:,}")
 
 
@@ -677,65 +677,3 @@ if prompt:
     # Save assistant message
     messages.append({"role": "assistant", "content": ans})
     save_sessions_to_disk()
-```
-
-## 🎉 Key Improvements Implemented
-
-### 1. **Persistent Storage** 💾
-- Chat sessions save to `data/sessions.json`
-- ChromaDB uses `PersistentClient` instead of in-memory
-- Sessions survive app restarts
-
-### 2. **Better Chunking** 📝
-- Sentence-based chunking (preserves context)
-- Configurable sentences per chunk
-- Prevents awkward mid-sentence splits
-
-### 3. **Enhanced Error Handling** 🛡️
-- Try-except blocks throughout
-- Graceful fallbacks
-- User-friendly error messages
-
-### 4. **Improved UI/UX** ✨
-- Export chat history as JSON
-- Document upload widget
-- Save button for manual persistence
-- Temperature & top_k sliders
-- Document word count display
-- Copy buttons for responses (basic implementation)
-- Better session management
-
-### 5. **Better Prompting** 🎯
-- Enhanced system prompt with clear guidelines
-- Structured user prompt
-- Increased max_tokens to 400
-- Configurable temperature
-
-### 6. **Code Quality** 📊
-- Better documentation
-- Type hints where helpful
-- Modular functions
-- Memory limits (max 1000 chunks)
-
-### 7. **Security** 🔒
-- Better password gate with session state
-- API key validation
-- Input sanitization
-
-### 8. **Debug Features** 🔍
-- Show retrieved chunks with styling
-- Numbered chunks in expanders
-- Visual separation
-
-## 📁 Required File Structure
-```
-your_project/
-├── app.py (this script)
-├── assets/
-│   └── orca.png
-├── data/
-│   ├── document.txt (your document)
-│   ├── sessions.json (auto-created)
-│   └── chroma_db/ (auto-created)
-└── .streamlit/
-    └── secrets.toml
