@@ -5,75 +5,75 @@ Table of Contents
 
 Rapid SCADA Docs
 
-• v6.4
-– v6.4
-– v6.1
-– v5.8
-• Table of contents
+â€¢ v6.4
+â€“ v6.4
+â€“ v6.1
+â€“ v5.8
+â€¢ Table of contents
 Table of contents
-• Overview
-– Introduction
-– Applications
-– Software Architecture
-• Installation
-– System Requirements
-– Install on Windows
-– Install on Windows Manually
-– Install on Linux
-– Install Modules
-– Service Management
-– Transfer to New Server
-– Safety
-• Configuration
-– Configuration Basics
-– Configuration Database
-– Device Polling
-– Channels
-– Scripts and Formulas
-– Views
-– Table Views
-– User Management
-• Modules
-– Chart Pro Plugin
-– Dashboard Plugin
-– Elastic Report Plugin
-– Map Plugin
-– Notification Plugin
-– Automatic Control Module
-– Database Export Module
-– Rapid Gate Module
-– Database Import Driver
-– Modbus Slave Driver
-– Telegram Driver
-• Additional Applications
-– Auto Report
-• Enterprise Edition
-– Overview
-– Audit Log Plugin
-– Guard Plugin
-• Developers
-– Development Basics
-– Logic Module Development
-– Driver Development
-– Web Plugin Development
-– Module Store
-• Version History
-– History of Rapid SCADA
-– Server History
-– Communicator History
-– Webstation History
-– Agent History
-– Administrator History
-– History of Additional Applications
+â€¢ Overview
+â€“ Introduction
+â€“ Applications
+â€“ Software Architecture
+â€¢ Installation
+â€“ System Requirements
+â€“ Install on Windows
+â€“ Install on Windows Manually
+â€“ Install on Linux
+â€“ Install Modules
+â€“ Service Management
+â€“ Transfer to New Server
+â€“ Safety
+â€¢ Configuration
+â€“ Configuration Basics
+â€“ Configuration Database
+â€“ Device Polling
+â€“ Channels
+â€“ Scripts and Formulas
+â€“ Views
+â€“ Table Views
+â€“ User Management
+â€¢ Modules
+â€“ Chart Pro Plugin
+â€“ Dashboard Plugin
+â€“ Elastic Report Plugin
+â€“ Map Plugin
+â€“ Notification Plugin
+â€“ Automatic Control Module
+â€“ Database Export Module
+â€“ Rapid Gate Module
+â€“ Database Import Driver
+â€“ Modbus Slave Driver
+â€“ Telegram Driver
+â€¢ Additional Applications
+â€“ Auto Report
+â€¢ Enterprise Edition
+â€“ Overview
+â€“ Audit Log Plugin
+â€“ Guard Plugin
+â€¢ Developers
+â€“ Development Basics
+â€“ Logic Module Development
+â€“ Driver Development
+â€“ Web Plugin Development
+â€“ Module Store
+â€¢ Version History
+â€“ History of Rapid SCADA
+â€“ Server History
+â€“ Communicator History
+â€“ Webstation History
+â€“ Agent History
+â€“ Administrator History
+â€“ History of Additional Applications
 Introduction
 What is Rapid SCADA
 Rapid SCADA is an open source industrial automation platform. The out of the box software provides tools for rapid creation of monitoring and control systems. In case of large implementation, Rapid SCADA is used as a core for development of custom SCADA and MES solutions for a Customer.
 Open source is the key to software transparency and security. The source code is available on GitHub. Rapid SCADA is released under Apache License 2.0 which permits creation of new derivative software products.
 Rapid SCADA is a perfect choice for creating large distributed industrial automation systems. Rapid SCADA runs on servers, embedded computers and in the cloud. Rapid SCADA nodes exchange information between themselves, and interact with external databases in real time.
 The main classes of systems developed using Rapid SCADA are the following:
-• Industrial automation systems and IIoT systems.
-• Process control systems.
-• Energy accounting systems.
+â€¢ Industrial automation systems and IIoT systems.
+â€¢ Process control systems.
+â€¢ Energy accounting systems.
 Key Features
 General
 Supported OS families
@@ -160,10 +160,10 @@ The Administrator application (see Figure 5) is intended for developing Rapid SC
 Figure 5. Administrator application
 Figure 5. Administrator application
 Tools and features of the Administrator application that speed up the configuration process are as follows:
-• Wizards for creating communication lines, devices and channels.
-• Import and export of the configuration database tables for exchanging works between projects.
-• Channel cloning to minimize manual input.
-• Searching, sorting and filtering the configuration database tables.
+â€¢ Wizards for creating communication lines, devices and channels.
+â€¢ Import and export of the configuration database tables for exchanging works between projects.
+â€¢ Channel cloning to minimize manual input.
+â€¢ Searching, sorting and filtering the configuration database tables.
 A project contains a set of configuration files, mainly using the XML format. This approach makes it easy to copy projects from one computer to another. To control project versions and collaboration, Git is the best choice.
 
 Software Architecture
@@ -189,23 +189,23 @@ Service Management
 Transfer to New Server
 Safety
 
-– 
+â€“ 
 System Requirements
 Server Software Requirements
 Windows:
-• Operating system: Microsoft Windows Server 2016/2019/2022, Microsoft Windows 10/11.
-• .NET Runtime 8.0.
-• Microsoft IIS is required to deploy the web application.
+â€¢ Operating system: Microsoft Windows Server 2016/2019/2022, Microsoft Windows 10/11.
+â€¢ .NET Runtime 8.0.
+â€¢ Microsoft IIS is required to deploy the web application.
 Linux:
-• Operating system: Ubuntu (recommended), Alpine, CentOS, Debian, Fedora, OpenSUSE, Red Hat, and more.
-• .NET Runtime 8.0.
-• Nginx is required to deploy the web application.
+â€¢ Operating system: Ubuntu (recommended), Alpine, CentOS, Debian, Fedora, OpenSUSE, Red Hat, and more.
+â€¢ .NET Runtime 8.0.
+â€¢ Nginx is required to deploy the web application.
 Server Hardware Requirements
 Hardware configuration of a server depends on the scale of the automated system. The minimum configuration is determined by the operating system requirements. The methodology for estimating the required hard disk space is described in the Archives section.
 Rapid SCADA uses its own built-in database management system by default, so installing a third-party DBMS is not necessary. The software can run on physical or virtual machines.
 Workstation or Tablet Requirements
-• Up-to-date Chrome, Firefox, Safari or Edge browser.
-• Microsoft Office or LibreOffice is required to view reports.
+â€¢ Up-to-date Chrome, Firefox, Safari or Edge browser.
+â€¢ Microsoft Office or LibreOffice is required to view reports.
 
 Install on Windows
 Preparing to install
@@ -230,15 +230,15 @@ The Rapid SCADA services actively write to log files. To extend the life of the 
 2. Specify the log directory in ScadaInstanceConfig.xml, for example, R:\SCADA\
 3. Restart the Rapid SCADA services or reboot the computer.
 If the web application is not in use, it stops. On a production server, it is preferable that the web application be always up and running. To ensure this, start Internet Information Services (IIS) Manager, select the ScadaAppPool application pool, open Advanced Settings of the application pool, and set the following options:
-• General - Start Mode: AlwaysRunning
-• Process Model - Idle Time-out: 0
-• Recycling - Regular Time Interval: 0
+â€¢ General - Start Mode: AlwaysRunning
+â€¢ Process Model - Idle Time-out: 0
+â€¢ Recycling - Regular Time Interval: 0
 Update
-The installer allows to update the previously installed Rapid SCADA version 6.
+The installer allows to update the previously installed Rapid SCADA versionÂ 6.
 Important
-• The update feature cannot be used to update Rapid SCADA from version 5 to version 6.
-• The update feature does not check the compatibility of the project being executed with the new version of the software.
-• The update must first be tested on a test server and only after verification run on a production server.
+â€¢ The update feature cannot be used to update Rapid SCADA from version 5 to version 6.
+â€¢ The update feature does not check the compatibility of the project being executed with the new version of the software.
+â€¢ The update must first be tested on a test server and only after verification run on a production server.
 The update is performed according to the following algorithm:
 1. Check if the specified installation directory exists.
 2. Stop the updated services.
@@ -364,7 +364,15 @@ b. In the Administrator application, select the module and click the Register bu
 c. Obtain a registration key, enter it in the appropriate field and save.
 d. Upload the configuration to the server again.
 Module File Structure
-ScadaAdmin\Lang\*.xmlUI language files for the Administrator applicationScadaAdmin\Lib\*.View.dllUI library for the Administrator applicationScadaServer\Config\*.xmlModule configuration to be copied to the projectScadaServer\Mod\*.Logic.dllModule logic library for the Server applicationInstall Communicator Drivers
+ScadaAdmin\Lang\*.xml
+UI language files for the Administrator application
+ScadaAdmin\Lib\*.View.dll
+UI library for the Administrator application
+ScadaServer\Config\*.xml
+Module configuration to be copied to the project
+ScadaServer\Mod\*.Logic.dll
+Module logic library for the Server application
+Install Communicator Drivers
 The sequence of installing a new or updating an existing driver of the Communicator application:
 1. Close the Administrator application if it is running.
 2. Unzip the driver installation package.
@@ -380,7 +388,13 @@ b. In the Administrator application, select the driver and click the Register bu
 c. Obtain a registration key, enter it in the appropriate field and save.
 d. Upload the configuration to the server again.
 Driver File Structure
-ScadaAdmin\Lang\*.xmlUI language files for the Administrator applicationScadaAdmin\Lib\*.View.dllUI library for the Administrator applicationScadaComm\Drv\*.Logic.dllDriver logic library for the Communicator applicationInstall Webstation Plugins
+ScadaAdmin\Lang\*.xml
+UI language files for the Administrator application
+ScadaAdmin\Lib\*.View.dll
+UI library for the Administrator application
+ScadaComm\Drv\*.Logic.dll
+Driver logic library for the Communicator application
+Install Webstation Plugins
 Additional modules for the Webstation application are called plugins. The sequence of installing a new or updating an existing plugin:
 1. Close the Administrator application if it is running.
 2. Unzip the plugin installation package.
@@ -398,13 +412,38 @@ b. In the Administrator application, select the plugin and click the Register bu
 c. Obtain a registration key, enter it in the appropriate field and save.
 d. Upload the configuration to the server again.
 Plugin File Structure
-ScadaAdmin\Lib\*.View.dllUI library for the Administrator applicationScadaWeb\config\*.xmlPlugin configuration to be copied to the projectScadaWeb\lang\*.xmlPlugin language files for the Webstation applicationScadaWeb\wwwroot\*.*Static plugin files for the Webstation applicationScadaWeb\*.dllPlugin libraries for the Webstation application
+ScadaAdmin\Lib\*.View.dll
+UI library for the Administrator application
+ScadaWeb\config\*.xml
+Plugin configuration to be copied to the project
+ScadaWeb\lang\*.xml
+Plugin language files for the Webstation application
+ScadaWeb\wwwroot\*.*
+Static plugin files for the Webstation application
+ScadaWeb\*.dll
+Plugin libraries for the Webstation application
+
 Service Management
 The Server, Communicator and Agent applications run as services. On Linux, the Webstation application also runs as a separate service. To manage Rapid SCADA services, use the Administrator application or operating system tools.
 Services are managed by the Administrator application using the Instance Status form, which is opened by the  button located on the application toolbar.
 
 The following table contains the names of the Windows services and Linux daemons that are included in Rapid SCADA.
-ApplicationWindows SericeLinux DaemonServerScadaServer6scadaserver6CommunicatorScadaComm6scadacomm6Webstation-scadaweb6AgentScadaAgent6scadaagent6On Windows, the services.msc snap-in is available to manage services. The startup type of the Server, Communicator and Agent services is set to Automatic by default, so the services start when the operating system starts and stop when it shuts down. If autostart is not required, set the Manual startup type in the properties of the corresponding services.
+Application
+Windows Serice
+Linux Daemon
+Server
+ScadaServer6
+scadaserver6
+Communicator
+ScadaComm6
+scadacomm6
+Webstation
+-
+scadaweb6
+Agent
+ScadaAgent6
+scadaagent6
+On Windows, the services.msc snap-in is available to manage services. The startup type of the Server, Communicator and Agent services is set to Automatic by default, so the services start when the operating system starts and stop when it shuts down. If autostart is not required, set the Manual startup type in the properties of the corresponding services.
 
 Commands to start daemons on Linux:
 sudo systemctl start scadaagent6
@@ -420,9 +459,9 @@ sudo systemctl stop scadaagent6
 Transfer to New Server
 This article describes how to migrate a running Rapid SCADA instance from one server to another. The sequence of actions is as follows:
 1. Check that connections with polled devices are configured on the new server:
-– there are serial ports whose numbers match the port numbers on the old server,
-– controllers polled over the network are available,
-– OPC servers installed and configured.
+â€“ there are serial ports whose numbers match the port numbers on the old server,
+â€“ controllers polled over the network are available,
+â€“ OPC servers installed and configured.
 2. Install Rapid SCADA on the new server and check its functionality with the default configuration.
 3. Stop the Server and Communicator services on the new server.
 4. Stop the Server and Communicator services on the obsolete server and disable automatic startup of these services.
@@ -441,10 +480,10 @@ Use VPN to provide access for external users. If possible, avoid open access to 
 Passwords
 Change the default passwords. To create strong passwords, use a password generator, for example, available here. If a company uses Active Directory, setting up Rapid SCADA user authentication based on Active Directory enhances system security.
 Passwords to be set:
-• User passwords in the Users table of the project.
-• Password for connecting to the Server application in the Communicator and Webstation settings.
-• Agent password, located in the ScadaAgentConfig.xml file.
-• Password for connecting to the Agent application in the deployment profile.
+â€¢ User passwords in the Users table of the project.
+â€¢ Password for connecting to the Server application in the Communicator and Webstation settings.
+â€¢ Agent password, located in the ScadaAgentConfig.xml file.
+â€¢ Password for connecting to the Agent application in the deployment profile.
 Note: The user table stores password hashes. A password cannot be recovered from a hash code. XML configuration files contain encrypted passwords that are decrypted by applications during execution.
 
 Configuration
@@ -467,11 +506,11 @@ Figure 2. Project creation form
 Pay attention to the Template field on the project creation form (see Figure 2). The template defines the initial configuration that is added to the project. Another existing project can be used as a template.
 Project Structure
 The structure of the Rapid SCADA project is displayed in the project explorer, which is located on the left side of the main Administrator window. The project consists of the following main parts (see Figure 3):
-• The Configuration Database consists of tables. It is a general structured description of the automated system. The detailed settings refer to the corresponding applications.
-• The Views section contains view files that are displayed by the Webstation application, and report configuration files. Views examples are mimic diagrams, tables, maps and dashboards.
-• Server application settings.
-• Communicator application settings.
-• Webstation web application settings.
+â€¢ The Configuration Database consists of tables. It is a general structured description of the automated system. The detailed settings refer to the corresponding applications.
+â€¢ The Views section contains view files that are displayed by the Webstation application, and report configuration files. Views examples are mimic diagrams, tables, maps and dashboards.
+â€¢ Server application settings.
+â€¢ Communicator application settings.
+â€¢ Webstation web application settings.
 Figure 3. Project structure
 Figure 3. Project structure
 An instance is a set of Rapid SCADA applications running the same project and installed on the same computer.
@@ -541,15 +580,15 @@ Dictionary of view types
 Editing Database
 The configuration database tables are related to each other, that is, a cell of one table can refer to a record of another table. For example, a device refers to a communication line to which it is connected. Therefore, it is efficient to edit tables in a certain sequence. For tables from the Primary tables group, enter data in order starting with the Objects table and ending by the Users table.
 The Administrator application provides tools that make editing the configuration database faster and handy:
-• The search and replace dialog is called by the  button, which is located on the application toolbar, or by the keyboard shortcut Ctrl + F.
-• Filtering a table hides unnecessary rows. If the table is filtered, search and replace is performed only on the table rows that are displayed. The filter window is called by the  button.
-• When editing table cells, use the functions cut Ctrl + X, copy Ctrl + C and paste Ctrl + V. That functions can also be applied for cells whose values ??are selected from a drop-down list.
-• Clicking a column header sorts the rows in the table by the values in that column.
-• If the properties button is displayed on the table toolbar, then the rows for that table can be edited using a dialog form.
-• The wizards, which are called up with the ,  and  buttons located on the main toolbar, help to quickly fill out the Communication lines, Devices and Channels tables.
-• The channel cloning tool is useful for populating the Channels table if the system contains many similar devices. The tool is available through the main menu Tools > Project Tools > Clone Channels.
-• Using the table import and export functions, you can transfer previously completed work between projects. XML, CSV and DAT data formats are supported. The functions are available in the main menu section Tools > Project Tools.
-• The integrity check tool helps ensure that the relations between the tables are valid and that table foreign keys point to existing records.
+â€¢ The search and replace dialog is called by the  button, which is located on the application toolbar, or by the keyboard shortcut Ctrl + F.
+â€¢ Filtering a table hides unnecessary rows. If the table is filtered, search and replace is performed only on the table rows that are displayed. The filter window is called by the  button.
+â€¢ When editing table cells, use the functions cut Ctrl + X, copy Ctrl + C and paste Ctrl + V. That functions can also be applied for cells whose values ??are selected from a drop-down list.
+â€¢ Clicking a column header sorts the rows in the table by the values in that column.
+â€¢ If the properties button is displayed on the table toolbar, then the rows for that table can be edited using a dialog form.
+â€¢ The wizards, which are called up with the ,  and  buttons located on the main toolbar, help to quickly fill out the Communication lines, Devices and Channels tables.
+â€¢ The channel cloning tool is useful for populating the Channels table if the system contains many similar devices. The tool is available through the main menu Tools > Project Tools > Clone Channels.
+â€¢ Using the table import and export functions, you can transfer previously completed work between projects. XML, CSV and DAT data formats are supported. The functions are available in the main menu section Tools > Project Tools.
+â€¢ The integrity check tool helps ensure that the relations between the tables are valid and that table foreign keys point to existing records.
 
 Device Polling
 Interaction with devices is performed by the Communicator application, which requests data and sends commands to devices, acting as a master or slave. The polled devices are controllers, input/output modules, metering devices, as well as external data sources, which are also conventionally called devices. All devices belong to communication lines that are independent and operate in parallel.
@@ -564,7 +603,35 @@ In the Device Polling section, individual polling options are configured for eac
 Figure 2. Device polling options
 Figure 2. Device polling options
 The table below clarifies the device polling options.
-OptionDescriptionActiveIndicates that the device is being polledPoll only on commandTo poll the device, send a commandBound to the configuration databaseIf the option is set, the device tags are bound to the channels of the configuration database, and the received data is sent to the Server applicationNumberDevice number. It must match the device number in the configuration databaseNameDevice nameDriverA driver that implements the communication protocol supported by the deviceNumeric addressDevice address as a numberString address or host nameDevice address as a string. This is usually an IP addressTimeoutDuration of waiting for a response from the device in millisecondsDelayDelay after receiving data in millisecondsTime and PeriodIf both options are zero, the device is polled continuously and cyclically. If the time is specified and the period is zero, the device is polled once a day at the specified time. If the period is greater than zero, the device is polled periodically, starting at the specified timeCommand lineAdditional options determined by the driver and described in its instructionsOptionsSimilar to command line, but more structuredIf the device requires device type-specific options, click the Properties button to then to configure them in a dialog window provided by the driver. The Reset button restores the device polling options to the default values determined by the selected driver.
+Option
+Description
+Active
+Indicates that the device is being polled
+Poll only on command
+To poll the device, send a command
+Bound to the configuration database
+If the option is set, the device tags are bound to the channels of the configuration database, and the received data is sent to the Server application
+Number
+Device number. It must match the device number in the configuration database
+Name
+Device name
+Driver
+A driver that implements the communication protocol supported by the device
+Numeric address
+Device address as a number
+String address or host name
+Device address as a string. This is usually an IP address
+Timeout
+Duration of waiting for a response from the device in milliseconds
+Delay
+Delay after receiving data in milliseconds
+Time and Period
+If both options are zero, the device is polled continuously and cyclically. If the time is specified and the period is zero, the device is polled once a day at the specified time. If the period is greater than zero, the device is polled periodically, starting at the specified time
+Command line
+Additional options determined by the driver and described in its instructions
+Options
+Similar to command line, but more structured
+If the device requires device type-specific options, click the Properties button to then to configure them in a dialog window provided by the driver. The Reset button restores the device polling options to the default values determined by the selected driver.
 Synchronizing Settings
 The synchronization feature helps create communication lines and devices in the Communicator settings based on data from the Communication lines and Devices tables of the configuration database. And vice versa, fill the configuration database tables based on the Communicator settings. To open the synchronization dialog, in the project explorer, right-click the Communication Lines node or the node of a specific line, then select Synchronize from the context menu.
 Figure 3. Synchronize line and devices
@@ -626,15 +693,233 @@ Rules for calculating channel formulas:
 7. If a channel has specified limits, the channel status is recalculated taking the limits into account after calculating the channel's input formula.
 8. Formulas must return values of certain data types, described below.
 Channel input formulas return data of the following types:
-Data TypeDescriptiondoubleChannel valueCnlDataChannel value and statuslong64-bit integer value of a channel whose data type is set to Integer in the Channels tablestringString value of a channel whose data type is set to ASCII string or Unicode string in the Channels tableIf a channel's input formula returns a data type other than those listed in the table above, the value returned by the formula is cast to the appropriate type based on the data type of the channel. The part of the channel input formula that calculates the channel status must return an integer value of type int.
+Data Type
+Description
+double
+Channel value
+CnlData
+Channel value and status
+long
+64-bit integer value of a channel whose data type is set to Integer in the Channels table
+string
+String value of a channel whose data type is set to ASCII string or Unicode string in the Channels table
+If a channel's input formula returns a data type other than those listed in the table above, the value returned by the formula is cast to the appropriate type based on the data type of the channel. The part of the channel input formula that calculates the channel status must return an integer value of type int.
 Channel output formulas return data of the following types:
-Data TypeDescriptiondoubleCommand value. To cancel a command, formula must return double.NaNCnlDataCommand value. To cancel a command, formula must return CnlData.Emptybyte[]Binary command data. To cancel a command, formula must return nullstringString command data. Converted by Server into a byte arrayAvailable Variables
+Data Type
+Description
+double
+Command value. To cancel a command, formula must return double.NaN
+CnlData
+Command value. To cancel a command, formula must return CnlData.Empty
+byte[]
+Binary command data. To cancel a command, formula must return null
+string
+String command data. Converted by Server into a byte array
+Available Variables
 The scripting engine provides the following built-in variables:
-VariableData TypeDescriptionTimestampDateTimeTimestamp of the processed data (UTC)IsCurrentboolProcessed data is current dataCnlNumintChannel number for which the formula is calculatedChannelCnlProperties of the channel for which the formula is calculatedArrIdxintIndex of the processed array elementCnl, CnlValdoubleChannel value transmitted to Server before the calculationCnlStatintChannel status transmitted to Server before the calculationCnlDataCnlDataChannel data transmitted to Server before the calculationCmd, CmdValdoubleCommand value transmitted to Server before the calculationCmdDatabyte[]Command data transmitted to ServerCmdDataStrstringCommand data as a stringAvailable Functions
+Variable
+Data Type
+Description
+Timestamp
+DateTime
+Timestamp of the processed data (UTC)
+IsCurrent
+bool
+Processed data is current data
+CnlNum
+int
+Channel number for which the formula is calculated
+Channel
+Cnl
+Properties of the channel for which the formula is calculated
+ArrIdx
+int
+Index of the processed array element
+Cnl, CnlVal
+double
+Channel value transmitted to Server before the calculation
+CnlStat
+int
+Channel status transmitted to Server before the calculation
+CnlData
+CnlData
+Channel data transmitted to Server before the calculation
+Cmd, CmdVal
+double
+Command value transmitted to Server before the calculation
+CmdData
+byte[]
+Command data transmitted to Server
+CmdDataStr
+string
+Command data as a string
+Available Functions
 The scripting engine provides the following built-in functions:
-FunctionData TypeDescriptionN(n)intReturns the channel number n. Used in channel cloningVal()doubleActual value of the formula channelVal(n)doubleActual value of the channel nSetVal(n, val)doubleSets the current value of the channel nStat()intActual status of the formula channelStat(n)intActual status of the channel nSetStat(n, stat)intSets the current status of the channel nData()CnlDataActual data of the formula channelData(n)CnlDataActual data of the channel nSetData(n, val, stat)doubleSets the current value and status of the channel nSetData(n, cnlData)doubleSets the current data of the channel nNewData(val, stat)CnlDataCreates a new channel data instancePrevVal()doublePrevious value of the formula channelPrevVal(n)doublePrevious value of the channel nPrevStat()intPrevious status of the formula channelPrevStat(n)intPrevious status of the channel nPrevData()CnlDataPrevious data of the formula channelPrevData(n)CnlDataPrevious data of the channel nTime()DateTimeActual timestamp of the formula channelTime(n)DateTimeActual timestamp of the channel nPrevTime()DateTimePrevious timestamp of the formula channelPrevTime(n)DateTimePrevious timestamp of the channel nDeriv(n)doubleTime derivative of the channel nFunctions from Project Template
+Function
+Data Type
+Description
+N(n)
+int
+Returns the channel number n. Used in channel cloning
+Val()
+double
+Actual value of the formula channel
+Val(n)
+double
+Actual value of the channel n
+SetVal(n, val)
+double
+Sets the current value of the channel n
+Stat()
+int
+Actual status of the formula channel
+Stat(n)
+int
+Actual status of the channel n
+SetStat(n, stat)
+int
+Sets the current status of the channel n
+Data()
+CnlData
+Actual data of the formula channel
+Data(n)
+CnlData
+Actual data of the channel n
+SetData(n, val, stat)
+double
+Sets the current value and status of the channel n
+SetData(n, cnlData)
+double
+Sets the current data of the channel n
+NewData(val, stat)
+CnlData
+Creates a new channel data instance
+PrevVal()
+double
+Previous value of the formula channel
+PrevVal(n)
+double
+Previous value of the channel n
+PrevStat()
+int
+Previous status of the formula channel
+PrevStat(n)
+int
+Previous status of the channel n
+PrevData()
+CnlData
+Previous data of the formula channel
+PrevData(n)
+CnlData
+Previous data of the channel n
+Time()
+DateTime
+Actual timestamp of the formula channel
+Time(n)
+DateTime
+Actual timestamp of the channel n
+PrevTime()
+DateTime
+Previous timestamp of the formula channel
+PrevTime(n)
+DateTime
+Previous timestamp of the channel n
+Deriv(n)
+double
+Time derivative of the channel n
+Functions from Project Template
 In a project that was created based on a standard template, the Scripts table contains the following functions:
-FunctionData TypeDescriptionGetBit(val, n)doubleReturns the n-th bit of the specified valueGetBit(cnlData, n)CnlDataReturns a channel data consists of the n-th bit of the value and the channel statusGetBits(val, n, len)doubleReturns specified bits of the given valueGetBits(cnlData, n, len)CnlDataReturns a channel data consists of the specified bits of the value and the channel statusSetBit(val, n, isOn)doubleSets the n-th bit of the specified valueSetBit(cnlData, n, isOn)CnlDataSets the n-th bit of the channel value, keeping the channel status unchangedGetByte(val, n)doubleReturns the n-th byte of the specified valueDataRel(offset)CnlDataChannel data relative to the current channelSetData()doubleSets the current channel data according to the command valueGetDefaultData(val)CnlDataGets the default data of the calculated channelNow()doubleThe current date and time as a floating-point number. Uses the server time zoneUtcNow()doubleThe current date and time as a floating-point number. Uses universal time zone (UTC)UnixTime()longThe current Unix time in secondsEncodeDate(dateTime)doubleConverts the specified date and time to a channel value of Double typeDecodeDate(val)DateTimeConverts the channel value to a date and timeEncodeAscii(s)doubleConverts an ASCII string, up to 8 characters long, to a floating point numberEncodeUnicode(s)doubleConverts a Unicode string, up to 4 characters long, to a floating point numberDecodeAscii(val)stringConverts the specified value to an ASCII string up to 8 characters longDecodeUnicode(val)stringConverts the specified value to an Unicode string up to 4 characters longSubstring(s, startIndex, length)stringExtracts a substring from the string with bounds checkingSplitAscii(getStringFunc)stringSplits an ASCII string to store by several channelsSplitUnicode(getStringFunc)stringSplits an Unicode string to store by several channelsEverySec(getDataFunc)CnlDataExecutes the specified function every secondEveryMin(getDataFunc)CnlDataExecutes the specified function every minuteEveryHour(getDataFunc)CnlDataExecutes the specified function every hourCountPulse(cnlNum)doubleCounts a pulse of the specified channelHourStarted()boolIndicates that a new hour has started. The result is true once for each channelDayStarted()boolIndicates that a new day has started. The result is true once for each channelMonthStarted()boolIndicates that a new month has started. The result is true once for each channelAdditional scripts, including those for calculating averages, are available on GitHub.
+Function
+Data Type
+Description
+GetBit(val, n)
+double
+Returns the n-th bit of the specified value
+GetBit(cnlData, n)
+CnlData
+Returns a channel data consists of the n-th bit of the value and the channel status
+GetBits(val, n, len)
+double
+Returns specified bits of the given value
+GetBits(cnlData, n, len)
+CnlData
+Returns a channel data consists of the specified bits of the value and the channel status
+SetBit(val, n, isOn)
+double
+Sets the n-th bit of the specified value
+SetBit(cnlData, n, isOn)
+CnlData
+Sets the n-th bit of the channel value, keeping the channel status unchanged
+GetByte(val, n)
+double
+Returns the n-th byte of the specified value
+DataRel(offset)
+CnlData
+Channel data relative to the current channel
+SetData()
+double
+Sets the current channel data according to the command value
+GetDefaultData(val)
+CnlData
+Gets the default data of the calculated channel
+Now()
+double
+The current date and time as a floating-point number. Uses the server time zone
+UtcNow()
+double
+The current date and time as a floating-point number. Uses universal time zone (UTC)
+UnixTime()
+long
+The current Unix time in seconds
+EncodeDate(dateTime)
+double
+Converts the specified date and time to a channel value of Double type
+DecodeDate(val)
+DateTime
+Converts the channel value to a date and time
+EncodeAscii(s)
+double
+Converts an ASCII string, up to 8 characters long, to a floating point number
+EncodeUnicode(s)
+double
+Converts a Unicode string, up to 4 characters long, to a floating point number
+DecodeAscii(val)
+string
+Converts the specified value to an ASCII string up to 8 characters long
+DecodeUnicode(val)
+string
+Converts the specified value to an Unicode string up to 4 characters long
+Substring(s, startIndex, length)
+string
+Extracts a substring from the string with bounds checking
+SplitAscii(getStringFunc)
+string
+Splits an ASCII string to store by several channels
+SplitUnicode(getStringFunc)
+string
+Splits an Unicode string to store by several channels
+EverySec(getDataFunc)
+CnlData
+Executes the specified function every second
+EveryMin(getDataFunc)
+CnlData
+Executes the specified function every minute
+EveryHour(getDataFunc)
+CnlData
+Executes the specified function every hour
+CountPulse(cnlNum)
+double
+Counts a pulse of the specified channel
+HourStarted()
+bool
+Indicates that a new hour has started. The result is true once for each channel
+DayStarted()
+bool
+Indicates that a new day has started. The result is true once for each channel
+MonthStarted()
+bool
+Indicates that a new month has started. The result is true once for each channel
+Additional scripts, including those for calculating averages, are available on GitHub.
 Debugging Scripts
 When developing your own scripts, follow the syntax rules and check that the scripts work correctly. If the Server service failed to compile scripts at startup, error information is displayed in the Server operation log ScadaServer.log, and the compiled source code is available in the CalcEngine.cs file, which is located in the Server log directory. To develop complex formulas, we recommend using Microsoft Visual Studio or Visual Studio Code.
 Examples of Formulas
@@ -690,7 +975,15 @@ View Options
 A window containing the table view options (see Figure 4) is called by the  button located on the editor toolbar. The options are set for the certain view being edited.
 Figure 4. Table view options
 Figure 4. Table view options
-OptionDescriptionArchive codeSpecifies the archive from which historical data is retrievedTable periodTime step used to generate the table view columnsChart argumentsArguments separated by & that are added to the address bar when a chart opensExample of arguments for the standard Chart plugin: archive=Min&gap=90, where archive is the archive code, gap is the distance between points connected by a line (in seconds).
+Option
+Description
+Archive code
+Specifies the archive from which historical data is retrieved
+Table period
+Time step used to generate the table view columns
+Chart arguments
+Arguments separated by & that are added to the address bar when a chart opens
+Example of arguments for the standard Chart plugin: archive=Min&gap=90, where archive is the archive code, gap is the distance between points connected by a line (in seconds).
 Example of arguments for Chart Pro Plugin: profile=PlgChartPro.xml, where profile is the name of the chart profile file.
 If the Use default options checkbox is checked, the archive code and period are loaded from the web application configuration file ScadaWebConfig.xml. The TableArchiveCode and TablePeriod options located in the Main group of the CustomOptions section are used.
 
@@ -703,7 +996,7 @@ Figure 1. Users table
 Users with IDs from 1 to 12 are created by default from the project template. The ScadaWeb and ScadaComm users are intended to connect the Webstation and Communicator client applications to the Server application. The admin and guest users who use the built-in roles are intended to log in to the system. The alex, john and maria users who use custom roles are created as an example.
 Rights Assignment
 Rights are assigned to roles on objects. Note that rights are assigned only for custom roles. For built-in roles, permission check is already implemented in applications. A role is a named set of rights.
-Before assigning rights, fill in the Objects and Roles tables (see Figures 2 and 3). Next, specify the rights in the Object rights table (see Figure 4). Objects can relate to each other hierarchically (see Figure 5). If a top-level object has certain permissions, they are inherited by lower-level objects.
+Before assigning rights, fill in the Objects and Roles tables (see Figures 2 and 3). Next, specify the rights in the ObjectÂ rights table (see Figure 4). Objects can relate to each other hierarchically (see Figure 5). If a top-level object has certain permissions, they are inherited by lower-level objects.
 Figure 2. Objects table
 Figure 2. Objects table
 Figure 3. Roles table
@@ -714,15 +1007,33 @@ Figure 5. Object hierarchy
 Figure 5. Object hierarchy
 Built-in Roles
 Built-in roles whose permissions are hard-coded into the applications are listed in the following table.
-IDNameDescription0DisabledAccess denied1AdministratorFull access2DispatcherCan view information and send commands3GuestCan view information4ApplicationInteracts with the serverFeatures of the built-in roles:
-• Their IDs are from 0 to 4.
-• They apply to all objects.
-• Cannot be changed.
+ID
+Name
+Description
+0
+Disabled
+Access denied
+1
+Administrator
+Full access
+2
+Dispatcher
+Can view information and send commands
+3
+Guest
+Can view information
+4
+Application
+Interacts with the server
+Features of the built-in roles:
+â€¢ Their IDs are from 0 to 4.
+â€¢ They apply to all objects.
+â€¢ Cannot be changed.
 Custom Roles
-Custom roles are roles created by the project developer. In the example above, the custom roles are My role 1, My role 2, and My role 3.
+Custom roles are roles created by the project developer. In the example above, the custom roles are MyÂ roleÂ 1, MyÂ roleÂ 2, and MyÂ roleÂ 3.
 It is recommended to assign IDs to custom roles starting from 101. The Code field of a role is intended for integration with third-party systems and databases. If integration is not used, the code can be left blank.
 By using the role inheritance mechanism, it is possible to significantly reduce the number of records that are added to the Object rights table.
-In the Role inheritance table shown in Figure 6, the child role My role 3 inherits from the parent roles My role 1 and My role 2 the sum of the rights of both.
+In the Role inheritance table shown in Figure 6, the child role MyÂ roleÂ 3 inherits from the parent roles MyÂ roleÂ 1 and MyÂ roleÂ 2 the sum of the rights of both.
 Figure 6. Role inheritance
 Figure 6. Role inheritance
 To check whether the rights are configured properly, open the Rights Matrix window (see Figure 7), which is called by the  button located on the toolbar of the Administrator application. The figure below shows how role inheritance works.
@@ -749,16 +1060,40 @@ Chart Pro Plugin is the additional plugin for the Webstation application extends
 
 Installation
 Chart Pro Plugin is installed according to the instructions. Follow additional steps during installation:
-• Copy the PlgChartPro.xml and PlgChartPro_Config.xml files into your project. The PlgChartPro_Reg.xml file will be created when the registration key is saved.
+â€¢ Copy the PlgChartPro.xml and PlgChartPro_Config.xml files into your project. The PlgChartPro_Reg.xml file will be created when the registration key is saved.
   
-• In the Webstation application options, in the Plugin Assignment section, select the PlgChartPro plugin.
+â€¢ In the Webstation application options, in the Plugin Assignment section, select the PlgChartPro plugin.
   
 Configuring
 Chart Pro Plugin is configured by default. Plugin settings are saved in the PlgChartPro.xml and PlgChartPro_Config.xml files, which can be edited manually if necessary.
 The PlgChartPro_Config.xml file contains a list of profiles. A profile is a set of plugin settings that can be selected by a user on the chart web page. The PlgChartPro.xml file contains a chart profile, which includes display options and data options.
 To create a new profile, copy the PlgChartPro.xml file with a new name and edit it. Then specify the created profile in the PlgChartPro_Config.xml file.
 In addition to the configuration files, the chart display is determined by a query string, which parameters are given in the table below. The query string has the following form: http://localhost:10008/ChartPro/ChartPro?cnlNums=101-103&startDate=2023-09-16&mode=fixed&period=2&periodMin=60&title=Demo&profile=PlgChartPro.xml
-ParameterData TypeDescriptioncnlNumsRange of integers separated by hyphens and commasChannel numbers displayed on the chartstartDateDate in YYYY-MM-DD formatStart date of the displayed data. If not specified, the current date is usedmodefixed | rollingChart mode: fixed or rolling. If not specified, fixed mode is usedperiodIntegerChart period in days relative to the start date. Can be either positive or negative. Used in fixed modeperiodMinIntegerChart period in minutes in rolling modetitleStringChart title. If not specified, it is generated automaticallyprofileStringChart profile file name. If not specified, the first profile from the list is usedIn the fixed mode, the plugin displays a chart for a selected period of time. The chart data is automatically updated by adding new values to the right side of the chart.
+Parameter
+Data Type
+Description
+cnlNums
+Range of integers separated by hyphens and commas
+Channel numbers displayed on the chart
+startDate
+Date in YYYY-MM-DD format
+Start date of the displayed data. If not specified, the current date is used
+mode
+fixed | rolling
+Chart mode: fixed or rolling. If not specified, fixed mode is used
+period
+Integer
+Chart period in days relative to the start date. Can be either positive or negative. Used in fixed mode
+periodMin
+Integer
+Chart period in minutes in rolling mode
+title
+String
+Chart title. If not specified, it is generated automatically
+profile
+String
+Chart profile file name. If not specified, the first profile from the list is used
+In the fixed mode, the plugin displays a chart for a selected period of time. The chart data is automatically updated by adding new values to the right side of the chart.
 In the rolling mode, the plugin displays a graph from the current moment to the specified depth. The chart data is automatically updated, while the chart shifts from right to left.
 The following figure helps to understand the layout of the chart in order to change the plugin configuration.
 
@@ -839,15 +1174,15 @@ Each report form requires the creation of a separate configuration file in XML f
 Configuration files may be edited using any text editor. For example, the free editor Notepad++ is convenient for working with XML files.
 An example report file ElasticReport1.xml is contained in the plugin installation package. This example includes a detailed description of the options and demonstrates the generation of report sections of all possible types.
 The main elements of the report configuration file:
-• The InputOptions element contains options for the input report form, with which a user enters the report parameters and starts generating the document.
-• The OutputOptions element contains formatting options for the generated document.
-• The Document element defines the content of the report.
-– The DocumentOptions element specifies basic options that apply to the entire document.
-– The Section element describes a report section containing data. A report includes one or more sections of various types.
+â€¢ The InputOptions element contains options for the input report form, with which a user enters the report parameters and starts generating the document.
+â€¢ The OutputOptions element contains formatting options for the generated document.
+â€¢ The Document element defines the content of the report.
+â€“ The DocumentOptions element specifies basic options that apply to the entire document.
+â€“ The Section element describes a report section containing data. A report includes one or more sections of various types.
 The supported section types:
-• The TimeData section displays channel data for the selected time period. Channels are displayed horizontally, timestamps are displayed vertically.
-• The TimeTime section displays data of one channel in a compact form. Timestamps are displayed in the horizontal and vertical section headers.
-• The DataData section displays data in a table form. Each cell can be linked to its own channel.
+â€¢ The TimeData section displays channel data for the selected time period. Channels are displayed horizontally, timestamps are displayed vertically.
+â€¢ The TimeTime section displays data of one channel in a compact form. Timestamps are displayed in the horizontal and vertical section headers.
+â€¢ The DataData section displays data in a table form. Each cell can be linked to its own channel.
 The plugin provides the generation of reports based on historical data. Reports on current data and events are not supported. When choosing a historical archive for a report, it is recommended to give preference to an archive with a data writing period that matches or is close to the step of the report sections. This will avoid fetching unnecessary data.
 Report List
 The PlgElasticReport.xml configuration file contains a list of reports divided into groups, which are displayed on the Main Menu > Reports page. Example of file contents:
@@ -900,7 +1235,34 @@ Example 1:
 http://localhost:10008/ElasticReport/Print/PrintReport1?reportID=1&startTime=2024-05-28&endTime=2024-05-29&archive=Hour&format=Html
 Example 2:
 http://localhost:10008/ElasticReport/Print/PrintReport2?reportID=1&offset=0&period=1&unit=Day&archive=Hour&format=Html
-ParameterData TypeDescriptionreportIDIntegerReport ID from the PlgElasticReport.xml filestartTimeDate and time in YYYY-MM-DD or YYYY-MM-DD'T'HH:MM formatReport start date and timeendTimeDate and timeReport end date and timeoffsetIntegerOffset of the report start date relative to the current date. Can be positive or negativeperiodIntegerDuration of the reporting periodunitDay | MonthUnit for offset and periodarchiveStringArchive code from which the report data is takenformatPdf | Xlsx | HtmlOutput format
+Parameter
+Data Type
+Description
+reportID
+Integer
+Report ID from the PlgElasticReport.xml file
+startTime
+Date and time in YYYY-MM-DD or YYYY-MM-DD'T'HH:MM format
+Report start date and time
+endTime
+Date and time
+Report end date and time
+offset
+Integer
+Offset of the report start date relative to the current date. Can be positive or negative
+period
+Integer
+Duration of the reporting period
+unit
+Day | Month
+Unit for offset and period
+archive
+String
+Archive code from which the report data is taken
+format
+Pdf | Xlsx | Html
+Output format
+
 Map Plugin
 Overview
 Map Plugin displays the status and parameters of stationary and moving objects on interactive OpenStreetMap maps. The plugin provides visual control of geographically distributed systems and transport. By clicking, a user is taken to a page with detailed information on the object of interest. Download the plugin using the link. The appearance of Map Plugin is shown in the following figure.
@@ -990,13 +1352,45 @@ Notification Plugin helps an operator to pay attention to the most important eve
 The plugin displays only those events that require acknowledgement and have not yet been acknowledged. The filter specified in the plugin configuration is applied to the displayed events. Clicking the Information button displays a tooltip related to the notification. If a user acknowledges the event, the corresponding notification is hidden.
 Installation
 Notification Plugin is installed according to the instructions. Follow additional steps during installation:
-• Copy the PlgNotification.xml file from the plugin distribution into your project. The file should be displayed in the project explorer under the Webstation > Configuration Files node.
-• In the Webstation application options, in the Plugin Assignment section, select the PlgNotification plugin as the notification management plugin.
+â€¢ Copy the PlgNotification.xml file from the plugin distribution into your project. The file should be displayed in the project explorer under the Webstation > Configuration Files node.
+â€¢ In the Webstation application options, in the Plugin Assignment section, select the PlgNotification plugin as the notification management plugin.
 Configuring
 The configuration file PlgNotification.xml contains the parameters described in the following table.
-XML ElementDescriptionEventFilterEvent filter sectionObjNumsObject numbersDeviceNumsDevice numbersStatusesStatus identifiersSeveritiesSeverity valuesTipsNotification tips sectionTipSection that defines one tipTipConditionTip conditionLinkIf the parameter is defined, it specifies a link to go to the tipHtmlHTML markup of the tip contentIf the parameter value is a numeric range, it may contain commas and hyphens, for example, 1-5,10.
+XML Element
+Description
+EventFilter
+Event filter section
+ObjNums
+Object numbers
+DeviceNums
+Device numbers
+Statuses
+Status identifiers
+Severities
+Severity values
+Tips
+Notification tips section
+Tip
+Section that defines one tip
+TipCondition
+Tip condition
+Link
+If the parameter is defined, it specifies a link to go to the tip
+Html
+HTML markup of the tip content
+If the parameter value is a numeric range, it may contain commas and hyphens, for example, 1-5,10.
 Notification Plugin also uses some parameters from the ScadaWebConfig.xml file, the general configuration file of the Webstation application:
-ParameterDescriptionRefreshRateData refresh rate in millisecondsEventArchiveCodeEvent archive code on the basis of which notifications are generatedEventCountNumber of notifications displayedEventDepthNumber of days to request events
+Parameter
+Description
+RefreshRate
+Data refresh rate in milliseconds
+EventArchiveCode
+Event archive code on the basis of which notifications are generated
+EventCount
+Number of notifications displayed
+EventDepth
+Number of days to request events
+
 Automatic Control Module
 Overview
 Automatic Control Module is an additional module for the Server application that sends commands and generates events when certain conditions are met. The module helps to implement various control algorithms and sending notifications without the need for programming, through the user interface. Download the module using the link. The following figure shows the form for configuring the module.
@@ -1126,8 +1520,8 @@ A database into which the export is performed must be previously created and con
 Current data can be exported On Receive by Server from Communicator or On Timer. Transferring data when received ensures that all current data received from the polled devices is uploaded to the database. Transferring data by timer reduces the database size and saves network traffic.
 
 Historical data export refers to data that is transferred with a timestamp, such as:
-• Archives that are downloaded by Communicator from metering devices and transferred to Server.
-• Data received from Rapid Gate Module installed on a remote server when replicating archives.
+â€¢ Archives that are downloaded by Communicator from metering devices and transferred to Server.
+â€¢ Data received from Rapid Gate Module installed on a remote server when replicating archives.
 The Delay before export option helps to avoid multiple exports of calculated data if several data slices with the same timestamp are received one after another. The Bit of historical archive is used to retrieve data from the calculated channels.
 
 Archive replication ensures that the information in the Rapid SCADA archive and in the database is identical. If archive replication is enabled and the Automatically export archives checkbox is checked, historical data and events received by the Server service from clients are not added to the export queue to avoid duplication. The replication state is saved while the module is running and is loaded when the Server service is restarted.
@@ -1335,9 +1729,9 @@ Auto Report
 Overview
 The Auto Report application is designed to automatically generate various reports according to a schedule, save them to disk and send them by email. Download the application using the link. Sending reports by email is provided by the DrvEmail driver, which is included in the Rapid SCADA distribution and does not require separate installation.
 The application supports adding new libraries to the list of generated report types. The following report types are supported by default:
-• Historical data report.
-• Event report.
-• Elastic report.
+â€¢ Historical data report.
+â€¢ Event report.
+â€¢ Elastic report.
 Auto Report works as a service. The application runs tasks to generate reports according to the schedule. Generated reports are saved to disk and, if the corresponding option is enabled, sent by email. Auto Report connects to the Server application to receive commands for generating reports and to send commands for sending reports via email.
 Installation
 The sequence of installing the Auto Report application on Windows:
@@ -1406,24 +1800,24 @@ Rapid SCADA Enterprise is proprietary software built on an open source core. Rap
 2. The Enterprise edition includes all software modules included in the Standard edition, plus enterprise modules.
 3. Transfer of the software to another server is permitted upon request.
 Enterprise modules, distributed only in the Enterprise edition:
-• Audit Log Plugin
-• Guard Plugin
-• Database Report Plugin
-• Spreadsheet Report Plugin
-• Replication Module
-• Performance Monitor
+â€¢ Audit Log Plugin
+â€¢ Guard Plugin
+â€¢ Database Report Plugin
+â€¢ Spreadsheet Report Plugin
+â€¢ Replication Module
+â€¢ Performance Monitor
 Installation of Rapid SCADA Enterprise includes installation of the basic Rapid SCADA Standard distribution and subsequent installation of additional software modules. Installation packages of the enterprise modules are available upon request.
 
 
 Audit Log Plugin
 Overview
 Audit Log Plugin records the actions of Webstation application users in a PostgreSQL database. The following types of actions are recorded:
-• Login.
-• Logout.
-• Open view.
-• Open chart.
-• Generate report.
-• Send command.
+â€¢ Login.
+â€¢ Logout.
+â€¢ Open view.
+â€¢ Open chart.
+â€¢ Generate report.
+â€¢ Send command.
 Users with the Administrator role have access to generate audit log reports. To generate a report, navigate to Main Menu > Reports > Audit Log. An example report is shown in the following figure.
 
 Reports are generated in XLSX format and can be opened using Microsoft Excel and LibreOffice Calc.
@@ -1450,7 +1844,34 @@ Installation
 Guard Plugin is installed according to the instructions. During installation, complete the following additional step: copy the PlgGuard.xml file from the plugin distribution into your project. The file should be displayed in the project explorer under the Webstation > Configuration Files node.
 Configuring
 Guard Plugin is configured by editing the PlgGuard.xml file in the Administrator application. The configuration file contains the parameters described in the following table.
-ParameterDefault ValueDescriptionGeneralOptionsSection of general optionsUserFailsPerMinute10Maximum number of failed login attempts allowed per minute for a specific userTotalFailsPerMinute100Maximum number of failed login attempts allowed per minute for all usersBlockingDuration1Login blocking duration, minutesCacheExpiration30Cache expiration period for violation data, minutesEventOptionsSecurity event recording optionsArchiveCodeEventsArchive code for recording events. If not specified, the default event archive is usedCnlNum0Channel number to which generated events belong
+Parameter
+Default Value
+Description
+GeneralOptions
+
+Section of general options
+UserFailsPerMinute
+10
+Maximum number of failed login attempts allowed per minute for a specific user
+TotalFailsPerMinute
+100
+Maximum number of failed login attempts allowed per minute for all users
+BlockingDuration
+1
+Login blocking duration, minutes
+CacheExpiration
+30
+Cache expiration period for violation data, minutes
+EventOptions
+
+Security event recording options
+ArchiveCode
+Events
+Archive code for recording events. If not specified, the default event archive is used
+CnlNum
+0
+Channel number to which generated events belong
+
 
 Developers
 Development Basics
@@ -1464,20 +1885,30 @@ Development Basics
 Rapid SCADA is an open source project. Therefore, engineers and programmers can join the Rapid SCADA community to develop software that communicates with or integrates with Rapid SCADA. According to practice, an engineer with basic programming knowledge can begin to develop modules for Rapid SCADA, improving his skills bit by bit.
 Module Development
 The term module refers to a software module that includes a DLL library and a set of additional files, which is built into one of the Rapid SCADA applications, expanding its functionality. Main module types:
-• Logic module is a library that operates as part of the Server service, which adds data processing logic and mathematical calculations.
-• Communication driver is a library managed by Communicator, which implements an industrial communication protocol. For example, Modbus, OPC or MQTT.
-• Web plugin consists of a set of DLLs and scripts that are built into the Webstation application, expanding the capabilities of the Rapid SCADA web interface.
-• Extension of the Administrator application adds new features to the application's user interface.
+â€¢ Logic module is a library that operates as part of the Server service, which adds data processing logic and mathematical calculations.
+â€¢ Communication driver is a library managed by Communicator, which implements an industrial communication protocol. For example, Modbus, OPC or MQTT.
+â€¢ Web plugin consists of a set of DLLs and scripts that are built into the Webstation application, expanding the capabilities of the Rapid SCADA web interface.
+â€¢ Extension of the Administrator application adds new features to the application's user interface.
 For development, use the free Microsoft Visual Studio Community and Visual Studio Code environments. The primary development language is C#.
 Integration
 Rapid SCADA provides a wide range of integration methods:
-DatabaseRapid SCADA has built-in mechanisms for reading and writing real-time data into various popular DBMSs. Import and export can be flexibly configured in accordance with the existing data model.Industrial protocolsSCADA systems made by different manufacturers can exchange data with each other using protocols such as Modbus, OPC or MQTT. One system is a data source, and the other is a data consumer.Application protocolRapid SCADA supports its own application protocol, implemented on top of TCP, which is used to exchange data between the Server application and client applications. The protocol is documented, and a .NET client library is available. The application protocol can be used by a third party client to read data from SCADA archives and send commands.Web APIThe Webstation application provides access to the Web API, which can be used from both client and server code. An example of using the Web API is available here.Direct reading of archivesRapid SCADA supports various types of archives based on files, relational DBMSs and time series databases. Integration can be carried out by directly reading data from the archive by the relevant clients.
+Database
+Rapid SCADA has built-in mechanisms for reading and writing real-time data into various popular DBMSs. Import and export can be flexibly configured in accordance with the existing data model.
+Industrial protocols
+SCADA systems made by different manufacturers can exchange data with each other using protocols such as Modbus, OPC or MQTT. One system is a data source, and the other is a data consumer.
+Application protocol
+Rapid SCADA supports its own application protocol, implemented on top of TCP, which is used to exchange data between the Server application and client applications. The protocol is documented, and a .NET client library is available. The application protocol can be used by a third party client to read data from SCADA archives and send commands.
+Web API
+The Webstation application provides access to the Web API, which can be used from both client and server code. An example of using the Web API is available here.
+Direct reading of archives
+Rapid SCADA supports various types of archives based on files, relational DBMSs and time series databases. Integration can be carried out by directly reading data from the archive by the relevant clients.
+
 Logic Module Development
 Logic modules have the following features:
-• Receive current, historical data and events at the fastest possible speed for processing.
-• Record data and events in archives.
-• Control commands coming to Server.
-• Send commands.
+â€¢ Receive current, historical data and events at the fastest possible speed for processing.
+â€¢ Record data and events in archives.
+â€¢ Control commands coming to Server.
+â€¢ Send commands.
 Let's look at the development of the logical part and user interface of a simple module, which will be named ModAbc. To develop a complex module, learn and use the source code of existing modules on GitHub as examples.
 Logic Implementation
 Create a new project based on the Class Library template. Enter the project name ModAbc.Logic, and select the .NET 8.0 framework.
@@ -1584,11 +2015,11 @@ Activate the ModAbc module and upload the project for execution. Information abo
 
 Driver Development
 Advantages of Rapid SCADA as a platform for driver creation:
-• Communicator is responsible for the connection (Serial, TCP, UDP). The developer implements encoding and decoding of data packets.
-• A driver can collect current, historical data and events, and send commands.
-• The built-in OPC UA server provides data received from the developed driver to third-party OPC clients.
-• A ready-made logging system.
-• Unified user interface for configuration.
+â€¢ Communicator is responsible for the connection (Serial, TCP, UDP). The developer implements encoding and decoding of data packets.
+â€¢ A driver can collect current, historical data and events, and send commands.
+â€¢ The built-in OPC UA server provides data received from the developed driver to third-party OPC clients.
+â€¢ A ready-made logging system.
+â€¢ Unified user interface for configuration.
 Next, let's look at the development of the logical part and user interface of a simple driver, which will be named DrvAbc. To develop a complex driver that implements an industrial protocol, learn and use the source code of existing drivers on GitHub as examples (link 1, link 2).
 Logic Implementation
 Create a new project based on the Class Library template. Enter the project name DrvAbc.Logic, and select the .NET 8.0 framework.
@@ -1713,10 +2144,10 @@ DrvAbc driver polling session
 
 Web Plugin Development
 Using web plugins you can create:
-• New types of views.
-• Components for mimic diagrams.
-• Reports.
-• Web pages for data manipulation.
+â€¢ New types of views.
+â€¢ Components for mimic diagrams.
+â€¢ Reports.
+â€¢ Web pages for data manipulation.
 Let's look at the development of the web interface and interface for configuration a simple plugin, which will be named PlgAbc. To develop a complex plugin, learn and use the source code of existing plugins on GitHub as examples.
 Implementation of Web Interface
 Create a new project based on the Razor Class Library template. Enter the project name PlgAbc, select the .NET 8.0 framework and set the Support pages and views checkbox.
@@ -1831,18 +2262,24 @@ The final decision to publish a module is made by the moderator.
 Module Naming
 Module name should reflect the purpose of the module, and may also contain the full or abbreviated name of the author. Suppose an author named Lion King has developed a driver that implements the MQTT protocol. Then the appropriate module name would be Lion MQTT Driver.
 Module file name is related to the module display name. Module file names use prefixes to indicate the type of module. For example:
-• PlgChartPro.dll - Webstation plugin,
-• ModAutoControl.Logic.dll - Server module,
-• DrvTelegram.Logic.dll - Communicator driver,
-• ExtTableEditor.dll - extension for the Administrator application.
+â€¢ PlgChartPro.dll - Webstation plugin,
+â€¢ ModAutoControl.Logic.dll - Server module,
+â€¢ DrvTelegram.Logic.dll - Communicator driver,
+â€¢ ExtTableEditor.dll - extension for the Administrator application.
 It is recommended to use a file suffix to indicate authorship of a module. Continuing with the example, the driver file might be named DrvMqttLion.Logic.dll.
 Add Your Module
 To add your module to the store, fill out the form. Below are guidelines for completing some of the form fields.
-Module home URLSpecify a web page that contains general information about the module. Example:
-https://forum.rapidscada.org/?topic=driver-gpio-for-scada-v6-1Module documentation URLSpecify a web page that contains instructions for setting up the module. Example:
-https://github.com/JurasskPark/RapidScada_v6/tree/master/OpenDriversDownload URLSpecify a link to a cloud storage where the author can easily upload new versions. Examples:
+Module home URL
+Specify a web page that contains general information about the module. Example:
+https://forum.rapidscada.org/?topic=driver-gpio-for-scada-v6-1
+Module documentation URL
+Specify a web page that contains instructions for setting up the module. Example:
+https://github.com/JurasskPark/RapidScada_v6/tree/master/OpenDrivers
+Download URL
+Specify a link to a cloud storage where the author can easily upload new versions. Examples:
 https://github.com/Manjey73/OpenDrivers/releases?q=DrvGpiod
-https://drive.google.com/drive/folders/18bApJzEzJ_ipM8m89N7YZNH-M8BcYQuE
+https://drive.google.com/drive/folders/18bApJzEzJ_ipM8m89N7YZNH-M8BcYQuE
+
 Version History
 History of Rapid SCADA
 Server History
@@ -1854,1111 +2291,1111 @@ History of Additional Applications
 
 History of Rapid SCADA
 Rapid SCADA 6.4.3 (September 24, 2025)
-• Server 6.2.2.1
-• Communicator 6.2.0.1
-• Webstation 6.2.2.0
-– PlgChart 6.1.0.1
-– PlgMain 6.1.1.1
-– PlgMimic 6.0.0.1
-– PlgMimicEditor 6.0.0.1
-– PlgMimBasicComp 6.0.0.1
-• Agent 6.2.0.1
-• Administrator 6.2.2.0
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.2.2.1
+â€¢ Communicator 6.2.0.1
+â€¢ Webstation 6.2.2.0
+â€“ PlgChart 6.1.0.1
+â€“ PlgMain 6.1.1.1
+â€“ PlgMimic 6.0.0.1
+â€“ PlgMimicEditor 6.0.0.1
+â€“ PlgMimBasicComp 6.0.0.1
+â€¢ Agent 6.2.0.1
+â€¢ Administrator 6.2.2.0
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.4.2 (August 26, 2025)
-• Server 6.2.2.0
-– ModActiveDirectory 6.1.1.0
-– ModArcBasic 6.2.1.0
-– ModArcInfluxDb 6.2.1.0
-– ModArcPostgreSql 6.2.2.0
-– ModDbExport 6.1.1.2
-– ModDiffCalculator 6.0.1.0
-• Communicator 6.2.0.1
-– DrvDbImport 6.1.0.2
-– DrvMqttPublisher 6.1.0.1
-– DrvOpcUa 6.1.1.0
-• Webstation 6.2.2.0
-– PlgMain 6.1.1.0
-– PlgMimic 6.0.0.0
-– PlgMimicEditor 6.0.0.0
-– PlgMimBasicComp 6.0.0.0
-– PlgScheme 6.1.1.0
-– PlgWebPage 6.1.1.0
-• Agent 6.2.0.1
-• Administrator 6.2.2.0
-– ExtDepPostgreSql 6.1.0.1
-– ExtMimicLauncher 6.0.0.0
-– ExtWebConfig 6.1.0.2
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.2.2.0
+â€“ ModActiveDirectory 6.1.1.0
+â€“ ModArcBasic 6.2.1.0
+â€“ ModArcInfluxDb 6.2.1.0
+â€“ ModArcPostgreSql 6.2.2.0
+â€“ ModDbExport 6.1.1.2
+â€“ ModDiffCalculator 6.0.1.0
+â€¢ Communicator 6.2.0.1
+â€“ DrvDbImport 6.1.0.2
+â€“ DrvMqttPublisher 6.1.0.1
+â€“ DrvOpcUa 6.1.1.0
+â€¢ Webstation 6.2.2.0
+â€“ PlgMain 6.1.1.0
+â€“ PlgMimic 6.0.0.0
+â€“ PlgMimicEditor 6.0.0.0
+â€“ PlgMimBasicComp 6.0.0.0
+â€“ PlgScheme 6.1.1.0
+â€“ PlgWebPage 6.1.1.0
+â€¢ Agent 6.2.0.1
+â€¢ Administrator 6.2.2.0
+â€“ ExtDepPostgreSql 6.1.0.1
+â€“ ExtMimicLauncher 6.0.0.0
+â€“ ExtWebConfig 6.1.0.2
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.4.1 (April 01, 2025)
-• Server 6.2.2.0
-– ModArcPostgreSql 6.2.1.0
-– ModDbExport 6.1.1.1
-• Communicator 6.2.0.1
-– DrvCnlMqtt 6.1.0.1
-– DrvDbImport 6.1.0.1
-• Webstation 6.2.1.0
-• Agent 6.2.0.1
-• Administrator 6.2.1.3
-– ExtTableEditor 6.1.1.0
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.2.2.0
+â€“ ModArcPostgreSql 6.2.1.0
+â€“ ModDbExport 6.1.1.1
+â€¢ Communicator 6.2.0.1
+â€“ DrvCnlMqtt 6.1.0.1
+â€“ DrvDbImport 6.1.0.1
+â€¢ Webstation 6.2.1.0
+â€¢ Agent 6.2.0.1
+â€¢ Administrator 6.2.1.3
+â€“ ExtTableEditor 6.1.1.0
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.4.0 (January 23, 2025)
-• Server 6.2.1.0
-– ModArcPostgreSql 6.2.0.1
-– ModDbExport 6.1.1.0
-• Communicator 6.2.0.1
-• Webstation 6.2.0.3
-• Agent 6.2.0.1
-• Administrator 6.2.1.2
-– ExtCommConfig 6.1.0.1
-– ExtServerConfig 6.1.0.1
-– ExtWebConfig 6.1.0.1
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.2.1.0
+â€“ ModArcPostgreSql 6.2.0.1
+â€“ ModDbExport 6.1.1.0
+â€¢ Communicator 6.2.0.1
+â€¢ Webstation 6.2.0.3
+â€¢ Agent 6.2.0.1
+â€¢ Administrator 6.2.1.2
+â€“ ExtCommConfig 6.1.0.1
+â€“ ExtServerConfig 6.1.0.1
+â€“ ExtWebConfig 6.1.0.1
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.3.1 (October 15, 2024)
-• Server 6.2.0.1
-– ModDbExport 6.1.0.1
-• Communicator 6.2.0.1
-• Webstation 6.2.0.3
-– PlgMain 6.1.0.1
-– PlgStore 6.1.0.1
-• Agent 6.2.0.1
-• Administrator 6.2.1.1
-– ExtExternalTools 6.0.0.0
-– ExtTableEditor 6.1.0.1
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.2.0.1
+â€“ ModDbExport 6.1.0.1
+â€¢ Communicator 6.2.0.1
+â€¢ Webstation 6.2.0.3
+â€“ PlgMain 6.1.0.1
+â€“ PlgStore 6.1.0.1
+â€¢ Agent 6.2.0.1
+â€¢ Administrator 6.2.1.1
+â€“ ExtExternalTools 6.0.0.0
+â€“ ExtTableEditor 6.1.0.1
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.3.0 (August 12, 2024)
-• Server 6.2.0.1
-– ModActiveDirectory 6.1.0.0
-– ModArcBasic 6.2.0.0
-– ModArcInfluxDb 6.2.0.0
-– ModArcPostgreSql 6.2.0.0
-– ModDbExport 6.1.0.0
-• Communicator 6.2.0.1
-– DrvCnlBasic 6.1.0.1
-– DrvCnlMqtt 6.1.0.0
-– DrvDbImport 6.1.0.0
-– DrvDsMqtt 6.1.0.0
-– DrvDsOpcUaServer 6.1.0.0
-– DrvModbus 6.0.0.4
-– DrvMqttClient 6.1.0.0
-– DrvMqttPublisher 6.1.0.0
-– DrvOpcUa 6.1.0.0
-• Webstation 6.2.0.2
-– PlgChart 6.1.0.0
-– PlgMain 6.1.0.0
-– PlgScheme 6.1.0.0
-– PlgSchBasicComp 6.1.0.0
-– PlgStore 6.1.0.0
-– PlgWebPage 6.1.0.0
-• Agent 6.2.0.1
-• Administrator 6.2.1.0
-– ExtCommConfig 6.1.0.0
-– ExtDepAgent 6.1.0.0
-– ExtDepPostgreSql 6.1.0.0
-– ExtProjectTools 6.1.0.0
-– ExtServerConfig 6.1.0.0
-– ExtWebConfig 6.1.0.0
-– ExtWirenBoard 6.1.0.0
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.2.0.1
+â€“ ModActiveDirectory 6.1.0.0
+â€“ ModArcBasic 6.2.0.0
+â€“ ModArcInfluxDb 6.2.0.0
+â€“ ModArcPostgreSql 6.2.0.0
+â€“ ModDbExport 6.1.0.0
+â€¢ Communicator 6.2.0.1
+â€“ DrvCnlBasic 6.1.0.1
+â€“ DrvCnlMqtt 6.1.0.0
+â€“ DrvDbImport 6.1.0.0
+â€“ DrvDsMqtt 6.1.0.0
+â€“ DrvDsOpcUaServer 6.1.0.0
+â€“ DrvModbus 6.0.0.4
+â€“ DrvMqttClient 6.1.0.0
+â€“ DrvMqttPublisher 6.1.0.0
+â€“ DrvOpcUa 6.1.0.0
+â€¢ Webstation 6.2.0.2
+â€“ PlgChart 6.1.0.0
+â€“ PlgMain 6.1.0.0
+â€“ PlgScheme 6.1.0.0
+â€“ PlgSchBasicComp 6.1.0.0
+â€“ PlgStore 6.1.0.0
+â€“ PlgWebPage 6.1.0.0
+â€¢ Agent 6.2.0.1
+â€¢ Administrator 6.2.1.0
+â€“ ExtCommConfig 6.1.0.0
+â€“ ExtDepAgent 6.1.0.0
+â€“ ExtDepPostgreSql 6.1.0.0
+â€“ ExtProjectTools 6.1.0.0
+â€“ ExtServerConfig 6.1.0.0
+â€“ ExtWebConfig 6.1.0.0
+â€“ ExtWirenBoard 6.1.0.0
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.2.1 (March 26, 2024)
-• Server 6.2.0.0
-– ModDbExport 6.0.1.1
-– ModDiffCalculator 6.0.0.0
-• Communicator 6.2.0.0
-– DrvDsOpcUaServer 6.0.0.2
-– DrvOpcClassic 6.0.1.2
-– DrvOpcUa 6.0.0.1
-• Webstation 6.2.0.1
-• Agent 6.2.0.1
-• Administrator 6.2.0.0
-– ExtTableEditor 6.1.0.0
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.2.0.0
+â€“ ModDbExport 6.0.1.1
+â€“ ModDiffCalculator 6.0.0.0
+â€¢ Communicator 6.2.0.0
+â€“ DrvDsOpcUaServer 6.0.0.2
+â€“ DrvOpcClassic 6.0.1.2
+â€“ DrvOpcUa 6.0.0.1
+â€¢ Webstation 6.2.0.1
+â€¢ Agent 6.2.0.1
+â€¢ Administrator 6.2.0.0
+â€“ ExtTableEditor 6.1.0.0
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.2.0 (January 27, 2024)
-• Server 6.2.0.0
-– ModArcPostgreSql 6.1.2.1
-– ModDbExport 6.0.1.0
-• Communicator 6.2.0.0
-– DrvCnlBasic 6.1.0.0
-• Webstation 6.2.0.0
-• Agent 6.2.0.0
-• Administrator 6.2.0.0
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.2.0.0
+â€“ ModArcPostgreSql 6.1.2.1
+â€“ ModDbExport 6.0.1.0
+â€¢ Communicator 6.2.0.0
+â€“ DrvCnlBasic 6.1.0.0
+â€¢ Webstation 6.2.0.0
+â€¢ Agent 6.2.0.0
+â€¢ Administrator 6.2.0.0
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.1.6 (December 10, 2023)
-• Server 6.1.1.1
-– ModActiveDirectory 6.0.2.0
-– ModArcPostgreSql 6.1.2.0
-– ModDbExport 6.0.0.2
-• Communicator 6.1.1.1
-– DrvCsvReader 6.0.0.0
-– DrvMqttClient 6.0.0.4
-– DrvOpcClassic 6.0.1.1
-• Webstation 6.1.2.2
-– PlgMain 6.0.3.1
-• Agent 6.1.0.1
-• Administrator 6.1.1.1
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.1.1.1
+â€“ ModActiveDirectory 6.0.2.0
+â€“ ModArcPostgreSql 6.1.2.0
+â€“ ModDbExport 6.0.0.2
+â€¢ Communicator 6.1.1.1
+â€“ DrvCsvReader 6.0.0.0
+â€“ DrvMqttClient 6.0.0.4
+â€“ DrvOpcClassic 6.0.1.1
+â€¢ Webstation 6.1.2.2
+â€“ PlgMain 6.0.3.1
+â€¢ Agent 6.1.0.1
+â€¢ Administrator 6.1.1.1
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.1.5 (September 25, 2023)
-• Server 6.1.1.1
-• Communicator 6.1.1.1
-– DrvDbImport 6.0.0.1
-– DrvDsOpcUaServer 6.0.0.1
-– DrvOpcClassic 6.0.1.0
-• Webstation 6.1.2.1
-• Agent 6.1.0.0
-• Administrator 6.1.1.0
-– ExtProjectTools 6.0.1.0
-– ExtWirenBoard 6.0.0.1
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.1.1.1
+â€¢ Communicator 6.1.1.1
+â€“ DrvDbImport 6.0.0.1
+â€“ DrvDsOpcUaServer 6.0.0.1
+â€“ DrvOpcClassic 6.0.1.0
+â€¢ Webstation 6.1.2.1
+â€¢ Agent 6.1.0.0
+â€¢ Administrator 6.1.1.0
+â€“ ExtProjectTools 6.0.1.0
+â€“ ExtWirenBoard 6.0.0.1
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.1.4 (August 03, 2023)
-• Server 6.1.1.1
-– ModArcPostgreSql 6.1.1.1
-• Communicator 6.1.1.1
-• Webstation 6.1.2.0
-– PlgChart 6.0.2.0
-– PlgMain 6.0.3.0
-– PlgScheme 6.0.2.0
-– PlgSchBasicComp 6.0.2.0
-– PlgStore 6.0.0.0
-– PlgWebPage 6.0.2.0
-• Agent 6.1.0.0
-• Administrator 6.1.0.3
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.1.1.1
+â€“ ModArcPostgreSql 6.1.1.1
+â€¢ Communicator 6.1.1.1
+â€¢ Webstation 6.1.2.0
+â€“ PlgChart 6.0.2.0
+â€“ PlgMain 6.0.3.0
+â€“ PlgScheme 6.0.2.0
+â€“ PlgSchBasicComp 6.0.2.0
+â€“ PlgStore 6.0.0.0
+â€“ PlgWebPage 6.0.2.0
+â€¢ Agent 6.1.0.0
+â€¢ Administrator 6.1.0.3
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.1.3 (July 04, 2023)
-• Server 6.1.1.0
-– ModArcPostgreSql 6.1.1.0
-– ModDbExport 6.0.0.1
-• Communicator 6.1.1.0
-– DrvCnlBasic 6.0.1.0
-– DrvMqttClient 6.0.0.3
-– DrvMqttPublisher 6.0.0.3
-– DrvSnmp 6.0.0.1
-• Webstation 6.1.1.0
-– PlgChart 6.0.1.0
-– PlgMain 6.0.2.0
-– PlgScheme 6.0.1.0
-– PlgSchBasicComp 6.0.1.0
-– PlgWebPage 6.0.1.0
-• Agent 6.1.0.0
-• Administrator 6.1.0.2
-– ExtCommConfig 6.0.1.2
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.1.1.0
+â€“ ModArcPostgreSql 6.1.1.0
+â€“ ModDbExport 6.0.0.1
+â€¢ Communicator 6.1.1.0
+â€“ DrvCnlBasic 6.0.1.0
+â€“ DrvMqttClient 6.0.0.3
+â€“ DrvMqttPublisher 6.0.0.3
+â€“ DrvSnmp 6.0.0.1
+â€¢ Webstation 6.1.1.0
+â€“ PlgChart 6.0.1.0
+â€“ PlgMain 6.0.2.0
+â€“ PlgScheme 6.0.1.0
+â€“ PlgSchBasicComp 6.0.1.0
+â€“ PlgWebPage 6.0.1.0
+â€¢ Agent 6.1.0.0
+â€¢ Administrator 6.1.0.2
+â€“ ExtCommConfig 6.0.1.2
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.1.2 (May 15, 2023)
-• Server 6.1.0.2
-• Communicator 6.1.0.1
-– DrvModbus 6.0.0.3
-– DrvMqttClient 6.0.0.2
-• Webstation 6.1.0.1
-– PlgMain 6.0.1.1
-– PlgScheme 6.0.0.1
-• Agent 6.1.0.0
-• Administrator 6.1.0.2
-– ExtServerConfig 6.0.1.1
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.1.0.2
+â€¢ Communicator 6.1.0.1
+â€“ DrvModbus 6.0.0.3
+â€“ DrvMqttClient 6.0.0.2
+â€¢ Webstation 6.1.0.1
+â€“ PlgMain 6.0.1.1
+â€“ PlgScheme 6.0.0.1
+â€¢ Agent 6.1.0.0
+â€¢ Administrator 6.1.0.2
+â€“ ExtServerConfig 6.0.1.1
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.1.1 (April 02, 2023)
-• Server 6.1.0.1
-• Communicator 6.1.0.0
-– DrvDsScadaServer 6.0.1.1
-• Webstation 6.1.0.0
-• Agent 6.1.0.0
-• Administrator 6.1.0.1
-– ExtCommConfig 6.0.1.1
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.1.0.1
+â€¢ Communicator 6.1.0.0
+â€“ DrvDsScadaServer 6.0.1.1
+â€¢ Webstation 6.1.0.0
+â€¢ Agent 6.1.0.0
+â€¢ Administrator 6.1.0.1
+â€“ ExtCommConfig 6.0.1.1
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.1.0 (March 21, 2023)
-• Server 6.1.0.0
-– ModActiveDirectory 6.0.1.0
-– ModArcBasic 6.1.0.0
-– ModArcInfluxDb 6.1.0.0
-– ModArcPostgreSql 6.1.0.0
-• Communicator 6.1.0.0
-– DrvCnlMqtt 6.0.0.2
-– DrvDsMqtt 6.0.0.2
-– DrvDsScadaServer 6.0.1.0
-– DrvModbus 6.0.0.2
-– DrvMqttPublisher 6.0.0.2
-• Webstation 6.1.0.0
-– PlgMain 6.0.1.0
-• Agent 6.1.0.0
-• Administrator 6.1.0.0
-– ExtCommConfig 6.0.1.0
-– ExtProjectTools 6.0.0.2
-– ExtServerConfig 6.0.1.0
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.1.0.0
+â€“ ModActiveDirectory 6.0.1.0
+â€“ ModArcBasic 6.1.0.0
+â€“ ModArcInfluxDb 6.1.0.0
+â€“ ModArcPostgreSql 6.1.0.0
+â€¢ Communicator 6.1.0.0
+â€“ DrvCnlMqtt 6.0.0.2
+â€“ DrvDsMqtt 6.0.0.2
+â€“ DrvDsScadaServer 6.0.1.0
+â€“ DrvModbus 6.0.0.2
+â€“ DrvMqttPublisher 6.0.0.2
+â€¢ Webstation 6.1.0.0
+â€“ PlgMain 6.0.1.0
+â€¢ Agent 6.1.0.0
+â€¢ Administrator 6.1.0.0
+â€“ ExtCommConfig 6.0.1.0
+â€“ ExtProjectTools 6.0.0.2
+â€“ ExtServerConfig 6.0.1.0
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.0.2 (February 20, 2023)
-• Server 6.0.0.2
-• Communicator 6.0.0.2
-– DrvCnlBasic 6.0.0.1
-– DrvDbImport 6.0.0.0
-– DrvEnronModbus 6.0.0.0
-– DrvModbus 6.0.0.1
-– DrvSms 6.0.0.0
-– DrvSnmp 6.0.0.0
-• Webstation 6.0.0.1
-• Agent 6.0.0.0
-• Administrator 6.0.0.1
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.0.0.2
+â€¢ Communicator 6.0.0.2
+â€“ DrvCnlBasic 6.0.0.1
+â€“ DrvDbImport 6.0.0.0
+â€“ DrvEnronModbus 6.0.0.0
+â€“ DrvModbus 6.0.0.1
+â€“ DrvSms 6.0.0.0
+â€“ DrvSnmp 6.0.0.0
+â€¢ Webstation 6.0.0.1
+â€¢ Agent 6.0.0.0
+â€¢ Administrator 6.0.0.1
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.0.1 (January 17, 2023)
-• Server 6.0.0.1
-– ModActiveDirectory 6.0.0.0
-– ModArcInfluxDb 6.0.0.1
-– ModDbExport 6.0.0.0
-• Communicator 6.0.0.1
-– DrvCnlMqtt 6.0.0.1
-– DrvDsMqtt 6.0.0.1
-– DrvDsScadaServer 6.0.0.1
-– DrvMqttClient 6.0.0.1
-– DrvMqttPublisher 6.0.0.1
-• Webstation 6.0.0.1
-– PlgChart 6.0.0.1
-– PlgSchBasicComp 6.0.0.1
-• Agent 6.0.0.0
-• Administrator 6.0.0.1
-– ExtProjectTools 6.0.0.1
-– ExtServerConfig 6.0.0.1
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.0.0.1
+â€“ ModActiveDirectory 6.0.0.0
+â€“ ModArcInfluxDb 6.0.0.1
+â€“ ModDbExport 6.0.0.0
+â€¢ Communicator 6.0.0.1
+â€“ DrvCnlMqtt 6.0.0.1
+â€“ DrvDsMqtt 6.0.0.1
+â€“ DrvDsScadaServer 6.0.0.1
+â€“ DrvMqttClient 6.0.0.1
+â€“ DrvMqttPublisher 6.0.0.1
+â€¢ Webstation 6.0.0.1
+â€“ PlgChart 6.0.0.1
+â€“ PlgSchBasicComp 6.0.0.1
+â€¢ Agent 6.0.0.0
+â€¢ Administrator 6.0.0.1
+â€“ ExtProjectTools 6.0.0.1
+â€“ ExtServerConfig 6.0.0.1
+â€¢ Scheme Editor 5.3.1.1
 Rapid SCADA 6.0.0 (December 03, 2022)
-• Server 6.0.0.0
-• Communicator 6.0.0.0
-• Webstation 6.0.0.0
-• Agent 6.0.0.0
-• Administrator 6.0.0.0
-• Scheme Editor 5.3.1.1
+â€¢ Server 6.0.0.0
+â€¢ Communicator 6.0.0.0
+â€¢ Webstation 6.0.0.0
+â€¢ Agent 6.0.0.0
+â€¢ Administrator 6.0.0.0
+â€¢ Scheme Editor 5.3.1.1
 
 
 Server History
 Server Application
 ScadaServer 6.2.2.1 (September 24, 2025)
-• Fixed calculation of channel status taking deadband into account
+â€¢ Fixed calculation of channel status taking deadband into account
 ScadaServer 6.2.2.0 (April 01, 2025)
-• Writes initial command values ??to events
-• Prevents infinity in historical data
+â€¢ Writes initial command values ??to events
+â€¢ Prevents infinity in historical data
 ScadaServer 6.2.1.0 (January 23, 2025)
-• Changes in module methods that handle writing of historical data and events
-• Fixed Deriv function
-• Fixed writing to archive on change
+â€¢ Changes in module methods that handle writing of historical data and events
+â€¢ Fixed Deriv function
+â€¢ Fixed writing to archive on change
 ScadaServer 6.2.0.1 (August 12, 2024)
-• Fixed a bug with incorrect timestamps when writing historical data
+â€¢ Fixed a bug with incorrect timestamps when writing historical data
 ScadaServer 6.2.0.0 (January 27, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ScadaServer 6.1.1.1 (August 03, 2023)
-• Code refactoring
+â€¢ Code refactoring
 ScadaServer 6.1.1.0 (July 04, 2023)
-• Works with new instance configuration
-• Time of writing to archives is set as current when Server starts.
+â€¢ Works with new instance configuration
+â€¢ Time of writing to archives is set as current when Server starts.
 ScadaServer 6.1.0.2 (May 15, 2023)
-• Fixed waiting for service stop
+â€¢ Fixed waiting for service stop
 ScadaServer 6.1.0.1 (April 02, 2023)
-• Fixed reading configuration database
+â€¢ Fixed reading configuration database
 ScadaServer 6.1.0.0 (March 21, 2023)
-• Added the Command format column to the Channels table
-• New faster application protocol
-• Output formula can return a CnlData instance
-• Third-party applications can be started from scripts
-• Changes in the module API
+â€¢ Added the Command format column to the Channels table
+â€¢ New faster application protocol
+â€¢ Output formula can return a CnlData instance
+â€¢ Third-party applications can be started from scripts
+â€¢ Changes in the module API
 ScadaServer 6.0.0.2 (February 20, 2023)
-• Non-numeric event channel values are replaced with zero
-• Limit deadband can be bound to channel
+â€¢ Non-numeric event channel values are replaced with zero
+â€¢ Limit deadband can be bound to channel
 ScadaServer 6.0.0.1 (January 17, 2023)
-• Fixed hang on stop if some modules are in use
-• Added an option whether to use archival channel status
+â€¢ Fixed hang on stop if some modules are in use
+â€¢ Added an option whether to use archival channel status
 ScadaServer 6.0.0.0 (December 03, 2022)
-• New configuration database
-• Configuration database can be stored in files and PostgreSQL database
-• Secure and fast application communication protocol
-• Channel formulas became more powerful
-• No limit on the number of channels and devices
-• Flexible archives
+â€¢ New configuration database
+â€¢ Configuration database can be stored in files and PostgreSQL database
+â€¢ Secure and fast application communication protocol
+â€¢ Channel formulas became more powerful
+â€¢ No limit on the number of channels and devices
+â€¢ Flexible archives
 Active Directory Module
 ModActiveDirectory 6.1.1.0 (August 26, 2025)
-• Build due to changes in the base libraries
+â€¢ Build due to changes in the base libraries
 ModActiveDirectory 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ModActiveDirectory 6.0.2.0 (December 10, 2023)
-• User information is stored in PostgreSQL database
+â€¢ User information is stored in PostgreSQL database
 ModActiveDirectory 6.0.1.0 (March 21, 2023)
-• Added an option to enable or disable search in Active Directory
+â€¢ Added an option to enable or disable search in Active Directory
 ModActiveDirectory 6.0.0.0 (January 17, 2023)
-• Security groups can be used to assign custom roles
+â€¢ Security groups can be used to assign custom roles
 Basic Archive
 ModArcBasic 6.2.1.0 (August 26, 2025)
-• Supports monthly writing period
+â€¢ Supports monthly writing period
 ModArcBasic 6.2.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
-• Added historical archive options
-• Trend table format has been updated
+â€¢ Upgrade to .NET 8.0
+â€¢ Added historical archive options
+â€¢ Trend table format has been updated
 ModArcBasic 6.1.0.0 (March 21, 2023)
-• Refactoring and optimization
+â€¢ Refactoring and optimization
 ModArcBasic 6.0.0.0 (December 03, 2022)
-• Initial development of the module
+â€¢ Initial development of the module
 InfluxDB Archive
 ModArcInfluxDb 6.2.1.0 (August 26, 2025)
-• Supports monthly writing period
+â€¢ Supports monthly writing period
 ModArcInfluxDb 6.2.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
-• Added historical archive options
+â€¢ Upgrade to .NET 8.0
+â€¢ Added historical archive options
 ModArcInfluxDb 6.1.0.0 (March 21, 2023)
-• Refactoring and optimization
+â€¢ Refactoring and optimization
 ModArcInfluxDb 6.0.0.1 (January 17, 2023)
-• Fixed loading of module configuration
+â€¢ Fixed loading of module configuration
 ModArcInfluxDb 6.0.0.0 (December 03, 2022)
-• Initial development of the module
+â€¢ Initial development of the module
 PostgreSQL Archive
 ModArcPostgreSql 6.2.2.0 (August 26, 2025)
-• Supports monthly writing period
+â€¢ Supports monthly writing period
 ModArcPostgreSql 6.2.1.0 (April 01, 2025)
-• Historical archive supports in-memory caching
+â€¢ Historical archive supports in-memory caching
 ModArcPostgreSql 6.2.0.1 (January 23, 2025)
-• Handling partition missing error
+â€¢ Handling partition missing error
 ModArcPostgreSql 6.2.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
-• Added historical archive options
+â€¢ Upgrade to .NET 8.0
+â€¢ Added historical archive options
 ModArcPostgreSql 6.1.2.1 (January 27, 2024)
-• Fixed a bug when writing events
+â€¢ Fixed a bug when writing events
 ModArcPostgreSql 6.1.2.0 (December 10, 2023)
-• Added a partition size of one day
+â€¢ Added a partition size of one day
 ModArcPostgreSql 6.1.1.1 (August 03, 2023)
-• Fixed batch size
+â€¢ Fixed batch size
 ModArcPostgreSql 6.1.1.0 (July 04, 2023)
-• Changes in archive options
+â€¢ Changes in archive options
 ModArcPostgreSql 6.1.0.0 (March 21, 2023)
-• Refactoring and optimization
+â€¢ Refactoring and optimization
 ModArcPostgreSql 6.0.0.0 (December 03, 2022)
-• Initial development of the module
+â€¢ Initial development of the module
 Automatic Control Module
 ModAutoControl 6.1.1.1 (March 17, 2025)
-• Fixed cancel changes function
+â€¢ Fixed cancel changes function
 ModAutoControl 6.1.1.0 (January 23, 2025)
-• Build due to changes in the base libraries
+â€¢ Build due to changes in the base libraries
 ModAutoControl 6.1.0.1 (August 12, 2024)
-• Build due to changes in the base libraries
+â€¢ Build due to changes in the base libraries
 ModAutoControl 6.1.0.0 (February 26, 2024)
-• Upgrade to .NET 8.0
-• Implemented multi-channel data trigger
-• Supports event generation on triggers
-• Added a firing rate option in data change trigger
-• Added variables to output channel limits
-• Improved channel filters in data and event triggers
-• Fixed a bug when generating command text
+â€¢ Upgrade to .NET 8.0
+â€¢ Implemented multi-channel data trigger
+â€¢ Supports event generation on triggers
+â€¢ Added a firing rate option in data change trigger
+â€¢ Added variables to output channel limits
+â€¢ Improved channel filters in data and event triggers
+â€¢ Fixed a bug when generating command text
 ModAutoControl 6.0.0.4 (January 27, 2024)
-• Does not use BinaryFormatter
+â€¢ Does not use BinaryFormatter
 ModAutoControl 6.0.0.3 (December 10, 2023)
-• Fixed copying a command value in data change trigger
-• Fixed trigger copying on the configuration form
+â€¢ Fixed copying a command value in data change trigger
+â€¢ Fixed trigger copying on the configuration form
 ModAutoControl 6.0.0.2 (September 25, 2023)
-• Fixes on module configuration form
+â€¢ Fixes on module configuration form
 ModAutoControl 6.0.0.1 (May 15, 2023)
-• Fixed formatting of variable values in commands
+â€¢ Fixed formatting of variable values in commands
 ModAutoControl 6.0.0.0 (December 03, 2022)
-• Added new variables available in command text
-• Channels, devices and other entities can be selected from dictionaries
-• Implemented copying and pasting of triggers
+â€¢ Added new variables available in command text
+â€¢ Channels, devices and other entities can be selected from dictionaries
+â€¢ Implemented copying and pasting of triggers
 DB Export
 ModDbExport 6.1.1.2 (August 26, 2025)
-• Dependencies updated
+â€¢ Dependencies updated
 ModDbExport 6.1.1.1 (April 01, 2025)
-• Fixed cancel changes function
+â€¢ Fixed cancel changes function
 ModDbExport 6.1.1.0 (January 23, 2025)
-• Fixed query filter by objects and devices
-• Delay before historical data export works differently
+â€¢ Fixed query filter by objects and devices
+â€¢ Delay before historical data export works differently
 ModDbExport 6.1.0.1 (October 15, 2024)
-• Refactoring of loading and saving configuration
+â€¢ Refactoring of loading and saving configuration
 ModDbExport 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
-• Fixed label text on the module configuration form
+â€¢ Upgrade to .NET 8.0
+â€¢ Fixed label text on the module configuration form
 ModDbExport 6.0.1.1 (March 26, 2024)
-• Added delay option when exporting calculated historical data
+â€¢ Added delay option when exporting calculated historical data
 ModDbExport 6.0.1.0 (January 27, 2024)
-• Export of calculated historical data
+â€¢ Export of calculated historical data
 ModDbExport 6.0.0.2 (December 10, 2023)
-• Fixed query filter editing
-• Added available query parameters
+â€¢ Fixed query filter editing
+â€¢ Added available query parameters
 ModDbExport 6.0.0.1 (July 04, 2023)
-• Optimized module configuration source code
+â€¢ Optimized module configuration source code
 ModDbExport 6.0.0.0 (January 17, 2023)
-• Export status can be bound to a channel
-• Added a feature to export current data on timer
-• Added a feature to export event acknowledgments and commands
-• Object filter added to query options
-• Module task queue
+â€¢ Export status can be bound to a channel
+â€¢ Added a feature to export current data on timer
+â€¢ Added a feature to export event acknowledgments and commands
+â€¢ Object filter added to query options
+â€¢ Module task queue
 Difference Calculator
 ModDiffCalculator 6.0.1.0 (August 26, 2025)
-• Added an option to continuously calculate the difference between historical and current data
-• Added an option to adjust for daylight saving time
+â€¢ Added an option to continuously calculate the difference between historical and current data
+â€¢ Added an option to adjust for daylight saving time
 ModDiffCalculator 6.0.0.0 (March 26, 2024)
-• Initial development of the module
+â€¢ Initial development of the module
 Performance Monitor
 ModPerformanceMonitor 6.1.1.0 (January 23, 2025)
-• Build due to changes in the base libraries
+â€¢ Build due to changes in the base libraries
 ModPerformanceMonitor 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ModPerformanceMonitor 6.0.0.0 (March 21, 2023)
-• Initial development of the module
+â€¢ Initial development of the module
 Rapid Gate
 ModRapidGate 6.1.1.1 (April 01, 2025)
-• Fixed cancel changes function
+â€¢ Fixed cancel changes function
 ModRapidGate 6.1.1.0 (January 23, 2025)
-• Historical data and events are transferred if the archive mask matches
+â€¢ Historical data and events are transferred if the archive mask matches
 ModRapidGate 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ModRapidGate 6.0.1.4 (January 27, 2024)
-• Does not use BinaryFormatter
+â€¢ Does not use BinaryFormatter
 ModRapidGate 6.0.1.3 (December 10, 2023)
-• Fixed a bug when sending acknowledgments
+â€¢ Fixed a bug when sending acknowledgments
 ModRapidGate 6.0.1.2 (July 04, 2023)
-• Optimized module configuration source code
+â€¢ Optimized module configuration source code
 ModRapidGate 6.0.1.1 (April 02, 2023)
-• Command handling changed
-• Fixed statistics calculation for current data
+â€¢ Command handling changed
+â€¢ Fixed statistics calculation for current data
 ModRapidGate 6.0.1.0 (March 21, 2023)
-• Batch transfer of current data
+â€¢ Batch transfer of current data
 ModRapidGate 6.0.0.1 (January 17, 2023)
-• Code refactoring
+â€¢ Code refactoring
 ModRapidGate 6.0.0.0 (December 03, 2022)
-• Implemented the mode of automatic download of an archive from a backup server
-• Events are transferred when replicating archives
-• Event acknowledgments are transferred
-• Added an option to replicate only by command
-• Archive mask for receiving and transmitting
-• Option whether to apply formulas and generate events on data transfer
-• Server address is checked to prevent loops
-• Gateways are controlled by command code without using channel number
-• Module task queue
+â€¢ Implemented the mode of automatic download of an archive from a backup server
+â€¢ Events are transferred when replicating archives
+â€¢ Event acknowledgments are transferred
+â€¢ Added an option to replicate only by command
+â€¢ Archive mask for receiving and transmitting
+â€¢ Option whether to apply formulas and generate events on data transfer
+â€¢ Server address is checked to prevent loops
+â€¢ Gateways are controlled by command code without using channel number
+â€¢ Module task queue
 Replication Helper
 ModReplicationHelper 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ModReplicationHelper 6.0.0.0 (December 03, 2022)
-• Initial development of the module
+â€¢ Initial development of the module
 
 Communicator History
 Communicator Application
 ScadaComm 6.2.0.1 (August 12, 2024)
-• Data type matching between channel and tag is not required
-• Logs a list of communication lines that have not stopped
+â€¢ Data type matching between channel and tag is not required
+â€¢ Logs a list of communication lines that have not stopped
 ScadaComm 6.2.0.0 (January 27, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ScadaComm 6.1.1.1 (August 03, 2023)
-• Code refactoring
+â€¢ Code refactoring
 ScadaComm 6.1.1.0 (July 04, 2023)
-• Works with new instance configuration
-• Device status is set to error if connection is not established
+â€¢ Works with new instance configuration
+â€¢ Device status is set to error if connection is not established
 ScadaComm 6.1.0.1 (May 15, 2023)
-• Fixed waiting for service stop
+â€¢ Fixed waiting for service stop
 ScadaComm 6.1.0.0 (March 21, 2023)
-• Uses new configuration database and application protocol
+â€¢ Uses new configuration database and application protocol
 ScadaComm 6.0.0.2 (February 20, 2023)
-• Inactive communication line can be started with a command
+â€¢ Inactive communication line can be started with a command
 ScadaComm 6.0.0.1 (January 17, 2023)
-• Device status is written as 0 or 1
-• If line logging is disabled, device information files are not written
+â€¢ Device status is written as 0 or 1
+â€¢ If line logging is disabled, device information files are not written
 ScadaComm 6.0.0.0 (December 03, 2022)
-• Communication channels are implemented using drivers
-• Data sources for interaction with other applications
-• Queue for sending data to the server
-• Device tag codes make it easy to bind tags to channels
-• Supports tags that are strings or arrays
-• Device status can be bound to a channel
-• Communication lines can be started or stopped with commands from the server
-• Configuration check: duplicate lines and devices are ignored, calculated channels are not bound to tags
+â€¢ Communication channels are implemented using drivers
+â€¢ Data sources for interaction with other applications
+â€¢ Queue for sending data to the server
+â€¢ Device tag codes make it easy to bind tags to channels
+â€¢ Supports tags that are strings or arrays
+â€¢ Device status can be bound to a channel
+â€¢ Communication lines can be started or stopped with commands from the server
+â€¢ Configuration check: duplicate lines and devices are ignored, calculated channels are not bound to tags
 Basic Communication Channels
 DrvCnlBasic 6.1.0.1 (August 12, 2024)
-• TCP client communication channel has been optimized
+â€¢ TCP client communication channel has been optimized
 DrvCnlBasic 6.1.0.0 (January 27, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 DrvCnlBasic 6.0.1.0 (July 04, 2023)
-• Added TCP client option whether to disconnect if session fails
+â€¢ Added TCP client option whether to disconnect if session fails
 DrvCnlBasic 6.0.0.1 (February 20, 2023)
-• Fixed a bug in UDP communication channel
+â€¢ Fixed a bug in UDP communication channel
 DrvCnlBasic 6.0.0.0 (December 03, 2022)
-• Initial development of the driver
+â€¢ Initial development of the driver
 MQTT Communication Channel
 DrvCnlMqtt 6.1.0.1 (April 01, 2025)
-• Fixed a bug when receiving an empty message
+â€¢ Fixed a bug when receiving an empty message
 DrvCnlMqtt 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 DrvCnlMqtt 6.0.0.2 (March 21, 2023)
-• Fixed display of channel status
+â€¢ Fixed display of channel status
 DrvCnlMqtt 6.0.0.1 (January 17, 2023)
-• Updated MQTTnet dependency
+â€¢ Updated MQTTnet dependency
 DrvCnlMqtt 6.0.0.0 (December 03, 2022)
-• Initial development of the driver
+â€¢ Initial development of the driver
 CSV Reader
 DrvCsvReader 6.0.0.0 (December 10, 2023)
-• Initial development of the driver
+â€¢ Initial development of the driver
 DB Import
 DrvDbImport 6.1.0.2 (August 26, 2025)
-• Dependencies updated
+â€¢ Dependencies updated
 DrvDbImport 6.1.0.1 (April 01, 2025)
-• Fixed cancel changes function
+â€¢ Fixed cancel changes function
 DrvDbImport 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 DrvDbImport 6.0.0.1 (September 25, 2023)
-• Fixed editing query parameters
+â€¢ Fixed editing query parameters
 DrvDbImport 6.0.0.0 (February 20, 2023)
-• Common database connection is used on communication line
-• Reads values from row or column
-• Supports multiple requests per device
+â€¢ Common database connection is used on communication line
+â€¢ Reads values from row or column
+â€¢ Supports multiple requests per device
 MQTT Data Source
 DrvDsMqtt 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 DrvDsMqtt 6.0.0.2 (March 21, 2023)
-• Data queue refactoring
+â€¢ Data queue refactoring
 DrvDsMqtt 6.0.0.1 (January 17, 2023)
-• Updated MQTTnet dependency
+â€¢ Updated MQTTnet dependency
 DrvDsMqtt 6.0.0.0 (December 03, 2022)
-• Initial development of the driver
+â€¢ Initial development of the driver
 OPC UA Server
 DrvDsOpcUaServer 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 DrvDsOpcUaServer 6.0.0.2 (March 26, 2024)
-• Updated OPCFoundation.NetStandard.Opc.Ua dependencies
+â€¢ Updated OPCFoundation.NetStandard.Opc.Ua dependencies
 DrvDsOpcUaServer 6.0.0.1 (September 25, 2023)
-• Fixed error when loading configuration from PostgreSQL
+â€¢ Fixed error when loading configuration from PostgreSQL
 DrvDsOpcUaServer 6.0.0.0 (December 03, 2022)
-• Initial development of the driver
+â€¢ Initial development of the driver
 Server Data Source
 DrvDsScadaServer 6.0.1.1 (April 02, 2023)
-• Fixed reading configuration database
-• Fixed statistics calculation
+â€¢ Fixed reading configuration database
+â€¢ Fixed statistics calculation
 DrvDsScadaServer 6.0.1.0 (March 21, 2023)
-• Batch transfer of current data
+â€¢ Batch transfer of current data
 DrvDsScadaServer 6.0.0.1 (January 17, 2023)
-• Added an option to read the configuration database
+â€¢ Added an option to read the configuration database
 DrvDsScadaServer 6.0.0.0 (December 03, 2022)
-• Initial development of the driver
+â€¢ Initial development of the driver
 Email
 DrvEmail 6.0.0.0 (December 03, 2022)
-• Email is resent in case of an error
+â€¢ Email is resent in case of an error
 Enron Modbus
 DrvEnronModbus 6.0.0.0 (February 20, 2023)
-• Porting the driver to the new version
+â€¢ Porting the driver to the new version
 HTTP Notifications
 DrvHttpNotif 6.0.0.0 (December 03, 2022)
-• Porting the driver to the new version
+â€¢ Porting the driver to the new version
 Modbus
 DrvModbus 6.0.0.4 (August 12, 2024)
-• Fixed bug in requests in ASCII mode on Linux
+â€¢ Fixed bug in requests in ASCII mode on Linux
 DrvModbus 6.0.0.3 (May 15, 2023)
-• Supports A...F digits in byte order
+â€¢ Supports A...F digits in byte order
 DrvModbus 6.0.0.2 (March 21, 2023)
-• Fixed channel generation
+â€¢ Fixed channel generation
 DrvModbus 6.0.0.1 (February 20, 2023)
-• Fixed bugs in the driver user interface
+â€¢ Fixed bugs in the driver user interface
 DrvModbus 6.0.0.0 (December 03, 2022)
-• Added a feature to send commands with a custom function code
-• Template elements are both readable and writeable
-• Added the Bit mask element parameter for generating calculated channels
-• Inactive groups are not output to a device state file
-• Added a feature to copy element parameters to its group
-• Added a template validation feature
+â€¢ Added a feature to send commands with a custom function code
+â€¢ Template elements are both readable and writeable
+â€¢ Added the Bit mask element parameter for generating calculated channels
+â€¢ Inactive groups are not output to a device state file
+â€¢ Added a feature to copy element parameters to its group
+â€¢ Added a template validation feature
 Modbus Slave
 DrvModbusSlave 6.1.0.2 (February 10, 2025)
-• Fixed a bug when working in gateway mode
+â€¢ Fixed a bug when working in gateway mode
 DrvModbusSlave 6.1.0.1 (October 15, 2024)
-• Fixed saving changes of channel gateway options
+â€¢ Fixed saving changes of channel gateway options
 DrvModbusSlave 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 DrvModbusSlave 6.0.0.1 (April 11, 2024)
-• Fixed a bug when reading data in Independent device mode
+â€¢ Fixed a bug when reading data in Independent device mode
 DrvModbusSlave 6.0.0.0 (March 21, 2023)
-• Gateway mode for selected channels
+â€¢ Gateway mode for selected channels
 MQTT Client
 DrvMqttClient 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 DrvMqttClient 6.0.0.4 (December 10, 2023)
-• Fixed JavaScript execution
+â€¢ Fixed JavaScript execution
 DrvMqttClient 6.0.0.3 (July 04, 2023)
-• Optimized driver configuration source code
+â€¢ Optimized driver configuration source code
 DrvMqttClient 6.0.0.2 (May 15, 2023)
-• JavaScript execution refactoring
+â€¢ JavaScript execution refactoring
 DrvMqttClient 6.0.0.1 (January 17, 2023)
-• Updated MQTTnet dependency
+â€¢ Updated MQTTnet dependency
 DrvMqttClient 6.0.0.0 (December 03, 2022)
-• The driver is completely redesigned
+â€¢ The driver is completely redesigned
 MQTT Publisher
 DrvMqttPublisher 6.1.0.1 (August 26, 2025)
-• Selecting published channel using dialog box
+â€¢ Selecting published channel using dialog box
 DrvMqttPublisher 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 DrvMqttPublisher 6.0.0.3 (July 04, 2023)
-• Optimized driver configuration source code
+â€¢ Optimized driver configuration source code
 DrvMqttPublisher 6.0.0.2 (March 21, 2023)
-• Commands are returned to Communicator
+â€¢ Commands are returned to Communicator
 DrvMqttPublisher 6.0.0.1 (January 17, 2023)
-• Updated MQTTnet dependency
+â€¢ Updated MQTTnet dependency
 DrvMqttPublisher 6.0.0.0 (December 03, 2022)
-• Initial development of the driver
+â€¢ Initial development of the driver
 OPC Classic
 DrvOpcClassic 6.0.1.2 (March 26, 2024)
-• Fixed a bug that occured if the device is not configured
+â€¢ Fixed a bug that occured if the device is not configured
 DrvOpcClassic 6.0.1.1 (December 10, 2023)
-• Improved reconnection when connection is lost
+â€¢ Improved reconnection when connection is lost
 DrvOpcClassic 6.0.1.0 (September 25, 2023)
-• Added support for synchronous reading
-• Fixed subscription creation
+â€¢ Added support for synchronous reading
+â€¢ Fixed subscription creation
 DrvOpcClassic 6.0.0.0 (December 03, 2022)
-• Client can connect to remote host
-• Connection options are common to communication line
-• Items are both readable and writeable
-• Supports arrays and strings
+â€¢ Client can connect to remote host
+â€¢ Connection options are common to communication line
+â€¢ Items are both readable and writeable
+â€¢ Supports arrays and strings
 OPC UA
 DrvOpcUa 6.1.1.0 (August 26, 2025)
-• Reconnects if there is no new data
-• Channel-based subscription creation mode
+â€¢ Reconnects if there is no new data
+â€¢ Channel-based subscription creation mode
 DrvOpcUa 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 DrvOpcUa 6.0.0.1 (March 26, 2024)
-• Updated OPCFoundation.NetStandard.Opc.Ua dependencies
+â€¢ Updated OPCFoundation.NetStandard.Opc.Ua dependencies
 DrvOpcUa 6.0.0.0 (December 03, 2022)
-• Connection options are common to communication line
-• Items are both readable and writeable
-• Supports arrays and strings
-• User can select item data type
+â€¢ Connection options are common to communication line
+â€¢ Items are both readable and writeable
+â€¢ Supports arrays and strings
+â€¢ User can select item data type
 Device Simulator
 DrvSimulator 6.0.0.0 (December 03, 2022)
-• Added an array device tag
+â€¢ Added an array device tag
 SMS
 DrvSms 6.0.0.0 (February 20, 2023)
-• Porting the driver to the new version
+â€¢ Porting the driver to the new version
 SNMP
 DrvSnmp 6.0.0.1 (July 04, 2023)
-• Optimized driver configuration source code
+â€¢ Optimized driver configuration source code
 DrvSnmp 6.0.0.0 (February 20, 2023)
-• Porting the driver to the new version
+â€¢ Porting the driver to the new version
 Telegram
 DrvTelegram 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 DrvTelegram 6.0.0.1 (May 15, 2023)
-• Fixed chat ID input
+â€¢ Fixed chat ID input
 DrvTelegram 6.0.0.0 (December 03, 2022)
-• Bot token is stored encrypted
+â€¢ Bot token is stored encrypted
 Communication Channel Tester
 DrvTester 6.0.0.0 (December 03, 2022)
-• Initial development of the driver
+â€¢ Initial development of the driver
 
 Webstation History
 Webstation Application
 ScadaWeb 6.2.2.0 (August 26, 2025)
-• Added support for transitive dependencies of view resources
-• Checking for unacceptability of Application role when user logs in
-• Changes in the plugin API
+â€¢ Added support for transitive dependencies of view resources
+â€¢ Checking for unacceptability of Application role when user logs in
+â€¢ Changes in the plugin API
 ScadaWeb 6.2.1.0 (April 01, 2025)
-• Changes in the plugin API
+â€¢ Changes in the plugin API
 ScadaWeb 6.2.0.3 (October 15, 2024)
-• Changes in CSS
+â€¢ Changes in CSS
 ScadaWeb 6.2.0.2 (August 12, 2024)
-• Support for binary format of channel values
-• Inactive channels are hidden in the channel selection form
+â€¢ Support for binary format of channel values
+â€¢ Inactive channels are hidden in the channel selection form
 ScadaWeb 6.2.0.1 (March 26, 2024)
-• Changes in Access denied page
+â€¢ Changes in Access denied page
 ScadaWeb 6.2.0.0 (January 27, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ScadaWeb 6.1.2.2 (December 10, 2023)
-• Fixed authorization handling
-• New features of modal forms
-• Changes in CSS and JavaScript
+â€¢ Fixed authorization handling
+â€¢ New features of modal forms
+â€¢ Changes in CSS and JavaScript
 ScadaWeb 6.1.2.1 (September 25, 2023)
-• Fixed translation on the channel selection page
+â€¢ Fixed translation on the channel selection page
 ScadaWeb 6.1.2.0 (August 03, 2023)
-• Fixed list of objects available to user
-• Changes in common classes
+â€¢ Fixed list of objects available to user
+â€¢ Changes in common classes
 ScadaWeb 6.1.1.0 (July 04, 2023)
-• Works with new instance configuration
-• Supports audit log
-• Plugins can add JavaScript to the main page
+â€¢ Works with new instance configuration
+â€¢ Supports audit log
+â€¢ Plugins can add JavaScript to the main page
 ScadaWeb 6.1.0.1 (May 15, 2023)
-• Autofocus support for modal forms
+â€¢ Autofocus support for modal forms
 ScadaWeb 6.1.0.0 (March 21, 2023)
-• Support for external users
+â€¢ Support for external users
 ScadaWeb 6.0.0.1 (January 17, 2023)
-• Changes in common JavaScript classes
+â€¢ Changes in common JavaScript classes
 ScadaWeb 6.0.0.0 (December 03, 2022)
-• The web application is configured using the Administrator application
-• Timezone support
-• Captcha when logging in
-• Automatic login option
-• Flexible appearance customization
+â€¢ The web application is configured using the Administrator application
+â€¢ Timezone support
+â€¢ Captcha when logging in
+â€¢ Automatic login option
+â€¢ Flexible appearance customization
 Audit Log
 PlgAudit 6.1.1.0 (August 26, 2025)
-• Build due to changes in the base libraries
+â€¢ Build due to changes in the base libraries
 PlgAudit 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 PlgAudit 6.0.0.0 (August 03, 2023)
-• Initial development of the plugin
+â€¢ Initial development of the plugin
 Chart
 PlgChart 6.1.0.1 (September 24, 2025)
-• Fixed a bug occurred when switching to summer time in some countries
+â€¢ Fixed a bug occurred when switching to summer time in some countries
 PlgChart 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 PlgChart 6.0.2.0 (August 03, 2023)
-• Provides plugin description
+â€¢ Provides plugin description
 PlgChart 6.0.1.0 (July 04, 2023)
-• Supports audit log
-• JavaScript refactoring
+â€¢ Supports audit log
+â€¢ JavaScript refactoring
 PlgChart 6.0.0.1 (January 17, 2023)
-• Changes in JavaScript
+â€¢ Changes in JavaScript
 PlgChart 6.0.0.0 (December 03, 2022)
-• Added an address bar parameter to specify an archive for selecting data
-• Channel status is displayed after a channel value
-• Trend breaks when the data status is unreliable
+â€¢ Added an address bar parameter to specify an archive for selecting data
+â€¢ Channel status is displayed after a channel value
+â€¢ Trend breaks when the data status is unreliable
 Chart Pro
 PlgChartPro 6.1.1.0 (August 26, 2025)
-• Uses updated plugin API
+â€¢ Uses updated plugin API
 PlgChartPro 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 PlgChartPro 6.0.2.2 (December 10, 2023)
-• Fixed links to dialog pages and API
+â€¢ Fixed links to dialog pages and API
 PlgChartPro 6.0.2.1 (September 25, 2023)
-• Translation fixed
+â€¢ Translation fixed
 PlgChartPro 6.0.2.0 (August 03, 2023)
-• Provides plugin description
+â€¢ Provides plugin description
 PlgChartPro 6.0.1.0 (July 04, 2023)
-• Supports audit log
-• JavaScript refactoring
+â€¢ Supports audit log
+â€¢ JavaScript refactoring
 PlgChartPro 6.0.0.3 (April 27, 2023)
-• Fixed loading chart for the past period
+â€¢ Fixed loading chart for the past period
 PlgChartPro 6.0.0.2 (April 02, 2023)
-• Fixed zoom button color
+â€¢ Fixed zoom button color
 PlgChartPro 6.0.0.1 (January 17, 2023)
-• Changes in JavaScript
+â€¢ Changes in JavaScript
 PlgChartPro 6.0.0.0 (December 03, 2022)
-• Chart configuration profile is selectable
-• Supports views to display a chart with given arguments
-• Displays data for the future if data exists
-• Y-axis fixed range option
-• Option to display trend color according to channel status
+â€¢ Chart configuration profile is selectable
+â€¢ Supports views to display a chart with given arguments
+â€¢ Displays data for the future if data exists
+â€¢ Y-axis fixed range option
+â€¢ Option to display trend color according to channel status
 Dashboard
 PlgDashboard 6.1.1.0 (August 26, 2025)
-• Uses updated plugin API
+â€¢ Uses updated plugin API
 PlgDashboard 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 PlgDashboard 6.0.1.0 (August 03, 2023)
-• Fixed display of long strings
-• Provides plugin description
+â€¢ Fixed display of long strings
+â€¢ Provides plugin description
 PlgDashboard 6.0.0.0 (July 04, 2023)
-• Links to charts and sending commands from current data widgets
+â€¢ Links to charts and sending commands from current data widgets
 Database Report
 PlgDatabaseReport 6.0.0.0 (August 26, 2025)
-• Initial development of the plugin
+â€¢ Initial development of the plugin
 Elastic Report
 PlgElasticReport 6.1.1.0 (August 26, 2025)
-• Dependencies updated
+â€¢ Dependencies updated
 PlgElasticReport 6.1.0.2 (April 01, 2025)
-• Fixed a bug in calculating the report period
-• Fixed a bug when displaying data for a specific time
+â€¢ Fixed a bug in calculating the report period
+â€¢ Fixed a bug when displaying data for a specific time
 PlgElasticReport 6.1.0.1 (February 19, 2025)
-• Supports the offset parameter in PrintReport2 query
+â€¢ Supports the offset parameter in PrintReport2 query
 PlgElasticReport 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 PlgElasticReport 6.0.2.0 (August 03, 2023)
-• Supports loading fonts
-• Phrase names converted to camel-casing format
-• Provides plugin description
+â€¢ Supports loading fonts
+â€¢ Phrase names converted to camel-casing format
+â€¢ Provides plugin description
 PlgElasticReport 6.0.1.0 (July 04, 2023)
-• End date in report arguments is 1 day more
-• Supports audit log
+â€¢ End date in report arguments is 1 day more
+â€¢ Supports audit log
 PlgElasticReport 6.0.0.0 (May 15, 2023)
-• Supports XLSX format
-• Archive can be selected as a report parameter
-• Text color is set according to data status
-• Styles for XLSX format are configured using XML file
-• Added new features of report sections
+â€¢ Supports XLSX format
+â€¢ Archive can be selected as a report parameter
+â€¢ Text color is set according to data status
+â€¢ Styles for XLSX format are configured using XML file
+â€¢ Added new features of report sections
 Guard
 PlgGuard 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 PlgGuard 6.0.1.0 (August 03, 2023)
-• Provides plugin description
+â€¢ Provides plugin description
 PlgGuard 6.0.0.0 (December 03, 2022)
-• Initial development of the plugin
+â€¢ Initial development of the plugin
 Main Plugin
 PlgMain 6.1.1.1 (September 24, 2025)
-• Fixed a bug occurred when switching to summer time in some countries
+â€¢ Fixed a bug occurred when switching to summer time in some countries
 PlgMain 6.1.1.0 (August 26, 2025)
-• Command API is always available
+â€¢ Command API is always available
 PlgMain 6.1.0.1 (October 15, 2024)
-• MainApi returns multiple event colors
+â€¢ MainApi returns multiple event colors
 PlgMain 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
-• Support for binary command format
+â€¢ Upgrade to .NET 8.0
+â€¢ Support for binary command format
 PlgMain 6.0.3.1 (December 10, 2023)
-• Fixed link to dialog pages
-• Event window is disabled if the number of displayed events is 0
+â€¢ Fixed link to dialog pages
+â€¢ Event window is disabled if the number of displayed events is 0
 PlgMain 6.0.3.0 (August 03, 2023)
-• Changes in JavaScript API
-• Fixed current data request for empty channel list
-• Provides plugin description
+â€¢ Changes in JavaScript API
+â€¢ Fixed current data request for empty channel list
+â€¢ Provides plugin description
 PlgMain 6.0.2.0 (July 04, 2023)
-• Supports audit log
-• Improved filters when using plugin API
-• When requesting events, a view is loaded if necessary
-• JavaScript refactoring
+â€¢ Supports audit log
+â€¢ Improved filters when using plugin API
+â€¢ When requesting events, a view is loaded if necessary
+â€¢ JavaScript refactoring
 PlgMain 6.0.1.1 (May 15, 2023)
-• Table view styles changed
-• Autofocus on the command form
+â€¢ Table view styles changed
+â€¢ Autofocus on the command form
 PlgMain 6.0.1.0 (March 21, 2023)
-• Uses channel command format
+â€¢ Uses channel command format
 PlgMain 6.0.0.0 (December 03, 2022)
-• New file format of table views
-• The command form displays an error message received from the server
-• The command form displays a description of the channel format, if the format is a string
-• Reporting period can be specified up to minutes
-• An archive for which a report is generated can be selected
-• The maximum reporting period is specified in the configuration
+â€¢ New file format of table views
+â€¢ The command form displays an error message received from the server
+â€¢ The command form displays a description of the channel format, if the format is a string
+â€¢ Reporting period can be specified up to minutes
+â€¢ An archive for which a report is generated can be selected
+â€¢ The maximum reporting period is specified in the configuration
 Map
 PlgMap 6.1.1.0 (August 26, 2025)
-• Uses updated plugin API
+â€¢ Uses updated plugin API
 PlgMap 6.1.0.1 (August 12, 2024)
-• Code refactoring
+â€¢ Code refactoring
 PlgMap 6.1.0.0 (March 04, 2023)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 PlgMap 6.0.0.0 (August 03, 2023)
-• Switch between tile layers
-• Customizable marker icons
-• Marker labels
-• Home button on a map
-• Displays moving objects
-• Displays geometric shapes
+â€¢ Switch between tile layers
+â€¢ Customizable marker icons
+â€¢ Marker labels
+â€¢ Home button on a map
+â€¢ Displays moving objects
+â€¢ Displays geometric shapes
 Mimic Diagrams (New)
 PlgMimic 6.0.0.1 (September 24, 2025)
-• Bug fixes
+â€¢ Bug fixes
 PlgMimic 6.0.0.0 (August 26, 2025)
-• Initial development of the plugin
+â€¢ Initial development of the plugin
 Mimic Editor (New)
 PlgMimicEditor 6.0.0.1 (September 24, 2025)
-• Bug fixes
+â€¢ Bug fixes
 PlgMimicEditor 6.0.0.0 (August 26, 2025)
-• Initial development of the plugin
+â€¢ Initial development of the plugin
 Basic Mimic Components (New)
 PlgMimBasicComp 6.0.0.1 (September 24, 2025)
-• Bug fixes
+â€¢ Bug fixes
 PlgMimBasicComp 6.0.0.0 (August 26, 2025)
-• Initial development of the plugin
+â€¢ Initial development of the plugin
 Extra Scheme Components (New)
 PlgMimExtraComp 6.0.0.0 (September 24, 2025)
-• Initial development of the plugin
+â€¢ Initial development of the plugin
 Notification Plugin
 PlgNotification 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 PlgNotification 6.0.1.0 (August 03, 2023)
-• Phrase names converted to camel-casing format
-• Provides plugin description
+â€¢ Phrase names converted to camel-casing format
+â€¢ Provides plugin description
 PlgNotification 6.0.0.0 (July 04, 2023)
-• Added the Ack All button
+â€¢ Added the Ack All button
 Schemes (Classic)
 PlgScheme 6.1.1.0 (August 26, 2025)
-• Uses updated plugin API
+â€¢ Uses updated plugin API
 PlgScheme 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
-• Date is not specified when opening chart
+â€¢ Upgrade to .NET 8.0
+â€¢ Date is not specified when opening chart
 PlgScheme 6.0.2.0 (August 03, 2023)
-• Provides plugin description
+â€¢ Provides plugin description
 PlgScheme 6.0.1.0 (July 04, 2023)
-• Supports audit log
-• Fixed loading scheme title
-• JavaScript refactoring
+â€¢ Supports audit log
+â€¢ Fixed loading scheme title
+â€¢ JavaScript refactoring
 PlgScheme 6.0.0.1 (May 15, 2023)
-• Fixed scheme component style
+â€¢ Fixed scheme component style
 PlgScheme 6.0.0.0 (December 03, 2022)
-• Scheme is horizontally centered
+â€¢ Scheme is horizontally centered
 Basic Scheme Components (Classic)
 PlgSchBasicComp 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 PlgSchBasicComp 6.0.2.0 (August 03, 2023)
-• Provides plugin description
+â€¢ Provides plugin description
 PlgSchBasicComp 6.0.1.0 (July 04, 2023)
-• JavaScript refactoring
+â€¢ JavaScript refactoring
 PlgSchBasicComp 6.0.0.1 (January 17, 2023)
-• Fixed writing state of Link component
+â€¢ Fixed writing state of Link component
 PlgSchBasicComp 6.0.0.0 (December 03, 2022)
-• Porting the plugin to the new version
+â€¢ Porting the plugin to the new version
 Extra Scheme Components (Classic)
 PlgSchExtraComp 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 PlgSchExtraComp 6.0.1.0 (August 03, 2023)
-• Provides plugin description
+â€¢ Provides plugin description
 PlgSchExtraComp 6.0.0.1 (July 04, 2023)
-• Fixed a bug with displaying a view in a frame
+â€¢ Fixed a bug with displaying a view in a frame
 PlgSchExtraComp 6.0.0.0 (January 17, 2023)
-• Porting the plugin to the new version
+â€¢ Porting the plugin to the new version
 Spreadsheet Report
 PlgSpreadsheetReport 6.0.0.0 (August 26, 2025)
-• Initial development of the plugin
+â€¢ Initial development of the plugin
 Store
 PlgStore 6.1.0.1 (October 15, 2024)
-• Fixed price display
+â€¢ Fixed price display
 PlgStore 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 PlgStore 6.0.0.0 (August 03, 2023)
-• Module search
+â€¢ Module search
 Web Pages
 PlgWebPage 6.1.1.0 (August 26, 2025)
-• Uses updated plugin API
+â€¢ Uses updated plugin API
 PlgWebPage 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 PlgWebPage 6.0.2.0 (August 03, 2023)
-• Provides plugin description
+â€¢ Provides plugin description
 PlgWebPage 6.0.1.0 (July 04, 2023)
-• Supports audit log
+â€¢ Supports audit log
 PlgWebPage 6.0.0.0 (December 03, 2022)
-• Porting the plugin to the new version
+â€¢ Porting the plugin to the new version
 
 Agent History
 ScadaAgent 6.2.0.1 (March 26, 2024)
-• Additionally checks a path when reading and writing files
+â€¢ Additionally checks a path when reading and writing files
 ScadaAgent 6.2.0.0 (January 27, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ScadaAgent 6.1.0.1 (December 10, 2023)
-• Fixed temporary directory when configuration is uploaded to another instance
+â€¢ Fixed temporary directory when configuration is uploaded to another instance
 ScadaAgent 6.1.0.0 (March 21, 2023)
-• Uses new application protocol
+â€¢ Uses new application protocol
 ScadaAgent 6.0.0.0 (December 03, 2022)
-• Reverse connection, meaning that the Agent service initiates the connection
-• The Agent's login and password are specified in the application configuration
-• Supports sending commands to Communicator
-• Reads logs of all applications and modules
+â€¢ Reverse connection, meaning that the Agent service initiates the connection
+â€¢ The Agent's login and password are specified in the application configuration
+â€¢ Supports sending commands to Communicator
+â€¢ Reads logs of all applications and modules
 
 Administrator History
 Administrator Application
 ScadaAdmin 6.2.2.0 (August 26, 2025)
-• Can create mimic diagram files of a new format
-• The Code field length increased to 500 characters
-• New formulas added to the project template
+â€¢ Can create mimic diagram files of a new format
+â€¢ The Code field length increased to 500 characters
+â€¢ New formulas added to the project template
 ScadaAdmin 6.2.1.3 (April 01, 2025)
-• Fixed flickering of the project list on the start page
-• Changes in the extension API
+â€¢ Fixed flickering of the project list on the start page
+â€¢ Changes in the extension API
 ScadaAdmin 6.2.1.2 (January 23, 2025)
-• Fixed a bug when saving a project
+â€¢ Fixed a bug when saving a project
 ScadaAdmin 6.2.1.1 (October 15, 2024)
-• Development of interfaces available to extensions
+â€¢ Development of interfaces available to extensions
 ScadaAdmin 6.2.1.0 (August 12, 2024)
-• Load extension configuration before editing it
-• The Refresh and Find buttons added to the application toolbar
-• Updated WinControl dependency
+â€¢ Load extension configuration before editing it
+â€¢ The Refresh and Find buttons added to the application toolbar
+â€¢ Updated WinControl dependency
 ScadaAdmin 6.2.0.0 (January 27, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ScadaAdmin 6.1.1.1 (December 10, 2023)
-• Fixed creation of channel limits
+â€¢ Fixed creation of channel limits
 ScadaAdmin 6.1.1.0 (September 25, 2023)
-• Added the Code column to the Channels table
-• Can reload the configuration database
-• Increased length of the Arguments column in the Views table
-• Changes in common classes
+â€¢ Added the Code column to the Channels table
+â€¢ Can reload the configuration database
+â€¢ Increased length of the Arguments column in the Views table
+â€¢ Changes in common classes
 ScadaAdmin 6.1.0.3 (August 03, 2023)
-• Code refactoring
+â€¢ Code refactoring
 ScadaAdmin 6.1.0.2 (May 15, 2023)
-• Instance status form remains responsive if Agent is not available
+â€¢ Instance status form remains responsive if Agent is not available
 ScadaAdmin 6.1.0.1 (April 02, 2023)
-• UI fixes
+â€¢ UI fixes
 ScadaAdmin 6.1.0.0 (March 21, 2023)
-• Uses new configuration database and application protocol
+â€¢ Uses new configuration database and application protocol
 ScadaAdmin 6.0.0.1 (January 17, 2023)
-• Updated control for editing DB connection options
+â€¢ Updated control for editing DB connection options
 ScadaAdmin 6.0.0.0 (December 03, 2022)
-• Supports extensions
-• Indicates a progress of configuration transfer
-• Added a feature to import configuration database tables from CSV files
+â€¢ Supports extensions
+â€¢ Indicates a progress of configuration transfer
+â€¢ Added a feature to import configuration database tables from CSV files
 Communicator Configurator
 ExtCommConfig 6.1.0.1 (January 23, 2025)
-• Changes related to driver registration
+â€¢ Changes related to driver registration
 ExtCommConfig 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ExtCommConfig 6.0.1.2 (July 04, 2023)
-• Added inactive device icon
+â€¢ Added inactive device icon
 ExtCommConfig 6.0.1.1 (April 02, 2023)
-• Fixed layout of controls
+â€¢ Fixed layout of controls
 ExtCommConfig 6.0.1.0 (March 21, 2023)
-• Added new application options
+â€¢ Added new application options
 ExtCommConfig 6.0.0.0 (December 03, 2022)
-• Initial development of the extension
+â€¢ Initial development of the extension
 Deployment with Agent
 ExtDepAgent 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ExtDepAgent 6.0.0.0 (December 03, 2022)
-• Initial development of the extension
+â€¢ Initial development of the extension
 Deployment to Postgre SQL
 ExtDepPostgreSql 6.1.0.1 (August 26, 2025)
-• Dependencies updated
+â€¢ Dependencies updated
 ExtDepPostgreSql 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
-• Added an option to select configuration database cleanup method
+â€¢ Upgrade to .NET 8.0
+â€¢ Added an option to select configuration database cleanup method
 ExtDepPostgreSql 6.0.0.0 (December 03, 2022)
-• Initial development of the extension
+â€¢ Initial development of the extension
 External Tools
 ExtExternalTools 6.0.0.0 (October 15, 2024)
-• Initial development of the extension
+â€¢ Initial development of the extension
 Mimic Editor Launcher
 ExtMimicLauncher 6.0.0.0 (August 26, 2025)
-• Initial development of the extension
+â€¢ Initial development of the extension
 Project Tools
 ExtProjectTools 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
-• Object editor
-• Right matrix
+â€¢ Upgrade to .NET 8.0
+â€¢ Object editor
+â€¢ Right matrix
 ExtProjectTools 6.0.1.0 (September 25, 2023)
-• Object map
-• Channel cloning form updated
-• Encrypted password is hidden
+â€¢ Object map
+â€¢ Channel cloning form updated
+â€¢ Encrypted password is hidden
 ExtProjectTools 6.0.0.2 (March 21, 2023)
-• BOM signature is written when exporting a table in CSV format
+â€¢ BOM signature is written when exporting a table in CSV format
 ExtProjectTools 6.0.0.1 (January 17, 2023)
-• Added password encryption form
+â€¢ Added password encryption form
 ExtProjectTools 6.0.0.0 (December 03, 2022)
-• Initial development of the extension
+â€¢ Initial development of the extension
 Server Configurator
 ExtServerConfig 6.1.0.1 (January 23, 2025)
-• Changes related to module registration
+â€¢ Changes related to module registration
 ExtServerConfig 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ExtServerConfig 6.0.1.1 (May 15, 2023)
-• Fixed module interface initialization
+â€¢ Fixed module interface initialization
 ExtServerConfig 6.0.1.0 (March 21, 2023)
-• Added new application options
+â€¢ Added new application options
 ExtServerConfig 6.0.0.1 (January 17, 2023)
-• Added an option whether to use archival channel status
+â€¢ Added an option whether to use archival channel status
 ExtServerConfig 6.0.0.0 (December 03, 2022)
-• Initial development of the extension
+â€¢ Initial development of the extension
 Table Editor
 ExtTableEditor 6.1.1.0 (April 01, 2025)
-• Uses updated extension API
+â€¢ Uses updated extension API
 ExtTableEditor 6.1.0.1 (October 15, 2024)
-• Supports the Refresh button on the application toolbar
+â€¢ Supports the Refresh button on the application toolbar
 ExtTableEditor 6.1.0.0 (March 26, 2024)
-• Upgrade to .NET 8.0
-• Fixed a bug when editing a channel number
+â€¢ Upgrade to .NET 8.0
+â€¢ Fixed a bug when editing a channel number
 ExtTableEditor 6.0.0.0 (December 03, 2022)
-• Initial development of the extension
+â€¢ Initial development of the extension
 Webstation Configurator
 ExtWebConfig 6.1.0.2 (August 26, 2025)
-• Culture list was expanded with cultures without a region
+â€¢ Culture list was expanded with cultures without a region
 ExtWebConfig 6.1.0.1 (January 23, 2025)
-• Changes related to plugin registration
+â€¢ Changes related to plugin registration
 ExtWebConfig 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ExtWebConfig 6.0.0.0 (December 03, 2022)
-• Initial development of the extension
+â€¢ Initial development of the extension
 Wiren Board
 ExtWirenBoard 6.1.0.0 (August 12, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ExtWirenBoard 6.0.0.1 (September 25, 2023)
-• Code refactoring
+â€¢ Code refactoring
 ExtWirenBoard 6.0.0.0 (December 03, 2022)
-• Initial development of the extension
+â€¢ Initial development of the extension
 
 
 History of Additional Applications
 Auto Report
 ScadaAutoReport 6.0.1.3 (August 26, 2025)
-• Inactive reports are skipped when executing a task
-• Fixed editing of custom report arguments
+â€¢ Inactive reports are skipped when executing a task
+â€¢ Fixed editing of custom report arguments
 ScadaAutoReport 6.0.1.2 (February 19, 2025)
-• Fixed bugs in the user interface
+â€¢ Fixed bugs in the user interface
 ScadaAutoReport 6.0.1.1 (November 27, 2024)
-• Fixed editing of schedule options
+â€¢ Fixed editing of schedule options
 ScadaAutoReport 6.0.1.0 (January 27, 2024)
-• Upgrade to .NET 8.0
+â€¢ Upgrade to .NET 8.0
 ScadaAutoReport 6.0.0.1 (July 04, 2023)
-• Fixed calculation of report period
+â€¢ Fixed calculation of report period
 ScadaAutoReport 6.0.0.0 (May 24, 2023)
-• Report types are loaded dynamically according to the configuration
-• Report culture and timezone are set in the configuration
-• Built-in task schedule
-• Each task has a separate mail recipient
-• Convenient options for choosing a report period
+â€¢ Report types are loaded dynamically according to the configuration
+â€¢ Report culture and timezone are set in the configuration
+â€¢ Built-in task schedule
+â€¢ Each task has a separate mail recipient
+â€¢ Convenient options for choosing a report period
