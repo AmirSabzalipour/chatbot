@@ -18,14 +18,32 @@ st.set_page_config(page_title=BOT_NAME, page_icon=BOT_ICON_PATH, layout="centere
 st.markdown(
     """
 <style>
-/* --- Global background + text --- */
+/* =========================
+   GLOBAL PAGE LOOK
+========================= */
+html, body { background: #f0f0f0 !important; }
+
 .stApp { background-color: #f0f0f0; color: #000 !important; }
 .stApp, .stApp * { color: #000 !important; }
 
-/* Sidebar background (keep sidebar visible!) */
+/* Main Streamlit view containers (kills the black bottom strip) */
+div[data-testid="stAppViewContainer"] { background: #f0f0f0 !important; }
+div[data-testid="stAppViewBlockContainer"] { background: #f0f0f0 !important; }
+
+/* Bottom/fixed area where chat_input is rendered */
+div[data-testid="stBottom"],
+div[data-testid="stBottomBlockContainer"] {
+  background: #f0f0f0 !important;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
 section[data-testid="stSidebar"] { background-color: #e8e8e8 !important; }
 
-/* Make inputs/selects look white (password + chat input + selectbox) */
+/* =========================
+   INPUTS / SELECTS (WHITE)
+========================= */
 input, textarea {
   background: #ffffff !important;
   color: #000000 !important;
@@ -39,55 +57,117 @@ div[data-baseweb="select"] > div {
   border: 1px solid #cfcfcf !important;
 }
 
-/* Dropdown menu itself */
+/* Dropdown menu */
 div[role="listbox"] { background: #ffffff !important; }
 div[role="option"] { background: #ffffff !important; color: #000000 !important; }
 
-/* Main container */
-.block-container { padding-top: 2rem; max-width: 900px; padding-bottom: 6rem !important; }
+/* =========================
+   LAYOUT CONTAINER
+========================= */
+.block-container {
+  padding-top: 2rem;
+  max-width: 900px;
+  /* Extra space so chat input doesn't overlap Streamlit Cloud "Manage app" */
+  padding-bottom: 7rem !important;
+}
 
-/* Chat bubbles */
-.stChatMessage { border-radius: 14px; padding: 6px 10px; }
+/* =========================
+   CHAT MESSAGES
+========================= */
+.stChatMessage {
+  border-radius: 14px;
+  padding: 6px 10px;
+  background-color: transparent !important;
+}
 
-/* CRITICAL: Chat input - force white background on ALL elements */
-[data-testid="stChatInput"],
+/* Optional: light styling for user/assistant bubbles */
+[data-testid="stChatMessage"][data-testid*="user"] {
+  background-color: #e3f2fd !important;
+  border: 1px solid #90caf9 !important;
+  border-radius: 14px !important;
+}
+[data-testid="stChatMessage"][data-testid*="assistant"] {
+  background-color: #f5f5f5 !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 14px !important;
+}
+
+/* =========================
+   CHAT INPUT (WHITE + NO BLACK BOX)
+========================= */
+/* Force chat input wrapper to be white */
+[data-testid="stChatInput"] {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  padding: 10px !important;
+  border: 1px solid #cfcfcf !important;
+  box-shadow: none !important;
+
+  /* avoid overlap with Streamlit Cloud Manage app button */
+  margin-right: 180px !important;
+  margin-bottom: 20px !important;
+}
+
+/* wrapper div */
+[data-testid="stChatInput"] > div:first-child {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* everything inside */
 [data-testid="stChatInput"] *,
 [data-testid="stChatInput"] > div,
 [data-testid="stChatInput"] input,
 [data-testid="stChatInput"] textarea,
-.stChatInputContainer,
-.stChatInputContainer * {
+[data-testid="stChatInput"] div {
   background: #ffffff !important;
   background-color: #ffffff !important;
+  box-shadow: none !important;
 }
 
-/* Chat input wrapper positioning */
-[data-testid="stChatInput"] {
-  border-radius: 10px !important;
-  padding: 10px !important;
-  margin-bottom: 20px !important;
-  margin-right: 180px !important;
-  border: 1px solid #cfcfcf !important;
+/* input field itself */
+[data-testid="stChatInput"] input,
+[data-testid="stChatInput"] textarea {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* ---- IMPORTANT: Keep header/toolbar so sidebar + arrows stay ---- */
+/* Streamlit sometimes uses this class */
+.stChatInputContainer,
+.stChatInputContainer *,
+.stChatInputContainer > div {
+  background: #f0f0f0 !important;   /* the container behind input */
+  box-shadow: none !important;
+}
+
+/* =========================
+   HEADER / TOOLBAR (KEEP ARROWS)
+========================= */
 header {
   background: #f0f0f0 !important;
   box-shadow: none !important;
 }
 
-/* Remove only the thin "decoration" strip (often the dark bar) */
+/* Remove thin decoration strip that can look like a dark bar */
 [data-testid="stDecoration"] { display: none !important; }
 
-/* Toolbar stays visible but match the page background */
+/* Keep toolbar, but match background */
 [data-testid="stToolbar"] {
   background: #f0f0f0 !important;
   box-shadow: none !important;
 }
 
-/* ---------- Force WHITE backgrounds for Streamlit widgets ---------- */
-
-/* Buttons (New chat / Delete) */
+/* =========================
+   BUTTONS / RADIO / TEXT INPUT CONTAINERS (WHITE)
+========================= */
+/* Buttons */
 .stButton > button,
 button[kind="primary"],
 button[kind="secondary"]{
@@ -98,7 +178,7 @@ button[kind="secondary"]{
 }
 .stButton > button:hover{ background: #f7f7f7 !important; }
 
-/* Radio items (Chat selector) */
+/* Radio items */
 div[role="radiogroup"] label{
   background: #ffffff !important;
   border: 1px solid #cfcfcf !important;
@@ -108,7 +188,7 @@ div[role="radiogroup"] label{
 }
 div[role="radiogroup"] label:hover{ background: #f7f7f7 !important; }
 
-/* Password input container + eye button */
+/* Text input container + eye button */
 div[data-testid="stTextInput"] > div{
   background: #ffffff !important;
   border-radius: 10px !important;
@@ -123,26 +203,6 @@ div[data-baseweb="button"] button{
   background: #ffffff !important;
   color: #000000 !important;
   border: 1px solid #cfcfcf !important;
-}
-
-/* Source citations styling */
-.source-citation {
-  background: #e3f2fd;
-  border-left: 3px solid #2196f3;
-  padding: 8px 12px;
-  margin: 8px 0;
-  border-radius: 4px;
-  font-size: 0.9em;
-}
-
-/* Copy button styling */
-.copy-button {
-  background: #ffffff;
-  border: 1px solid #cfcfcf;
-  border-radius: 6px;
-  padding: 4px 8px;
-  cursor: pointer;
-  font-size: 0.85em;
 }
 </style>
 """,
