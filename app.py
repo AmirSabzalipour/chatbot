@@ -264,6 +264,7 @@ def dedup_near(texts: list, overlap_threshold: float = 0.85) -> list:
 
 
 @st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def build_rag(document_text: str):
     """Build RAG system with embeddings and vector database."""
     try:
@@ -273,10 +274,7 @@ def build_rag(document_text: str):
         chunks = chunk_text_sentences(document_text, sentences_per_chunk=5, overlap=1)
         
         if not chunks:
-            st.error("No chunks created from document. Please check document content.")
             return None, None, None, []
-        
-        st.info(f"📄 Document split into {len(chunks)} chunks")
         
         # Generate embeddings
         embs = embedder.encode(chunks, convert_to_numpy=True, show_progress_bar=False)
@@ -308,7 +306,6 @@ def build_rag(document_text: str):
         # Initialize LLM
         api_key = st.secrets.get("TOGETHER_API_KEY")
         if not api_key:
-            st.error("TOGETHER_API_KEY not found in secrets!")
             return None, None, None, []
         
         llm = Together(api_key=api_key)
@@ -316,9 +313,7 @@ def build_rag(document_text: str):
         return llm, embedder, col, chunks
     
     except Exception as e:
-        st.error(f"Error building RAG system: {e}")
         return None, None, None, []
-
 
 def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 6, temperature: float = 0.3):
     """
