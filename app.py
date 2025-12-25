@@ -19,6 +19,9 @@ st.markdown(
 .stApp { background-color: #f0f0f0; color: #000 !important; }
 .stApp, .stApp * { color: #000 !important; }
 
+/* Keep main section consistent (prevents dark wrappers in some Streamlit versions) */
+section.main, section.main > div { background: #f0f0f0 !important; }
+
 /* Sidebar background (keep sidebar visible!) */
 section[data-testid="stSidebar"] { background-color: #e8e8e8 !important; }
 
@@ -45,9 +48,6 @@ div[role="option"] { background: #ffffff !important; color: #000000 !important; 
 
 /* Chat bubbles */
 .stChatMessage { border-radius: 14px; padding: 6px 10px; }
-
-/* Chat input container */
-[data-testid="stChatInput"] { background: transparent !important; }
 
 /* ---- IMPORTANT: Keep header/toolbar so sidebar + arrows stay ---- */
 header {
@@ -103,10 +103,32 @@ div[data-baseweb="button"] button{
   color: #000000 !important;
   border: 1px solid #cfcfcf !important;
 }
+
+/* ---------- FIX BLACK BOTTOM BAR (chat input area container) ---------- */
+div[data-testid="stBottom"]{
+  background: #ffffff !important;
+}
+div[data-testid="stBottom"] > div{
+  background: #ffffff !important;
+}
+
+/* Make the chat input region white */
+div[data-testid="stChatInput"]{
+  background: #ffffff !important;
+  border-top: 1px solid #cfcfcf !important;
+}
+div[data-testid="stChatInput"] > div{
+  background: #ffffff !important;
+}
+div[data-testid="stChatInput"] textarea{
+  background: #ffffff !important;
+  color: #000000 !important;
+}
 </style>
 """,
     unsafe_allow_html=True,
 )
+
 
 # ---------------- UTIL ----------------
 def img_to_base64(path: str) -> str:
