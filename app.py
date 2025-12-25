@@ -49,8 +49,26 @@ div[role="option"] { background: #ffffff !important; color: #000000 !important; 
 /* Chat bubbles */
 .stChatMessage { border-radius: 14px; padding: 6px 10px; }
 
-/* Chat input container */
-[data-testid="stChatInput"] { background: transparent !important; }
+/* Chat input container - WHITE BACKGROUND FIX */
+[data-testid="stChatInput"] { 
+  background: #ffffff !important;
+  border-radius: 10px !important;
+  padding: 10px !important;
+  margin-bottom: 20px !important;
+  margin-right: 180px !important;  /* Space from Manage app button */
+}
+
+/* Chat input inner container */
+[data-testid="stChatInput"] > div {
+  background: #ffffff !important;
+}
+
+/* The actual input field inside chat */
+[data-testid="stChatInput"] input,
+[data-testid="stChatInput"] textarea {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
 
 /* ---- IMPORTANT: Keep header/toolbar so sidebar + arrows stay ---- */
 header {
@@ -107,17 +125,6 @@ div[data-baseweb="button"] button{
   border: 1px solid #cfcfcf !important;
 }
 
-/* --- Avoid Streamlit Cloud "Manage app" overlay (bottom-right) --- */
-/* Reserve space on the right so the chat input doesn't go under Manage app */
-div[data-testid="stChatInput"]{
-  padding-right: 220px !important;   /* adjust: 180–260 as needed */
-  box-sizing: border-box !important;
-}
-div[data-testid="stChatInput"] > div{
-  padding-right: 220px !important;
-  box-sizing: border-box !important;
-}
-
 /* Source citations styling */
 .source-citation {
   background: #e3f2fd;
@@ -141,7 +148,6 @@ div[data-testid="stChatInput"] > div{
 """,
     unsafe_allow_html=True,
 )
-
 
 # ---------------- UTIL ----------------
 def img_to_base64(path: str) -> str:
