@@ -19,9 +19,6 @@ st.markdown(
 .stApp { background-color: #f0f0f0; color: #000 !important; }
 .stApp, .stApp * { color: #000 !important; }
 
-/* Keep main section consistent (prevents dark wrappers in some Streamlit versions) */
-section.main, section.main > div { background: #f0f0f0 !important; }
-
 /* Sidebar background (keep sidebar visible!) */
 section[data-testid="stSidebar"] { background-color: #e8e8e8 !important; }
 
@@ -44,10 +41,13 @@ div[role="listbox"] { background: #ffffff !important; }
 div[role="option"] { background: #ffffff !important; color: #000000 !important; }
 
 /* Main container */
-.block-container { padding-top: 2rem; max-width: 900px; }
+.block-container { padding-top: 2rem; max-width: 900px; padding-bottom: 6rem !important; }
 
 /* Chat bubbles */
 .stChatMessage { border-radius: 14px; padding: 6px 10px; }
+
+/* Chat input container */
+[data-testid="stChatInput"] { background: transparent !important; }
 
 /* ---- IMPORTANT: Keep header/toolbar so sidebar + arrows stay ---- */
 header {
@@ -104,25 +104,15 @@ div[data-baseweb="button"] button{
   border: 1px solid #cfcfcf !important;
 }
 
-/* ---------- FIX BLACK BOTTOM BAR (chat input area container) ---------- */
-div[data-testid="stBottom"]{
-  background: #ffffff !important;
-}
-div[data-testid="stBottom"] > div{
-  background: #ffffff !important;
-}
-
-/* Make the chat input region white */
+/* --- Avoid Streamlit Cloud "Manage app" overlay (bottom-right) --- */
+/* Reserve space on the right so the chat input doesn't go under Manage app */
 div[data-testid="stChatInput"]{
-  background: #ffffff !important;
-  border-top: 1px solid #cfcfcf !important;
+  padding-right: 220px !important;   /* adjust: 180–260 as needed */
+  box-sizing: border-box !important;
 }
 div[data-testid="stChatInput"] > div{
-  background: #ffffff !important;
-}
-div[data-testid="stChatInput"] textarea{
-  background: #ffffff !important;
-  color: #000000 !important;
+  padding-right: 220px !important;
+  box-sizing: border-box !important;
 }
 </style>
 """,
