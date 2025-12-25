@@ -149,7 +149,11 @@ div[data-baseweb="button"] button{
     unsafe_allow_html=True,
 )
 
-# ---------------- UTIL ----------------
+
+# ===============================================================
+# SECTION 1: UTILITY FUNCTIONS
+# ===============================================================
+
 def img_to_base64(path: str) -> str:
     """Convert image to base64 string."""
     try:
@@ -185,7 +189,10 @@ def load_sessions_from_disk():
     return None
 
 
-# ---------------- DOC (from file or upload) ----------------
+# ===============================================================
+# SECTION 2: DOCUMENT PROCESSING FUNCTIONS
+# ===============================================================
+
 DOC_PATH = Path("data/document.txt")
 
 @st.cache_data
@@ -263,7 +270,10 @@ def dedup_near(texts: list, overlap_threshold: float = 0.85) -> list:
     return [t for t in original if t in kept]
 
 
-@st.cache_resource(show_spinner=False)
+# ===============================================================
+# SECTION 3: RAG SYSTEM - BUILD & ANSWER
+# ===============================================================
+
 @st.cache_resource(show_spinner=False)
 def build_rag(document_text: str):
     """Build RAG system with embeddings and vector database."""
@@ -314,6 +324,7 @@ def build_rag(document_text: str):
     
     except Exception as e:
         return None, None, None, []
+
 
 def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 6, temperature: float = 0.3):
     """
@@ -389,7 +400,10 @@ def export_chat_history(session_data: dict, session_name: str):
     return json.dumps(export_data, indent=2, ensure_ascii=False)
 
 
-# ---------------- CHAT HISTORY (multi-session with persistence) ----------------
+# ===============================================================
+# SECTION 4: CHAT SESSION MANAGEMENT
+# ===============================================================
+
 if "sessions" not in st.session_state:
     # Try to load from disk first
     loaded_sessions = load_sessions_from_disk()
@@ -425,7 +439,10 @@ def new_chat():
     st.rerun()
 
 
-# ---------------- SIDEBAR ----------------
+# ===============================================================
+# SECTION 5: SIDEBAR UI
+# ===============================================================
+
 with st.sidebar:
     logo_b64 = img_to_base64(BOT_ICON_PATH)
 
@@ -557,14 +574,22 @@ with st.sidebar:
     
     # Document info
     st.markdown("### 📄 Document")
-    doc_size = len(load_document(str(DOC_PATH)).split()) if load_document(str(DOC_PATH)) else 0
+    doc_text = load_document(str(DOC_PATH))
+    doc_size = len(doc_text.split()) if doc_text else 0
     st.caption(f"Words: {doc_size:,}")
 
 
-# ---------------- HEADER ----------------
+# ===============================================================
+# SECTION 6: MAIN APP - HEADER
+# ===============================================================
+
 st.title(f"💬 {BOT_NAME}")
 
-# ---------------- PASSWORD GATE ----------------
+
+# ===============================================================
+# SECTION 7: PASSWORD AUTHENTICATION
+# ===============================================================
+
 pw_required = st.secrets.get("APP_PASSWORD", "")
 if pw_required:
     if "authenticated" not in st.session_state:
@@ -586,7 +611,11 @@ if pw_required:
         
         st.stop()
 
-# ---------------- DOCUMENT LOADING ----------------
+
+# ===============================================================
+# SECTION 8: DOCUMENT LOADING
+# ===============================================================
+
 # Try to load from file first
 DOCUMENT = load_document(str(DOC_PATH))
 
@@ -617,17 +646,33 @@ if not DOCUMENT:
         st.info("Please add a document at `data/document.txt` or upload one above.")
         st.stop()
 
-# ---------------- RAG INIT ----------------
+
+# ===============================================================
+# SECTION 9: RAG INITIALIZATION
+# ===============================================================
+
 llm, embedder, col, all_chunks = build_rag(DOCUMENT)
 
 if llm is None or embedder is None or col is None:
-    st.error("Failed to initialize RAG system. Please check your configuration.")
+    st.error("❌ Failed to initialize RAG system. Please check your document content and configuration.")
     st.stop()
+
+if not all_chunks:
+    st.error("❌ No chunks created from document. Please check document content.")
+    st.stop()
+
+# Update sidebar with chunk info (after RAG is built)
+with st.sidebar:
+    st.caption(f"📄 Document split into {len(all_chunks)} chunks")
 
 # Use active session messages
 messages = st.session_state.sessions[st.session_state.active_session]["messages"]
 
-# ---------------- CHAT UI ----------------
+
+# ===============================================================
+# SECTION 10: CHAT UI - DISPLAY MESSAGES
+# ===============================================================
+
 for i, m in enumerate(messages):
     with st.chat_message(m["role"]):
         st.markdown(m["content"])
@@ -640,6 +685,11 @@ for i, m in enumerate(messages):
                 help="Copy to clipboard",
                 on_click=lambda content=m["content"]: st.write(f"```\n{content}\n```")
             )
+
+
+# ===============================================================
+# SECTION 11: CHAT INPUT & RESPONSE GENERATION
+# ===============================================================
 
 # Chat input
 prompt = st.chat_input("Ask about the document…")
