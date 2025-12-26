@@ -21,12 +21,10 @@ st.markdown(
 /* ================================
    FORCE STREAMLIT CHROME -> WHITE
    ================================ */
-
 /* Page base */
 html, body, .stApp {
   background: #ffffff !important;
 }
-.stApp, .stApp * { color: #000 !important; }
 
 /* Main view + blocks */
 [data-testid="stAppViewContainer"],
@@ -48,35 +46,71 @@ header {
   background: #ffffff !important;
   box-shadow: none !important;
 }
+
 /* Remove thin decoration strip */
 [data-testid="stDecoration"] { display: none !important; }
 
-/* Sidebar stays visible (make it white too if you want) */
+/* ---- FIXED SIDEBAR: Always visible, no collapse ---- */
 section[data-testid="stSidebar"] {
   background: #ffffff !important;
+  width: 260px !important;
+  min-width: 260px !important;
+  max-width: 260px !important;
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+  height: 100vh !important;
+  z-index: 999 !important;
+  border-right: 1px solid #e0e0e0 !important;
 }
 
-/* Containers */
+/* Hide collapse button (double arrow) */
+button[kind="header"][data-testid="baseButton-header"] {
+  display: none !important;
+}
+
+/* Alternative selectors for collapse button */
+button[title="Collapse sidebar"],
+button[aria-label="Collapse sidebar"],
+[data-testid="collapsedControl"] {
+  display: none !important;
+}
+
+/* Adjust main content to not overlap with fixed sidebar */
+[data-testid="stAppViewContainer"] {
+  margin-left: 260px !important;
+}
+
 .block-container {
   background: #ffffff !important;
   padding-top: 2rem !important;
   max-width: 900px !important;
-
-  /* space so Manage app overlay doesn't collide with chat input */
   padding-bottom: 7.5rem !important;
+  margin-left: 0 !important;
 }
 
-/* Inputs/selects -> white */
+/* Inputs/selects -> white background with DARK text */
 input, textarea {
   background: #ffffff !important;
-  color: #000 !important;
+  color: #000000 !important;
   border: 1px solid #cfcfcf !important;
 }
+
+/* Specifically target text input fields */
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  background: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
 div[data-baseweb="select"] > div {
   background: #ffffff !important;
   color: #000 !important;
   border: 1px solid #cfcfcf !important;
 }
+
 div[role="listbox"], div[role="option"] {
   background: #ffffff !important;
   color: #000 !important;
@@ -103,6 +137,7 @@ div[data-baseweb="button"] button{
   box-shadow: none !important;
   margin-right: 190px !important;
 }
+
 [data-testid="stChatInput"] *,
 [data-testid="stChatInput"] > div,
 [data-testid="stChatInput"] textarea,
@@ -121,28 +156,10 @@ div[data-baseweb="button"] button{
 [data-testid="stChatMessage"][data-testid*="assistant"]{
   background: #f5f5f5 !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important;
 }
-
-/* ---- Reduce left sidebar width and disable collapse ---- */
-section[data-testid="stSidebar"] {
-  width: 260px !important;
-  min-width: 260px !important;
-  max-width: 260px !important;
-}
-
-/* Disable sidebar collapse button (arrow icon) */
-button[title="Collapse sidebar"] {
-  display: none !important;
-}
-
-
-
-
-
 </style>
 """,
     unsafe_allow_html=True,
 )
-
 
 # ===============================================================
 # SECTION 1: UTILITY FUNCTIONS
