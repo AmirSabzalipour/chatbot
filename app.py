@@ -37,9 +37,38 @@ div[data-testid="stBottomBlockContainer"] {
 }
 
 /* =========================
-   SIDEBAR
+   SIDEBAR - FIXED & NO HAMBURGER
 ========================= */
-section[data-testid="stSidebar"] { background-color: #e8e8e8 !important; }
+section[data-testid="stSidebar"] { 
+  background-color: #e8e8e8 !important; 
+  width: 260px !important;
+  min-width: 260px !important;
+  max-width: 260px !important;
+}
+
+/* HIDE ALL HAMBURGER/COLLAPSE BUTTONS */
+button[kind="header"] {
+  display: none !important;
+}
+button[data-testid="collapsedControl"] {
+  display: none !important;
+}
+button[title="Collapse sidebar"],
+button[title="Hide sidebar"],
+button[title="Show sidebar"] {
+  display: none !important;
+}
+
+/* Prevent sidebar from ever collapsing */
+section[data-testid="stSidebar"][aria-expanded="false"] {
+  display: block !important;
+  margin-left: 0 !important;
+}
+
+/* Remove the hamburger icon completely */
+.css-1dp5vir, .css-164nlkn {
+  display: none !important;
+}
 
 /* =========================
    INPUTS / SELECTS (WHITE)
@@ -204,41 +233,11 @@ div[data-baseweb="button"] button{
   color: #000000 !important;
   border: 1px solid #cfcfcf !important;
 }
-/* =========================
-   STATIC SIDEBAR SETTINGS
-========================= */
-
-/* Set fixed width for sidebar */
-section[data-testid="stSidebar"] {
-  width: 260px !important;
-  min-width: 260px !important;
-  max-width: 260px !important;
-}
-
-/* Completely remove the collapse/expand arrow */
-button[title="Collapse sidebar"] {
-  display: none !important;
-}
-/* Hide the collapse sidebar (chevron) icon */
-button[title="Hide sidebar"] {
-    display: none !important;
-}
-button[title="Show sidebar"] {
-    display: none !important;
-}
-
-/* Prevent sidebar from collapsing */
-section[data-testid="stSidebar"] {
-    min-width: 260px !important;
-    width: 260px !important;
-    max-width: 260px !important;
-}
 
 </style>
 """,
     unsafe_allow_html=True,
 )
-
 
 # ===============================================================
 # SECTION 1: UTILITY FUNCTIONS
