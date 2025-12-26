@@ -122,6 +122,18 @@ div[data-baseweb="button"] button{
   background: #f5f5f5 !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important;
 }
 
+/* ---- Reduce left sidebar width and disable collapse ---- */
+section[data-testid="stSidebar"] {
+  width: 260px !important;
+  min-width: 260px !important;
+  max-width: 260px !important;
+}
+
+/* Disable sidebar collapse button (arrow icon) */
+button[title="Collapse sidebar"] {
+  display: none !important;
+}
+
 
 
 
