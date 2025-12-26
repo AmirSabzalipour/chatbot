@@ -204,6 +204,22 @@ div[data-baseweb="button"] button{
   color: #000000 !important;
   border: 1px solid #cfcfcf !important;
 }
+/* =========================
+   STATIC SIDEBAR SETTINGS
+========================= */
+
+/* Set fixed width for sidebar */
+section[data-testid="stSidebar"] {
+  width: 260px !important;
+  min-width: 260px !important;
+  max-width: 260px !important;
+}
+
+/* Completely remove the collapse/expand arrow */
+button[title="Collapse sidebar"] {
+  display: none !important;
+}
+
 </style>
 """,
     unsafe_allow_html=True,
