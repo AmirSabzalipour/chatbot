@@ -1,0 +1,345 @@
+Experience
+IARC - International Agency for Research on Cancer / World Health Organization logo
+IARC - International Agency for Research on Cancer / World Health Organization
+IARC - International Agency for Research on Cancer / World Health Organization
+2 yrs2 yrs
+Lyon, Auvergne-Rhône-Alpes, France · On-siteLyon, Auvergne-Rhône-Alpes, France · On-site
+Member of the Committee for Information Security Oversight 
+Member of the Committee for Information Security Oversight 
+Contract Part-timeContract Part-time
+May 2025 - Present · 8 mosMay 2025 to Present · 8 mos
+Training Programme Lead (Team-Based Delivery)
+Training Programme Lead (Team-Based Delivery)
+Contract Part-timeContract Part-time
+Sep 2024 - Present · 1 yr 4 mosSep 2024 to Present · 1 yr 4 mos
+Alongside my postdoctoral responsibilities, I serve as Training Programme Lead for a flagship skills programme designed and delivered by the Gitahead Training Group (Ali Farnudi, Sergey Senkin, Damien Georges, and Elham Ghobadpour). This programme provides structured, hands-on training in collaborative scientific coding, research software development, and best practices for open and reproducible science.
+The programme consists of six fully interactive, half-day workshops, progressing from beginner to advanced level. It equips researchers with practical skills for writing robust, maintainable, and scalable scientific software, with a strong emphasis on teamwork, real-world workflows, and reproducibility.
+Key areas covered include:
+Version control and collaborative workflows using Git
+Writing clean, readable, and well-documented code
+Debugging, testing, and code quality assurance
+Virtual environments and dependency management
+Modular programming and software design principles
+Open-source licensing and research software sustainability
+Software package development and distribution
+Performance optimisation, parallel computing, and data pipelines
+The workshops are delivered as:
+Git Started
+Code Champions: Virtual Environments for Real People
+Branching into the Multiverse: Git’s Hidden Powers
+Debugging Dragons: Conquering Bugs and Writing Clean Code
+Packaging Paladins: Crafting and Documenting Your Code
+Fast and Furious: Speeding Up Your Code
+In this role, I lead curriculum design, coordinate team-based delivery, and ensure the training remains inclusive, practical, and aligned with the evolving needs of modern, collaborative research environments.
+Alongside my postdoctoral responsibilities, I serve as Training Programme Lead for a flagship skills programme designed and delivered by the Gitahead Training Group (Ali Farnudi, Sergey Senkin, Damien Georges, and Elham Ghobadpour). This programme provides structured, hands-on training in collaborative scientific coding, research software development, and best practices for open and reproducible science. The programme consists of six fully interactive, half-day workshops, progressing from beginner to advanced level. It equips researchers with practical skills for writing robust, maintainable, and scalable scientific software, with a strong emphasis on teamwork, real-world workflows, and reproducibility. Key areas covered include: Version control and collaborative workflows using Git Writing clean, readable, and well-documented code Debugging, testing, and code quality assurance Virtual environments and dependency management Modular programming and software design principles Open-source licensing and research software sustainability Software package development and distribution Performance optimisation, parallel computing, and data pipelines The workshops are delivered as: Git Started Code Champions: Virtual Environments for Real People Branching into the Multiverse: Git’s Hidden Powers Debugging Dragons: Conquering Bugs and Writing Clean Code Packaging Paladins: Crafting and Documenting Your Code Fast and Furious: Speeding Up Your Code In this role, I lead curriculum design, coordinate team-based delivery, and ensure the training remains inclusive, practical, and aligned with the evolving needs of modern, collaborative research environments.
+Skills: Technical Training & Curriculum Development · Scientific Programming Best Practices · Open & Reproducible Science · Git · Research Software Engineering
+Skills: Technical Training & Curriculum Development · Scientific Programming Best Practices · Open & Reproducible Science · Git · Research Software Engineering
+
+GitAhead training group / Code_and_Conquer_Series_v3 · GitLabGitAhead training group / Code_and_Conquer_Series_v3 · GitLab
+Course timetable and materialCourse timetable and material
+Postdoctoral Research Scientist
+Postdoctoral Research Scientist
+ContractContract
+Jan 2024 - Present · 2 yrsJan 2024 to Present · 2 yrs
+Skills: Python (Programming Language) · Git · Cohort Analysis · Machine Learning · DevOps · Survival Analysis
+Skills: Python (Programming Language) · Git · Cohort Analysis · Machine Learning · DevOps · Survival Analysis
+Introduction to supervised learning for Life Science
+Introduction to supervised learning for Life Science
+ContractContract
+Nov 2024 - Nov 2024 · 1 moNov 2024 to Nov 2024 · 1 mo
+Designed and developed hands-on sessions for an 'Introduction to Supervised Learning' course aimed at PhD and postdoctoral researchers. Created all practical materials from scratch and prepared comprehensive R Markdown documents to support learning. The course combined theoretical lectures with practical, applied exercises to ensure a robust understanding of supervised learning concepts.
+Designed and developed hands-on sessions for an 'Introduction to Supervised Learning' course aimed at PhD and postdoctoral researchers. Created all practical materials from scratch and prepared comprehensive R Markdown documents to support learning. The course combined theoretical lectures with practical, applied exercises to ensure a robust understanding of supervised learning concepts.
+Skills: R (Programming Language) · Statistical Learning · Supervised Learning · Machine Learning · Employee Training
+Skills: R (Programming Language) · Statistical Learning · Supervised Learning · Machine Learning · Employee Training
+Training Instructor
+Training Instructor
+ContractContract
+Sep 2024 - Sep 2024 · 1 moSep 2024 to Sep 2024 · 1 mo
+Designed and delivered an introductory training course on reproducible research, emphasising the use of Git for version control, writing clean code, and comprehensive documentation. Developed and demonstrated examples using R as the primary programming language, ensuring participants gained hands-on experience in these essential research practices.
+Designed and delivered an introductory training course on reproducible research, emphasising the use of Git for version control, writing clean code, and comprehensive documentation. Developed and demonstrated examples using R as the primary programming language, ensuring participants gained hands-on experience in these essential research practices.
+Skills: Employee Training · Open-Source Software · R (Programming Language) · Git · Software Documentation
+Skills: Employee Training · Open-Source Software · R (Programming Language) · Git · Software Documentation
+emlyon business school logo
+Invited lecturer
+Invited lecturer
+emlyon business school · Contract Part-timeemlyon business school · Contract Part-time
+Sep 2025 - Oct 2025 · 2 mosSep 2025 to Oct 2025 · 2 mos
+Lyon, Auvergne-Rhône-Alpes, France · On-siteLyon, Auvergne-Rhône-Alpes, France · On-site
+Designed and delivered an introductory course on "Supervised Statistical Learning" for Business and Informatics majors. The course was structured with a balanced pedagogy, combining 50% lectures and 50% hands-on practical sessions, in which students implemented core concepts in Python. Content covered fundamental machine learning methods with an emphasis on regression-based modelling, including linear, polynomial, logistic, and multiple regression; variable selection techniques (forward and backward selection); regularisation approaches such as ridge regression and LASSO; and statistical hypothesis testing for model evaluation and interpretation. The curriculum bridged statistical theory with applied, business-relevant use cases.
+Designed and delivered an introductory course on "Supervised Statistical Learning" for Business and Informatics majors. The course was structured with a balanced pedagogy, combining 50% lectures and 50% hands-on practical sessions, in which students implemented core concepts in Python. Content covered fundamental machine learning methods with an emphasis on regression-based modelling, including linear, polynomial, logistic, and multiple regression; variable selection techniques (forward and backward selection); regularisation approaches such as ridge regression and LASSO; and statistical hypothesis testing for model evaluation and interpretation. The curriculum bridged statistical theory with applied, business-relevant use cases.
+Skills: Teaching · Python (Programming Language) · Statistical Learning · Statistical Modeling · knowledge transfer
+Skills: Teaching · Python (Programming Language) · Statistical Learning · Statistical Modeling · knowledge transfer
+
+afarnudi / em_ec_statisticscourse2025 · GitLabafarnudi / em_ec_statisticscourse2025 · GitLab
+Course time table and materialCourse time table and material
+Abdus Salam International Centre for Theoretical Physics (ICTP) logo
+Invited lecturer and mentor
+Invited lecturer and mentor
+Abdus Salam International Centre for Theoretical Physics (ICTP) · Contract Part-timeAbdus Salam International Centre for Theoretical Physics (ICTP) · Contract Part-time
+Nov 2024 - Nov 2024 · 1 moNov 2024 to Nov 2024 · 1 mo
+Trieste, Friuli-Venezia Giulia, Italy · On-siteTrieste, Friuli-Venezia Giulia, Italy · On-site
+Another iteration of ICTP’s Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages. One of the best ones so far! We added new training sessions for project management and giving and receiving feedback! What a success!
+Another iteration of ICTP’s Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages. One of the best ones so far! We added new training sessions for project management and giving and receiving feedback! What a success!
+Skills: Python (Programming Language) · Git · Software Documentation · Open-Source Software · Software Packaging · DevOps · Docker
+Skills: Python (Programming Language) · Git · Software Documentation · Open-Source Software · Software Packaging · DevOps · Docker
+
+11th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3982)11th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3982)
+Writing software has become central to research in many fields of science. This school aims to give early-career scientists an introduction to a variety of topics that help them write efficient, clean, maintainable and long-lived code that is useful beyond solving an immediate problem. In a mixture of talks and many hands-on sessions, the focus lies on showing best practices and building fundamental skills in creating, extending and collaborating on modular and reusable software.Writing software has become central to research in many fields of science. This school aims to give early-career scientists an introduction to a variety of topics that help them write efficient, clean, maintainable and long-lived code that is useful beyond solving an immediate problem. In a mixture of talks and many hands-on sessions, the focus lies on showing best practices and building fundamental skills in creating, extending and collaborating on modular and reusable software.
+emlyon business school logo
+Invited Lecturer
+Invited Lecturer
+emlyon business school · Contract Part-timeemlyon business school · Contract Part-time
+Sep 2024 - Oct 2024 · 2 mosSep 2024 to Oct 2024 · 2 mos
+Lyon, Auvergne-Rhône-Alpes, France · On-siteLyon, Auvergne-Rhône-Alpes, France · On-site
+Developed and delivered hands-on lectures for the 'Statistical Learning' undergraduate course in Python, creating all instructional materials from scratch. Worked alongside a co-lecturer who led the main theoretical sessions, ensuring an integrated and practical learning experience for students.
+Developed and delivered hands-on lectures for the 'Statistical Learning' undergraduate course in Python, creating all instructional materials from scratch. Worked alongside a co-lecturer who led the main theoretical sessions, ensuring an integrated and practical learning experience for students.
+Skills: Python (Programming Language) · Statistical Modeling · Statistical Learning · Course Design
+Skills: Python (Programming Language) · Statistical Modeling · Statistical Learning · Course Design
+École normale supérieure de Lyon logo
+Invited lecturer
+Invited lecturer
+École normale supérieure de Lyon · Contract Part-timeÉcole normale supérieure de Lyon · Contract Part-time
+Sep 2023 - Jan 2024 · 5 mosSep 2023 to Jan 2024 · 5 mos
+Lyon, Auvergne-Rhône-Alpes, France · On-siteLyon, Auvergne-Rhône-Alpes, France · On-site
+24hour hands-on course on Scientific Software Development for M2 students + 12h technical supervision of projects.
+24hour hands-on course on Scientific Software Development for M2 students + 12h technical supervision of projects.
+Skills: Python (Programming Language) · Molecular Dynamics · Gitlab · Git · Software Documentation · DevOps
+Skills: Python (Programming Language) · Molecular Dynamics · Gitlab · Git · Software Documentation · DevOps
+Inria logo
+Postdoctoral Researcher
+Postdoctoral Researcher
+Inria · ContractInria · Contract
+Sep 2022 - Dec 2023 · 1 yr 4 mosSep 2022 to Dec 2023 · 1 yr 4 mos
+Lyon, Auvergne-Rhône-Alpes, FranceLyon, Auvergne-Rhône-Alpes, France
+Skills: Développement de logiciels · Mathematical Modeling · Image Processing · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · LaTeX · Linux · Gitlab · Statistics · Data Analysis · Algorithms · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Scientific Writing · Research · DevOps · Physics
+Skills: Développement de logiciels · Mathematical Modeling · Image Processing · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · LaTeX · Linux · Gitlab · Statistics · Data Analysis · Algorithms · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Scientific Writing · Research · DevOps · Physics
+Abdus Salam International Centre for Theoretical Physics (ICTP) logo
+Invited lecturer & mentor
+Invited lecturer & mentor
+Abdus Salam International Centre for Theoretical Physics (ICTP) · Contract Part-timeAbdus Salam International Centre for Theoretical Physics (ICTP) · Contract Part-time
+Nov 2023 - Nov 2023 · 1 moNov 2023 to Nov 2023 · 1 mo
+Trieste, Friuli-Venezia Giulia, Italy · On-siteTrieste, Friuli-Venezia Giulia, Italy · On-site
+10th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3894) 
+I trained the participants in software development and collaboration in open source projects. I covered topics on: clean code, git, conversional development (GitLab), continuous integration, continuous development, DevOps, documentation, Sphinx, makefile, and Docker.
+10th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3894) I trained the participants in software development and collaboration in open source projects. I covered topics on: clean code, git, conversional development (GitLab), continuous integration, continuous development, DevOps, documentation, Sphinx, makefile, and Docker.
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Molecular Dynamics · Gitlab · Programmation orientée objet (POO) · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Software Documentation · DevOps
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Molecular Dynamics · Gitlab · Programmation orientée objet (POO) · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Software Documentation · DevOps
+
+10th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3894)10th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3894)
+University of Bergen (UiB) logo
+invited lecturer and mentor
+invited lecturer and mentor
+University of Bergen (UiB) · Contract Part-timeUniversity of Bergen (UiB) · Contract Part-time
+Jun 2023 - Jun 2023 · 1 moJun 2023 to Jun 2023 · 1 mo
+Bergen, Vestland, Norway · On-siteBergen, Vestland, Norway · On-site
+The aim of this workshop was to give an introduction to topics that go beyond the initial knowledge of reading and writing code. How do you design programs that are modular and reusable by others? How can libraries in different languages be used together? What are tools that can help in documenting and testing code? How can development and releases be managed in group projects with multiple authors and multiple users?
+The aim of this workshop was to give an introduction to topics that go beyond the initial knowledge of reading and writing code. How do you design programs that are modular and reusable by others? How can libraries in different languages be used together? What are tools that can help in documenting and testing code? How can development and releases be managed in group projects with multiple authors and multiple users?
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Gitlab · Programmation orientée objet (POO) · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Software Documentation · DevOps
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Gitlab · Programmation orientée objet (POO) · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Software Documentation · DevOps
+
+Collaborative scientific software developmentCollaborative scientific software development
+Sharif University of Technology logo
+Sharif University of Technology
+Sharif University of Technology
+6 yrs 10 mos6 yrs 10 mos
+Technical Lead
+Technical Lead
+Contract Part-timeContract Part-time
+Sep 2017 - Jun 2023 · 5 yrs 10 mosSep 2017 to Jun 2023 · 5 yrs 10 mos
+Tehran, Tehran Province, IranTehran, Tehran Province, Iran
+Lead developer and technical lead of the Virtual Cell Model molecular dynamics simulation software package. Written in C++ VCM take advantage of OpenMM to simulate the mechanical properties of 1D, 2D, and 3D objects using triangulated meshes.
+Lead developer and technical lead of the Virtual Cell Model molecular dynamics simulation software package. Written in C++ VCM take advantage of OpenMM to simulate the mechanical properties of 1D, 2D, and 3D objects using triangulated meshes.
+Skills: Développement de logiciels · Mathematical Modeling · Image Processing · Python (Programming Language) · Linux · Molecular Dynamics · Gitlab · Statistics · Data Analysis · Programmation orientée objet (POO) · Algorithms · Unit Testing · Git · Programming · PowerPoint · Final Cut Pro · Software Documentation · Research · C++ · DevOps · Physics · Monte Carlo Simulation
+Skills: Développement de logiciels · Mathematical Modeling · Image Processing · Python (Programming Language) · Linux · Molecular Dynamics · Gitlab · Statistics · Data Analysis · Programmation orientée objet (POO) · Algorithms · Unit Testing · Git · Programming · PowerPoint · Final Cut Pro · Software Documentation · Research · C++ · DevOps · Physics · Monte Carlo Simulation
+Teaching Assistant
+Teaching Assistant
+Sep 2016 - Dec 2019 · 3 yrs 4 mosSep 2016 to Dec 2019 · 3 yrs 4 mos
+Computational Physics (graduate + undergraduate course)
+Computational Physics (graduate + undergraduate course)
+Skills: Python (Programming Language) · Linux · Algorithms · Git · Programming · PowerPoint · Teaching · Physics · Monte Carlo Simulation
+Skills: Python (Programming Language) · Linux · Algorithms · Git · Programming · PowerPoint · Teaching · Physics · Monte Carlo Simulation
+Abdus Salam International Centre for Theoretical Physics (ICTP) logo
+invited lecturer & mentor
+invited lecturer & mentor
+Abdus Salam International Centre for Theoretical Physics (ICTP) · ContractAbdus Salam International Centre for Theoretical Physics (ICTP) · Contract
+Nov 2022 - Dec 2022 · 2 mosNov 2022 to Dec 2022 · 2 mos
+Trieste, Friuli-Venezia Giulia, ItalyTrieste, Friuli-Venezia Giulia, Italy
+9th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3696)
+9th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3696)
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Gitlab · Programmation orientée objet (POO) · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Software Documentation · DevOps
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Gitlab · Programmation orientée objet (POO) · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Software Documentation · DevOps
+
+9th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3696)9th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3696)
+École normale supérieure de Lyon logo
+École normale supérieure de Lyon
+École normale supérieure de Lyon
+2 yrs 11 mos2 yrs 11 mos
+Invited lecturer
+Invited lecturer
+ContractContract
+Sep 2022 - Nov 2022 · 3 mosSep 2022 to Nov 2022 · 3 mos
+Lyon, Auvergne-Rhône-Alpes, France · On-siteLyon, Auvergne-Rhône-Alpes, France · On-site
+24hour course on Scientific Software Development for M2 students
+24hour course on Scientific Software Development for M2 students
+Skills: Python (Programming Language) · Molecular Dynamics · Gitlab · Git · Software Documentation · DevOps
+Skills: Python (Programming Language) · Molecular Dynamics · Gitlab · Git · Software Documentation · DevOps
+invited lecturer
+invited lecturer
+Contract Part-timeContract Part-time
+Sep 2022 - Oct 2022 · 2 mosSep 2022 to Oct 2022 · 2 mos
+Lyon, Auvergne-Rhône-Alpes, FranceLyon, Auvergne-Rhône-Alpes, France
+Scientific Software development. Building an entire pipline for software development. From setting up a git repository and utilisation of git branches and conversational development, to writing clean code, documentation, software optimisation, testing, and continuous integration/deployment.
+Scientific Software development. Building an entire pipline for software development. From setting up a git repository and utilisation of git branches and conversational development, to writing clean code, documentation, software optimisation, testing, and continuous integration/deployment.
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Gitlab · Programmation orientée objet (POO) · Algorithms · Unit Testing · Git · Programming · PowerPoint · Teaching · Software Documentation · DevOps
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Gitlab · Programmation orientée objet (POO) · Algorithms · Unit Testing · Git · Programming · PowerPoint · Teaching · Software Documentation · DevOps
+Attaché Temporaire d'Enseignement et de Recherche (ATER)
+Attaché Temporaire d'Enseignement et de Recherche (ATER)
+ContractContract
+Sep 2021 - Sep 2022 · 1 yr 1 moSep 2021 to Sep 2022 · 1 yr 1 mo
+Lyon, Auvergne-Rhône-Alpes, FranceLyon, Auvergne-Rhône-Alpes, France
+My time is split between research and teaching (L3. M1, and M2) at ENS Lyon.
+My time is split between research and teaching (L3. M1, and M2) at ENS Lyon.
+Skills: Développement de logiciels · Mathematical Modeling · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Data Analysis · Programmation orientée objet (POO) · Algorithms · Unit Testing · Git · Programming · PowerPoint · Teaching · Research · DevOps
+Skills: Développement de logiciels · Mathematical Modeling · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Data Analysis · Programmation orientée objet (POO) · Algorithms · Unit Testing · Git · Programming · PowerPoint · Teaching · Research · DevOps
+Visiting Researcher
+Visiting Researcher
+Full-timeFull-time
+Jan 2020 - Aug 2021 · 1 yr 8 mosJan 2020 to Aug 2021 · 1 yr 8 mos
+Lyon 07, Rhône-Alpes, FranceLyon 07, Rhône-Alpes, France
+Skills: Développement de logiciels · Mathematical Modeling · Python (Programming Language) · Linux · Statistics · Data Analysis · Git · Programming · PowerPoint · Research · Physics
+Skills: Développement de logiciels · Mathematical Modeling · Python (Programming Language) · Linux · Statistics · Data Analysis · Git · Programming · PowerPoint · Research · Physics
+University of Bergen (UiB) logo
+Lecturer and supervisor
+Lecturer and supervisor
+University of Bergen (UiB) · Contract Part-timeUniversity of Bergen (UiB) · Contract Part-time
+Jun 2022 - Jun 2022 · 1 moJun 2022 to Jun 2022 · 1 mo
+Bergen, Vestland, NorwayBergen, Vestland, Norway
+The aim of this workshop is to give an introduction to topics that go beyond the initial knowledge of reading and writing code. They will learn to address questions such as: 
+
+How to design programs that are modular and reusable by others? 
+How can libraries in different languages be used together? 
+What are tools that can help in documenting and testing code? 
+How can development and releases be managed in group projects with multiple authors and multiple users? 
+
+The workshop is a mixture of talks and many hands-on sessions that try to prepare participants to answer the mentioned questions. In the second half of the workshop, participants will work in small groups on designing and writing a new project from scratch, giving them direct experience on having to rely on other people’s code.
+The aim of this workshop is to give an introduction to topics that go beyond the initial knowledge of reading and writing code. They will learn to address questions such as: How to design programs that are modular and reusable by others? How can libraries in different languages be used together? What are tools that can help in documenting and testing code? How can development and releases be managed in group projects with multiple authors and multiple users? The workshop is a mixture of talks and many hands-on sessions that try to prepare participants to answer the mentioned questions. In the second half of the workshop, participants will work in small groups on designing and writing a new project from scratch, giving them direct experience on having to rely on other people’s code.
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Gitlab · Programmation orientée objet (POO) · Unit Testing · Git · Programming · PowerPoint · Teaching · Software Documentation · DevOps
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Gitlab · Programmation orientée objet (POO) · Unit Testing · Git · Programming · PowerPoint · Teaching · Software Documentation · DevOps
+
+Collaborative scientific software developmentCollaborative scientific software development
+Abdus Salam International Centre for Theoretical Physics (ICTP) logo
+Invited lecturer & mentor
+Invited lecturer & mentor
+Abdus Salam International Centre for Theoretical Physics (ICTP) · ContractAbdus Salam International Centre for Theoretical Physics (ICTP) · Contract
+Oct 2021 - Dec 2021 · 3 mosOct 2021 to Dec 2021 · 3 mos
+OnlineOnline
+8th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3646)
+8th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3646)
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Gitlab · Programmation orientée objet (POO) · GNU Make · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Software Documentation · DevOps
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Gitlab · Programmation orientée objet (POO) · GNU Make · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Software Documentation · DevOps
+
+Lecture series on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3646)Lecture series on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3646)
+Writing software has become central to research in many fields of science. This school aims to give early-career scientists an introduction to a variety of topics that help them to write efficient, clean, maintainable and long-lived code that is useful beyond solving an immediate problem. In a mixture of talks and many hands-on sessions, the focus lies on showing best practices and building fundamental skills in creating, extending and collaborating on modular and reusable software.Writing software has become central to research in many fields of science. This school aims to give early-career scientists an introduction to a variety of topics that help them to write efficient, clean, maintainable and long-lived code that is useful beyond solving an immediate problem. In a mixture of talks and many hands-on sessions, the focus lies on showing best practices and building fundamental skills in creating, extending and collaborating on modular and reusable software.
+University of Bergen (UiB) logo
+Teaching Assistant
+Teaching Assistant
+University of Bergen (UiB) · ContractUniversity of Bergen (UiB) · Contract
+Jun 2020 - Dec 2021 · 1 yr 7 mosJun 2020 to Dec 2021 · 1 yr 7 mos
+Assistance with Python programming language examination for the Computer Science Department (undergraduate level).
+Assistance with Python programming language examination for the Computer Science Department (undergraduate level).
+Skills: Développement de logiciels · Python (Programming Language) · Programmation orientée objet (POO) · Git · Programming · Teaching · DevOps
+Skills: Développement de logiciels · Python (Programming Language) · Programmation orientée objet (POO) · Git · Programming · Teaching · DevOps
+"News" and "Problem of the month" section
+"News" and "Problem of the month" section
+"News" and "Problem of the month" section
+Physics Society of Iran - Physics club (Tehran)Physics Society of Iran - Physics club (Tehran)
+Aug 2016 - Sep 2021 · 5 yrs 2 mosAug 2016 to Sep 2021 · 5 yrs 2 mos
+Tehran University, Department of PhysicsTehran University, Department of Physics
+I am responsible for writing and presenting the news section of the monthly meetings of the physics club and I present a problem for physics enthusiasts to solve by the end of the month.
+I am responsible for writing and presenting the news section of the monthly meetings of the physics club and I present a problem for physics enthusiasts to solve by the end of the month.
+Skills: PowerPoint · Physics
+Skills: PowerPoint · Physics
+HomeHome
+History of the Physics Society of Iran The Physics Society of Iran was created in 1932. Between the years 1932 and 1942 a few physicists, with the guidance of Dr. Hesabi, would gather and hold sessions called “The Group of Physics and Chemistry”, in...History of the Physics Society of Iran The Physics Society of Iran was created in 1932. Between the years 1932 and 1942 a few physicists, with the guidance of Dr. Hesabi, would gather and hold sessions called “The Group of Physics and Chemistry”, in...
+Abdus Salam International Centre for Theoretical Physics (ICTP) logo
+Invited lecturer & mentor
+Invited lecturer & mentor
+Abdus Salam International Centre for Theoretical Physics (ICTP)Abdus Salam International Centre for Theoretical Physics (ICTP)
+May 2019 - May 2019 · 1 moMay 2019 to May 2019 · 1 mo
+Greater Trieste Metropolitan AreaGreater Trieste Metropolitan Area
+7th Workshop on Collaborative Scientific Software Development | (smr 3284)
+7th Workshop on Collaborative Scientific Software Development | (smr 3284)
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Molecular Dynamics · Gitlab · Programmation orientée objet (POO) · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Software Documentation · DevOps
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Molecular Dynamics · Gitlab · Programmation orientée objet (POO) · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Software Documentation · DevOps
+
+7th Workshop on Collaborative Scientific Software Development | (smr 3284)7th Workshop on Collaborative Scientific Software Development | (smr 3284)
+Writing software has become central to research in many fields of science. This school aims to give early-career scientists an introduction to a variety of topics that help them to write efficient, clean, maintainable and long-lived code that is...Writing software has become central to research in many fields of science. This school aims to give early-career scientists an introduction to a variety of topics that help them to write efficient, clean, maintainable and long-lived code that is...
+Part Time Researcher
+Part Time Researcher
+Part Time Researcher
+Institute for Research in Fundamental Sciences (IPM)Institute for Research in Fundamental Sciences (IPM)
+Aug 2017 - Mar 2019 · 1 yr 8 mosAug 2017 to Mar 2019 · 1 yr 8 mos
+Physics Research Deparment, Lavasani St, Tehran, IranPhysics Research Deparment, Lavasani St, Tehran, Iran
+Skills: Mathematical Modeling · Python (Programming Language) · LaTeX · Linux · Molecular Dynamics · Statistics · Git · Programming · PowerPoint · Research · Physics
+Skills: Mathematical Modeling · Python (Programming Language) · LaTeX · Linux · Molecular Dynamics · Statistics · Git · Programming · PowerPoint · Research · Physics
+Abdus Salam International Centre for Theoretical Physics (ICTP) logo
+Invited lecturer & mentor
+Invited lecturer & mentor
+Abdus Salam International Centre for Theoretical Physics (ICTP)Abdus Salam International Centre for Theoretical Physics (ICTP)
+May 2018 - May 2018 · 1 moMay 2018 to May 2018 · 1 mo
+Tehran Province, IranTehran Province, Iran
+6th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3199)
+6th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3199)
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Molecular Dynamics · Gitlab · Programmation orientée objet (POO) · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Software Documentation · DevOps
+Skills: Développement de logiciels · Intégration continue et livraison continue (CI/CD) · Python (Programming Language) · Linux · Molecular Dynamics · Gitlab · Programmation orientée objet (POO) · Unit Testing · Git · Programming · PowerPoint · Public Speaking · Teaching · Software Documentation · DevOps
+
+6th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3199)6th Workshop on Collaborative Scientific Software Development and Management of Open Source Scientific Packages | (smr 3199)
+Writing software has become central to research in many fields of science. This school aims to give early-career scientists an introduction to a variety of topics that help them to write efficient, clean, maintainable and long-lived code that is...Writing software has become central to research in many fields of science. This school aims to give early-career scientists an introduction to a variety of topics that help them to write efficient, clean, maintainable and long-lived code that is...
+Abdus Salam International Centre for Theoretical Physics (ICTP) logo
+Teaching Assistant
+Teaching Assistant
+Abdus Salam International Centre for Theoretical Physics (ICTP)Abdus Salam International Centre for Theoretical Physics (ICTP)
+Mar 2017 - Mar 2017 · 1 moMar 2017 to Mar 2017 · 1 mo
+Tehran Province, IranTehran Province, Iran
+5th Workshop on Advanced Techniques for Scientific Programming and Management of Open Source Software Packages | (smr 3107)
+5th Workshop on Advanced Techniques for Scientific Programming and Management of Open Source Software Packages | (smr 3107)
+Skills: Python (Programming Language) · Linux · Git · Programming · Teaching
+Skills: Python (Programming Language) · Linux · Git · Programming · Teaching
+
+5th Workshop on Advanced Techniques for Scientific Programming and Management of Open Source Software Packages | (smr 3107)5th Workshop on Advanced Techniques for Scientific Programming and Management of Open Source Software Packages | (smr 3107)
+The Abdus Salam International Centre for Theoretical Physics, in collaboration with the Sharif University of Technology, is organizing the 5th edition of the Workshop on Advanced Techniques for Scientific Programming and Management of Open Source...The Abdus Salam International Centre for Theoretical Physics, in collaboration with the Sharif University of Technology, is organizing the 5th edition of the Workshop on Advanced Techniques for Scientific Programming and Management of Open Source...
+Presenter (Persian)
+Presenter (Persian)
+Presenter (Persian)
+Mostanad TV Channel (National)Mostanad TV Channel (National)
+May 2016 - Oct 2016 · 6 mosMay 2016 to Oct 2016 · 6 mos
+Tehran, Tehran Province, IranTehran, Tehran Province, Iran
+Entertainment
+Entertainment
+Skills: Voiceovers · Video Editing · Post Production · Public Speaking · Presenter · Final Cut Pro
+Skills: Voiceovers · Video Editing · Post Production · Public Speaking · Presenter · Final Cut Pro
+Presenter (Persian)
+Presenter (Persian)
+Presenter (Persian)
+Nasim-Danesh Tech ShowNasim-Danesh Tech Show
+Jun 2015 - Feb 2016 · 9 mosJun 2015 to Feb 2016 · 9 mos
+Tehran, Tehran Province, IranTehran, Tehran Province, Iran
+We visited and reported on the progress of Iran's top 100 tech-companies with Iran's Vice-Presidency for Science and Technology Affairs as our sponsor.
+We visited and reported on the progress of Iran's top 100 tech-companies with Iran's Vice-Presidency for Science and Technology Affairs as our sponsor.
+Skills: Voiceovers · Video Editing · Post Production · Public Speaking · Presenter · Final Cut Pro
+Skills: Voiceovers · Video Editing · Post Production · Public Speaking · Presenter · Final Cut Pro
+PressTV logo
+Presenter (English)
+Presenter (English)
+PressTVPressTV
+Dec 2014 - Apr 2015 · 5 mosDec 2014 to Apr 2015 · 5 mos
+Skills: Voiceovers · Video Editing · Post Production · Public Speaking · Presenter · Final Cut Pro
+Skills: Voiceovers · Video Editing · Post Production · Public Speaking · Presenter · Final Cut Pro
+Presenter/Correspondent (English)
+Presenter/Correspondent (English)
+Presenter/Correspondent (English)
+iFilmTViFilmTV
+Feb 2013 - Dec 2014 · 1 yr 11 mosFeb 2013 to Dec 2014 · 1 yr 11 mos
+Presenter
+Presenter
+Skills: Voiceovers · Video Editing · Post Production · Public Speaking · Presenter · Final Cut Pro
