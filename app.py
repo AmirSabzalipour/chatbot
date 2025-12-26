@@ -219,6 +219,20 @@ section[data-testid="stSidebar"] {
 button[title="Collapse sidebar"] {
   display: none !important;
 }
+/* Hide the collapse sidebar (chevron) icon */
+button[title="Hide sidebar"] {
+    display: none !important;
+}
+button[title="Show sidebar"] {
+    display: none !important;
+}
+
+/* Prevent sidebar from collapsing */
+section[data-testid="stSidebar"] {
+    min-width: 260px !important;
+    width: 260px !important;
+    max-width: 260px !important;
+}
 
 </style>
 """,
