@@ -17,7 +17,7 @@ st.markdown("""
 .stApp { background-color: #f0f0f0; color: #000 !important; }
 .stApp, .stApp * { color: #000 !important; }
 
-/* Sidebar background */
+/* Sidebar background (keep sidebar visible!) */
 section[data-testid="stSidebar"] { background-color: #e8e8e8 !important; }
 
 /* Make inputs/selects look white (password + chat input + selectbox) */
@@ -26,13 +26,15 @@ input, textarea {
   color: #000000 !important;
   border: 1px solid #cfcfcf !important;
 }
+
+/* Selectbox (BaseWeb) */
 div[data-baseweb="select"] > div {
   background: #ffffff !important;
   color: #000000 !important;
   border: 1px solid #cfcfcf !important;
 }
 
-/* Fix dropdown menu itself */
+/* Dropdown menu itself */
 div[role="listbox"] { background: #ffffff !important; }
 div[role="option"] { background: #ffffff !important; color: #000000 !important; }
 
@@ -42,13 +44,67 @@ div[role="option"] { background: #ffffff !important; color: #000000 !important; 
 /* Chat bubbles */
 .stChatMessage { border-radius: 14px; padding: 6px 10px; }
 
-/* Chat input container (sometimes stays dark without this) */
+/* Chat input container */
 [data-testid="stChatInput"] { background: transparent !important; }
 
-/* --- Hide Streamlit top toolbar/decoration (usually removes the black top bar) --- */
-[data-testid="stToolbar"] { display: none !important; }
+/* ---- IMPORTANT: Keep header/toolbar so sidebar + arrows stay ---- */
+header { 
+  background: #f0f0f0 !important;
+  box-shadow: none !important;
+}
+
+/* Remove only the thin "decoration" strip (often the dark bar) */
 [data-testid="stDecoration"] { display: none !important; }
-header { display: none !important; }
+
+/* Toolbar stays visible but match the page background */
+[data-testid="stToolbar"] {
+  background: #f0f0f0 !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Force WHITE backgrounds for Streamlit widgets ---------- */
+
+/* Buttons (New chat / Delete) */
+.stButton > button,
+button[kind="primary"],
+button[kind="secondary"]{
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #cfcfcf !important;
+  box-shadow: none !important;
+}
+.stButton > button:hover{
+  background: #f7f7f7 !important;
+}
+
+/* Radio items (Chat selector) */
+div[role="radiogroup"] label{
+  background: #ffffff !important;
+  border: 1px solid #cfcfcf !important;
+  border-radius: 10px !important;
+  padding: 8px 10px !important;
+  margin-bottom: 8px !important;
+}
+div[role="radiogroup"] label:hover{
+  background: #f7f7f7 !important;
+}
+
+/* Password input container + eye button */
+div[data-testid="stTextInput"] > div{
+  background: #ffffff !important;
+  border-radius: 10px !important;
+}
+div[data-testid="stTextInput"] button{
+  background: #ffffff !important;
+  border: 0 !important;
+}
+
+/* BaseWeb buttons */
+div[data-baseweb="button"] button{
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #cfcfcf !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
