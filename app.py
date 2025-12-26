@@ -130,7 +130,7 @@ div[data-baseweb="button"] button{
 
 /* ---- Reduce left sidebar width (only) ---- */
 section[data-testid="stSidebar"]{
-  width: 260px !important;
+  width: 20px !important;
 }
 section[data-testid="stSidebar"] > div{
   width: 260px !important;
