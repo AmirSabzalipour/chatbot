@@ -121,6 +121,24 @@ div[data-baseweb="button"] button{
 [data-testid="stChatMessage"][data-testid*="assistant"]{
   background: #f5f5f5 !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important;
 }
+/* Assistant message styling (safe) */
+.stChatMessage {
+  background: #f5f5f5 !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 14px !important;
+}
+
+/* ---- Reduce left sidebar width (only) ---- */
+section[data-testid="stSidebar"]{
+  width: 260px !important;
+}
+section[data-testid="stSidebar"] > div{
+  width: 260px !important;
+}
+
+
+
+
 </style>
 """,
     unsafe_allow_html=True,
