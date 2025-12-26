@@ -18,148 +18,193 @@ st.set_page_config(page_title=BOT_NAME, page_icon=BOT_ICON_PATH, layout="centere
 st.markdown(
     """
 <style>
-/* ================================
-   FORCE STREAMLIT CHROME -> WHITE
-   ================================ */
-/* Page base */
-html, body, .stApp {
-  background: #ffffff !important;
-}
+/* --- Global background + text --- */
+.stApp { background-color: #f0f0f0; color: #000 !important; }
+.stApp, .stApp * { color: #000 !important; }
 
-/* Main view + blocks */
-[data-testid="stAppViewContainer"],
-[data-testid="stMain"],
-[data-testid="stMainBlockContainer"],
-[data-testid="stVerticalBlock"],
-[data-testid="stBottomBlockContainer"],
-[data-testid="stBottomBlockContainer"] > div,
-footer, footer > div {
-  background: #ffffff !important;
-}
+/* Sidebar background (keep sidebar visible!) */
+section[data-testid="stSidebar"] { background-color: #e8e8e8 !important; }
 
-/* Header / Toolbar (top Streamlit bar) */
-header {
-  background: #ffffff !important;
-  box-shadow: none !important;
-}
-[data-testid="stToolbar"] {
-  background: #ffffff !important;
-  box-shadow: none !important;
-}
-
-/* Remove thin decoration strip */
-[data-testid="stDecoration"] { display: none !important; }
-
-/* ---- FIXED SIDEBAR: Always visible, no collapse ---- */
-section[data-testid="stSidebar"] {
-  background: #ffffff !important;
-  width: 260px !important;
-  min-width: 260px !important;
-  max-width: 260px !important;
-  position: fixed !important;
-  left: 0 !important;
-  top: 0 !important;
-  height: 100vh !important;
-  z-index: 999 !important;
-  border-right: 1px solid #e0e0e0 !important;
-}
-
-/* Hide collapse button (double arrow) */
-button[kind="header"][data-testid="baseButton-header"] {
-  display: none !important;
-}
-
-/* Alternative selectors for collapse button */
-button[title="Collapse sidebar"],
-button[aria-label="Collapse sidebar"],
-[data-testid="collapsedControl"] {
-  display: none !important;
-}
-
-/* Adjust main content to not overlap with fixed sidebar */
-[data-testid="stAppViewContainer"] {
-  margin-left: 260px !important;
-}
-
-.block-container {
-  background: #ffffff !important;
-  padding-top: 2rem !important;
-  max-width: 900px !important;
-  padding-bottom: 7.5rem !important;
-  margin-left: 0 !important;
-}
-
-/* Inputs/selects -> white background with DARK text */
+/* Make inputs/selects look white (password + chat input + selectbox) */
 input, textarea {
   background: #ffffff !important;
   color: #000000 !important;
   border: 1px solid #cfcfcf !important;
 }
 
-/* Specifically target text input fields */
-input[type="text"],
-input[type="password"],
-input[type="email"] {
-  background: #ffffff !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
+/* Selectbox (BaseWeb) */
 div[data-baseweb="select"] > div {
   background: #ffffff !important;
-  color: #000 !important;
+  color: #000000 !important;
   border: 1px solid #cfcfcf !important;
 }
 
-div[role="listbox"], div[role="option"] {
-  background: #ffffff !important;
-  color: #000 !important;
+/* Dropdown menu itself */
+div[role="listbox"] { background: #ffffff !important; }
+div[role="option"] { background: #ffffff !important; color: #000000 !important; }
+
+/* Main container */
+.block-container { padding-top: 2rem; max-width: 900px; padding-bottom: 6rem !important; }
+
+/* Chat bubbles - remove dark backgrounds */
+.stChatMessage { 
+  border-radius: 14px; 
+  padding: 6px 10px;
+  background-color: transparent !important;
 }
 
-/* Buttons -> white */
-.stButton > button,
-button[kind="primary"],
-button[kind="secondary"],
-div[data-baseweb="button"] button{
-  background: #ffffff !important;
-  color: #000 !important;
-  border: 1px solid #cfcfcf !important;
-  box-shadow: none !important;
+/* User message styling */
+[data-testid="stChatMessage"][data-testid*="user"] {
+  background-color: #e3f2fd !important;
+  border: 1px solid #90caf9 !important;
 }
-.stButton > button:hover { background: #f7f7f7 !important; }
 
-/* Chat input -> white (and avoid Manage app overlap) */
-[data-testid="stChatInput"]{
+/* Assistant message styling */
+[data-testid="stChatMessage"][data-testid*="assistant"] {
+  background-color: #f5f5f5 !important;
+  border: 1px solid #e0e0e0 !important;
+}
+
+/* CRITICAL: Chat input - force white background and remove black box */
+/* Target the main container */
+[data-testid="stChatInput"] {
+  background-color: #ffffff !important;
   background: #ffffff !important;
-  border: 1px solid #cfcfcf !important;
-  border-radius: 12px !important;
+  border-radius: 10px !important;
   padding: 10px !important;
+  margin-bottom: 20px !important;
+  margin-right: 180px !important;
+  border: 1px solid #cfcfcf !important;
   box-shadow: none !important;
-  margin-right: 190px !important;
 }
 
+/* Target the wrapper div */
+[data-testid="stChatInput"] > div:first-child {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Target ALL nested elements */
 [data-testid="stChatInput"] *,
 [data-testid="stChatInput"] > div,
+[data-testid="stChatInput"] input,
 [data-testid="stChatInput"] textarea,
-[data-testid="stChatInput"] input{
+[data-testid="stChatInput"] div {
   background: #ffffff !important;
-  color: #000 !important;
+  background-color: #ffffff !important;
   box-shadow: none !important;
-  border: none !important;
 }
 
-/* Chat bubbles (optional nice look) */
-.stChatMessage { border-radius: 14px !important; padding: 6px 10px !important; }
-[data-testid="stChatMessage"][data-testid*="user"]{
-  background: #e3f2fd !important; border: 1px solid #90caf9 !important; border-radius: 14px !important;
+/* Force the input field itself */
+[data-testid="stChatInput"] input {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: none !important;
+  box-shadow: none !important;
 }
-[data-testid="stChatMessage"][data-testid*="assistant"]{
-  background: #f5f5f5 !important; border: 1px solid #e0e0e0 !important; border-radius: 14px !important;
+
+/* Target the chat input container class if it exists */
+.stChatInputContainer,
+.stChatInputContainer *,
+.stChatInputContainer > div {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+/* ---- IMPORTANT: Keep header/toolbar so sidebar + arrows stay ---- */
+header {
+  background: #f0f0f0 !important;
+  box-shadow: none !important;
+}
+
+/* Remove only the thin "decoration" strip (often the dark bar) */
+[data-testid="stDecoration"] { display: none !important; }
+
+/* Toolbar stays visible but match the page background */
+[data-testid="stToolbar"] {
+  background: #f0f0f0 !important;
+  box-shadow: none !important;
+}
+
+/* Remove black background from bottom containers */
+.main .block-container {
+  background: transparent !important;
+}
+
+/* Target any remaining dark containers */
+div[class*="st-emotion-cache"] {
+  background-color: transparent !important;
+}
+
+/* ---------- Force WHITE backgrounds for Streamlit widgets ---------- */
+
+/* Buttons (New chat / Delete) */
+.stButton > button,
+button[kind="primary"],
+button[kind="secondary"]{
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #cfcfcf !important;
+  box-shadow: none !important;
+}
+.stButton > button:hover{ background: #f7f7f7 !important; }
+
+/* Radio items (Chat selector) */
+div[role="radiogroup"] label{
+  background: #ffffff !important;
+  border: 1px solid #cfcfcf !important;
+  border-radius: 10px !important;
+  padding: 8px 10px !important;
+  margin-bottom: 8px !important;
+}
+div[role="radiogroup"] label:hover{ background: #f7f7f7 !important; }
+
+/* Password input container + eye button */
+div[data-testid="stTextInput"] > div{
+  background: #ffffff !important;
+  border-radius: 10px !important;
+}
+div[data-testid="stTextInput"] button{
+  background: #ffffff !important;
+  border: 0 !important;
+}
+
+/* BaseWeb buttons */
+div[data-baseweb="button"] button{
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #cfcfcf !important;
+}
+
+/* Source citations styling */
+.source-citation {
+  background: #e3f2fd;
+  border-left: 3px solid #2196f3;
+  padding: 8px 12px;
+  margin: 8px 0;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* Copy button styling */
+.copy-button {
+  background: #ffffff;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 0.85em;
 }
 </style>
 """,
     unsafe_allow_html=True,
 )
+
 
 # ===============================================================
 # SECTION 1: UTILITY FUNCTIONS
