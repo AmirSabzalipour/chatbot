@@ -149,6 +149,26 @@ section[data-testid="stSidebar"] div,
 section[data-testid="stSidebar"] button {
   font-size: 13px !important;
 }
+/* =========================
+   REMOVE SIDEBAR COLLAPSE ICON
+========================= */
+
+/* Hide the sidebar collapse button (double arrows) */
+button[data-testid="collapsedControl"],
+button[data-testid="collapseSidebarButton"],
+div[data-testid="collapsedControl"] {
+  display: none !important;
+}
+
+/* Extra safety: hide any stray sidebar toggle icons */
+section[data-testid="stSidebar"] button {
+  visibility: visible;
+}
+section[data-testid="stSidebar"] button[aria-label*="Collapse"],
+section[data-testid="stSidebar"] button[aria-label*="Expand"] {
+  display: none !important;
+}
+
 </style>
 """,
     unsafe_allow_html=True,
