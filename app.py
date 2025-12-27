@@ -126,40 +126,6 @@ div[data-testid="stSidebarContent"] {
   padding-left: 0px !important;
 }
 
-/* =========================
-   SIDEBAR SIZE + FONT TWEAKS
-========================= */
-
-/* Make sidebar narrower */
-section[data-testid="stSidebar"] {
-  width: 100px !important;
-  min-width: 100px !important;
-  max-width: 100px !important;
-}
-
-/* Shrink all text inside the sidebar */
-section[data-testid="stSidebar"] * {
-  font-size: 13px !important;
-}
-
-/* Optionally shrink radio/text input/label font too */
-section[data-testid="stSidebar"] label,
-section[data-testid="stSidebar"] input,
-section[data-testid="stSidebar"] div,
-section[data-testid="stSidebar"] button {
-  font-size: 13px !important;
-}
-/* =========================
-   REMOVE SIDEBAR COLLAPSE ICON
-========================= */
-
-/* Hide the sidebar collapse button (double arrows) */
-button[data-testid="collapsedControl"],
-button[data-testid="collapseSidebarButton"],
-div[data-testid="collapsedControl"] {
-  display: none !important;
-}
-
 
 
 </style>
