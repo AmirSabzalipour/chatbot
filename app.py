@@ -132,9 +132,9 @@ div[data-testid="stSidebarContent"] {
 
 /* Make sidebar narrower */
 section[data-testid="stSidebar"] {
-  width: 200px !important;
-  min-width: 200px !important;
-  max-width: 200px !important;
+  width: 100px !important;
+  min-width: 100px !important;
+  max-width: 100px !important;
 }
 
 /* Shrink all text inside the sidebar */
@@ -160,14 +160,7 @@ div[data-testid="collapsedControl"] {
   display: none !important;
 }
 
-/* Extra safety: hide any stray sidebar toggle icons */
-section[data-testid="stSidebar"] button {
-  visibility: visible;
-}
-section[data-testid="stSidebar"] button[aria-label*="Collapse"],
-section[data-testid="stSidebar"] button[aria-label*="Expand"] {
-  display: none !important;
-}
+
 
 </style>
 """,
