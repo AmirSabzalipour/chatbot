@@ -103,6 +103,28 @@ div[data-baseweb="button"] button{
   color: #000000 !important;
   border: 1px solid #cfcfcf !important;
 }
+
+/* Hide collapse button */
+[data-testid="collapsedControl"] {
+  display: none !important;
+}
+
+/* Prevent sidebar collapse */
+section[data-testid="stSidebar"] {
+  visibility: visible !important;
+  transform: none !important;
+  width: 260px !important;
+  min-width: 260px !important;
+  max-width: 260px !important;
+  transition: none !important;
+  box-shadow: none !important;
+  border-right: 1px solid #dcdcdc !important;
+}
+
+/* Prevent main area from sliding */
+div[data-testid="stSidebarContent"] {
+  padding-left: 0px !important;
+}
 </style>
 """,
     unsafe_allow_html=True,
