@@ -125,6 +125,30 @@ section[data-testid="stSidebar"] {
 div[data-testid="stSidebarContent"] {
   padding-left: 0px !important;
 }
+
+/* =========================
+   SIDEBAR SIZE + FONT TWEAKS
+========================= */
+
+/* Make sidebar narrower */
+section[data-testid="stSidebar"] {
+  width: 200px !important;
+  min-width: 200px !important;
+  max-width: 200px !important;
+}
+
+/* Shrink all text inside the sidebar */
+section[data-testid="stSidebar"] * {
+  font-size: 13px !important;
+}
+
+/* Optionally shrink radio/text input/label font too */
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] input,
+section[data-testid="stSidebar"] div,
+section[data-testid="stSidebar"] button {
+  font-size: 13px !important;
+}
 </style>
 """,
     unsafe_allow_html=True,
