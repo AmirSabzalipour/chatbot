@@ -3,10 +3,23 @@ from together import Together
 import chromadb
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
+import streamlit as st
+
 
 # ---------------- BASIC APP ----------------
 st.set_page_config(page_title="Chatbot", layout="centered")
 st.title("Chatbot")
+
+
+
+st.markdown("""
+<style>
+#MainMenu {visibility: hidden;}
+header {visibility: hidden;}
+footer {visibility: hidden;}
+</style>
+""", unsafe_allow_html=True)
+
 
 # ---------------- LOAD DOC ----------------
 DOC_PATH = Path("data/document.txt")
