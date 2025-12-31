@@ -1,24 +1,39 @@
-import streamlit as st
-from together import Together
-import chromadb
-from sentence_transformers import SentenceTransformer
+import time
 from pathlib import Path
+
+import chromadb
 import streamlit as st
+from sentence_transformers import SentenceTransformer
+from together import Together
 
 
 # ---------------- BASIC APP ----------------
 st.set_page_config(page_title="Chatbot", layout="centered")
-st.title("Chatbot")
 
-
-
-st.markdown("""
+# Hide Streamlit default UI + keep sidebar always open
+st.markdown(
+    """
 <style>
 #MainMenu {visibility: hidden;}
 header {visibility: hidden;}
 footer {visibility: hidden;}
+
+/* Keep sidebar always open */
+[data-testid="collapsedControl"] { display: none !important; }
+section[data-testid="stSidebar"] {
+  visibility: visible !important;
+  transform: none !important;
+  width: 300px !important;      /* adjust */
+  min-width: 300px !important;
+  max-width: 300px !important;
+  transition: none !important;
+}
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
+
+st.title("Chatbot")
 
 
 # ---------------- LOAD DOC ----------------
@@ -36,8 +51,9 @@ if not DOCUMENT:
     st.error("Document not found. Please add your file at: data/document.txt")
     st.stop()
 
+
 # ---------------- RAG HELPERS ----------------
-def chunk_text_words(text, chunk_size=120, overlap=30):
+def chunk_text_words(text: str, chunk_size: int = 120, overlap: int = 30):
     words = text.split()
     chunks, start = [], 0
     while start < len(words):
@@ -46,9 +62,11 @@ def chunk_text_words(text, chunk_size=120, overlap=30):
         start = max(end - overlap, start + 1)
     return chunks
 
+
 @st.cache_resource
 def build_rag(document_text: str):
     embedder = SentenceTransformer("all-MiniLM-L6-v2")
+
     chunks = chunk_text_words(document_text, 120, 30)
     embs = embedder.encode(chunks, convert_to_numpy=True)
 
@@ -68,10 +86,12 @@ def build_rag(document_text: str):
     llm = Together(api_key=api_key)
     return llm, embedder, col
 
-def rag_answer(llm, embedder, col, query, model_name, top_k=5):
+
+def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
     q = embedder.encode([query], convert_to_numpy=True)[0]
     res = col.query(query_embeddings=[q], n_results=top_k)
-    ctx = "\n\n---\n\n".join(res["documents"][0])
+    chunks = res["documents"][0]
+    ctx = "\n\n---\n\n".join(chunks)
 
     r = llm.chat.completions.create(
         model=model_name,
@@ -82,14 +102,37 @@ def rag_answer(llm, embedder, col, query, model_name, top_k=5):
         max_tokens=250,
         temperature=0.2,
     )
-    return r.choices[0].message.content
+    return r.choices[0].message.content, chunks
+
 
 # ---------------- INIT ----------------
-MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
 llm, embedder, col = build_rag(DOCUMENT)
 
+# ---------------- SIDEBAR ----------------
+with st.sidebar:
+    st.header("Settings")
+
+    MODEL_NAME = st.selectbox(
+        "Model",
+        [
+            "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+            "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
+        ],
+        index=0,
+    )
+
+    TOP_K = st.slider("Top-k chunks", 1, 10, 5)
+    DEBUG = st.toggle("Show retrieved context", value=False)
+
+    st.divider()
+    if st.button("🧹 Clear chat"):
+        st.session_state.messages = [{"role": "assistant", "content": "Hi! Ask me about the document."}]
+        st.rerun()
+
+    st.caption("Sidebar is pinned open.")
+
+
 # ---------------- CHAT ----------------
-# Keep only a simple chat transcript (no multi-session, no sidebar UI)
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "assistant", "content": "Hi! Ask me about the document."}]
 
@@ -105,7 +148,13 @@ if prompt:
 
     with st.chat_message("assistant"):
         with st.spinner("Thinking…"):
-            ans = rag_answer(llm, embedder, col, prompt, model_name=MODEL_NAME)
+            ans, retrieved_chunks = rag_answer(
+                llm, embedder, col, prompt, model_name=MODEL_NAME, top_k=TOP_K
+            )
         st.markdown(ans)
+
+        if DEBUG:
+            with st.expander("Retrieved context"):
+                st.write(retrieved_chunks)
 
     st.session_state.messages.append({"role": "assistant", "content": ans})
