@@ -10,7 +10,7 @@ from together import Together
 # ---------------- BASIC APP ----------------
 st.set_page_config(page_title="Chatbot", layout="wide")
 
-# --- ChatGPT-like CSS ---
+# ---------------- GLOBAL CSS (ChatGPT-like) ----------------
 st.markdown(
     """
 <style>
@@ -19,10 +19,8 @@ st.markdown(
 header {visibility: hidden;}
 footer {visibility: hidden;}
 
-/* App background like ChatGPT */
-.stApp {
-  background: #f7f7f8;
-}
+/* App background */
+.stApp { background: #f7f7f8; }
 
 /* Sidebar pinned open */
 [data-testid="collapsedControl"] { display: none !important; }
@@ -36,17 +34,15 @@ section[data-testid="stSidebar"] {
   border-right: 1px solid rgba(0,0,0,0.08);
 }
 
-/* Center main content column like ChatGPT */
+/* Center main content column */
 .block-container {
   max-width: 1050px;
-  padding-top: 1.2rem;
+  padding-top: 0.6rem;
   padding-bottom: 7.5rem; /* leave room for sticky input */
 }
 
-/* Make chat messages breathe a bit */
-div[data-testid="stChatMessage"] {
-  padding: 0.35rem 0;
-}
+/* Chat message spacing */
+div[data-testid="stChatMessage"] { padding: 0.35rem 0; }
 
 /* Sticky chat input bar */
 div[data-testid="stChatInput"] {
@@ -59,23 +55,66 @@ div[data-testid="stChatInput"] {
   z-index: 50;
 }
 
-/* Round the input like a pill */
+/* Round the input */
 div[data-testid="stChatInput"] textarea {
   border-radius: 18px !important;
   padding: 0.85rem 1rem !important;
 }
 
-/* Make buttons in sidebar full-width */
-section[data-testid="stSidebar"] button {
-  width: 100%;
+/* Sidebar buttons full-width */
+section[data-testid="stSidebar"] button { width: 100%; }
+
+/* ---- Top bar (sticky) ---- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #f7f7f8;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding: 0.65rem 0;
 }
 
-/* Optional: tighten title spacing */
-h1 { margin-top: 0.2rem; }
+.topbar-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  max-width:1050px;
+  margin:0 auto;
+  padding: 0 0.25rem;
+}
+
+.topbar-title{
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  display:flex;
+  gap: 0.35rem;
+  align-items:center;
+}
+
+.topbar-sub{
+  font-weight: 500;
+  opacity: 0.65;
+}
+
+.topbar-actions{
+  display:flex;
+  gap: 0.6rem;
+  align-items:center;
+  font-size: 0.95rem;
+}
+
+.topbar-link{
+  color:#111827;
+  text-decoration:none;
+  opacity:0.9;
+}
+.topbar-link:hover{ opacity:1; }
 </style>
 """,
     unsafe_allow_html=True,
 )
+
 
 # ---------------- LOAD DOC ----------------
 DOC_PATH = Path("data/document.txt")
@@ -151,7 +190,6 @@ llm, embedder, col = build_rag(DOCUMENT)
 
 # ---------------- STATE (simple chat sessions) ----------------
 if "chats" not in st.session_state:
-    # each chat is: {"title": str, "messages": [...]}
     st.session_state.chats = [{
         "title": "New chat",
         "messages": [{"role": "assistant", "content": "Hi! Ask me about the document."}]
@@ -169,10 +207,16 @@ def new_chat():
 active = st.session_state.active_chat
 messages = st.session_state.chats[active]["messages"]
 
-# ---------------- SIDEBAR (ChatGPT-like left panel) ----------------
-with st.sidebar:
-    st.markdown("### Chatbot")
 
+# ---------------- SIDEBAR (logo + ChatGPT-like) ----------------
+with st.sidebar:
+    # Put your logo here (local path or URL)
+    # Example local: "assets/logo.png" (create assets/ and put logo.png in it)
+    c1, c2, c3 = st.columns([1, 2, 1])
+    with c2:
+        st.image("assets/logo.png", width=64)  # <-- change path/size as needed
+
+    st.markdown("### Chatbot")
     st.button("➕ New chat", on_click=new_chat)
 
     st.divider()
@@ -193,8 +237,7 @@ with st.sidebar:
     st.divider()
     st.markdown("**History**")
 
-    # Simple history list
-    for i, chat in enumerate(st.session_state.chats[:10]):  # show first 10
+    for i, chat in enumerate(st.session_state.chats[:10]):
         label = chat["title"] if chat["title"] else f"Chat {i+1}"
         if st.button(label, key=f"chat_{i}"):
             st.session_state.active_chat = i
@@ -207,9 +250,28 @@ with st.sidebar:
         ]
         st.rerun()
 
-# ---------------- MAIN CHAT ----------------
-st.title("Chatbot")
 
+# ---------------- TOP BAR (main area) ----------------
+st.markdown(
+    f"""
+<div class="topbar">
+  <div class="topbar-row">
+    <div class="topbar-title">
+      <span>Chatbot</span>
+      <span class="topbar-sub">{MODEL_NAME}</span>
+    </div>
+    <div class="topbar-actions">
+      <a class="topbar-link" href="#" onclick="navigator.clipboard.writeText(window.location.href);return false;">Share</a>
+      <span style="opacity:.6;">⋯</span>
+    </div>
+  </div>
+</div>
+""",
+    unsafe_allow_html=True,
+)
+
+
+# ---------------- MAIN CHAT ----------------
 for m in messages:
     with st.chat_message(m["role"]):
         st.markdown(m["content"])
