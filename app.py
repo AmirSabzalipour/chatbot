@@ -121,6 +121,47 @@ section[data-testid="stSidebar"] button { width: 100%; }
   opacity:0.9;
 }
 .topbar-link:hover{ opacity:1; }
+
+.block-container{
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 2) Make the topbar row span full width too */
+.topbar-row{
+  max-width: 100% !important;
+  padding-left: 24px !important;   /* keep some breathing room */
+  padding-right: 24px !important;
+}
+
+/* 3) Remove "card" styling (rounded corners / shadow / border) around main content */
+div[data-testid="stAppViewContainer"] > .main,
+div[data-testid="stAppViewContainer"] > .main > div {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* 4) Ensure any containers inside don't add shadows/rounding */
+div[data-testid="stVerticalBlock"],
+div[data-testid="stVerticalBlock"] > div,
+div[data-testid="stBlock"] {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+
+/* 5) Optional: make chat input bar full width as well */
+div[data-testid="stChatInput"]{
+  left: 0;
+  right: 0;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-left: 24px;
+  padding-right: 24px;
+}
 </style>
 """,
     unsafe_allow_html=True,
