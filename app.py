@@ -38,16 +38,16 @@ button[title="Close sidebar"] {
 section[data-testid="stSidebar"] {
   visibility: visible !important;
   transform: none !important;
-  width: 320px !important;
-  min-width: 320px !important;
-  max-width: 320px !important;
+  width: 200px !important;
+  min-width: 200px !important;
+  max-width: 200px !important;
   transition: none !important;
   border-right: 1px solid rgba(0,0,0,0.08);
 }
 
 /* Center main content column */
 .block-container {
-  max-width: 700px;
+  max-width: 1200px;
   padding-top: 0.6rem;
   padding-bottom: 7.5rem; /* leave room for sticky input */
 }
