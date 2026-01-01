@@ -115,8 +115,8 @@ with st.sidebar:
     MODEL_NAME = st.selectbox(
         "Model",
         [
-            "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
-            "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
+            "Meta-Llama-3.1-8B-Instruct-Turbo",
+            "Meta-Llama-3.1-70B-Instruct-Turbo",
         ],
         index=0,
     )
