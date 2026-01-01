@@ -47,7 +47,7 @@ section[data-testid="stSidebar"] {
 
 /* Center main content column */
 .block-container {
-  max-width: 1050px;
+  max-width: 700px;
   padding-top: 0.6rem;
   padding-bottom: 7.5rem; /* leave room for sticky input */
 }
