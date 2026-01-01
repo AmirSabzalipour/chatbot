@@ -22,6 +22,17 @@ footer {visibility: hidden;}
 /* App background */
 .stApp { background: #f7f7f8; }
 
+/* Hide sidebar collapse/expand arrow button (different Streamlit versions) */
+button[data-testid="stSidebarCollapseButton"],
+button[aria-label="Collapse sidebar"],
+button[aria-label="Expand sidebar"],
+button[title="Collapse sidebar"],
+button[title="Expand sidebar"],
+button[aria-label="Close sidebar"],
+button[title="Close sidebar"] {
+  display: none !important;
+}
+
 /* Sidebar pinned open */
 [data-testid="collapsedControl"] { display: none !important; }
 section[data-testid="stSidebar"] {
@@ -211,7 +222,6 @@ messages = st.session_state.chats[active]["messages"]
 # ---------------- SIDEBAR (logo + ChatGPT-like) ----------------
 with st.sidebar:
     # Put your logo here (local path or URL)
-    # Example local: "assets/logo.png" (create assets/ and put logo.png in it)
     c1, c2, c3 = st.columns([1, 2, 1])
     with c2:
         st.image("assets/logo.png", width=64)  # <-- change path/size as needed
