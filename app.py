@@ -8,33 +8,74 @@ from together import Together
 
 
 # ---------------- BASIC APP ----------------
-st.set_page_config(page_title="Chatbot", layout="centered")
+st.set_page_config(page_title="Chatbot", layout="wide")
 
-# Hide Streamlit default UI + keep sidebar always open
+# --- ChatGPT-like CSS ---
 st.markdown(
     """
 <style>
+/* Hide Streamlit default chrome */
 #MainMenu {visibility: hidden;}
 header {visibility: hidden;}
 footer {visibility: hidden;}
 
-/* Keep sidebar always open */
+/* App background like ChatGPT */
+.stApp {
+  background: #f7f7f8;
+}
+
+/* Sidebar pinned open */
 [data-testid="collapsedControl"] { display: none !important; }
 section[data-testid="stSidebar"] {
   visibility: visible !important;
   transform: none !important;
-  width: 300px !important;      /* adjust */
-  min-width: 300px !important;
-  max-width: 300px !important;
+  width: 320px !important;
+  min-width: 320px !important;
+  max-width: 320px !important;
   transition: none !important;
+  border-right: 1px solid rgba(0,0,0,0.08);
 }
+
+/* Center main content column like ChatGPT */
+.block-container {
+  max-width: 1050px;
+  padding-top: 1.2rem;
+  padding-bottom: 7.5rem; /* leave room for sticky input */
+}
+
+/* Make chat messages breathe a bit */
+div[data-testid="stChatMessage"] {
+  padding: 0.35rem 0;
+}
+
+/* Sticky chat input bar */
+div[data-testid="stChatInput"] {
+  position: sticky;
+  bottom: 0;
+  background: #f7f7f8;
+  padding-top: 0.75rem;
+  padding-bottom: 1rem;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  z-index: 50;
+}
+
+/* Round the input like a pill */
+div[data-testid="stChatInput"] textarea {
+  border-radius: 18px !important;
+  padding: 0.85rem 1rem !important;
+}
+
+/* Make buttons in sidebar full-width */
+section[data-testid="stSidebar"] button {
+  width: 100%;
+}
+
+/* Optional: tighten title spacing */
+h1 { margin-top: 0.2rem; }
 </style>
 """,
     unsafe_allow_html=True,
 )
-
-st.title("Chatbot")
-
 
 # ---------------- LOAD DOC ----------------
 DOC_PATH = Path("data/document.txt")
@@ -108,9 +149,34 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
 # ---------------- INIT ----------------
 llm, embedder, col = build_rag(DOCUMENT)
 
-# ---------------- SIDEBAR ----------------
+# ---------------- STATE (simple chat sessions) ----------------
+if "chats" not in st.session_state:
+    # each chat is: {"title": str, "messages": [...]}
+    st.session_state.chats = [{
+        "title": "New chat",
+        "messages": [{"role": "assistant", "content": "Hi! Ask me about the document."}]
+    }]
+if "active_chat" not in st.session_state:
+    st.session_state.active_chat = 0
+
+def new_chat():
+    st.session_state.chats.insert(0, {
+        "title": "New chat",
+        "messages": [{"role": "assistant", "content": "Hi! Ask me about the document."}]
+    })
+    st.session_state.active_chat = 0
+
+active = st.session_state.active_chat
+messages = st.session_state.chats[active]["messages"]
+
+# ---------------- SIDEBAR (ChatGPT-like left panel) ----------------
 with st.sidebar:
-    st.header("Settings")
+    st.markdown("### Chatbot")
+
+    st.button("➕ New chat", on_click=new_chat)
+
+    st.divider()
+    st.markdown("**Settings**")
 
     MODEL_NAME = st.selectbox(
         "Model",
@@ -125,24 +191,32 @@ with st.sidebar:
     DEBUG = st.toggle("Show retrieved context", value=False)
 
     st.divider()
-    if st.button("🧹 Clear chat"):
-        st.session_state.messages = [{"role": "assistant", "content": "Hi! Ask me about the document."}]
+    st.markdown("**History**")
+
+    # Simple history list
+    for i, chat in enumerate(st.session_state.chats[:10]):  # show first 10
+        label = chat["title"] if chat["title"] else f"Chat {i+1}"
+        if st.button(label, key=f"chat_{i}"):
+            st.session_state.active_chat = i
+            st.rerun()
+
+    st.divider()
+    if st.button("🧹 Clear this chat"):
+        st.session_state.chats[st.session_state.active_chat]["messages"] = [
+            {"role": "assistant", "content": "Hi! Ask me about the document."}
+        ]
         st.rerun()
 
-    st.caption("Sidebar is pinned open.")
+# ---------------- MAIN CHAT ----------------
+st.title("Chatbot")
 
-
-# ---------------- CHAT ----------------
-if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "Hi! Ask me about the document."}]
-
-for m in st.session_state.messages:
+for m in messages:
     with st.chat_message(m["role"]):
         st.markdown(m["content"])
 
 prompt = st.chat_input("Ask about the document…")
 if prompt:
-    st.session_state.messages.append({"role": "user", "content": prompt})
+    messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
@@ -157,4 +231,8 @@ if prompt:
             with st.expander("Retrieved context"):
                 st.write(retrieved_chunks)
 
-    st.session_state.messages.append({"role": "assistant", "content": ans})
+    messages.append({"role": "assistant", "content": ans})
+
+    # Update chat title after first user message
+    if st.session_state.chats[active]["title"] == "New chat":
+        st.session_state.chats[active]["title"] = prompt[:28] + ("…" if len(prompt) > 28 else "")
