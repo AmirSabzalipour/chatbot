@@ -33,7 +33,7 @@ button[title="Close sidebar"] {
   display: none !important;
 }
 
-/* Sidebar pinned open */
+/* Sidebar pinned open + width */
 [data-testid="collapsedControl"] { display: none !important; }
 section[data-testid="stSidebar"] {
   visibility: visible !important;
@@ -43,27 +43,28 @@ section[data-testid="stSidebar"] {
   max-width: 200px !important;
   transition: none !important;
   border-right: 1px solid rgba(0,0,0,0.08);
+  padding: 0 !important; /* remove sidebar padding */
 }
 
-/* ✅ NEW: remove sidebar inner padding so content can touch the left edge */
+/* Remove padding/margins on sidebar inner wrappers */
 section[data-testid="stSidebar"] > div {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
-
-/* ✅ NEW: force images in sidebar to have no left margin/padding */
-section[data-testid="stSidebar"] img {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  display: block;
-}
-
-/* ✅ NEW (optional): remove internal vertical block gaps in sidebar */
-section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
+section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
+  padding: 0 !important;
+  margin: 0 !important;
   gap: 0 !important;
 }
 
-/* Full-width main content (override centered container) */
+/* Force the logo image flush-left */
+section[data-testid="stSidebar"] img {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Full-width main content */
 .block-container{
   max-width: 100% !important;
   padding-top: 0.6rem;
@@ -75,7 +76,7 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
 /* Chat message spacing */
 div[data-testid="stChatMessage"] { padding: 0.35rem 0; }
 
-/* Sticky chat input bar */
+/* Sticky chat input bar (full width, no shadow) */
 div[data-testid="stChatInput"] {
   position: sticky;
   bottom: 0;
@@ -84,9 +85,15 @@ div[data-testid="stChatInput"] {
   padding-bottom: 1rem;
   border-top: 1px solid rgba(0,0,0,0.08);
   z-index: 50;
+  left: 0;
+  right: 0;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
-/* Round the input */
+/* Round the textarea itself */
 div[data-testid="stChatInput"] textarea {
   border-radius: 18px !important;
   padding: 0.85rem 1rem !important;
@@ -105,14 +112,14 @@ section[data-testid="stSidebar"] button { width: 100%; }
   padding: 0.65rem 0;
 }
 
-/* Make the topbar row span full width */
+/* Full-width topbar row */
 .topbar-row{
   display:flex;
   align-items:center;
   justify-content:space-between;
   max-width: 100% !important;
   margin:0 auto;
-  padding-left: 24px !important;   /* breathing room */
+  padding-left: 24px !important;
   padding-right: 24px !important;
 }
 
@@ -137,15 +144,7 @@ section[data-testid="stSidebar"] button { width: 100%; }
   font-size: 0.95rem;
 }
 
-/* Keep link styling available (even if you removed Share) */
-.topbar-link{
-  color:#111827;
-  text-decoration:none;
-  opacity:0.9;
-}
-.topbar-link:hover{ opacity:1; }
-
-/* Remove "card" styling (rounded corners / shadow / border) around main content */
+/* Remove "card" styling around main content */
 div[data-testid="stAppViewContainer"] > .main,
 div[data-testid="stAppViewContainer"] > .main > div {
   background: transparent !important;
@@ -162,46 +161,10 @@ div[data-testid="stBlock"] {
   border-radius: 0 !important;
   border: 0 !important;
 }
-
-/* Make chat input bar full width + no shadow */
-div[data-testid="stChatInput"]{
-  left: 0;
-  right: 0;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-/* Remove default padding on the entire sidebar content area */
-section[data-testid="stSidebar"] {
-  padding: 0 !important;
-}
-
-/* The inner content wrapper in the sidebar */
-section[data-testid="stSidebar"] > div {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Remove padding/margins on the sidebar block container */
-section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
-  padding: 0 !important;
-  margin: 0 !important;
-  gap: 0 !important;
-}
-
-/* Force the logo image to start at x=0 */
-section[data-testid="stSidebar"] img {
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
 </style>
 """,
     unsafe_allow_html=True,
 )
-
 
 
 # ---------------- LOAD DOC ----------------
@@ -298,10 +261,8 @@ messages = st.session_state.chats[active]["messages"]
 
 # ---------------- SIDEBAR (logo + ChatGPT-like) ----------------
 with st.sidebar:
-    # Put your logo here (local path or URL)
-    c1, c2, c3 = st.columns([1, 2, 1])
-    with c2:
-        st.image("assets/logo.png", width=64)  # <-- change path/size as needed
+    # Logo flush-left (no centering columns)
+    st.image("assets/logo.png", width=64)
 
     st.markdown("### Chatbot")
     st.button("➕ New chat", on_click=new_chat)
@@ -339,6 +300,7 @@ with st.sidebar:
 
 
 # ---------------- TOP BAR (main area) ----------------
+# Share removed (text + functionality)
 st.markdown(
     f"""
 <div class="topbar">
@@ -348,7 +310,6 @@ st.markdown(
       <span class="topbar-sub">{MODEL_NAME}</span>
     </div>
     <div class="topbar-actions">
-      <a class="topbar-link" href="#" onclick="navigator.clipboard.writeText(window.location.href);return false;">Share</a>
       <span style="opacity:.6;">⋯</span>
     </div>
   </div>
