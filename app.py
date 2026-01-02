@@ -16,6 +16,12 @@ MODEL_NAME = "Meta-Llama-3.1-8B-Instruct-Turbo"
 TOP_K = 5
 DEBUG = False
 
+# ---------------- RESET CHAT (prevents old code blocks showing in chat) ----------------
+# One-time init. If you want to force-clear on every refresh, uncomment the next line and remove the "if" block.
+# st.session_state["messages"] = [{"role": "assistant", "content": "Hi! Ask me about the document."}]
+if "messages" not in st.session_state:
+    st.session_state["messages"] = [{"role": "assistant", "content": "Hi! Ask me about the document."}]
+
 
 # ---------------- GLOBAL CSS (ChatGPT-like) ----------------
 st.markdown(
@@ -26,34 +32,22 @@ st.markdown(
 header {visibility: hidden;}
 footer {visibility: hidden;}
 
-/* Hide Streamlit native toolbar (two-arrows etc.) */
-div[data-testid="stToolbar"],
-div[data-testid="stToolbarActions"],
-div[data-testid="stToolbarAction"],
-div[data-testid="stToolbarActionButton"],
-div[data-testid="stHeader"],
-header[data-testid="stHeader"],
-button[kind="headerNoPadding"],
-button[kind="header"]{
-  display: none !important;
-}
-
 /* App background */
 .stApp { background: #f7f7f8; }
 
-/* Hide sidebar collapse/expand arrow button */
+/* Hide sidebar collapse/expand arrow button (different Streamlit versions) */
 button[data-testid="stSidebarCollapseButton"],
 button[aria-label="Collapse sidebar"],
 button[aria-label="Expand sidebar"],
 button[title="Collapse sidebar"],
 button[title="Expand sidebar"],
 button[aria-label="Close sidebar"],
-button[title="Close sidebar"],
-[data-testid="collapsedControl"]{
+button[title="Close sidebar"] {
   display: none !important;
 }
 
 /* Sidebar pinned open + width */
+[data-testid="collapsedControl"] { display: none !important; }
 section[data-testid="stSidebar"] {
   visibility: visible !important;
   transform: none !important;
@@ -63,7 +57,7 @@ section[data-testid="stSidebar"] {
   transition: none !important;
   border-right: 1px solid rgba(0,0,0,0.08);
   padding: 0 !important;
-  position: relative;        /* for absolute positioning of logo box */
+  position: relative;          /* required for absolute logo positioning */
   overflow: visible !important; /* allow negative top without clipping */
 }
 
@@ -78,38 +72,38 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
   gap: 0 !important;
 }
 
-/* Reserve space so nothing overlaps the logo+line (adjust if needed) */
+/* Reserve space so nothing overlaps the logo (adjust if needed) */
 section[data-testid="stSidebar"] > div{
-  padding-top: 90px !important;
+  padding-top: 110px !important; /* room for logo + line */
 }
 
-/* ---- PRECISE LOGO + FULL-WIDTH DIVIDER ---- */
+/* ---- PRECISE LOGO + LINE (use wrapper) ---- */
 .sidebar-logo-box{
   position: absolute;
-  top: -100px;   /* ✅ can be negative */
-  left: 0;
-  right: 0;      /* ✅ full sidebar width */
+  top: -100px;   /* can be negative */
+  left: 0px;     /* start from left edge of sidebar */
+  right: 0px;    /* extend to right edge of sidebar */
   z-index: 9999;
 }
 
-/* Logo image position inside the full-width box */
+/* Logo image size/position */
 .sidebar-logo-img{
   width: 40px;
   height: auto;
   display: block !important;
-  margin: 0 0 0 70px !important; /* ✅ move logo horizontally */
+  margin: 0 0 0 70px !important;  /* move logo right */
   padding: 0 !important;
 }
 
-/* Full width divider line under logo with vertical spacing */
+/* Full-width line under logo */
 .sidebar-logo-box::after{
   content: "";
   display: block;
-  width: 100%;                 /* ✅ from left edge to right edge */
+  width: 100%;
   height: 1px;
   background: rgba(0,0,0,0.15);
-  margin-top: 20px;            /* space between logo and line */
-  margin-bottom: 12px;         /* space under the line */
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 /* Full-width main content */
@@ -156,27 +150,41 @@ div[data-testid="stAppViewContainer"] > .main > div {
   border-radius: 0 !important;
 }
 
-/* -------- ChatGPT-like TOP BAR -------- */
-.topbar{
+/* Hide Streamlit top-right toolbar (icons like arrows / fullscreen / open) */
+div[data-testid="stToolbar"],
+div[data-testid="stToolbarActions"],
+div[data-testid="stToolbarAction"],
+div[data-testid="stToolbarActionButton"],
+div[data-testid="stHeader"],
+header[data-testid="stHeader"],
+button[kind="headerNoPadding"],
+button[kind="header"]{
+  display: none !important;
+}
+
+/* --- ChatGPT-like top header --- */
+.topbar {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #ffffff;                 /* ✅ white like ChatGPT */
+  background: #ffffff;
   border-bottom: 1px solid rgba(0,0,0,0.10);
   height: 56px;
   display: flex;
   align-items: center;
 }
 
+/* full width row */
 .topbar-row{
   width: 100%;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding: 0 18px;
+  min-width: 0; /* important for ellipsis */
 }
 
-/* left: title + model + chevron */
+/* left group: "Chatbot 5.2 Thinking ▾" */
 .topbar-left{
   display:flex;
   align-items:center;
@@ -185,19 +193,32 @@ div[data-testid="stAppViewContainer"] > .main > div {
   font-size: 18px;
   font-weight: 600;
   line-height: 1;
+  min-width: 0;          /* allow truncation */
+  flex-wrap: nowrap;     /* no wrapping */
+  white-space: nowrap;   /* no wrapping */
 }
+
+/* model name: truncate instead of wrapping */
 .topbar-left .sub{
   font-weight: 500;
   opacity: 0.65;
   font-size: 18px;
+
+  display: inline-block;
+  max-width: 420px;      /* adjust if you want */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
+/* chevron */
 .topbar-left .chev{
   font-size: 14px;
   opacity: 0.65;
   transform: translateY(1px);
 }
 
-/* right: Share + dots */
+/* right group: Share + ⋯ */
 .topbar-right{
   display:flex;
   align-items:center;
@@ -205,6 +226,8 @@ div[data-testid="stAppViewContainer"] > .main > div {
   font-size: 16px;
   color:#111827;
 }
+
+/* Share button (look like link) */
 .topbar-share{
   display:flex;
   align-items:center;
@@ -217,6 +240,7 @@ div[data-testid="stAppViewContainer"] > .main > div {
 }
 .topbar-share:hover{ opacity: 1; }
 
+/* 3-dots */
 .topbar-more{
   font-size: 22px;
   opacity: 0.8;
@@ -316,11 +340,6 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
 # ---------------- INIT ----------------
 llm, embedder, col = build_rag(DOCUMENT)
 
-# ---------------- CHAT STATE ----------------
-if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "Hi! Ask me about the document."}]
-messages = st.session_state.messages
-
 
 # ---------------- TOP BAR (main area) ----------------
 st.markdown(
@@ -332,10 +351,9 @@ st.markdown(
       <span class="sub">{MODEL_NAME}</span>
       <span class="chev">▾</span>
     </div>
-
     <div class="topbar-right">
-      <a class="topbar-share" href="#" onclick="navigator.clipboard.writeText(window.location.href); return false;">
-        <span style="font-size:18px;">⤴︎</span>
+      <a class="topbar-share" href="#" onclick="return false;">
+        <span style="font-size:18px;">⤴</span>
         <span>Share</span>
       </a>
       <span class="topbar-more">⋯</span>
@@ -348,6 +366,8 @@ st.markdown(
 
 
 # ---------------- MAIN CHAT ----------------
+messages = st.session_state.messages
+
 for m in messages:
     with st.chat_message(m["role"]):
         st.markdown(m["content"])
