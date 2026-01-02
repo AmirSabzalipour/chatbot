@@ -202,6 +202,98 @@ button[kind="headerNoPadding"],
 button[kind="header"]{
   display: none !important;
 }
+
+/* Hide Streamlit's native top-right toolbar so only our bar remains */
+div[data-testid="stToolbar"],
+div[data-testid="stToolbarActions"],
+div[data-testid="stToolbarActionButton"],
+header[data-testid="stHeader"]{
+  display:none !important;
+}
+
+/* --- ChatGPT-like top header --- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.10);
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+/* full width row */
+.topbar-row{
+  width: 100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 0 18px;
+}
+
+/* left group: "Chatbot 5.2 Thinking ▾" */
+.topbar-left{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  color: #111827;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.topbar-left .sub{
+  font-weight: 500;
+  opacity: 0.65;
+  font-size: 18px;
+}
+
+/* chevron */
+.topbar-left .chev{
+  font-size: 14px;
+  opacity: 0.65;
+  transform: translateY(1px);
+}
+
+/* right group: share icon + Share + ⋯ */
+.topbar-right{
+  display:flex;
+  align-items:center;
+  gap: 18px;
+  font-size: 16px;
+  color:#111827;
+}
+
+/* Share button (look like link) */
+.topbar-share{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  color:#111827;
+  opacity: 0.9;
+}
+.topbar-share:hover{ opacity: 1; }
+
+/* 3-dots */
+.topbar-more{
+  font-size: 22px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+/* make the main app background match ChatGPT-like header */
+.stApp { background: #f7f7f8; }
+
+
+
+
+
+
+
 </style>
 """,
     unsafe_allow_html=True,
