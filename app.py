@@ -172,6 +172,31 @@ div[data-testid="stChatInput"]{
   padding-left: 24px;
   padding-right: 24px;
 }
+
+/* Remove default padding on the entire sidebar content area */
+section[data-testid="stSidebar"] {
+  padding: 0 !important;
+}
+
+/* The inner content wrapper in the sidebar */
+section[data-testid="stSidebar"] > div {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Remove padding/margins on the sidebar block container */
+section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
+  padding: 0 !important;
+  margin: 0 !important;
+  gap: 0 !important;
+}
+
+/* Force the logo image to start at x=0 */
+section[data-testid="stSidebar"] img {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
 </style>
 """,
     unsafe_allow_html=True,
