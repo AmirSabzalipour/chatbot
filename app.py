@@ -14,11 +14,13 @@ from together import Together
 st.set_page_config(page_title="Chatbot", layout="wide")
 
 # =========================
-# DEFAULTS (no sidebar controls)
+# DEFAULTS
 # =========================
-MODEL_NAME = "Meta-Llama-3.1-8B-Instruct-Turbo"
+# ✅ Together usually needs provider-prefixed model ids
+MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
 TOP_K = 5
 DEBUG = False
+
 
 # =========================
 # GLOBAL CSS (ChatGPT-like)
@@ -33,7 +35,7 @@ footer {visibility: hidden;}
 /* App background like ChatGPT */
 .stApp { background: #f7f7f8; }
 
-/* ---- Hide Streamlit top-right toolbars / icons (the two arrows, etc.) ---- */
+/* ---- Hide Streamlit top-right toolbars / icons ---- */
 div[data-testid="stToolbar"],
 div[data-testid="stToolbarActions"],
 div[data-testid="stToolbarActionButton"],
@@ -96,19 +98,17 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
   gap: 0 !important;
 }
 
-/* Reserve space so sidebar content wouldn't overlap the logo (even though sidebar is logo-only now) */
+/* Reserve space so sidebar content wouldn't overlap the logo */
 section[data-testid="stSidebar"] > div{
-  padding-top: 90px !important;  /* adjust if you move the logo down/up */
+  padding-top: 90px !important;
 }
 
-/* ---- PRECISE LOGO + FULL-WIDTH LINE ----
-   Control logo position ONLY here: top/left + the logo margin.
-*/
+/* ---- PRECISE LOGO + FULL-WIDTH LINE ---- */
 .sidebar-logo-box{
   position: absolute;
-  top: 12px;      /* ✅ can be negative: e.g. -10px */
-  left: 0px;      /* ✅ full width box begins at left edge */
-  right: 0px;     /* ✅ stretches to right edge */
+  top: 12px;      /* can be negative if you want */
+  left: 0px;
+  right: 0px;
   z-index: 9999;
   padding: 0 !important;
   margin: 0 !important;
@@ -116,13 +116,11 @@ section[data-testid="stSidebar"] > div{
 
 /* Logo image itself */
 .sidebar-logo-img{
-  width: 44px;          /* logo size */
+  width: 44px;
   height: auto;
   display: block !important;
-
-  /* ✅ precise horizontal placement of the image inside the full-width box */
-  margin-left: 22px !important;   /* move logo right/left */
-  margin-top: 0px !important;     /* move logo down/up */
+  margin-left: 22px !important;   /* move logo horizontally */
+  margin-top: 0px !important;     /* move logo vertically */
 }
 
 /* Full-width divider line under the logo */
@@ -132,10 +130,8 @@ section[data-testid="stSidebar"] > div{
   width: 100%;
   height: 1px;
   background: rgba(0,0,0,0.15);
-
-  /* ✅ margins around the line */
-  margin-top: 16px;     /* space between logo and line */
-  margin-bottom: 12px;  /* space under the line */
+  margin-top: 16px;
+  margin-bottom: 12px;
 }
 
 /* =========================
@@ -205,8 +201,8 @@ section[data-testid="stSidebar"] > div{
    MAIN PANEL (ChatGPT-like card)
    ========================= */
 .block-container{
-  max-width: 1100px !important;                 /* panel width */
-  margin: 18px auto 110px auto !important;      /* centered + room for input */
+  max-width: 1100px !important;
+  margin: 18px auto 110px auto !important;
   padding: 18px 22px 26px 22px !important;
 
   background: #ffffff !important;
@@ -249,8 +245,9 @@ div[data-testid="stChatInput"] textarea{
     unsafe_allow_html=True,
 )
 
+
 # =========================
-# SIDEBAR (logo only, base64 HTML so CSS works reliably)
+# SIDEBAR (logo only, base64 HTML)
 # =========================
 def img_to_base64(path: str) -> str:
     return base64.b64encode(Path(path).read_bytes()).decode()
@@ -265,6 +262,7 @@ with st.sidebar:
         """,
         unsafe_allow_html=True,
     )
+
 
 # =========================
 # LOAD DOC
@@ -282,6 +280,7 @@ DOCUMENT = load_document(str(DOC_PATH))
 if not DOCUMENT:
     st.error("Document not found. Please add your file at: data/document.txt")
     st.stop()
+
 
 # =========================
 # RAG HELPERS
@@ -324,21 +323,29 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
     chunks = res["documents"][0]
     ctx = "\n\n---\n\n".join(chunks)
 
-    r = llm.chat.completions.create(
-        model=model_name,
-        messages=[
-            {"role": "system", "content": "Answer ONLY using the provided context. If missing, say you don't know."},
-            {"role": "user", "content": f"Context:\n{ctx}\n\nQuestion: {query}\nAnswer:"},
-        ],
-        max_tokens=250,
-        temperature=0.2,
-    )
-    return r.choices[0].message.content, chunks
+    # ✅ show actual error details if Together rejects the request
+    try:
+        r = llm.chat.completions.create(
+            model=model_name,
+            messages=[
+                {"role": "system", "content": "Answer ONLY using the provided context. If missing, say you don't know."},
+                {"role": "user", "content": f"Context:\n{ctx}\n\nQuestion: {query}\nAnswer:"},
+            ],
+            max_tokens=250,
+            temperature=0.2,
+        )
+        return r.choices[0].message.content, chunks
+    except Exception as e:
+        # This gives you the real reason (bad model name, permissions, etc.)
+        st.error(f"Together request failed.\n\nModel: {model_name}\n\nError: {repr(e)}")
+        raise
+
 
 # =========================
 # INIT
 # =========================
 llm, embedder, col = build_rag(DOCUMENT)
+
 
 # =========================
 # CHAT STATE
@@ -346,6 +353,7 @@ llm, embedder, col = build_rag(DOCUMENT)
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "assistant", "content": "Hi! Ask me about the document."}]
 messages = st.session_state.messages
+
 
 # =========================
 # TOP BAR (main area)
@@ -368,6 +376,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+
 # =========================
 # MAIN CHAT
 # =========================
@@ -383,11 +392,7 @@ if prompt:
 
     with st.chat_message("assistant"):
         with st.spinner("Thinking…"):
-            ans, retrieved = rag_answer(llm, embedder, col, prompt, model_name=MODEL_NAME, top_k=TOP_K)
+            ans, _ = rag_answer(llm, embedder, col, prompt, model_name=MODEL_NAME, top_k=TOP_K)
         st.markdown(ans)
-
-        if DEBUG:
-            with st.expander("Retrieved context"):
-                st.write(retrieved)
 
     messages.append({"role": "assistant", "content": ans})
