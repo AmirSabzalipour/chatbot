@@ -93,7 +93,7 @@ section[data-testid="stSidebar"] > div{
   content: "";
   display: block;
   margin-top: 8px;                /* gap below logo */
-  width: 200px;                    /* line length (match logo width) */
+  width: 300px;                    /* line length (match logo width) */
   height: 1px;
   background: rgba(0,0,0,0.15);
 }
