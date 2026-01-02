@@ -90,7 +90,7 @@ section[data-testid="stSidebar"] > div{
   left: 0;              /* start under the logo's left edge */
   top: calc(100% + 8px);/* distance below the logo */
   width: 40px;          /* line length (set to your logo width) */
-  height: 1px;
+  height: 4px;
   background: rgba(0,0,0,0.15);
 }
 
