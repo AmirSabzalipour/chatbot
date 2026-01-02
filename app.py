@@ -106,7 +106,7 @@ section[data-testid="stSidebar"] > div{
 /* ---- PRECISE LOGO + FULL-WIDTH LINE ---- */
 .sidebar-logo-box{
   position: absolute;
-  top: 12px;      /* can be negative if you want */
+  top: -80px;      /* can be negative if you want */
   left: 0px;
   right: 0px;
   z-index: 9999;
