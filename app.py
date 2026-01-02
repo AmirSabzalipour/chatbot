@@ -58,11 +58,13 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
 }
 
 /* Force the logo image flush-left */
-section[data-testid="stSidebar"] img {
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
+.sidebar-logo-wrap{
+  margin-left: 0px;   /* + right, - left */
+  margin-top: 0px;    /* + down, - up */
+  padding-left: 0px;
+  padding-top: 0px;
 }
+
 
 /* Full-width main content */
 .block-container{
