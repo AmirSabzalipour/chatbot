@@ -162,8 +162,8 @@ div[data-testid="stBlock"] {
   border: 0 !important;
 }
 .sidebar-logo{
-  margin-left: 10px;  /* + moves right, - moves left */
-  margin-top: 10px;   /* + moves down, - moves up */
+  margin-left: 0px;  /* + moves right, - moves left */
+  margin-top: 0px;   /* + moves down, - moves up */
   padding-left: 0px;
   padding-top: 0px;
 }
@@ -269,7 +269,7 @@ messages = st.session_state.chats[active]["messages"]
 with st.sidebar:
     # Logo flush-left (no centering columns)
     st.markdown('<div class="sidebar-logo">', unsafe_allow_html=True)
-    st.image("assets/logo.png", width=64)
+    st.image("assets/logo.png", width=40)
     st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown("### Chatbot")
