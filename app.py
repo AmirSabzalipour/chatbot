@@ -1,5 +1,6 @@
 import time
 from pathlib import Path
+import base64
 
 import chromadb
 import streamlit as st
@@ -50,12 +51,8 @@ section[data-testid="stSidebar"] {
   transition: none !important;
   border-right: 1px solid rgba(0,0,0,0.08);
   padding: 0 !important;
+  position: relative; /* IMPORTANT for absolute logo positioning */
 }
-
-section[data-testid="stSidebar"]{
-  position: relative;
-}
-
 
 /* Remove padding/margins on sidebar inner wrappers */
 section[data-testid="stSidebar"] > div {
@@ -68,21 +65,22 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
   gap: 0 !important;
 }
 
-/* Logo wrapper position control (ONLY affects logo) */
-.sidebar-logo{
-  position: absolute;
-  top: 0px;   /* ⬅️ vertical position from top edge */
-  left: 70px;  /* ⬅️ horizontal position from left edge */
-  z-index: 9999;
-  padding: 0 !important;
-  margin: 0 !important;
+/* Reserve space so nothing overlaps the logo (optional but recommended) */
+section[data-testid="stSidebar"] > div{
+  padding-top: 70px !important; /* adjust if logo is taller */
 }
 
-/* Ensure logo image has no extra spacing */
-.sidebar-logo img{
-  display: block !important;
+/* ---- PRECISE LOGO POSITIONING ---- */
+.sidebar-logo-img{
+  position: absolute;
+  top: 0px;     /* ✅ change vertical position here */
+  left: 70px;   /* ✅ change horizontal position here */
+  width: 60px;  /* ✅ logo size */
+  height: auto;
+  z-index: 9999;
   margin: 0 !important;
   padding: 0 !important;
+  display: block !important;
 }
 
 /* Full-width main content */
@@ -175,6 +173,18 @@ div[data-testid="stAppViewContainer"] > .main > div {
 )
 
 
+# ---------------- SIDEBAR (logo only, base64 HTML so CSS top/left works) ----------------
+def img_to_base64(path: str) -> str:
+    return base64.b64encode(Path(path).read_bytes()).decode()
+
+with st.sidebar:
+    b64 = img_to_base64("assets/logo.png")
+    st.markdown(
+        f"""<img class="sidebar-logo-img" src="data:image/png;base64,{b64}" />""",
+        unsafe_allow_html=True,
+    )
+
+
 # ---------------- LOAD DOC ----------------
 DOC_PATH = Path("data/document.txt")
 
@@ -247,25 +257,10 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
 # ---------------- INIT ----------------
 llm, embedder, col = build_rag(DOCUMENT)
 
-# ---------------- STATE (simple chat sessions) ----------------
-if "chats" not in st.session_state:
-    st.session_state.chats = [{
-        "title": "New chat",
-        "messages": [{"role": "assistant", "content": "Hi! Ask me about the document."}]
-    }]
-if "active_chat" not in st.session_state:
-    st.session_state.active_chat = 0
-
-active = st.session_state.active_chat
-messages = st.session_state.chats[active]["messages"]
-
-
-# ---------------- SIDEBAR (logo only) ----------------
-with st.sidebar:
-    st.markdown('<div class="sidebar-logo">', unsafe_allow_html=True)
-    st.image("assets/logo.png", width=40)
-    st.markdown('</div>', unsafe_allow_html=True)
-
+# ---------------- CHAT STATE ----------------
+if "messages" not in st.session_state:
+    st.session_state.messages = [{"role": "assistant", "content": "Hi! Ask me about the document."}]
+messages = st.session_state.messages
 
 
 # ---------------- TOP BAR (main area) ----------------
@@ -300,13 +295,7 @@ if prompt:
 
     with st.chat_message("assistant"):
         with st.spinner("Thinking…"):
-            ans, retrieved_chunks = rag_answer(
-                llm, embedder, col, prompt, model_name=MODEL_NAME, top_k=TOP_K
-            )
+            ans, _ = rag_answer(llm, embedder, col, prompt, model_name=MODEL_NAME, top_k=TOP_K)
         st.markdown(ans)
-
-        if DEBUG:
-            with st.expander("Retrieved context"):
-                st.write(retrieved_chunks)
 
     messages.append({"role": "assistant", "content": ans})
