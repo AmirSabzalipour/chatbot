@@ -74,28 +74,31 @@ section[data-testid="stSidebar"] > div{
 /* ---- PRECISE LOGO + LINE (use wrapper) ---- */
 .sidebar-logo-box{
   position: absolute;
-  top: -100px;     /* ✅ change vertical position here (can be negative) */
-  left: 70px;   /* ✅ change horizontal position here */
+  top: 0px;     /* keep your current value (can be negative) */
+  left: 0px;    /* ✅ start from left edge of sidebar */
+  right: 0px;   /* ✅ extend to right edge of sidebar */
   z-index: 9999;
 }
 
 /* Logo image size */
 .sidebar-logo-img{
-  width: 40px;  /* ✅ logo size */
+  width: 40px;
   height: auto;
   display: block !important;
-  margin: 0 !important;
+  margin: 0 0 0 70px !important;  /* ✅ move logo right inside the box */
   padding: 0 !important;
 }
 
-/* Tiny line below the logo */
+
 .sidebar-logo-box::after{
   content: "";
   display: block;
-  margin-top: 8px;                /* gap below logo */
-  width: 300px;                    /* line length (match logo width) */
+  width: 100%;                    /* ✅ full sidebar width */
   height: 1px;
   background: rgba(0,0,0,0.15);
+
+  margin-top: 10px;               /* ✅ space above the line */
+  margin-bottom: 10px;            /* ✅ space below the line */
 }
 
 /* Full-width main content */
