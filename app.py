@@ -45,11 +45,31 @@ section[data-testid="stSidebar"] {
   border-right: 1px solid rgba(0,0,0,0.08);
 }
 
-/* Center main content column */
-.block-container {
-  max-width: 1200px;
+/* ✅ NEW: remove sidebar inner padding so content can touch the left edge */
+section[data-testid="stSidebar"] > div {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* ✅ NEW: force images in sidebar to have no left margin/padding */
+section[data-testid="stSidebar"] img {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  display: block;
+}
+
+/* ✅ NEW (optional): remove internal vertical block gaps in sidebar */
+section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
+  gap: 0 !important;
+}
+
+/* Full-width main content (override centered container) */
+.block-container{
+  max-width: 100% !important;
   padding-top: 0.6rem;
   padding-bottom: 7.5rem; /* leave room for sticky input */
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 /* Chat message spacing */
@@ -85,13 +105,15 @@ section[data-testid="stSidebar"] button { width: 100%; }
   padding: 0.65rem 0;
 }
 
+/* Make the topbar row span full width */
 .topbar-row{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  max-width:1050px;
+  max-width: 100% !important;
   margin:0 auto;
-  padding: 0 0.25rem;
+  padding-left: 24px !important;   /* breathing room */
+  padding-right: 24px !important;
 }
 
 .topbar-title{
@@ -115,6 +137,7 @@ section[data-testid="stSidebar"] button { width: 100%; }
   font-size: 0.95rem;
 }
 
+/* Keep link styling available (even if you removed Share) */
 .topbar-link{
   color:#111827;
   text-decoration:none;
@@ -122,20 +145,7 @@ section[data-testid="stSidebar"] button { width: 100%; }
 }
 .topbar-link:hover{ opacity:1; }
 
-.block-container{
-  max-width: 100% !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* 2) Make the topbar row span full width too */
-.topbar-row{
-  max-width: 100% !important;
-  padding-left: 24px !important;   /* keep some breathing room */
-  padding-right: 24px !important;
-}
-
-/* 3) Remove "card" styling (rounded corners / shadow / border) around main content */
+/* Remove "card" styling (rounded corners / shadow / border) around main content */
 div[data-testid="stAppViewContainer"] > .main,
 div[data-testid="stAppViewContainer"] > .main > div {
   background: transparent !important;
@@ -144,7 +154,7 @@ div[data-testid="stAppViewContainer"] > .main > div {
   border-radius: 0 !important;
 }
 
-/* 4) Ensure any containers inside don't add shadows/rounding */
+/* Ensure any containers inside don't add shadows/rounding */
 div[data-testid="stVerticalBlock"],
 div[data-testid="stVerticalBlock"] > div,
 div[data-testid="stBlock"] {
@@ -153,7 +163,7 @@ div[data-testid="stBlock"] {
   border: 0 !important;
 }
 
-/* 5) Optional: make chat input bar full width as well */
+/* Make chat input bar full width + no shadow */
 div[data-testid="stChatInput"]{
   left: 0;
   right: 0;
@@ -166,6 +176,7 @@ div[data-testid="stChatInput"]{
 """,
     unsafe_allow_html=True,
 )
+
 
 
 # ---------------- LOAD DOC ----------------
