@@ -74,8 +74,8 @@ section[data-testid="stSidebar"] > div{
 /* ---- PRECISE LOGO + LINE (use wrapper) ---- */
 .sidebar-logo-box{
   position: absolute;
-  top: 0px;     /* keep your current value (can be negative) */
-  left: 0px;    /* ✅ start from left edge of sidebar */
+  top:-100px;     /* keep your current value (can be negative) */
+  left: 70px;    /* ✅ start from left edge of sidebar */
   right: 0px;   /* ✅ extend to right edge of sidebar */
   z-index: 9999;
 }
