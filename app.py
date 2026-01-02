@@ -197,6 +197,11 @@ div[data-testid="stHeader"],
 header[data-testid="stHeader"]{
   display: none !important;
 }
+/* Catch icons rendered as header buttons */
+button[kind="headerNoPadding"],
+button[kind="header"]{
+  display: none !important;
+}
 </style>
 """,
     unsafe_allow_html=True,
