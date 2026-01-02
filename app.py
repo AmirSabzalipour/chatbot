@@ -16,24 +16,26 @@ st.set_page_config(page_title="Chatbot", layout="wide")
 # =========================
 # DEFAULTS
 # =========================
-# ✅ Together usually needs provider-prefixed model ids
 MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
 TOP_K = 5
 DEBUG = False
+
+# ✅ Control main discussion panel width here
+PANEL_WIDTH_PX = 820  # try 760 / 820 / 900
 
 
 # =========================
 # GLOBAL CSS (ChatGPT-like)
 # =========================
 st.markdown(
-    """
+    f"""
 <style>
 /* Hide Streamlit default chrome */
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
+#MainMenu {{visibility: hidden;}}
+footer {{visibility: hidden;}}
 
 /* App background like ChatGPT */
-.stApp { background: #f7f7f8; }
+.stApp {{ background: #f7f7f8; }}
 
 /* ---- Hide Streamlit top-right toolbars / icons ---- */
 div[data-testid="stToolbar"],
@@ -43,15 +45,15 @@ div[data-testid="stStatusWidget"],
 button[title="View fullscreen"],
 button[title="Open in new tab"],
 button[title="Settings"],
-button[title="Rerun"]{
+button[title="Rerun"]{{
   display: none !important;
-}
+}}
 
 /* Some versions render a header container */
 header[data-testid="stHeader"],
-div[data-testid="stHeader"]{
+div[data-testid="stHeader"]{{
   display: none !important;
-}
+}}
 
 /* Hide sidebar collapse/expand arrow button (different Streamlit versions) */
 button[data-testid="stSidebarCollapseButton"],
@@ -61,16 +63,16 @@ button[title="Collapse sidebar"],
 button[title="Expand sidebar"],
 button[aria-label="Close sidebar"],
 button[title="Close sidebar"],
-[data-testid="collapsedControl"]{
+[data-testid="collapsedControl"]{{
   display: none !important;
-}
+}}
 
 /* =========================
    SIDEBAR (logo only)
    ========================= */
 
 /* Sidebar width */
-section[data-testid="stSidebar"] {
+section[data-testid="stSidebar"] {{
   visibility: visible !important;
   transform: none !important;
 
@@ -82,49 +84,47 @@ section[data-testid="stSidebar"] {
   border-right: 1px solid rgba(0,0,0,0.08);
 
   padding: 0 !important;
-  position: relative !important;    /* needed for absolute logo positioning */
-  overflow: visible !important;     /* allow negative top if desired */
+  position: relative !important;
+  overflow: visible !important;
   background: #f7f7f8 !important;
-}
+}}
 
 /* Remove padding/margins inside sidebar wrappers */
-section[data-testid="stSidebar"] > div {
+section[data-testid="stSidebar"] > div {{
   padding: 0 !important;
   margin: 0 !important;
-}
-section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
+}}
+section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{{
   padding: 0 !important;
   margin: 0 !important;
   gap: 0 !important;
-}
+}}
 
 /* Reserve space so sidebar content wouldn't overlap the logo */
-section[data-testid="stSidebar"] > div{
+section[data-testid="stSidebar"] > div{{
   padding-top: 90px !important;
-}
+}}
 
 /* ---- PRECISE LOGO + FULL-WIDTH LINE ---- */
-.sidebar-logo-box{
+.sidebar-logo-box{{
   position: absolute;
-  top: 12px;      /* can be negative if you want */
+  top: 12px;
   left: 0px;
   right: 0px;
   z-index: 9999;
   padding: 0 !important;
   margin: 0 !important;
-}
+}}
 
-/* Logo image itself */
-.sidebar-logo-img{
+.sidebar-logo-img{{
   width: 44px;
   height: auto;
   display: block !important;
-  margin-left: 22px !important;   /* move logo horizontally */
-  margin-top: 0px !important;     /* move logo vertically */
-}
+  margin-left: 22px !important;
+  margin-top: 0px !important;
+}}
 
-/* Full-width divider line under the logo */
-.sidebar-logo-box::after{
+.sidebar-logo-box::after{{
   content: "";
   display: block;
   width: 100%;
@@ -132,12 +132,12 @@ section[data-testid="stSidebar"] > div{
   background: rgba(0,0,0,0.15);
   margin-top: 16px;
   margin-bottom: 12px;
-}
+}}
 
 /* =========================
    TOP BAR (main area)
    ========================= */
-.topbar{
+.topbar{{
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -146,17 +146,17 @@ section[data-testid="stSidebar"] > div{
   height: 56px;
   display: flex;
   align-items: center;
-}
+}}
 
-.topbar-row{
+.topbar-row{{
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 18px;
-}
+}}
 
-.topbar-left{
+.topbar-left{{
   display:flex;
   align-items:center;
   gap: 8px;
@@ -166,80 +166,78 @@ section[data-testid="stSidebar"] > div{
   line-height: 1;
   max-width: 70%;
   overflow: hidden;
-}
+}}
 
-.topbar-left .sub{
+.topbar-left .sub{{
   font-weight: 500;
   opacity: 0.65;
   font-size: 18px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
+}}
 
-.topbar-left .chev{
+.topbar-left .chev{{
   font-size: 14px;
   opacity: 0.65;
   transform: translateY(1px);
-}
+}}
 
-.topbar-right{
+.topbar-right{{
   display:flex;
   align-items:center;
   gap: 18px;
   font-size: 16px;
   color:#111827;
-}
+}}
 
-.topbar-more{
+.topbar-more{{
   font-size: 22px;
   opacity: 0.8;
   cursor: pointer;
-}
+}}
 
 /* =========================
-   MAIN PANEL (ChatGPT-like card)
+   MAIN DISCUSSION PANEL
    ========================= */
-.block-container{
-  max-width: 1100px !important;
-  margin: 18px auto 110px auto !important;
+.block-container{{
+  max-width: {PANEL_WIDTH_PX}px !important;   /* ✅ panel width control */
+  margin: 18px auto 110px auto !important;   /* keep centered */
   padding: 18px 22px 26px 22px !important;
 
   background: #ffffff !important;
   border: 1px solid rgba(0,0,0,0.08) !important;
   border-radius: 26px !important;
   box-shadow: 0 10px 28px rgba(0,0,0,0.08) !important;
-}
+}}
 
 /* Chat message spacing */
-div[data-testid="stChatMessage"]{
+div[data-testid="stChatMessage"]{{
   padding: 0.35rem 0 !important;
-}
+}}
 
 /* Floating/sticky input inside the panel */
-div[data-testid="stChatInput"]{
+div[data-testid="stChatInput"]{{
   position: sticky !important;
   bottom: 16px !important;
   z-index: 50 !important;
   background: transparent !important;
   border-top: 0 !important;
   padding: 0 !important;
-}
+}}
 
-/* Inner input wrapper becomes the rounded bar */
-div[data-testid="stChatInput"] > div{
+div[data-testid="stChatInput"] > div{{
   background: #ffffff !important;
   border: 1px solid rgba(0,0,0,0.10) !important;
   border-radius: 28px !important;
   box-shadow: 0 12px 30px rgba(0,0,0,0.10) !important;
   padding: 10px 14px !important;
-}
+}}
 
-/* Textarea itself */
-div[data-testid="stChatInput"] textarea{
+div[data-testid="stChatInput"] textarea{{
   border-radius: 20px !important;
   padding: 0.85rem 1rem !important;
-}
+}}
 </style>
 """,
     unsafe_allow_html=True,
@@ -247,7 +245,7 @@ div[data-testid="stChatInput"] textarea{
 
 
 # =========================
-# SIDEBAR (logo only, base64 HTML)
+# SIDEBAR (logo only)
 # =========================
 def img_to_base64(path: str) -> str:
     return base64.b64encode(Path(path).read_bytes()).decode()
@@ -323,29 +321,22 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
     chunks = res["documents"][0]
     ctx = "\n\n---\n\n".join(chunks)
 
-    # ✅ show actual error details if Together rejects the request
-    try:
-        r = llm.chat.completions.create(
-            model=model_name,
-            messages=[
-                {"role": "system", "content": "Answer ONLY using the provided context. If missing, say you don't know."},
-                {"role": "user", "content": f"Context:\n{ctx}\n\nQuestion: {query}\nAnswer:"},
-            ],
-            max_tokens=250,
-            temperature=0.2,
-        )
-        return r.choices[0].message.content, chunks
-    except Exception as e:
-        # This gives you the real reason (bad model name, permissions, etc.)
-        st.error(f"Together request failed.\n\nModel: {model_name}\n\nError: {repr(e)}")
-        raise
+    r = llm.chat.completions.create(
+        model=model_name,
+        messages=[
+            {"role": "system", "content": "Answer ONLY using the provided context. If missing, say you don't know."},
+            {"role": "user", "content": f"Context:\n{ctx}\n\nQuestion: {query}\nAnswer:"},
+        ],
+        max_tokens=250,
+        temperature=0.2,
+    )
+    return r.choices[0].message.content, chunks
 
 
 # =========================
 # INIT
 # =========================
 llm, embedder, col = build_rag(DOCUMENT)
-
 
 # =========================
 # CHAT STATE
@@ -356,7 +347,7 @@ messages = st.session_state.messages
 
 
 # =========================
-# TOP BAR (main area)
+# TOP BAR
 # =========================
 st.markdown(
     f"""
