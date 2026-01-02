@@ -51,7 +51,8 @@ section[data-testid="stSidebar"] {
   transition: none !important;
   border-right: 1px solid rgba(0,0,0,0.08);
   padding: 0 !important;
-  position: relative; /* IMPORTANT for absolute logo positioning */
+  position: relative; /* required for absolute logo positioning */
+  overflow: visible !important; /* allow negative top without clipping */
 }
 
 /* Remove padding/margins on sidebar inner wrappers */
@@ -65,25 +66,37 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
   gap: 0 !important;
 }
 
-/* Reserve space so nothing overlaps the logo (optional but recommended) */
+/* Reserve space so nothing overlaps the logo (adjust if needed) */
 section[data-testid="stSidebar"] > div{
-  padding-top: 70px !important; /* adjust if logo is taller */
+  padding-top: 70px !important;
 }
 
-/* ---- PRECISE LOGO POSITIONING ---- */
-.sidebar-logo-img{
+/* ---- PRECISE LOGO + LINE (use wrapper) ---- */
+.sidebar-logo-box{
   position: absolute;
-  top: -120px;     /* ✅ change vertical position here */
+  top: 0px;     /* ✅ change vertical position here (can be negative) */
   left: 70px;   /* ✅ change horizontal position here */
+  z-index: 9999;
+}
+
+/* Logo image size */
+.sidebar-logo-img{
   width: 40px;  /* ✅ logo size */
   height: auto;
-  z-index: 9999;
+  display: block !important;
   margin: 0 !important;
   padding: 0 !important;
-  display: block !important;
 }
 
-
+/* Tiny line below the logo */
+.sidebar-logo-box::after{
+  content: "";
+  display: block;
+  margin-top: 8px;                /* gap below logo */
+  width: 40px;                    /* line length (match logo width) */
+  height: 1px;
+  background: rgba(0,0,0,0.15);
+}
 
 /* Full-width main content */
 .block-container{
@@ -182,7 +195,11 @@ def img_to_base64(path: str) -> str:
 with st.sidebar:
     b64 = img_to_base64("assets/logo.png")
     st.markdown(
-        f"""<img class="sidebar-logo-img" src="data:image/png;base64,{b64}" />""",
+        f"""
+        <div class="sidebar-logo-box">
+          <img class="sidebar-logo-img" src="data:image/png;base64,{b64}" />
+        </div>
+        """,
         unsafe_allow_html=True,
     )
 
