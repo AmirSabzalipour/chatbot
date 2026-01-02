@@ -74,7 +74,7 @@ section[data-testid="stSidebar"] > div{
 /* ---- PRECISE LOGO + LINE (use wrapper) ---- */
 .sidebar-logo-box{
   position: absolute;
-  top: 0px;     /* ✅ change vertical position here (can be negative) */
+  top: -100px;     /* ✅ change vertical position here (can be negative) */
   left: 70px;   /* ✅ change horizontal position here */
   z-index: 9999;
 }
@@ -93,7 +93,7 @@ section[data-testid="stSidebar"] > div{
   content: "";
   display: block;
   margin-top: 8px;                /* gap below logo */
-  width: 40px;                    /* line length (match logo width) */
+  width: 200px;                    /* line length (match logo width) */
   height: 1px;
   background: rgba(0,0,0,0.15);
 }
