@@ -83,6 +83,17 @@ section[data-testid="stSidebar"] > div{
   display: block !important;
 }
 
+/* Tiny line below the logo */
+.sidebar-logo-img::after{
+  content: "";
+  position: absolute;
+  left: 0;              /* start under the logo's left edge */
+  top: calc(100% + 8px);/* distance below the logo */
+  width: 40px;          /* line length (set to your logo width) */
+  height: 1px;
+  background: rgba(0,0,0,0.15);
+}
+
 /* Full-width main content */
 .block-container{
   max-width: 100% !important;
