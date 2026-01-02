@@ -161,6 +161,12 @@ div[data-testid="stBlock"] {
   border-radius: 0 !important;
   border: 0 !important;
 }
+.sidebar-logo{
+  margin-left: 10px;  /* + moves right, - moves left */
+  margin-top: 10px;   /* + moves down, - moves up */
+  padding-left: 0px;
+  padding-top: 0px;
+}
 </style>
 """,
     unsafe_allow_html=True,
@@ -262,7 +268,9 @@ messages = st.session_state.chats[active]["messages"]
 # ---------------- SIDEBAR (logo + ChatGPT-like) ----------------
 with st.sidebar:
     # Logo flush-left (no centering columns)
+    st.markdown('<div class="sidebar-logo">', unsafe_allow_html=True)
     st.image("assets/logo.png", width=64)
+    st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown("### Chatbot")
     st.button("➕ New chat", on_click=new_chat)
