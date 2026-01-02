@@ -73,9 +73,9 @@ section[data-testid="stSidebar"] > div{
 /* ---- PRECISE LOGO POSITIONING ---- */
 .sidebar-logo-img{
   position: absolute;
-  top: -70px;     /* ✅ change vertical position here */
+  top: -100px;     /* ✅ change vertical position here */
   left: 70px;   /* ✅ change horizontal position here */
-  width: 60px;  /* ✅ logo size */
+  width: 40px;  /* ✅ logo size */
   height: auto;
   z-index: 9999;
   margin: 0 !important;
