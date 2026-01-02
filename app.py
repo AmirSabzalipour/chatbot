@@ -72,7 +72,7 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
 .sidebar-logo{
   position: absolute;
   top: 0px;   /* ⬅️ vertical position from top edge */
-  left: 20px;  /* ⬅️ horizontal position from left edge */
+  left: 70px;  /* ⬅️ horizontal position from left edge */
   z-index: 9999;
   padding: 0 !important;
   margin: 0 !important;
