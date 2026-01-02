@@ -75,7 +75,7 @@ section[data-testid="stSidebar"] > div{
 .sidebar-logo-box{
   position: absolute;
   top:-100px;     /* keep your current value (can be negative) */
-  left: 70px;    /* ✅ start from left edge of sidebar */
+  left: 0px;    /* ✅ start from left edge of sidebar */
   right: 0px;   /* ✅ extend to right edge of sidebar */
   z-index: 9999;
 }
@@ -96,8 +96,7 @@ section[data-testid="stSidebar"] > div{
   width: 100%;                    /* ✅ full sidebar width */
   height: 1px;
   background: rgba(0,0,0,0.15);
-
-  margin-top: 10px;               /* ✅ space above the line */
+  margin-top: 20px;               /* ✅ space above the line */
   margin-bottom: 10px;            /* ✅ space below the line */
 }
 
