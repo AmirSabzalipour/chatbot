@@ -38,9 +38,9 @@ button[title="Close sidebar"] {
 section[data-testid="stSidebar"] {
   visibility: visible !important;
   transform: none !important;
-  width: 200px !important;
-  min-width: 200px !important;
-  max-width: 200px !important;
+  width: 250px !important;
+  min-width: 250px !important;
+  max-width: 250px !important;
   transition: none !important;
   border-right: 1px solid rgba(0,0,0,0.08);
   padding: 0 !important; /* remove sidebar padding */
@@ -162,10 +162,10 @@ div[data-testid="stBlock"] {
   border: 0 !important;
 }
 .sidebar-logo{
-  margin-left: 0px;  /* + moves right, - moves left */
-  margin-top: 0px;   /* + moves down, - moves up */
-  padding-left: 0px;
-  padding-top: 0px;
+  margin-left: 20px;  /* + moves right, - moves left */
+  margin-top: 20px;   /* + moves down, - moves up */
+  padding-left: 20px;
+  padding-top: 20px;
 }
 </style>
 """,
