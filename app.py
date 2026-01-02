@@ -52,6 +52,11 @@ section[data-testid="stSidebar"] {
   padding: 0 !important;
 }
 
+section[data-testid="stSidebar"]{
+  position: relative;
+}
+
+
 /* Remove padding/margins on sidebar inner wrappers */
 section[data-testid="stSidebar"] > div {
   padding: 0 !important;
@@ -65,9 +70,12 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
 
 /* Logo wrapper position control (ONLY affects logo) */
 .sidebar-logo{
-  margin-left: 10px;  /* + right, - left */
-  margin-top: 10px;   /* + down, - up */
+  position: absolute;
+  top: 12px;   /* ⬅️ vertical position from top edge */
+  left: 10px;  /* ⬅️ horizontal position from left edge */
+  z-index: 9999;
   padding: 0 !important;
+  margin: 0 !important;
 }
 
 /* Ensure logo image has no extra spacing */
@@ -257,6 +265,7 @@ with st.sidebar:
     st.markdown('<div class="sidebar-logo">', unsafe_allow_html=True)
     st.image("assets/logo.png", width=40)
     st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 # ---------------- TOP BAR (main area) ----------------
