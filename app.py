@@ -48,8 +48,8 @@ section[data-testid="stSidebar"] {
 
 /* Remove padding/margins on sidebar inner wrappers */
 section[data-testid="stSidebar"] > div {
-  padding: 0 !important;
-  margin: 0 !important;
+  padding: 10 !important;
+  margin: 10 !important;
 }
 section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
   padding: 0 !important;
@@ -59,8 +59,8 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
 
 /* Force the logo image flush-left */
 .sidebar-logo-wrap{
-  margin-left: 0px;   /* + right, - left */
-  margin-top: 0px;    /* + down, - up */
+  margin-left: 10px;   /* + right, - left */
+  margin-top: -20px;    /* + down, - up */
   padding-left: 0px;
   padding-top: 0px;
 }
