@@ -21,7 +21,7 @@ TOP_K = 5
 DEBUG = False
 
 # ✅ Control main discussion panel width here
-PANEL_WIDTH_PX = 820  # try 760 / 820 / 900
+PANEL_WIDTH_PX = 700  # try 760 / 820 / 900
 
 
 # =========================
