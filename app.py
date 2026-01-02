@@ -184,6 +184,19 @@ div[data-testid="stAppViewContainer"] > .main > div {
   border: 0 !important;
   border-radius: 0 !important;
 }
+/* Hide Streamlit top-right toolbar (icons like the two arrows / fullscreen / open) */
+div[data-testid="stToolbar"],
+div[data-testid="stToolbarActions"],
+div[data-testid="stToolbarAction"],
+div[data-testid="stToolbarActionButton"]{
+  display: none !important;
+}
+
+/* Some Streamlit versions place these in the header wrapper */
+div[data-testid="stHeader"],
+header[data-testid="stHeader"]{
+  display: none !important;
+}
 </style>
 """,
     unsafe_allow_html=True,
