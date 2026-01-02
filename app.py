@@ -26,22 +26,34 @@ st.markdown(
 header {visibility: hidden;}
 footer {visibility: hidden;}
 
+/* Hide Streamlit native toolbar (two-arrows etc.) */
+div[data-testid="stToolbar"],
+div[data-testid="stToolbarActions"],
+div[data-testid="stToolbarAction"],
+div[data-testid="stToolbarActionButton"],
+div[data-testid="stHeader"],
+header[data-testid="stHeader"],
+button[kind="headerNoPadding"],
+button[kind="header"]{
+  display: none !important;
+}
+
 /* App background */
 .stApp { background: #f7f7f8; }
 
-/* Hide sidebar collapse/expand arrow button (different Streamlit versions) */
+/* Hide sidebar collapse/expand arrow button */
 button[data-testid="stSidebarCollapseButton"],
 button[aria-label="Collapse sidebar"],
 button[aria-label="Expand sidebar"],
 button[title="Collapse sidebar"],
 button[title="Expand sidebar"],
 button[aria-label="Close sidebar"],
-button[title="Close sidebar"] {
+button[title="Close sidebar"],
+[data-testid="collapsedControl"]{
   display: none !important;
 }
 
 /* Sidebar pinned open + width */
-[data-testid="collapsedControl"] { display: none !important; }
 section[data-testid="stSidebar"] {
   visibility: visible !important;
   transform: none !important;
@@ -51,7 +63,7 @@ section[data-testid="stSidebar"] {
   transition: none !important;
   border-right: 1px solid rgba(0,0,0,0.08);
   padding: 0 !important;
-  position: relative; /* required for absolute logo positioning */
+  position: relative;        /* for absolute positioning of logo box */
   overflow: visible !important; /* allow negative top without clipping */
 }
 
@@ -66,38 +78,38 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
   gap: 0 !important;
 }
 
-/* Reserve space so nothing overlaps the logo (adjust if needed) */
+/* Reserve space so nothing overlaps the logo+line (adjust if needed) */
 section[data-testid="stSidebar"] > div{
-  padding-top: 70px !important;
+  padding-top: 90px !important;
 }
 
-/* ---- PRECISE LOGO + LINE (use wrapper) ---- */
+/* ---- PRECISE LOGO + FULL-WIDTH DIVIDER ---- */
 .sidebar-logo-box{
   position: absolute;
-  top:-100px;     /* keep your current value (can be negative) */
-  left: 0px;    /* ✅ start from left edge of sidebar */
-  right: 0px;   /* ✅ extend to right edge of sidebar */
+  top: -100px;   /* ✅ can be negative */
+  left: 0;
+  right: 0;      /* ✅ full sidebar width */
   z-index: 9999;
 }
 
-/* Logo image size */
+/* Logo image position inside the full-width box */
 .sidebar-logo-img{
   width: 40px;
   height: auto;
   display: block !important;
-  margin: 0 0 0 70px !important;  /* ✅ move logo right inside the box */
+  margin: 0 0 0 70px !important; /* ✅ move logo horizontally */
   padding: 0 !important;
 }
 
-
+/* Full width divider line under logo with vertical spacing */
 .sidebar-logo-box::after{
   content: "";
   display: block;
-  width: 100%;                    /* ✅ full sidebar width */
+  width: 100%;                 /* ✅ from left edge to right edge */
   height: 1px;
   background: rgba(0,0,0,0.15);
-  margin-top: 20px;               /* ✅ space above the line */
-  margin-bottom: 10px;            /* ✅ space below the line */
+  margin-top: 20px;            /* space between logo and line */
+  margin-bottom: 12px;         /* space under the line */
 }
 
 /* Full-width main content */
@@ -135,47 +147,6 @@ div[data-testid="stChatInput"] textarea {
   padding: 0.85rem 1rem !important;
 }
 
-/* ---- Top bar (sticky) ---- */
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: #f7f7f8;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-  padding: 0.65rem 0;
-}
-
-.topbar-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  max-width: 100% !important;
-  margin:0 auto;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
-}
-
-.topbar-title{
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111827;
-  display:flex;
-  gap: 0.35rem;
-  align-items:center;
-}
-
-.topbar-sub{
-  font-weight: 500;
-  opacity: 0.65;
-}
-
-.topbar-actions{
-  display:flex;
-  gap: 0.6rem;
-  align-items:center;
-  font-size: 0.95rem;
-}
-
 /* Remove "card" styling around main content */
 div[data-testid="stAppViewContainer"] > .main,
 div[data-testid="stAppViewContainer"] > .main > div {
@@ -184,46 +155,19 @@ div[data-testid="stAppViewContainer"] > .main > div {
   border: 0 !important;
   border-radius: 0 !important;
 }
-/* Hide Streamlit top-right toolbar (icons like the two arrows / fullscreen / open) */
-div[data-testid="stToolbar"],
-div[data-testid="stToolbarActions"],
-div[data-testid="stToolbarAction"],
-div[data-testid="stToolbarActionButton"]{
-  display: none !important;
-}
 
-/* Some Streamlit versions place these in the header wrapper */
-div[data-testid="stHeader"],
-header[data-testid="stHeader"]{
-  display: none !important;
-}
-/* Catch icons rendered as header buttons */
-button[kind="headerNoPadding"],
-button[kind="header"]{
-  display: none !important;
-}
-
-/* Hide Streamlit's native top-right toolbar so only our bar remains */
-div[data-testid="stToolbar"],
-div[data-testid="stToolbarActions"],
-div[data-testid="stToolbarActionButton"],
-header[data-testid="stHeader"]{
-  display:none !important;
-}
-
-/* --- ChatGPT-like top header --- */
-.topbar {
+/* -------- ChatGPT-like TOP BAR -------- */
+.topbar{
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #ffffff;
+  background: #ffffff;                 /* ✅ white like ChatGPT */
   border-bottom: 1px solid rgba(0,0,0,0.10);
   height: 56px;
   display: flex;
   align-items: center;
 }
 
-/* full width row */
 .topbar-row{
   width: 100%;
   display:flex;
@@ -232,7 +176,7 @@ header[data-testid="stHeader"]{
   padding: 0 18px;
 }
 
-/* left group: "Chatbot 5.2 Thinking ▾" */
+/* left: title + model + chevron */
 .topbar-left{
   display:flex;
   align-items:center;
@@ -242,21 +186,18 @@ header[data-testid="stHeader"]{
   font-weight: 600;
   line-height: 1;
 }
-
 .topbar-left .sub{
   font-weight: 500;
   opacity: 0.65;
   font-size: 18px;
 }
-
-/* chevron */
 .topbar-left .chev{
   font-size: 14px;
   opacity: 0.65;
   transform: translateY(1px);
 }
 
-/* right group: share icon + Share + ⋯ */
+/* right: Share + dots */
 .topbar-right{
   display:flex;
   align-items:center;
@@ -264,8 +205,6 @@ header[data-testid="stHeader"]{
   font-size: 16px;
   color:#111827;
 }
-
-/* Share button (look like link) */
 .topbar-share{
   display:flex;
   align-items:center;
@@ -278,22 +217,11 @@ header[data-testid="stHeader"]{
 }
 .topbar-share:hover{ opacity: 1; }
 
-/* 3-dots */
 .topbar-more{
   font-size: 22px;
   opacity: 0.8;
   cursor: pointer;
 }
-
-/* make the main app background match ChatGPT-like header */
-.stApp { background: #f7f7f8; }
-
-
-
-
-
-
-
 </style>
 """,
     unsafe_allow_html=True,
@@ -399,12 +327,18 @@ st.markdown(
     f"""
 <div class="topbar">
   <div class="topbar-row">
-    <div class="topbar-title">
+    <div class="topbar-left">
       <span>Chatbot</span>
-      <span class="topbar-sub">{MODEL_NAME}</span>
+      <span class="sub">{MODEL_NAME}</span>
+      <span class="chev">▾</span>
     </div>
-    <div class="topbar-actions">
-      <span style="opacity:.6;">⋯</span>
+
+    <div class="topbar-right">
+      <a class="topbar-share" href="#" onclick="navigator.clipboard.writeText(window.location.href); return false;">
+        <span style="font-size:18px;">⤴︎</span>
+        <span>Share</span>
+      </a>
+      <span class="topbar-more">⋯</span>
     </div>
   </div>
 </div>
