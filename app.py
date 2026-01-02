@@ -10,6 +10,12 @@ from together import Together
 # ---------------- BASIC APP ----------------
 st.set_page_config(page_title="Chatbot", layout="wide")
 
+# ---------------- DEFAULTS (since sidebar controls are removed) ----------------
+MODEL_NAME = "Meta-Llama-3.1-8B-Instruct-Turbo"
+TOP_K = 5
+DEBUG = False
+
+
 # ---------------- GLOBAL CSS (ChatGPT-like) ----------------
 st.markdown(
     """
@@ -43,13 +49,13 @@ section[data-testid="stSidebar"] {
   max-width: 250px !important;
   transition: none !important;
   border-right: 1px solid rgba(0,0,0,0.08);
-  padding: 0 !important; /* remove sidebar padding */
+  padding: 0 !important;
 }
 
 /* Remove padding/margins on sidebar inner wrappers */
 section[data-testid="stSidebar"] > div {
-  padding: 10 !important;
-  margin: 10 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
   padding: 0 !important;
@@ -57,20 +63,25 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
   gap: 0 !important;
 }
 
-/* Force the logo image flush-left */
-.sidebar-logo-wrap{
-  margin-left: 10px;   /* + right, - left */
-  margin-top: -20px;    /* + down, - up */
-  padding-left: 0px;
-  padding-top: 0px;
+/* Logo wrapper position control (ONLY affects logo) */
+.sidebar-logo{
+  margin-left: 10px;  /* + right, - left */
+  margin-top: 10px;   /* + down, - up */
+  padding: 0 !important;
 }
 
+/* Ensure logo image has no extra spacing */
+.sidebar-logo img{
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
 /* Full-width main content */
 .block-container{
   max-width: 100% !important;
   padding-top: 0.6rem;
-  padding-bottom: 7.5rem; /* leave room for sticky input */
+  padding-bottom: 7.5rem;
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
@@ -78,7 +89,7 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
 /* Chat message spacing */
 div[data-testid="stChatMessage"] { padding: 0.35rem 0; }
 
-/* Sticky chat input bar (full width, no shadow) */
+/* Sticky chat input bar */
 div[data-testid="stChatInput"] {
   position: sticky;
   bottom: 0;
@@ -101,9 +112,6 @@ div[data-testid="stChatInput"] textarea {
   padding: 0.85rem 1rem !important;
 }
 
-/* Sidebar buttons full-width */
-section[data-testid="stSidebar"] button { width: 100%; }
-
 /* ---- Top bar (sticky) ---- */
 .topbar {
   position: sticky;
@@ -114,7 +122,6 @@ section[data-testid="stSidebar"] button { width: 100%; }
   padding: 0.65rem 0;
 }
 
-/* Full-width topbar row */
 .topbar-row{
   display:flex;
   align-items:center;
@@ -153,21 +160,6 @@ div[data-testid="stAppViewContainer"] > .main > div {
   box-shadow: none !important;
   border: 0 !important;
   border-radius: 0 !important;
-}
-
-/* Ensure any containers inside don't add shadows/rounding */
-div[data-testid="stVerticalBlock"],
-div[data-testid="stVerticalBlock"] > div,
-div[data-testid="stBlock"] {
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  border: 0 !important;
-}
-.sidebar-logo{
-  margin-left: 20px;  /* + moves right, - moves left */
-  margin-top: 20px;   /* + moves down, - moves up */
-  padding-left: 20px;
-  padding-top: 20px;
 }
 </style>
 """,
@@ -256,26 +248,18 @@ if "chats" not in st.session_state:
 if "active_chat" not in st.session_state:
     st.session_state.active_chat = 0
 
-def new_chat():
-    st.session_state.chats.insert(0, {
-        "title": "New chat",
-        "messages": [{"role": "assistant", "content": "Hi! Ask me about the document."}]
-    })
-    st.session_state.active_chat = 0
-
 active = st.session_state.active_chat
 messages = st.session_state.chats[active]["messages"]
 
 
-# ---------------- SIDEBAR (logo + ChatGPT-like) ----------------
+# ---------------- SIDEBAR (logo only) ----------------
 with st.sidebar:
-    # Logo flush-left (no centering columns)
     st.markdown('<div class="sidebar-logo">', unsafe_allow_html=True)
     st.image("assets/logo.png", width=40)
     st.markdown('</div>', unsafe_allow_html=True)
 
-  # ---------------- TOP BAR (main area) ----------------
-# Share removed (text + functionality)
+
+# ---------------- TOP BAR (main area) ----------------
 st.markdown(
     f"""
 <div class="topbar">
@@ -317,7 +301,3 @@ if prompt:
                 st.write(retrieved_chunks)
 
     messages.append({"role": "assistant", "content": ans})
-
-    # Update chat title after first user message
-    if st.session_state.chats[active]["title"] == "New chat":
-        st.session_state.chats[active]["title"] = prompt[:28] + ("…" if len(prompt) > 28 else "")
