@@ -139,8 +139,7 @@ section[data-testid="stSidebar"] > div{
    MAIN LAYOUT
    ========================= */
 
-/* IMPORTANT: do NOT make .block-container a card anymore.
-   Keep it transparent so the topbar is NOT inside any card. */
+/* Keep main transparent so topbar is NOT inside any card */
 .block-container{
   max-width: 100% !important;
   margin: 0 !important;
@@ -217,7 +216,6 @@ section[data-testid="stSidebar"] > div{
 
 /* =========================
    CHAT CARD (separate from topbar)
-   We style the container that "has" the anchor.
    ========================= */
 div[data-testid="stVerticalBlock"]:has(#chat-card-anchor) {
   max-width: 1100px !important;
@@ -233,10 +231,10 @@ div[data-testid="stVerticalBlock"]:has(#chat-card-anchor) {
 /* hide the anchor itself */
 #chat-card-anchor{ display:none; }
 
-/* Make the messages area scrollable with controlled height */
+/* Make messages area scrollable with controlled height */
 div[data-testid="stVerticalBlock"]:has(#chat-card-anchor) div[data-testid="stChatMessageContainer"],
 div[data-testid="stVerticalBlock"]:has(#chat-card-anchor) section[aria-label="Chat messages"]{
-  max-height: 45vh;          /* ✅ reduce/raise this to control middle panel height */
+  max-height: 45vh;   /* adjust to control middle panel height */
   overflow-y: auto;
   padding-right: 6px;
 }
@@ -246,8 +244,7 @@ div[data-testid="stChatMessage"]{
   padding: 0.35rem 0 !important;
 }
 
-/* Input bar should appear BELOW the card (like ChatGPT floating area),
-   but still visually attached. We'll style it as a separate pill. */
+/* Input: centered pill, sticky near bottom */
 div[data-testid="stChatInput"]{
   position: sticky !important;
   bottom: 18px !important;
@@ -256,7 +253,6 @@ div[data-testid="stChatInput"]{
   border-top: 0 !important;
   padding: 0 !important;
 
-  /* center the input and keep it narrower than topbar */
   max-width: 1100px !important;
   margin: 0 auto 20px auto !important;
 }
@@ -358,20 +354,16 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
     chunks = res["documents"][0]
     ctx = "\n\n---\n\n".join(chunks)
 
-    try:
-        r = llm.chat.completions.create(
-            model=model_name,
-            messages=[
-                {"role": "system", "content": "Answer ONLY using the provided context. If missing, say you don't know."},
-                {"role": "user", "content": f"Context:\n{ctx}\n\nQuestion: {query}\nAnswer:"},
-            ],
-            max_tokens=250,
-            temperature=0.2,
-        )
-        return r.choices[0].message.content, chunks
-    except Exception as e:
-        st.error(f"Together request failed.\n\nModel: {model_name}\n\nError: {repr(e)}")
-        raise
+    r = llm.chat.completions.create(
+        model=model_name,
+        messages=[
+            {"role": "system", "content": "Answer ONLY using the provided context. If missing, say you don't know."},
+            {"role": "user", "content": f"Context:\n{ctx}\n\nQuestion: {query}\nAnswer:"},
+        ],
+        max_tokens=250,
+        temperature=0.2,
+    )
+    return r.choices[0].message.content, chunks
 
 
 # =========================
@@ -381,15 +373,15 @@ llm, embedder, col = build_rag(DOCUMENT)
 
 
 # =========================
-# CHAT STATE
+# CHAT STATE  ✅ (NO DEFAULT MESSAGE)
 # =========================
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "Hi! Ask me about the document."}]
+    st.session_state.messages = []   # <-- no "Hi! Ask me ..." anymore
 messages = st.session_state.messages
 
 
 # =========================
-# TOP BAR (sticky, OUTSIDE card)
+# TOP BAR (sticky, outside card)
 # =========================
 st.markdown(
     f"""
@@ -411,10 +403,9 @@ st.markdown(
 
 
 # =========================
-# CHAT CARD (separate container)
+# CHAT CARD
 # =========================
 with st.container():
-    # anchor used by CSS :has() to apply card styling to this container
     st.markdown('<div id="chat-card-anchor"></div>', unsafe_allow_html=True)
 
     for m in messages:
@@ -423,7 +414,7 @@ with st.container():
 
 
 # =========================
-# INPUT (separate, sticky pill)
+# INPUT
 # =========================
 prompt = st.chat_input("Ask about the document…")
 if prompt:
