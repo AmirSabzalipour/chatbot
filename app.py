@@ -16,14 +16,13 @@ st.set_page_config(page_title="Chatbot", layout="wide")
 # =========================
 # DEFAULTS
 # =========================
-# ✅ Together usually needs provider-prefixed model ids
 MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
 TOP_K = 5
 DEBUG = False
 
 
 # =========================
-# GLOBAL CSS (ChatGPT-like)
+# GLOBAL CSS
 # =========================
 st.markdown(
     """
@@ -32,7 +31,7 @@ st.markdown(
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 
-/* App background like ChatGPT */
+/* App background */
 .stApp { background: #f7f7f8; }
 
 /* ---- Hide Streamlit top-right toolbars / icons ---- */
@@ -53,7 +52,7 @@ div[data-testid="stHeader"]{
   display: none !important;
 }
 
-/* Hide sidebar collapse/expand arrow button (different Streamlit versions) */
+/* Hide sidebar collapse/expand arrow button */
 button[data-testid="stSidebarCollapseButton"],
 button[aria-label="Collapse sidebar"],
 button[aria-label="Expand sidebar"],
@@ -65,11 +64,10 @@ button[title="Close sidebar"],
   display: none !important;
 }
 
+
 /* =========================
    SIDEBAR (logo only)
    ========================= */
-
-/* Sidebar width */
 section[data-testid="stSidebar"] {
   visibility: visible !important;
   transform: none !important;
@@ -82,8 +80,8 @@ section[data-testid="stSidebar"] {
   border-right: 1px solid rgba(0,0,0,0.08);
 
   padding: 0 !important;
-  position: relative !important;    /* needed for absolute logo positioning */
-  overflow: visible !important;     /* allow negative top if desired */
+  position: relative !important;
+  overflow: visible !important;
   background: #f7f7f8 !important;
 }
 
@@ -98,32 +96,34 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
   gap: 0 !important;
 }
 
-/* Reserve space so sidebar content wouldn't overlap the logo */
+/* Reserve space so sidebar content wouldn't overlap logo+line */
 section[data-testid="stSidebar"] > div{
   padding-top: 90px !important;
 }
 
-/* ---- PRECISE LOGO + FULL-WIDTH LINE ---- */
+/* Logo box spans full sidebar width */
 .sidebar-logo-box{
   position: absolute;
-  top: -130px;      /* can be negative if you want */
-  left: 0px;
-  right: 0px;
+  top: -100px;        /* can be negative */
+  left: 0px;          /* full width */
+  right: 0px;         /* full width */
   z-index: 9999;
   padding: 0 !important;
   margin: 0 !important;
 }
 
-/* Logo image itself */
+/* Logo image position is controlled here */
 .sidebar-logo-img{
-  width: 70px;
+  width: 44px;
   height: auto;
   display: block !important;
-  margin-left: 22px !important;   /* move logo horizontally */
-  margin-top: 0px !important;     /* move logo vertically */
+
+  /* move logo precisely */
+  margin-left: 78px !important;   /* horizontal */
+  margin-top: 0px !important;     /* vertical */
 }
 
-/* Full-width divider line under the logo */
+/* Full-width divider line under logo */
 .sidebar-logo-box::after{
   content: "";
   display: block;
@@ -134,13 +134,30 @@ section[data-testid="stSidebar"] > div{
   margin-bottom: 12px;
 }
 
+
 /* =========================
-   TOP BAR (main area)
+   MAIN LAYOUT
+   ========================= */
+
+/* IMPORTANT: do NOT make .block-container a card anymore.
+   Keep it transparent so the topbar is NOT inside any card. */
+.block-container{
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* =========================
+   TOP BAR (sticky, full width)
    ========================= */
 .topbar{
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 2000;
   background: #ffffff;
   border-bottom: 1px solid rgba(0,0,0,0.10);
   height: 56px;
@@ -153,7 +170,7 @@ section[data-testid="stSidebar"] > div{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10 18px;
+  padding: 0 18px;
 }
 
 .topbar-left{
@@ -197,13 +214,15 @@ section[data-testid="stSidebar"] > div{
   cursor: pointer;
 }
 
+
 /* =========================
-   MAIN PANEL (ChatGPT-like card)
+   CHAT CARD (separate from topbar)
+   We style the container that "has" the anchor.
    ========================= */
-.block-container{
+div[data-testid="stVerticalBlock"]:has(#chat-card-anchor) {
   max-width: 1100px !important;
-  margin: 18px auto 110px auto !important;
-  padding: 18px 22px 26px 22px !important;
+  margin: 18px auto 24px auto !important;
+  padding: 18px 22px 18px 22px !important;
 
   background: #ffffff !important;
   border: 1px solid rgba(0,0,0,0.08) !important;
@@ -211,22 +230,38 @@ section[data-testid="stSidebar"] > div{
   box-shadow: 0 10px 28px rgba(0,0,0,0.08) !important;
 }
 
-/* Chat message spacing */
+/* hide the anchor itself */
+#chat-card-anchor{ display:none; }
+
+/* Make the messages area scrollable with controlled height */
+div[data-testid="stVerticalBlock"]:has(#chat-card-anchor) div[data-testid="stChatMessageContainer"],
+div[data-testid="stVerticalBlock"]:has(#chat-card-anchor) section[aria-label="Chat messages"]{
+  max-height: 45vh;          /* ✅ reduce/raise this to control middle panel height */
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* chat message spacing */
 div[data-testid="stChatMessage"]{
   padding: 0.35rem 0 !important;
 }
 
-/* Floating/sticky input inside the panel */
+/* Input bar should appear BELOW the card (like ChatGPT floating area),
+   but still visually attached. We'll style it as a separate pill. */
 div[data-testid="stChatInput"]{
   position: sticky !important;
-  bottom: 16px !important;
-  z-index: 50 !important;
+  bottom: 18px !important;
+  z-index: 3000 !important;
   background: transparent !important;
   border-top: 0 !important;
   padding: 0 !important;
+
+  /* center the input and keep it narrower than topbar */
+  max-width: 1100px !important;
+  margin: 0 auto 20px auto !important;
 }
 
-/* Inner input wrapper becomes the rounded bar */
+/* Rounded input wrapper */
 div[data-testid="stChatInput"] > div{
   background: #ffffff !important;
   border: 1px solid rgba(0,0,0,0.10) !important;
@@ -247,7 +282,7 @@ div[data-testid="stChatInput"] textarea{
 
 
 # =========================
-# SIDEBAR (logo only, base64 HTML)
+# SIDEBAR (logo only, base64)
 # =========================
 def img_to_base64(path: str) -> str:
     return base64.b64encode(Path(path).read_bytes()).decode()
@@ -323,7 +358,6 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
     chunks = res["documents"][0]
     ctx = "\n\n---\n\n".join(chunks)
 
-    # ✅ show actual error details if Together rejects the request
     try:
         r = llm.chat.completions.create(
             model=model_name,
@@ -336,7 +370,6 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
         )
         return r.choices[0].message.content, chunks
     except Exception as e:
-        # This gives you the real reason (bad model name, permissions, etc.)
         st.error(f"Together request failed.\n\nModel: {model_name}\n\nError: {repr(e)}")
         raise
 
@@ -356,7 +389,7 @@ messages = st.session_state.messages
 
 
 # =========================
-# TOP BAR (main area)
+# TOP BAR (sticky, OUTSIDE card)
 # =========================
 st.markdown(
     f"""
@@ -378,15 +411,24 @@ st.markdown(
 
 
 # =========================
-# MAIN CHAT
+# CHAT CARD (separate container)
 # =========================
-for m in messages:
-    with st.chat_message(m["role"]):
-        st.markdown(m["content"])
+with st.container():
+    # anchor used by CSS :has() to apply card styling to this container
+    st.markdown('<div id="chat-card-anchor"></div>', unsafe_allow_html=True)
 
+    for m in messages:
+        with st.chat_message(m["role"]):
+            st.markdown(m["content"])
+
+
+# =========================
+# INPUT (separate, sticky pill)
+# =========================
 prompt = st.chat_input("Ask about the document…")
 if prompt:
     messages.append({"role": "user", "content": prompt})
+
     with st.chat_message("user"):
         st.markdown(prompt)
 
