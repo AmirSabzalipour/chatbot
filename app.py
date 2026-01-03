@@ -41,19 +41,17 @@ st.markdown(
 :root {{
   --sidebar-w: {SIDEBAR_W}px;
   --panel-w: {PANEL_W}px;
-  --topbar-h: 56px;
+  --panel-pad-x: 22px;
+  --panel-pad-y: 18px;
+  --panel-radius: 26px;
 }}
 
-/* Hide Streamlit default chrome */
+/* Hide Streamlit chrome */
 #MainMenu {{ visibility: hidden; }}
 footer {{ visibility: hidden; }}
-
-/* App background like ChatGPT */
 .stApp {{ background: #f7f7f8; }}
 
-/* -------------------------
-   Hide Streamlit toolbars / icons / badges
--------------------------- */
+/* Hide Streamlit toolbars/icons */
 div[data-testid="stToolbar"],
 div[data-testid="stToolbarActions"],
 div[data-testid="stToolbarActionButton"],
@@ -64,17 +62,6 @@ div[data-testid="stHeader"] {{
   display: none !important;
 }}
 
-/* Streamlit Cloud “Built with Streamlit / Fullscreen” badge (best-effort) */
-div[class*="viewerBadge"],
-div[class^="viewerBadge"],
-section[class*="viewerBadge"],
-section[class^="viewerBadge"] {{
-  display: none !important;
-}}
-
-/* -------------------------
-   Sidebar: pinned, logo only
--------------------------- */
 /* Hide sidebar collapse controls */
 button[data-testid="stSidebarCollapseButton"],
 button[aria-label="Collapse sidebar"],
@@ -87,7 +74,17 @@ button[title="Close sidebar"],
   display: none !important;
 }}
 
-/* Sidebar width + remove padding */
+/* Hide Streamlit Cloud badge (best-effort) */
+div[class*="viewerBadge"],
+div[class^="viewerBadge"],
+section[class*="viewerBadge"],
+section[class^="viewerBadge"] {{
+  display: none !important;
+}}
+
+/* =========================
+   SIDEBAR (logo only)
+========================= */
 section[data-testid="stSidebar"] {{
   visibility: visible !important;
   transform: none !important;
@@ -104,7 +101,6 @@ section[data-testid="stSidebar"] {{
   position: relative !important;
 }}
 
-/* Remove padding/margins inside sidebar wrappers */
 section[data-testid="stSidebar"] > div,
 section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {{
   padding: 0 !important;
@@ -112,71 +108,94 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {{
   gap: 0 !important;
 }}
 
-/* Sidebar header (logo + divider) */
 .sidebar-header {{
-  position: relative;
   width: 100%;
-  padding-top: 16px;     /* vertical control */
-  padding-bottom: 14px;  /* space to divider */
+  padding-top: 16px;
+  padding-bottom: 14px;
 }}
 
 .sidebar-logo {{
-  width: 44px;           /* logo size */
+  width: 44px;
   height: auto;
   display: block;
-  margin: 0 auto;        /* center logo horizontally */
+  margin: 0 auto;
 }}
 
-/* Full-width divider line under logo */
 .sidebar-divider {{
   width: 100%;
   height: 1px;
   background: rgba(0,0,0,0.15);
-  margin-top: 14px;      /* space above the line */
-  margin-bottom: 12px;   /* space below the line */
+  margin-top: 14px;
+  margin-bottom: 12px;
 }}
 
-/* -------------------------
-   Topbar: fixed header (NOT inside chat panel)
--------------------------- */
-.topbar {{
-  position: fixed;
+/* =========================
+   MAIN AREA LAYOUT
+========================= */
+section.main > div.block-container {{
+  max-width: 100% !important;
+  padding-top: 18px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 140px !important; /* room for fixed input pill */
+}}
+
+/* =========================
+   DISCUSSION PANEL (single card)
+========================= */
+/* This targets the single st.container(height=...) we use */
+div[data-testid="stContainer"] {{
+  max-width: var(--panel-w) !important;
+  margin: 18px auto 110px auto !important;
+
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-radius: var(--panel-radius) !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08) !important;
+
+  padding: var(--panel-pad-y) var(--panel-pad-x) !important;
+
+  /* important: make the container the scroll context */
+  position: relative !important;
+}}
+
+/* =========================
+   STICKY HEADER INSIDE PANEL ✅
+========================= */
+.panel-header {{
+  position: sticky;
   top: 0;
-  left: var(--sidebar-w);
-  right: 0;
-  height: var(--topbar-h);
-  z-index: 2000;
+  z-index: 50;
 
   background: #ffffff;
   border-bottom: 1px solid rgba(0,0,0,0.10);
 
-  display: flex;
-  align-items: center;
-}}
+  /* make it span full width inside the card (cancel padding) */
+  margin: calc(-1 * var(--panel-pad-y)) calc(-1 * var(--panel-pad-x)) 14px calc(-1 * var(--panel-pad-x));
+  padding: 14px var(--panel-pad-x);
 
-.topbar-row {{
-  width: 100%;
+  /* keep the top corners rounded */
+  border-top-left-radius: var(--panel-radius);
+  border-top-right-radius: var(--panel-radius);
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  padding: 0 18px;
 }}
 
-.topbar-left {{
+.panel-left {{
   display: flex;
   align-items: center;
   gap: 10px;
+  max-width: 85%;
+  overflow: hidden;
 
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   color: #111827;
-
-  max-width: 70%;
-  overflow: hidden;
 }}
 
-.topbar-left .sub {{
+.panel-left .sub {{
   font-size: 18px;
   font-weight: 500;
   opacity: 0.65;
@@ -186,58 +205,26 @@ section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {{
   white-space: nowrap;
 }}
 
-.topbar-left .chev {{
+.panel-left .chev {{
   font-size: 14px;
   opacity: 0.65;
   transform: translateY(1px);
 }}
 
-.topbar-right {{
-  display: flex;
-  align-items: center;
-}}
-
-.topbar-more {{
+.panel-right {{
   font-size: 22px;
   opacity: 0.8;
   cursor: pointer;
 }}
 
-/* -------------------------
-   Main layout spacing (account for fixed topbar & fixed input)
--------------------------- */
-section.main > div.block-container {{
-  max-width: 100% !important;
-  padding-top: calc(var(--topbar-h) + 18px) !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  padding-bottom: 140px !important; /* room for fixed input */
-}}
-
-/* -------------------------
-   Discussion panel (single scrollable container)
-   We style ALL st.container() blocks — so keep only ONE in main.
--------------------------- */
-div[data-testid="stContainer"] {{
-  max-width: var(--panel-w) !important;
-  margin: 0 auto !important;
-
-  background: #ffffff !important;
-  border: 1px solid rgba(0,0,0,0.08) !important;
-  border-radius: 26px !important;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.08) !important;
-
-  padding: 18px 22px !important;
-}}
-
-/* Reduce extra whitespace inside chat messages */
+/* Chat message spacing */
 div[data-testid="stChatMessage"] {{
   padding: 0.35rem 0 !important;
 }}
 
-/* -------------------------
-   Input: fixed bottom, centered, white background
--------------------------- */
+/* =========================
+   INPUT PILL (fixed bottom)
+========================= */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
   left: var(--sidebar-w) !important;
@@ -250,7 +237,7 @@ div[data-testid="stChatInput"] {{
   padding: 0 !important;
 }}
 
-/* The inner input "pill" */
+/* inner wrapper becomes pill */
 div[data-testid="stChatInput"] > div {{
   max-width: var(--panel-w) !important;
   margin: 0 auto !important;
@@ -263,7 +250,6 @@ div[data-testid="stChatInput"] > div {{
   padding: 10px 14px !important;
 }}
 
-/* Make the textarea area white */
 div[data-testid="stChatInput"] textarea {{
   background: #ffffff !important;
   border-radius: 20px !important;
@@ -289,28 +275,6 @@ with st.sidebar:
         """,
         unsafe_allow_html=True,
     )
-
-
-# =========================
-# TOP BAR (fixed header)
-# =========================
-st.markdown(
-    f"""
-<div class="topbar">
-  <div class="topbar-row">
-    <div class="topbar-left">
-      <span>Chatbot</span>
-      <span class="sub">{MODEL_NAME}</span>
-      <span class="chev">▾</span>
-    </div>
-    <div class="topbar-right">
-      <span class="topbar-more">⋯</span>
-    </div>
-  </div>
-</div>
-""",
-    unsafe_allow_html=True,
-)
 
 
 # =========================
@@ -393,7 +357,7 @@ llm, embedder, col = build_rag(DOCUMENT)
 
 
 # =========================
-# CHAT STATE (NO initial assistant message)
+# CHAT STATE (no initial message)
 # =========================
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -401,11 +365,25 @@ messages = st.session_state.messages
 
 
 # =========================
-# DISCUSSION PANEL (scrollable)
+# DISCUSSION PANEL (scrollable) + STICKY HEADER ✅
 # =========================
 chat_panel = st.container(height=CHAT_HEIGHT, border=False)
 
 with chat_panel:
+    st.markdown(
+        f"""
+        <div class="panel-header">
+          <div class="panel-left">
+            <span>Chatbot</span>
+            <span class="sub">{MODEL_NAME}</span>
+            <span class="chev">▾</span>
+          </div>
+          <div class="panel-right">⋯</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
     for m in messages:
         with st.chat_message(m["role"]):
             st.markdown(m["content"])
