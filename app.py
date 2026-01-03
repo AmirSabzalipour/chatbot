@@ -213,7 +213,7 @@ div[data-testid="stAppViewContainer"] > .main{
   max-width: 1100px !important;
 
   /* ✅ keep a small gap under topbar, not a huge one */
-  margin: 18px auto 110px auto !important;
+  margin: 0px auto 110px auto !important;
 
   padding: 18px 22px 26px 22px !important;
 
