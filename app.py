@@ -74,9 +74,9 @@ section[data-testid="stSidebar"] {
   visibility: visible !important;
   transform: none !important;
 
-  width: 250px !important;
-  min-width: 250px !important;
-  max-width: 250px !important;
+  width: 200px !important;
+  min-width: 200px !important;
+  max-width: 200px !important;
 
   transition: none !important;
   border-right: 1px solid rgba(0,0,0,0.08);
@@ -106,9 +106,9 @@ section[data-testid="stSidebar"] > div{
 /* ---- PRECISE LOGO + FULL-WIDTH LINE ---- */
 .sidebar-logo-box{
   position: absolute;
-  top: -80px;      /* can be negative if you want */
-  left: 0px;
-  right: 0px;
+  top: -100px;      /* can be negative if you want */
+  left: 80px;
+  right: 80px;
   z-index: 9999;
   padding: 0 !important;
   margin: 0 !important;
