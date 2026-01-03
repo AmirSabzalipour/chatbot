@@ -277,6 +277,11 @@ div[data-testid="stChatInput"] textarea{
   border-radius: 20px !important;
   padding: 0.85rem 1rem !important;
 }
+
+/* Make the whole chat-input pill white */
+div[data-testid="stChatInput"] > div{
+  background: #ffffff !important;
+}
 </style>
 """,
     unsafe_allow_html=True,
