@@ -195,34 +195,23 @@ section[data-testid="stSidebar"] > div {{
 
 /* -----------------------------
    MAIN QA PANEL: centered + narrower
-   AND the chat scrolls inside it.
+   Target the actual block-container that Streamlit creates
 -------------------------------- */
 
 /* Remove Streamlit default paddings so we can control layout */
 .block-container {{
   max-width: {PANEL_WIDTH_PX}px !important;
   margin: 78px auto 18px auto !important;  /* push below fixed topbar */
-  padding: 0 !important;
-}}
-
-/* Create a "panel card" look */
-.qa-panel {{
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 26px;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
-
-  height: calc(100vh - 56px - 78px - 18px); /* viewport - topbar - margin top - margin bottom */
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}}
-
-/* Scroll area (chat history) */
-.qa-scroll {{
-  flex: 1;
-  overflow-y: auto;
-  padding: 18px 22px 10px 22px;
+  padding: 22px !important;
+  
+  /* Make the block-container itself the white panel */
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-radius: 26px !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08) !important;
+  
+  height: calc(100vh - 56px - 78px - 18px) !important;
+  overflow-y: auto !important;
 }}
 
 /* Messages spacing */
@@ -230,18 +219,19 @@ div[data-testid="stChatMessage"] {{
   padding: 0.35rem 0 !important;
 }}
 
-/* Input area pinned INSIDE the panel at bottom */
-.qa-input {{
-  padding: 10px 18px 16px 18px;
-  background: transparent;
-}}
-
 /* Make the Streamlit chat input look like a rounded floating input */
 div[data-testid="stChatInput"] {{
-  position: static !important;
-  padding: 0 !important;
-  background: transparent !important;
+  position: sticky !important;
+  bottom: 0 !important;
+  padding: 16px 0 0 0 !important;
+  background: #ffffff !important;
   border-top: 0 !important;
+  margin-left: -22px !important;
+  margin-right: -22px !important;
+  padding-left: 22px !important;
+  padding-right: 22px !important;
+  margin-bottom: -22px !important;
+  padding-bottom: 22px !important;
 }}
 
 div[data-testid="stChatInput"] > div {{
@@ -391,25 +381,16 @@ st.markdown(
 
 
 # =========================
-# MAIN QA PANEL (scroll + input inside)
+# CHAT MESSAGES (no custom wrappers)
 # =========================
-panel_container = st.container()
+for m in messages:
+    with st.chat_message(m["role"]):
+        st.markdown(m["content"])
 
-with panel_container:
-    st.markdown('<div class="qa-panel"><div class="qa-scroll">', unsafe_allow_html=True)
-    
-    # Display all messages
-    for m in messages:
-        with st.chat_message(m["role"]):
-            st.markdown(m["content"])
-    
-    st.markdown('</div>', unsafe_allow_html=True)  # end qa-scroll
-    
-    # Input area at bottom inside panel
-    st.markdown('<div class="qa-input">', unsafe_allow_html=True)
-    prompt = st.chat_input("Ask about the document…")
-    st.markdown('</div></div>', unsafe_allow_html=True)  # end qa-input and qa-panel
-
+# =========================
+# CHAT INPUT (sticky at bottom)
+# =========================
+prompt = st.chat_input("Ask about the document…")
 
 if prompt:
     messages.append({"role": "user", "content": prompt})
