@@ -229,7 +229,7 @@ section[data-testid="stSidebar"] > div{
   padding: 18px 22px 18px 22px;
 
   /* fixed height so middle area doesn’t become huge */
-  height: calc(100vh - var(--topbar-h) - 60px);
+  height: calc(100vh - var(--topbar-h) - 100px);
   display: flex;
   flex-direction: column;
 }
