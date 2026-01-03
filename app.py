@@ -22,25 +22,17 @@ DEBUG = False
 
 
 # =========================
-# GLOBAL CSS
+# GLOBAL CSS (ChatGPT-like)
 # =========================
 st.markdown(
     """
 <style>
-:root{
-  --sidebar-w: 200px;            /* ✅ change sidebar width here */
-  --topbar-h: 56px;              /* ✅ header height */
-  --bg: #f7f7f8;
-  --card: #ffffff;
-  --border: rgba(0,0,0,0.10);
-}
-
 /* Hide Streamlit default chrome */
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 
 /* App background */
-.stApp { background: var(--bg); }
+.stApp { background: #f7f7f8; }
 
 /* ---- Hide Streamlit top-right toolbars / icons ---- */
 div[data-testid="stToolbar"],
@@ -72,17 +64,17 @@ button[title="Close sidebar"],
   display: none !important;
 }
 
-
 /* =========================
    SIDEBAR (logo only)
    ========================= */
+
 section[data-testid="stSidebar"] {
   visibility: visible !important;
   transform: none !important;
 
-  width: var(--sidebar-w) !important;
-  min-width: var(--sidebar-w) !important;
-  max-width: var(--sidebar-w) !important;
+  width: 200px !important;
+  min-width: 200px !important;
+  max-width: 200px !important;
 
   transition: none !important;
   border-right: 1px solid rgba(0,0,0,0.08);
@@ -90,45 +82,43 @@ section[data-testid="stSidebar"] {
   padding: 0 !important;
   position: relative !important;
   overflow: visible !important;
-  background: var(--bg) !important;
+  background: #f7f7f8 !important;
 }
 
-/* Remove padding/margins inside sidebar wrappers */
 section[data-testid="stSidebar"] > div {
   padding: 0 !important;
   margin: 0 !important;
 }
+
 section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
   padding: 0 !important;
   margin: 0 !important;
   gap: 0 !important;
 }
 
-/* Reserve space so sidebar content wouldn't overlap logo+line */
+/* reserve vertical space so logo doesn't overlap anything */
 section[data-testid="stSidebar"] > div{
   padding-top: 90px !important;
 }
 
-/* Logo box spans full sidebar width */
+/* Logo container */
 .sidebar-logo-box{
   position: absolute;
-  top: -100px;        /* can be negative */
-  left: 0px;
-  right: 0px;
+  top: -100px;      /* can be negative */
+  left: 0;
+  right: 0;
   z-index: 9999;
   padding: 0 !important;
   margin: 0 !important;
 }
 
-/* Logo image position control */
+/* Logo image */
 .sidebar-logo-img{
   width: 44px;
   height: auto;
   display: block !important;
-
-  /* ✅ control logo position precisely */
-  margin-left: 78px !important;   /* horizontal */
-  margin-top: 0px !important;     /* vertical */
+  margin-left: 78px !important;   /* <-- adjust X */
+  margin-top: 0px !important;     /* <-- adjust Y */
 }
 
 /* Full-width divider line under logo */
@@ -142,23 +132,31 @@ section[data-testid="stSidebar"] > div{
   margin-bottom: 12px;
 }
 
-
 /* =========================
-   TOP BAR (fixed, OUTSIDE chat card)
+   TOP BAR (fixed full width)
    ========================= */
 .topbar{
-  position: fixed;
+  position: fixed;     /* ✅ fixed so it DOES NOT live inside the card flow */
   top: 0;
-  left: var(--sidebar-w);
+  left: 0;
   right: 0;
-  z-index: 3000;
-  height: var(--topbar-h);
-  background: var(--card);
-  border-bottom: 1px solid var(--border);
+  z-index: 10000;
+
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.10);
+  height: 56px;
+
   display: flex;
   align-items: center;
 }
 
+/* push Streamlit main content below fixed bar */
+div[data-testid="stAppViewContainer"] > .main{
+  padding-top: 56px !important;   /* same as topbar height */
+  background: #f7f7f8 !important;
+}
+
+/* Topbar row */
 .topbar-row{
   width: 100%;
   display: flex;
@@ -180,9 +178,9 @@ section[data-testid="stSidebar"] > div{
 }
 
 .topbar-left .sub{
-  font-weight: 900;
-  opacity: 1;
-  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.65;
+  font-size: 18px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -208,43 +206,21 @@ section[data-testid="stSidebar"] > div{
   cursor: pointer;
 }
 
-
 /* =========================
-   MAIN AREA: ONLY ONE CHAT CARD
+   MAIN PANEL (card)
    ========================= */
-
-/* Make Streamlit main wrapper transparent (no outer card) */
 .block-container{
-  max-width: 100% !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-}
+  max-width: 1100px !important;
 
-/* Add spacing below fixed topbar */
-div[data-testid="stAppViewContainer"] .main{
-  padding-top: calc(var(--topbar-h) + 18px) !important;
-}
+  /* ✅ keep a small gap under topbar, not a huge one */
+  margin: 18px auto 110px auto !important;
 
-/* The single discussion card */
-.chat-card{
-  max-width: 1000px;
-  margin: 0 auto 26px auto;
-  background: var(--card);
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 26px;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
-  padding: 16px 18px 18px 18px;
-}
+  padding: 18px 22px 26px 22px !important;
 
-/* Scrollable messages area (controls middle panel height) */
-.chat-scroll{
-  max-height: 45vh;      /* ✅ reduce/increase height here */
-  overflow-y: auto;
-  padding-right: 6px;
-  margin-top: 8px;
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-radius: 26px !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08) !important;
 }
 
 /* Chat message spacing */
@@ -252,27 +228,26 @@ div[data-testid="stChatMessage"]{
   padding: 0.35rem 0 !important;
 }
 
-/* Input: sticky within card bottom */
+/* Chat input box: make wrapper white */
 div[data-testid="stChatInput"]{
   position: sticky !important;
-  bottom: 1px !important;
-  z-index: 2000 !important;
+  bottom: 16px !important;
+  z-index: 50 !important;
   background: transparent !important;
   border-top: 0 !important;
   padding: 0 !important;
-  margin-top: 14px !important;
 }
 
-/* Rounded input wrapper */
+/* Input rounded container */
 div[data-testid="stChatInput"] > div{
-  background: #ffffff !important;
+  background: #ffffff !important; /* ✅ white background */
   border: 1px solid rgba(0,0,0,0.10) !important;
   border-radius: 28px !important;
   box-shadow: 0 12px 30px rgba(0,0,0,0.10) !important;
   padding: 10px 14px !important;
 }
 
-/* Textarea */
+/* Textarea itself */
 div[data-testid="stChatInput"] textarea{
   border-radius: 20px !important;
   padding: 0.85rem 1rem !important;
@@ -284,7 +259,7 @@ div[data-testid="stChatInput"] textarea{
 
 
 # =========================
-# SIDEBAR (logo only, base64)
+# SIDEBAR (logo only, base64 HTML)
 # =========================
 def img_to_base64(path: str) -> str:
     return base64.b64encode(Path(path).read_bytes()).decode()
@@ -331,6 +306,7 @@ def chunk_text_words(text: str, chunk_size: int = 120, overlap: int = 30):
         start = max(end - overlap, start + 1)
     return chunks
 
+
 @st.cache_resource
 def build_rag(document_text: str):
     embedder = SentenceTransformer("all-MiniLM-L6-v2")
@@ -353,6 +329,7 @@ def build_rag(document_text: str):
 
     llm = Together(api_key=api_key)
     return llm, embedder, col
+
 
 def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
     q = embedder.encode([query], convert_to_numpy=True)[0]
@@ -379,15 +356,16 @@ llm, embedder, col = build_rag(DOCUMENT)
 
 
 # =========================
-# CHAT STATE (empty)
+# CHAT STATE
 # =========================
+# (No initial assistant banner message)
 if "messages" not in st.session_state:
     st.session_state.messages = []
 messages = st.session_state.messages
 
 
 # =========================
-# TOP BAR (fixed header)
+# TOP BAR (fixed, full width)
 # =========================
 st.markdown(
     f"""
@@ -409,16 +387,11 @@ st.markdown(
 
 
 # =========================
-# SINGLE CHAT CARD (ONLY ONE CONTAINER)
+# MAIN CHAT
 # =========================
-st.markdown('<div class="chat-card">', unsafe_allow_html=True)
-st.markdown('<div class="chat-scroll">', unsafe_allow_html=True)
-
 for m in messages:
     with st.chat_message(m["role"]):
         st.markdown(m["content"])
-
-st.markdown("</div>", unsafe_allow_html=True)  # close chat-scroll
 
 prompt = st.chat_input("Ask about the document…")
 if prompt:
@@ -432,5 +405,3 @@ if prompt:
         st.markdown(ans)
 
     messages.append({"role": "assistant", "content": ans})
-
-st.markdown("</div>", unsafe_allow_html=True)  # close chat-card
