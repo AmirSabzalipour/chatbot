@@ -1,0 +1,430 @@
+import base64
+from pathlib import Path
+
+import chromadb
+import streamlit as st
+from sentence_transformers import SentenceTransformer
+from together import Together
+
+
+# =========================
+# BASIC APP
+# =========================
+st.set_page_config(page_title="Chatbot", layout="wide")
+
+
+# =========================
+# DEFAULTS
+# =========================
+MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
+TOP_K = 5
+DEBUG = False
+
+SIDEBAR_W = 200          # px
+PANEL_W = 760            # px (discussion panel width)
+CHAT_HEIGHT = 520        # px (middle panel height)
+
+
+# =========================
+# HELPERS
+# =========================
+def img_to_base64(path: str) -> str:
+    return base64.b64encode(Path(path).read_bytes()).decode()
+
+
+# =========================
+# GLOBAL CSS
+# =========================
+st.markdown(
+    f"""
+<style>
+:root {{
+  --sidebar-w: {SIDEBAR_W}px;
+  --panel-w: {PANEL_W}px;
+  --topbar-h: 56px;
+}}
+
+/* Hide Streamlit default chrome */
+#MainMenu {{ visibility: hidden; }}
+footer {{ visibility: hidden; }}
+
+/* App background like ChatGPT */
+.stApp {{ background: #f7f7f8; }}
+
+/* -------------------------
+   Hide Streamlit toolbars / icons / badges
+-------------------------- */
+div[data-testid="stToolbar"],
+div[data-testid="stToolbarActions"],
+div[data-testid="stToolbarActionButton"],
+div[data-testid="stStatusWidget"],
+div[data-testid="stDecoration"],
+header[data-testid="stHeader"],
+div[data-testid="stHeader"] {{
+  display: none !important;
+}}
+
+/* Streamlit Cloud “Built with Streamlit” / Fullscreen badge (best-effort) */
+div[class*="viewerBadge"],
+div[class^="viewerBadge"],
+section[class*="viewerBadge"],
+section[class^="viewerBadge"] {{
+  display: none !important;
+}}
+
+/* -------------------------
+   Sidebar: pinned, logo only
+-------------------------- */
+/* Hide sidebar collapse controls */
+button[data-testid="stSidebarCollapseButton"],
+button[aria-label="Collapse sidebar"],
+button[aria-label="Expand sidebar"],
+button[title="Collapse sidebar"],
+button[title="Expand sidebar"],
+button[aria-label="Close sidebar"],
+button[title="Close sidebar"],
+[data-testid="collapsedControl"] {{
+  display: none !important;
+}}
+
+/* Sidebar width + remove padding */
+section[data-testid="stSidebar"] {{
+  visibility: visible !important;
+  transform: none !important;
+
+  width: var(--sidebar-w) !important;
+  min-width: var(--sidebar-w) !important;
+  max-width: var(--sidebar-w) !important;
+
+  border-right: 1px solid rgba(0,0,0,0.08);
+  background: #f7f7f8 !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative !important;
+}}
+
+/* Remove padding/margins inside sidebar wrappers */
+section[data-testid="stSidebar"] > div,
+section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {{
+  padding: 0 !important;
+  margin: 0 !important;
+  gap: 0 !important;
+}}
+
+/* Sidebar header (logo + divider) */
+.sidebar-header {{
+  position: relative;
+  width: 100%;
+  padding-top: 16px;     /* vertical control */
+  padding-bottom: 14px;  /* space to divider */
+}}
+
+.sidebar-logo {{
+  width: 44px;           /* logo size */
+  height: auto;
+  display: block;
+  margin: 0 auto;        /* center logo horizontally */
+}}
+
+/* Full-width divider line under logo */
+.sidebar-divider {{
+  width: 100%;
+  height: 1px;
+  background: rgba(0,0,0,0.15);
+  margin-top: 14px;      /* space above the line */
+  margin-bottom: 12px;   /* space below the line */
+}}
+
+/* -------------------------
+   Topbar: fixed header (NOT inside chat panel)
+-------------------------- */
+.topbar {{
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-w);
+  right: 0;
+  height: var(--topbar-h);
+  z-index: 2000;
+
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.10);
+
+  display: flex;
+  align-items: center;
+}}
+
+.topbar-row {{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 18px;
+}}
+
+.topbar-left {{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+
+  max-width: 70%;
+  overflow: hidden;
+}}
+
+.topbar-left .sub {{
+  font-size: 18px;
+  font-weight: 500;
+  opacity: 0.65;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}}
+
+.topbar-left .chev {{
+  font-size: 14px;
+  opacity: 0.65;
+  transform: translateY(1px);
+}}
+
+.topbar-right {{
+  display: flex;
+  align-items: center;
+}}
+
+.topbar-more {{
+  font-size: 22px;
+  opacity: 0.8;
+  cursor: pointer;
+}}
+
+/* -------------------------
+   Main layout spacing (account for fixed topbar & fixed input)
+-------------------------- */
+section.main > div.block-container {{
+  max-width: 100% !important;
+  padding-top: calc(var(--topbar-h) + 18px) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 140px !important; /* room for fixed input */
+}}
+
+/* -------------------------
+   Discussion panel (single scrollable container)
+   We style ALL st.container() blocks — so keep only ONE in main.
+-------------------------- */
+div[data-testid="stContainer"] {{
+  max-width: var(--panel-w) !important;
+  margin: 0 auto !important;
+
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-radius: 26px !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08) !important;
+
+  padding: 18px 22px !important;
+}}
+
+/* Reduce extra whitespace inside chat messages */
+div[data-testid="stChatMessage"] {{
+  padding: 0.35rem 0 !important;
+}}
+
+/* -------------------------
+   Input: fixed bottom, centered, white background
+-------------------------- */
+div[data-testid="stChatInput"] {{
+  position: fixed !important;
+  left: var(--sidebar-w) !important;
+  right: 0 !important;
+  bottom: 18px !important;
+  z-index: 3000 !important;
+
+  background: transparent !important;
+  border-top: 0 !important;
+  padding: 0 !important;
+}}
+
+/* The inner input "pill" */
+div[data-testid="stChatInput"] > div {{
+  max-width: var(--panel-w) !important;
+  margin: 0 auto !important;
+
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.10) !important;
+  border-radius: 28px !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.10) !important;
+
+  padding: 10px 14px !important;
+}}
+
+/* Make the textarea area white */
+div[data-testid="stChatInput"] textarea {{
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  padding: 0.85rem 1rem !important;
+}}
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
+
+# =========================
+# SIDEBAR (logo only)
+# =========================
+with st.sidebar:
+    b64 = img_to_base64("assets/logo.png")
+    st.markdown(
+        f"""
+        <div class="sidebar-header">
+          <img class="sidebar-logo" src="data:image/png;base64,{b64}" />
+          <div class="sidebar-divider"></div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+# =========================
+# TOP BAR (fixed header)
+# =========================
+st.markdown(
+    f"""
+<div class="topbar">
+  <div class="topbar-row">
+    <div class="topbar-left">
+      <span>Chatbot</span>
+      <span class="sub">{MODEL_NAME}</span>
+      <span class="chev">▾</span>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-more">⋯</span>
+    </div>
+  </div>
+</div>
+""",
+    unsafe_allow_html=True,
+)
+
+
+# =========================
+# LOAD DOC
+# =========================
+DOC_PATH = Path("data/document.txt")
+
+@st.cache_data
+def load_document(path: str) -> str:
+    p = Path(path)
+    if not p.exists():
+        return ""
+    return p.read_text(encoding="utf-8").strip()
+
+DOCUMENT = load_document(str(DOC_PATH))
+if not DOCUMENT:
+    st.error("Document not found. Please add your file at: data/document.txt")
+    st.stop()
+
+
+# =========================
+# RAG HELPERS
+# =========================
+def chunk_text_words(text: str, chunk_size: int = 120, overlap: int = 30):
+    words = text.split()
+    chunks, start = [], 0
+    while start < len(words):
+        end = min(len(words), start + chunk_size)
+        chunks.append(" ".join(words[start:end]))
+        start = max(end - overlap, start + 1)
+    return chunks
+
+
+@st.cache_resource
+def build_rag(document_text: str):
+    embedder = SentenceTransformer("all-MiniLM-L6-v2")
+
+    chunks = chunk_text_words(document_text, 120, 30)
+    embs = embedder.encode(chunks, convert_to_numpy=True)
+
+    db = chromadb.Client()
+    col = db.get_or_create_collection("rag", metadata={"hnsw:space": "cosine"})
+    col.add(
+        ids=[str(i) for i in range(len(chunks))],
+        documents=chunks,
+        embeddings=embs.tolist(),
+    )
+
+    api_key = st.secrets.get("TOGETHER_API_KEY", "")
+    if not api_key:
+        st.error("Missing TOGETHER_API_KEY in Streamlit secrets.")
+        st.stop()
+
+    llm = Together(api_key=api_key)
+    return llm, embedder, col
+
+
+def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
+    q = embedder.encode([query], convert_to_numpy=True)[0]
+    res = col.query(query_embeddings=[q], n_results=top_k)
+    chunks = res["documents"][0]
+    ctx = "\n\n---\n\n".join(chunks)
+
+    r = llm.chat.completions.create(
+        model=model_name,
+        messages=[
+            {"role": "system", "content": "Answer ONLY using the provided context. If missing, say you don't know."},
+            {"role": "user", "content": f"Context:\n{ctx}\n\nQuestion: {query}\nAnswer:"},
+        ],
+        max_tokens=250,
+        temperature=0.2,
+    )
+    return r.choices[0].message.content, chunks
+
+
+# =========================
+# INIT
+# =========================
+llm, embedder, col = build_rag(DOCUMENT)
+
+
+# =========================
+# CHAT STATE (NO initial “Ask me about the document” message)
+# =========================
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+messages = st.session_state.messages
+
+
+# =========================
+# DISCUSSION PANEL (scrollable)
+# =========================
+chat_panel = st.container(height=CHAT_HEIGHT, border=False)
+
+with chat_panel:
+    for m in messages:
+        with st.chat_message(m["role"]):
+            st.markdown(m["content"])
+
+
+# =========================
+# INPUT (fixed bottom)
+# =========================
+prompt = st.chat_input("Ask about the document…")
+if prompt:
+    messages.append({"role": "user", "content": prompt})
+    with chat_panel:
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        with st.chat_message("assistant"):
+            with st.spinner("Thinking…"):
+                ans, _ = rag_answer(llm, embedder, col, prompt, model_name=MODEL_NAME, top_k=TOP_K)
+            st.markdown(ans)
+
+        messages.append({"role": "assistant", "content": ans})
+"""
