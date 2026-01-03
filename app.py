@@ -27,12 +27,20 @@ DEBUG = False
 st.markdown(
     """
 <style>
+:root{
+  --sidebar-w: 200px;            /* ✅ change sidebar width here */
+  --topbar-h: 56px;              /* ✅ header height */
+  --bg: #f7f7f8;
+  --card: #ffffff;
+  --border: rgba(0,0,0,0.10);
+}
+
 /* Hide Streamlit default chrome */
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 
 /* App background */
-.stApp { background: #f7f7f8; }
+.stApp { background: var(--bg); }
 
 /* ---- Hide Streamlit top-right toolbars / icons ---- */
 div[data-testid="stToolbar"],
@@ -72,9 +80,9 @@ section[data-testid="stSidebar"] {
   visibility: visible !important;
   transform: none !important;
 
-  width: 200px !important;
-  min-width: 200px !important;
-  max-width: 200px !important;
+  width: var(--sidebar-w) !important;
+  min-width: var(--sidebar-w) !important;
+  max-width: var(--sidebar-w) !important;
 
   transition: none !important;
   border-right: 1px solid rgba(0,0,0,0.08);
@@ -82,7 +90,7 @@ section[data-testid="stSidebar"] {
   padding: 0 !important;
   position: relative !important;
   overflow: visible !important;
-  background: #f7f7f8 !important;
+  background: var(--bg) !important;
 }
 
 /* Remove padding/margins inside sidebar wrappers */
@@ -105,20 +113,20 @@ section[data-testid="stSidebar"] > div{
 .sidebar-logo-box{
   position: absolute;
   top: -100px;        /* can be negative */
-  left: 0px;          /* full width */
-  right: 0px;         /* full width */
+  left: 0px;
+  right: 0px;
   z-index: 9999;
   padding: 0 !important;
   margin: 0 !important;
 }
 
-/* Logo image position is controlled here */
+/* Logo image position control */
 .sidebar-logo-img{
   width: 44px;
   height: auto;
   display: block !important;
 
-  /* move logo precisely */
+  /* ✅ control logo position precisely */
   margin-left: 78px !important;   /* horizontal */
   margin-top: 0px !important;     /* vertical */
 }
@@ -136,30 +144,17 @@ section[data-testid="stSidebar"] > div{
 
 
 /* =========================
-   MAIN LAYOUT
-   ========================= */
-
-/* Keep main transparent so topbar is NOT inside any card */
-.block-container{
-  max-width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}
-
-/* =========================
-   TOP BAR (sticky, full width)
+   TOP BAR (fixed, OUTSIDE chat card)
    ========================= */
 .topbar{
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 2000;
-  background: #ffffff;
-  border-bottom: 1px solid rgba(0,0,0,0.10);
-  height: 56px;
+  left: var(--sidebar-w);
+  right: 0;
+  z-index: 3000;
+  height: var(--topbar-h);
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
 }
@@ -215,46 +210,57 @@ section[data-testid="stSidebar"] > div{
 
 
 /* =========================
-   CHAT CARD (separate from topbar)
+   MAIN AREA: ONLY ONE CHAT CARD
    ========================= */
-div[data-testid="stVerticalBlock"]:has(#chat-card-anchor) {
-  max-width: 1100px !important;
-  margin: 18px auto 24px auto !important;
-  padding: 18px 22px 18px 22px !important;
 
-  background: #ffffff !important;
-  border: 1px solid rgba(0,0,0,0.08) !important;
-  border-radius: 26px !important;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.08) !important;
+/* Make Streamlit main wrapper transparent (no outer card) */
+.block-container{
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
-/* hide the anchor itself */
-#chat-card-anchor{ display:none; }
+/* Add spacing below fixed topbar */
+div[data-testid="stAppViewContainer"] .main{
+  padding-top: calc(var(--topbar-h) + 18px) !important;
+}
 
-/* Make messages area scrollable with controlled height */
-div[data-testid="stVerticalBlock"]:has(#chat-card-anchor) div[data-testid="stChatMessageContainer"],
-div[data-testid="stVerticalBlock"]:has(#chat-card-anchor) section[aria-label="Chat messages"]{
-  max-height: 45vh;   /* adjust to control middle panel height */
+/* The single discussion card */
+.chat-card{
+  max-width: 1000px;
+  margin: 0 auto 26px auto;
+  background: var(--card);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 26px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  padding: 16px 18px 18px 18px;
+}
+
+/* Scrollable messages area (controls middle panel height) */
+.chat-scroll{
+  max-height: 45vh;      /* ✅ reduce/increase height here */
   overflow-y: auto;
   padding-right: 6px;
+  margin-top: 8px;
 }
 
-/* chat message spacing */
+/* Chat message spacing */
 div[data-testid="stChatMessage"]{
   padding: 0.35rem 0 !important;
 }
 
-/* Input: centered pill, sticky near bottom */
+/* Input: sticky within card bottom */
 div[data-testid="stChatInput"]{
   position: sticky !important;
-  bottom: 18px !important;
-  z-index: 3000 !important;
+  bottom: 16px !important;
+  z-index: 2000 !important;
   background: transparent !important;
   border-top: 0 !important;
   padding: 0 !important;
-
-  max-width: 1100px !important;
-  margin: 0 auto 20px auto !important;
+  margin-top: 14px !important;
 }
 
 /* Rounded input wrapper */
@@ -266,7 +272,7 @@ div[data-testid="stChatInput"] > div{
   padding: 10px 14px !important;
 }
 
-/* Textarea itself */
+/* Textarea */
 div[data-testid="stChatInput"] textarea{
   border-radius: 20px !important;
   padding: 0.85rem 1rem !important;
@@ -373,15 +379,15 @@ llm, embedder, col = build_rag(DOCUMENT)
 
 
 # =========================
-# CHAT STATE  ✅ (NO DEFAULT MESSAGE)
+# CHAT STATE (empty)
 # =========================
 if "messages" not in st.session_state:
-    st.session_state.messages = []   # <-- no "Hi! Ask me ..." anymore
+    st.session_state.messages = []
 messages = st.session_state.messages
 
 
 # =========================
-# TOP BAR (sticky, outside card)
+# TOP BAR (fixed header)
 # =========================
 st.markdown(
     f"""
@@ -403,23 +409,20 @@ st.markdown(
 
 
 # =========================
-# CHAT CARD
+# SINGLE CHAT CARD (ONLY ONE CONTAINER)
 # =========================
-with st.container():
-    st.markdown('<div id="chat-card-anchor"></div>', unsafe_allow_html=True)
+st.markdown('<div class="chat-card">', unsafe_allow_html=True)
+st.markdown('<div class="chat-scroll">', unsafe_allow_html=True)
 
-    for m in messages:
-        with st.chat_message(m["role"]):
-            st.markdown(m["content"])
+for m in messages:
+    with st.chat_message(m["role"]):
+        st.markdown(m["content"])
 
+st.markdown("</div>", unsafe_allow_html=True)  # close chat-scroll
 
-# =========================
-# INPUT
-# =========================
 prompt = st.chat_input("Ask about the document…")
 if prompt:
     messages.append({"role": "user", "content": prompt})
-
     with st.chat_message("user"):
         st.markdown(prompt)
 
@@ -429,3 +432,5 @@ if prompt:
         st.markdown(ans)
 
     messages.append({"role": "assistant", "content": ans})
+
+st.markdown("</div>", unsafe_allow_html=True)  # close chat-card
