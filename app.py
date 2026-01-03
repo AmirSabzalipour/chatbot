@@ -27,6 +27,9 @@ PANEL_WIDTH_PX = 860  # try 760 / 820 / 900
 # =========================
 # GLOBAL CSS (layout exactly as requested)
 # =========================
+# =========================
+# GLOBAL CSS (layout exactly as requested)
+# =========================
 st.markdown(
     f"""
 <style>
@@ -131,11 +134,11 @@ section[data-testid="stSidebar"] > div {{
 }}
 
 /* -----------------------------
-   TOP BANNER: full width, fixed
+   TOP BANNER: sticky at top
 -------------------------------- */
 .topbar {{
-  position: fixed;      /* fixed so it stays on top always */
-  top: 0;
+  position: sticky !important;     /* sticky so it scrolls with content but stays at top */
+  top: 0 !important;
   left: 0;
   right: 0;
   z-index: 2000;
@@ -146,6 +149,7 @@ section[data-testid="stSidebar"] > div {{
 
   display: flex;
   align-items: center;
+  margin-bottom: 18px;  /* space between topbar and chat panel */
 }}
 
 .topbar-row {{
@@ -201,7 +205,7 @@ section[data-testid="stSidebar"] > div {{
 /* Remove Streamlit default paddings so we can control layout */
 .block-container {{
   max-width: {PANEL_WIDTH_PX}px !important;
-  margin: 78px auto 18px auto !important;  /* push below fixed topbar */
+  margin: 0 auto 18px auto !important;  /* no top margin since topbar has margin-bottom */
   padding: 22px !important;
   
   /* Make the block-container itself the white panel */
@@ -210,7 +214,7 @@ section[data-testid="stSidebar"] > div {{
   border-radius: 26px !important;
   box-shadow: 0 10px 28px rgba(0,0,0,0.08) !important;
   
-  height: calc(100vh - 56px - 78px - 18px) !important;
+  height: calc(100vh - 56px - 18px - 18px) !important;
   overflow-y: auto !important;
 }}
 
@@ -250,7 +254,6 @@ div[data-testid="stChatInput"] textarea {{
 """,
     unsafe_allow_html=True,
 )
-
 
 # =========================
 # SIDEBAR (logo only)
