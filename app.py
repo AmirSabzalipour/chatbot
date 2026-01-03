@@ -106,7 +106,7 @@ section[data-testid="stSidebar"] > div{
 /* ---- PRECISE LOGO + FULL-WIDTH LINE ---- */
 .sidebar-logo-box{
   position: absolute;
-  top: -100px;      /* can be negative if you want */
+  top: -130px;      /* can be negative if you want */
   left: 80px;
   right: 80px;
   z-index: 9999;
@@ -116,7 +116,7 @@ section[data-testid="stSidebar"] > div{
 
 /* Logo image itself */
 .sidebar-logo-img{
-  width: 44px;
+  width: 70px;
   height: auto;
   display: block !important;
   margin-left: 22px !important;   /* move logo horizontally */
@@ -153,7 +153,7 @@ section[data-testid="stSidebar"] > div{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 18px;
+  padding: 10 18px;
 }
 
 .topbar-left{
