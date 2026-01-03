@@ -27,9 +27,6 @@ PANEL_WIDTH_PX = 860  # try 760 / 820 / 900
 # =========================
 # GLOBAL CSS (layout exactly as requested)
 # =========================
-# =========================
-# GLOBAL CSS (layout exactly as requested)
-# =========================
 st.markdown(
     f"""
 <style>
@@ -87,9 +84,12 @@ section[data-testid="stSidebar"] {{
   border-right: 1px solid rgba(0,0,0,0.08);
   padding: 0 !important;
 
-  position: relative !important;
+  position: fixed !important;
   overflow: visible !important;
   background: #f7f7f8 !important;
+  height: 100vh !important;
+  top: 0 !important;
+  left: 0 !important;
 }}
 
 section[data-testid="stSidebar"] > div {{
@@ -110,7 +110,7 @@ section[data-testid="stSidebar"] > div {{
 /* Logo + line (full width) */
 .sidebar-logo-box {{
   position: absolute;
-  top: 14px;     /* <- adjust logo vertical position */
+  top: 14px;
   left: 0;
   right: 0;
   z-index: 9999;
@@ -120,7 +120,7 @@ section[data-testid="stSidebar"] > div {{
   width: 44px;
   height: auto;
   display: block;
-  margin-left: 22px;  /* <- adjust logo horizontal position */
+  margin-left: 22px;
 }}
 
 .sidebar-logo-box::after {{
@@ -129,18 +129,18 @@ section[data-testid="stSidebar"] > div {{
   width: 100%;
   height: 1px;
   background: rgba(0,0,0,0.15);
-  margin-top: 16px;   /* space above line */
-  margin-bottom: 12px;/* space below line */
+  margin-top: 16px;
+  margin-bottom: 12px;
 }}
 
 /* -----------------------------
-   TOP BANNER: sticky at top
+   TOP BANNER: fixed at top
 -------------------------------- */
 .topbar {{
-  position: sticky !important;     /* sticky so it scrolls with content but stays at top */
+  position: fixed !important;
   top: 0 !important;
-  left: 0;
-  right: 0;
+  left: 250px !important;  /* offset by sidebar width */
+  right: 0 !important;
   z-index: 2000;
   height: 56px;
 
@@ -149,20 +149,19 @@ section[data-testid="stSidebar"] > div {{
 
   display: flex;
   align-items: center;
-  margin-bottom: 18px;  /* space between topbar and chat panel */
 }}
 
 .topbar-row {{
   width: 100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 0 18px;
 }}
 
 .topbar-left {{
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   gap: 8px;
   font-size: 18px;
   font-weight: 600;
@@ -186,8 +185,8 @@ section[data-testid="stSidebar"] > div {{
 }}
 
 .topbar-right {{
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   gap: 16px;
 }}
 
@@ -198,14 +197,19 @@ section[data-testid="stSidebar"] > div {{
 }}
 
 /* -----------------------------
-   MAIN QA PANEL: centered + narrower
-   Target the actual block-container that Streamlit creates
+   MAIN CONTENT: offset by sidebar and topbar
 -------------------------------- */
+.main .block-container {{
+  padding-left: 250px !important;  /* offset by sidebar */
+  padding-top: 74px !important;     /* offset by topbar + spacing */
+}}
 
-/* Remove Streamlit default paddings so we can control layout */
+/* -----------------------------
+   MAIN QA PANEL: centered + narrower
+-------------------------------- */
 .block-container {{
-  max-width: {PANEL_WIDTH_PX}px !important;
-  margin: 0 auto 18px auto !important;  /* no top margin since topbar has margin-bottom */
+  max-width: calc({PANEL_WIDTH_PX}px + 250px) !important;  /* panel width + sidebar */
+  margin: 0 auto !important;
   padding: 22px !important;
   
   /* Make the block-container itself the white panel */
@@ -214,7 +218,7 @@ section[data-testid="stSidebar"] > div {{
   border-radius: 26px !important;
   box-shadow: 0 10px 28px rgba(0,0,0,0.08) !important;
   
-  height: calc(100vh - 56px - 18px - 18px) !important;
+  height: calc(100vh - 74px - 18px) !important;
   overflow-y: auto !important;
 }}
 
@@ -254,6 +258,7 @@ div[data-testid="stChatInput"] textarea {{
 """,
     unsafe_allow_html=True,
 )
+
 
 # =========================
 # SIDEBAR (logo only)
