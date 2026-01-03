@@ -180,9 +180,9 @@ section[data-testid="stSidebar"] > div{
 }
 
 .topbar-left .sub{
-  font-weight: 500;
-  opacity: 0.65;
-  font-size: 18px;
+  font-weight: 900;
+  opacity: 1;
+  font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
