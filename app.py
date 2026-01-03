@@ -64,7 +64,7 @@ div[data-testid="stHeader"] {{
   display: none !important;
 }}
 
-/* Streamlit Cloud “Built with Streamlit” / Fullscreen badge (best-effort) */
+/* Streamlit Cloud “Built with Streamlit / Fullscreen” badge (best-effort) */
 div[class*="viewerBadge"],
 div[class^="viewerBadge"],
 section[class*="viewerBadge"],
@@ -393,7 +393,7 @@ llm, embedder, col = build_rag(DOCUMENT)
 
 
 # =========================
-# CHAT STATE (NO initial “Ask me about the document” message)
+# CHAT STATE (NO initial assistant message)
 # =========================
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -417,6 +417,7 @@ with chat_panel:
 prompt = st.chat_input("Ask about the document…")
 if prompt:
     messages.append({"role": "user", "content": prompt})
+
     with chat_panel:
         with st.chat_message("user"):
             st.markdown(prompt)
@@ -427,4 +428,3 @@ if prompt:
             st.markdown(ans)
 
         messages.append({"role": "assistant", "content": ans})
-"""
