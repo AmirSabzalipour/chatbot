@@ -255,7 +255,7 @@ div[data-testid="stChatMessage"]{
 /* Input: sticky within card bottom */
 div[data-testid="stChatInput"]{
   position: sticky !important;
-  bottom: 16px !important;
+  bottom: 1px !important;
   z-index: 2000 !important;
   background: transparent !important;
   border-top: 0 !important;
