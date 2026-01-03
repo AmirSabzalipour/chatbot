@@ -267,9 +267,9 @@ div[data-testid="stChatInput"]{
 div[data-testid="stChatInput"] > div{
   background: #ffffff !important;
   border: 1px solid rgba(0,0,0,0.10) !important;
-  border-radius: 20px !important;
-  box-shadow: 0 3px 3px rgba(0,0,0,0.10) !important;
-  padding: 5px 5px !important;
+  border-radius: 28px !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.10) !important;
+  padding: 10px 14px !important;
 }
 
 /* Textarea */
@@ -277,7 +277,6 @@ div[data-testid="stChatInput"] textarea{
   border-radius: 20px !important;
   padding: 0.85rem 1rem !important;
 }
-
 </style>
 """,
     unsafe_allow_html=True,
