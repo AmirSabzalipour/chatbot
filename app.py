@@ -16,43 +16,51 @@ st.set_page_config(page_title="Chatbot", layout="wide")
 # =========================
 # DEFAULTS
 # =========================
-MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
+MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"  # Together model id
 TOP_K = 5
 DEBUG = False
 
+# ✅ Control the width of the scrollable QA panel (smaller than the full-width top banner)
+PANEL_WIDTH_PX = 860  # try 760 / 820 / 900
+
 
 # =========================
-# GLOBAL CSS
+# GLOBAL CSS (layout exactly as requested)
 # =========================
 st.markdown(
-    """
+    f"""
 <style>
-/* Hide Streamlit default chrome */
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
+/* Hide Streamlit chrome */
+#MainMenu {{visibility: hidden;}}
+footer {{visibility: hidden;}}
+header {{visibility: hidden;}}
 
-/* App background */
-.stApp { background: #f7f7f8; }
+/* Background */
+.stApp {{ background: #f7f7f8; }}
 
-/* ---- Hide Streamlit top-right toolbars / icons ---- */
+/* -----------------------------
+   Hide Streamlit toolbar/icons
+-------------------------------- */
 div[data-testid="stToolbar"],
 div[data-testid="stToolbarActions"],
 div[data-testid="stToolbarActionButton"],
 div[data-testid="stStatusWidget"],
+header[data-testid="stHeader"],
+div[data-testid="stHeader"] {{
+  display: none !important;
+}}
+
+/* Try to hide extra floating buttons some versions show */
 button[title="View fullscreen"],
 button[title="Open in new tab"],
-button[title="Settings"],
-button[title="Rerun"]{
+button[title="Rerun"],
+button[title="Settings"] {{
   display: none !important;
-}
+}}
 
-/* Some versions render a header container */
-header[data-testid="stHeader"],
-div[data-testid="stHeader"]{
-  display: none !important;
-}
-
-/* Hide sidebar collapse/expand arrow button */
+/* -----------------------------
+   Sidebar: fixed width + no collapse arrows
+-------------------------------- */
 button[data-testid="stSidebarCollapseButton"],
 button[aria-label="Collapse sidebar"],
 button[aria-label="Expand sidebar"],
@@ -60,221 +68,194 @@ button[title="Collapse sidebar"],
 button[title="Expand sidebar"],
 button[aria-label="Close sidebar"],
 button[title="Close sidebar"],
-[data-testid="collapsedControl"]{
+[data-testid="collapsedControl"] {{
   display: none !important;
-}
+}}
 
-
-/* =========================
-   SIDEBAR (logo only)
-   ========================= */
-section[data-testid="stSidebar"] {
+section[data-testid="stSidebar"] {{
   visibility: visible !important;
   transform: none !important;
 
-  width: 200px !important;
-  min-width: 200px !important;
-  max-width: 200px !important;
+  width: 250px !important;
+  min-width: 250px !important;
+  max-width: 250px !important;
 
   transition: none !important;
   border-right: 1px solid rgba(0,0,0,0.08);
-
   padding: 0 !important;
+
   position: relative !important;
   overflow: visible !important;
   background: #f7f7f8 !important;
-}
+}}
 
-/* Remove padding/margins inside sidebar wrappers */
-section[data-testid="stSidebar"] > div {
+section[data-testid="stSidebar"] > div {{
   padding: 0 !important;
   margin: 0 !important;
-}
-section[data-testid="stSidebar"] [data-testid="stVerticalBlock"]{
+}}
+section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {{
   padding: 0 !important;
   margin: 0 !important;
   gap: 0 !important;
-}
+}}
 
-/* Reserve space so sidebar content wouldn't overlap logo+line */
-section[data-testid="stSidebar"] > div{
-  padding-top: 90px !important;
-}
+/* Reserve space for logo block */
+section[data-testid="stSidebar"] > div {{
+  padding-top: 92px !important;
+}}
 
-/* Logo box spans full sidebar width */
-.sidebar-logo-box{
+/* Logo + line (full width) */
+.sidebar-logo-box {{
   position: absolute;
-  top: -100px;        /* can be negative */
-  left: 0px;          /* full width */
-  right: 0px;         /* full width */
+  top: 14px;     /* <- adjust logo vertical position */
+  left: 0;
+  right: 0;
   z-index: 9999;
-  padding: 0 !important;
-  margin: 0 !important;
-}
+}}
 
-/* Logo image position is controlled here */
-.sidebar-logo-img{
+.sidebar-logo-img {{
   width: 44px;
   height: auto;
-  display: block !important;
+  display: block;
+  margin-left: 22px;  /* <- adjust logo horizontal position */
+}}
 
-  /* move logo precisely */
-  margin-left: 78px !important;   /* horizontal */
-  margin-top: 0px !important;     /* vertical */
-}
-
-/* Full-width divider line under logo */
-.sidebar-logo-box::after{
+.sidebar-logo-box::after {{
   content: "";
   display: block;
   width: 100%;
   height: 1px;
   background: rgba(0,0,0,0.15);
-  margin-top: 16px;
-  margin-bottom: 12px;
-}
+  margin-top: 16px;   /* space above line */
+  margin-bottom: 12px;/* space below line */
+}}
 
-
-/* =========================
-   MAIN LAYOUT
-   ========================= */
-
-/* IMPORTANT: do NOT make .block-container a card anymore.
-   Keep it transparent so the topbar is NOT inside any card. */
-.block-container{
-  max-width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}
-
-/* =========================
-   TOP BAR (sticky, full width)
-   ========================= */
-.topbar{
-  position: sticky;
+/* -----------------------------
+   TOP BANNER: full width, fixed
+-------------------------------- */
+.topbar {{
+  position: fixed;      /* fixed so it stays on top always */
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 2000;
+  height: 56px;
+
   background: #ffffff;
   border-bottom: 1px solid rgba(0,0,0,0.10);
-  height: 56px;
+
   display: flex;
   align-items: center;
-}
+}}
 
-.topbar-row{
+.topbar-row {{
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   padding: 0 18px;
-}
+}}
 
-.topbar-left{
+.topbar-left {{
   display:flex;
   align-items:center;
   gap: 8px;
-  color: #111827;
   font-size: 18px;
   font-weight: 600;
-  line-height: 1;
-  max-width: 70%;
+  color: #111827;
+  max-width: 75%;
   overflow: hidden;
-}
+}}
 
-.topbar-left .sub{
+.topbar-left .sub {{
   font-weight: 500;
   opacity: 0.65;
-  font-size: 18px;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-}
+}}
 
-.topbar-left .chev{
+.topbar-left .chev {{
   font-size: 14px;
   opacity: 0.65;
   transform: translateY(1px);
-}
+}}
 
-.topbar-right{
+.topbar-right {{
   display:flex;
   align-items:center;
-  gap: 18px;
-  font-size: 16px;
-  color:#111827;
-}
+  gap: 16px;
+}}
 
-.topbar-more{
+.topbar-more {{
   font-size: 22px;
   opacity: 0.8;
   cursor: pointer;
-}
+}}
 
+/* -----------------------------
+   MAIN QA PANEL: centered + narrower
+   AND the chat scrolls inside it.
+-------------------------------- */
 
-/* =========================
-   CHAT CARD (separate from topbar)
-   We style the container that "has" the anchor.
-   ========================= */
-div[data-testid="stVerticalBlock"]:has(#chat-card-anchor) {
-  max-width: 1100px !important;
-  margin: 18px auto 24px auto !important;
-  padding: 18px 22px 18px 22px !important;
+/* Remove Streamlit default paddings so we can control layout */
+.block-container {{
+  max-width: {PANEL_WIDTH_PX}px !important;
+  margin: 78px auto 18px auto !important;  /* push below fixed topbar */
+  padding: 0 !important;
+}}
 
-  background: #ffffff !important;
-  border: 1px solid rgba(0,0,0,0.08) !important;
-  border-radius: 26px !important;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.08) !important;
-}
+/* Create a "panel card" look */
+.qa-panel {{
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 26px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
 
-/* hide the anchor itself */
-#chat-card-anchor{ display:none; }
+  height: calc(100vh - 56px - 78px - 18px); /* viewport - topbar - margin top - margin bottom */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}}
 
-/* Make the messages area scrollable with controlled height */
-div[data-testid="stVerticalBlock"]:has(#chat-card-anchor) div[data-testid="stChatMessageContainer"],
-div[data-testid="stVerticalBlock"]:has(#chat-card-anchor) section[aria-label="Chat messages"]{
-  max-height: 45vh;          /* ✅ reduce/raise this to control middle panel height */
+/* Scroll area (chat history) */
+.qa-scroll {{
+  flex: 1;
   overflow-y: auto;
-  padding-right: 6px;
-}
+  padding: 18px 22px 10px 22px;
+}}
 
-/* chat message spacing */
-div[data-testid="stChatMessage"]{
+/* Messages spacing */
+div[data-testid="stChatMessage"] {{
   padding: 0.35rem 0 !important;
-}
+}}
 
-/* Input bar should appear BELOW the card (like ChatGPT floating area),
-   but still visually attached. We'll style it as a separate pill. */
-div[data-testid="stChatInput"]{
-  position: sticky !important;
-  bottom: 18px !important;
-  z-index: 3000 !important;
+/* Input area pinned INSIDE the panel at bottom */
+.qa-input {{
+  padding: 10px 18px 16px 18px;
+  background: transparent;
+}}
+
+/* Make the Streamlit chat input look like a rounded floating input */
+div[data-testid="stChatInput"] {{
+  position: static !important;
+  padding: 0 !important;
   background: transparent !important;
   border-top: 0 !important;
-  padding: 0 !important;
+}}
 
-  /* center the input and keep it narrower than topbar */
-  max-width: 1100px !important;
-  margin: 0 auto 20px auto !important;
-}
-
-/* Rounded input wrapper */
-div[data-testid="stChatInput"] > div{
+div[data-testid="stChatInput"] > div {{
   background: #ffffff !important;
   border: 1px solid rgba(0,0,0,0.10) !important;
   border-radius: 28px !important;
   box-shadow: 0 12px 30px rgba(0,0,0,0.10) !important;
   padding: 10px 14px !important;
-}
+}}
 
-/* Textarea itself */
-div[data-testid="stChatInput"] textarea{
+div[data-testid="stChatInput"] textarea {{
   border-radius: 20px !important;
   padding: 0.85rem 1rem !important;
-}
+}}
 </style>
 """,
     unsafe_allow_html=True,
@@ -282,7 +263,7 @@ div[data-testid="stChatInput"] textarea{
 
 
 # =========================
-# SIDEBAR (logo only, base64)
+# SIDEBAR (logo only)
 # =========================
 def img_to_base64(path: str) -> str:
     return base64.b64encode(Path(path).read_bytes()).decode()
@@ -370,15 +351,14 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
         )
         return r.choices[0].message.content, chunks
     except Exception as e:
-        st.error(f"Together request failed.\n\nModel: {model_name}\n\nError: {repr(e)}")
-        raise
+        # Prevent the whole app crashing; show short error
+        return f"⚠️ Model request failed: {e}", chunks
 
 
 # =========================
 # INIT
 # =========================
 llm, embedder, col = build_rag(DOCUMENT)
-
 
 # =========================
 # CHAT STATE
@@ -389,7 +369,7 @@ messages = st.session_state.messages
 
 
 # =========================
-# TOP BAR (sticky, OUTSIDE card)
+# TOP BAR (full width banner)
 # =========================
 st.markdown(
     f"""
@@ -411,30 +391,42 @@ st.markdown(
 
 
 # =========================
-# CHAT CARD (separate container)
+# MAIN QA PANEL (scroll + input inside)
 # =========================
-with st.container():
-    # anchor used by CSS :has() to apply card styling to this container
-    st.markdown('<div id="chat-card-anchor"></div>', unsafe_allow_html=True)
+st.markdown('<div class="qa-panel">', unsafe_allow_html=True)
 
-    for m in messages:
-        with st.chat_message(m["role"]):
-            st.markdown(m["content"])
+# Scrollable chat history area
+st.markdown('<div class="qa-scroll">', unsafe_allow_html=True)
 
+for m in messages:
+    with st.chat_message(m["role"]):
+        st.markdown(m["content"])
 
-# =========================
-# INPUT (separate, sticky pill)
-# =========================
+st.markdown('</div>', unsafe_allow_html=True)  # end qa-scroll
+
+# Input area at bottom inside panel
+st.markdown('<div class="qa-input">', unsafe_allow_html=True)
+
 prompt = st.chat_input("Ask about the document…")
+st.markdown('</div>', unsafe_allow_html=True)  # end qa-input
+st.markdown('</div>', unsafe_allow_html=True)  # end qa-panel
+
+
 if prompt:
     messages.append({"role": "user", "content": prompt})
 
+    # Re-render user message immediately (Streamlit will show it anyway after rerun)
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
         with st.spinner("Thinking…"):
-            ans, _ = rag_answer(llm, embedder, col, prompt, model_name=MODEL_NAME, top_k=TOP_K)
+            ans, retrieved = rag_answer(llm, embedder, col, prompt, model_name=MODEL_NAME, top_k=TOP_K)
         st.markdown(ans)
 
+        if DEBUG:
+            with st.expander("Retrieved context"):
+                st.write(retrieved)
+
     messages.append({"role": "assistant", "content": ans})
+    st.rerun()
