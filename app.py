@@ -21,12 +21,12 @@ DEBUG = False
 
 # Layout controls
 LEFT_PANEL_WIDTH_PX = 320   # left panel outer width (due to border-box)
-OUTER_GAP_PX = 0          # gap from browser edges
+OUTER_GAP_PX = 40          # gap from browser edges
 PANEL_GAP_PX = 10           # white space BETWEEN left and right panels
 RIGHT_PANEL_MAX_WIDTH_PX = 600
 
 # Internal paddings
-PANEL_PADDING_PX = 22
+PANEL_PADDING_PX = 40
 MAIN_PADDING_PX = 22
 
 # Heights
@@ -35,7 +35,7 @@ RIGHT_PANEL_HEIGHT_PX = 500  # ✅ fixed variable name (was Right_PANEL_HEIGHT_P
 
 # Chat input controls
 INPUT_BOTTOM_PX = 100
-INPUT_WIDTH_PX = 700
+INPUT_WIDTH_PX = 400
 
 
 # =========================
