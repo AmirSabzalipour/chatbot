@@ -20,10 +20,10 @@ TOP_K = 5
 DEBUG = False
 
 # Layout controls
-LEFT_PANEL_WIDTH_PX = 280   # left panel outer width (due to border-box)
-OUTER_GAP_PX = 18           # gap from browser edges
+LEFT_PANEL_WIDTH_PX = 320   # left panel outer width (due to border-box)
+OUTER_GAP_PX = 0          # gap from browser edges
 PANEL_GAP_PX = 10           # white space BETWEEN left and right panels
-RIGHT_PANEL_MAX_WIDTH_PX = 500
+RIGHT_PANEL_MAX_WIDTH_PX = 600
 
 # Internal paddings
 PANEL_PADDING_PX = 22
@@ -34,8 +34,8 @@ LEFT_PANEL_HEIGHT_PX = 400
 RIGHT_PANEL_HEIGHT_PX = 400  # ✅ fixed variable name (was Right_PANEL_HEIGHT_PX)
 
 # Chat input controls
-INPUT_BOTTOM_PX = 28
-INPUT_WIDTH_PX = 720
+INPUT_BOTTOM_PX = 500
+INPUT_WIDTH_PX = 400
 
 
 # =========================
@@ -120,7 +120,7 @@ section[data-testid="stSidebar"] {{
 
 .left-panel h3 {{
   margin: 0 0 16px 0;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: #111827;
 }}
