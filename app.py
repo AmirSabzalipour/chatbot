@@ -34,7 +34,7 @@ LEFT_PANEL_HEIGHT_PX = 400
 RIGHT_PANEL_HEIGHT_PX = 400  # ✅ fixed variable name (was Right_PANEL_HEIGHT_PX)
 
 # Chat input controls
-INPUT_BOTTOM_PX = 500
+INPUT_BOTTOM_PX = 300
 INPUT_WIDTH_PX = 400
 
 
