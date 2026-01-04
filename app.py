@@ -20,22 +20,22 @@ TOP_K = 5
 DEBUG = False
 
 # Layout controls
-LEFT_PANEL_WIDTH_PX = 280   # left panel outer width (because of border-box below)
-OUTER_GAP_PX = 18           # gap from browser edges (top/left/right/bottom)
-PANEL_GAP_PX = 10          # ✅ white space BETWEEN left and right panels
+LEFT_PANEL_WIDTH_PX = 280   # left panel outer width (due to border-box)
+OUTER_GAP_PX = 18           # gap from browser edges
+PANEL_GAP_PX = 10           # white space BETWEEN left and right panels
 RIGHT_PANEL_MAX_WIDTH_PX = 500
 
-# Internal paddings (keeps offsets consistent)
+# Internal paddings
 PANEL_PADDING_PX = 22
 MAIN_PADDING_PX = 22
+
+# Heights
 LEFT_PANEL_HEIGHT_PX = 400
-Right_PANEL_HEIGHT_PX = 400
+RIGHT_PANEL_HEIGHT_PX = 400  # ✅ fixed variable name (was Right_PANEL_HEIGHT_PX)
 
-INPUT_LEFT_PX = OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX + MAIN_PADDING_PX
+# Chat input controls
 INPUT_BOTTOM_PX = 28
-INPUT_WIDTH_PX = 760   # set this to whatever you want
-
-
+INPUT_WIDTH_PX = 720
 
 
 # =========================
@@ -54,9 +54,18 @@ st.markdown(
 footer {{visibility: hidden;}}
 header {{visibility: hidden;}}
 
+/* ✅ Force consistent background everywhere (prevents random white areas) */
+html, body,
+div[data-testid="stAppViewContainer"],
+div[data-testid="stAppViewBlockContainer"],
+section.main,
+.main,
+.stApp {{
+  background: #f7f7f8 !important;
+}}
+
 /* Background */
 .stApp {{
-  background: #f7f7f8;
   overflow: hidden;
 }}
 
@@ -99,8 +108,8 @@ section[data-testid="stSidebar"] {{
   top: {OUTER_GAP_PX}px;
   left: {OUTER_GAP_PX}px;
   width: {LEFT_PANEL_WIDTH_PX}px;
- height: {LEFT_PANEL_HEIGHT_PX}px;
- background: #ffffff;
+  height: {LEFT_PANEL_HEIGHT_PX}px;
+  background: #ffffff;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
@@ -142,23 +151,24 @@ section[data-testid="stSidebar"] {{
 }}
 
 /* -----------------------------
-   MAIN QA PANEL
+   MAIN QA PANEL (RIGHT PANEL)
 -------------------------------- */
 .block-container {{
- max-width: {RIGHT_PANEL_MAX_WIDTH_PX}px !important;
+  max-width: {RIGHT_PANEL_MAX_WIDTH_PX}px !important;
   width: 100% !important;
-  /* ✅ left edge = outer gap + left panel width + panel gap */
-margin: {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX}px !important;
 
-  padding: {MAIN_PADDING_PX}px {MAIN_PADDING_PX}px 100px {MAIN_PADDING_PX}px !important;
+  /* left edge = outer gap + left panel width + panel gap */
+  margin: {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX}px !important;
+
+  /* ✅ reduce big empty area at bottom; we'll manage spacing with height */
+  padding: {MAIN_PADDING_PX}px {MAIN_PADDING_PX}px {MAIN_PADDING_PX}px {MAIN_PADDING_PX}px !important;
 
   background: #ffffff !important;
   border: 1px solid rgba(0,0,0,0.08) !important;
   border-radius: 16px !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
 
-  height: {Right_PANEL_HEIGHT_PX}px = 400
- !important;
+  height: {RIGHT_PANEL_HEIGHT_PX}px !important;
   overflow-y: auto !important;
 }}
 
@@ -168,30 +178,34 @@ div[data-testid="stChatMessage"] {{
 
 /* -----------------------------
    Chat input with fixed width (manual control)
+   IMPORTANT: inside f-string, braces must be doubled {{ }}
 -------------------------------- */
-div[data-testid="stChatInput"] {
+div[data-testid="stChatInput"] {{
   position: fixed !important;
-  bottom: {OUTER_GAP_PX + MAIN_PADDING_PX}px !important;
-  left:{OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX + MAIN_PADDING_PX}px !important;
-  width: 720px !important;      /* ✅ set your desired width */
-  right: auto !important;       /* ✅ prevent stretching */
+
+  bottom: {INPUT_BOTTOM_PX}px !important;
+  left: {OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX + MAIN_PADDING_PX}px !important;
+
+  width: {INPUT_WIDTH_PX}px !important;
+  right: auto !important;       /* prevent stretching */
   max-width: none !important;
+
   padding: 0 !important;
   background: transparent !important;
   border-top: 0 !important;
   margin: 0 !important;
   z-index: 10000 !important;
-}
-/* Same wrapper protection */
+}}
+
+/* Prevent outer wrappers from painting white (Streamlit version differences) */
 div[data-testid="stChatInput"],
 div[data-testid="stChatInput"] > div,
-div[data-testid="stChatInput"] > div > div {
+div[data-testid="stChatInput"] > div > div {{
   background: transparent !important;
-}
-
+}}
 
 div[data-testid="stChatInput"] > div {{
-  background: transparent  !important;
+  background: #ffffff !important;
   border: 1px solid rgba(0,0,0,0.10) !important;
   border-radius: 24px !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
@@ -291,7 +305,6 @@ def build_rag(document_text: str):
     chunks = chunk_text_words(document_text, 120, 30)
     embs = embedder.encode(chunks, convert_to_numpy=True)
 
-    # Persist + avoid ID collisions when doc changes
     doc_hash = hashlib.sha256(document_text.encode("utf-8")).hexdigest()[:12]
     db = chromadb.PersistentClient(path=".chroma")
     col_name = f"rag_{doc_hash}"
