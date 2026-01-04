@@ -205,18 +205,7 @@ section[data-testid="stSidebar"] > div {{
   padding: 0 !important;
 }}
 
-/* Create a "panel card" look */
-.qa-panel {{
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 26px;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
 
-  height: calc(100vh - 56px - 78px - 18px); /* viewport - topbar - margin top - margin bottom */
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}}
 
 /* Scroll area (chat history) */
 .qa-scroll {{
