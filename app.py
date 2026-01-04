@@ -23,6 +23,8 @@ DEBUG = False
 LEFT_PANEL_WIDTH_PX = 280   # left panel outer width (because of border-box below)
 OUTER_GAP_PX = 18           # gap from browser edges (top/left/right/bottom)
 PANEL_GAP_PX = 500           # ✅ white space BETWEEN left and right panels
+RIGHT_GAP_PX = 260  # 👈 increase = narrower right panel
+
 
 # Internal paddings (keeps offsets consistent)
 PANEL_PADDING_PX = 22
@@ -140,7 +142,7 @@ section[data-testid="stSidebar"] {{
   max-width: none !important;
 
   /* ✅ left edge = outer gap + left panel width + panel gap */
-  margin: {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX}px !important;
+margin: {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX}px !important;
 
   padding: {MAIN_PADDING_PX}px {MAIN_PADDING_PX}px 100px {MAIN_PADDING_PX}px !important;
 
