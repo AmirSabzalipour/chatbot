@@ -131,11 +131,11 @@ section[data-testid="stSidebar"] > div {{
 }}
 
 /* -----------------------------
-   TOP BANNER: full width, fixed
+   TOP BANNER: sticky at top
 -------------------------------- */
 .topbar {{
-  position: fixed;      /* fixed so it stays on top always */
-  top: 0;
+  position: sticky !important;
+  top: 0 !important;
   left: 0;
   right: 0;
   z-index: 2000;
@@ -146,6 +146,9 @@ section[data-testid="stSidebar"] > div {{
 
   display: flex;
   align-items: center;
+  
+  /* Add margin to separate from content below */
+  margin-bottom: 18px;
 }}
 
 .topbar-row {{
@@ -201,17 +204,17 @@ section[data-testid="stSidebar"] > div {{
 /* Remove Streamlit default paddings so we can control layout */
 .block-container {{
   max-width: {PANEL_WIDTH_PX}px !important;
-  margin: 78px auto 18px auto !important;  /* push below fixed topbar */
-  padding: 0 !important;
-}}
-
-
-
-/* Scroll area (chat history) */
-.qa-scroll {{
-  flex: 1;
-  overflow-y: auto;
-  padding: 18px 22px 10px 22px;
+  margin: 0 auto 18px auto !important;  /* no top margin since topbar has margin-bottom */
+  padding: 22px !important;
+  
+  /* Make the block-container itself the white panel */
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-radius: 26px !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08) !important;
+  
+  height: calc(100vh - 56px - 18px - 18px) !important;
+  overflow-y: auto !important;
 }}
 
 /* Messages spacing */
@@ -219,18 +222,19 @@ div[data-testid="stChatMessage"] {{
   padding: 0.35rem 0 !important;
 }}
 
-/* Input area pinned INSIDE the panel at bottom */
-.qa-input {{
-  padding: 10px 18px 16px 18px;
-  background: transparent;
-}}
-
 /* Make the Streamlit chat input look like a rounded floating input */
 div[data-testid="stChatInput"] {{
-  position: static !important;
-  padding: 0 !important;
-  background: transparent !important;
+  position: sticky !important;
+  bottom: 0 !important;
+  padding: 16px 0 0 0 !important;
+  background: #ffffff !important;
   border-top: 0 !important;
+  margin-left: -22px !important;
+  margin-right: -22px !important;
+  padding-left: 22px !important;
+  padding-right: 22px !important;
+  margin-bottom: -22px !important;
+  padding-bottom: 22px !important;
 }}
 
 div[data-testid="stChatInput"] > div {{
@@ -358,7 +362,7 @@ messages = st.session_state.messages
 
 
 # =========================
-# TOP BAR (full width banner)
+# TOP BAR (sticky banner)
 # =========================
 st.markdown(
     f"""
@@ -380,33 +384,19 @@ st.markdown(
 
 
 # =========================
-# MAIN QA PANEL (scroll + input inside)
+# CHAT MESSAGES
 # =========================
-st.markdown('<div class="qa-panel">', unsafe_allow_html=True)
-
-# Scrollable chat history area
-st.markdown('<div class="qa-scroll">', unsafe_allow_html=True)
-
 for m in messages:
     with st.chat_message(m["role"]):
         st.markdown(m["content"])
 
-st.markdown('</div>', unsafe_allow_html=True)  # end qa-scroll
-
-# Input area at bottom inside panel
-st.markdown('<div class="qa-input">', unsafe_allow_html=True)
-
+# =========================
+# CHAT INPUT (sticky at bottom)
+# =========================
 prompt = st.chat_input("Ask about the document…")
-st.markdown('</div>', unsafe_allow_html=True)  # end qa-input
-st.markdown('</div>', unsafe_allow_html=True)  # end qa-panel
-
 
 if prompt:
     messages.append({"role": "user", "content": prompt})
-
-    # Re-render user message immediately (Streamlit will show it anyway after rerun)
-    with st.chat_message("user"):
-        st.markdown(prompt)
 
     with st.chat_message("assistant"):
         with st.spinner("Thinking…"):
