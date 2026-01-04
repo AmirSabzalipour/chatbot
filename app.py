@@ -28,7 +28,9 @@ RIGHT_PANEL_MAX_WIDTH_PX = 500
 # Internal paddings (keeps offsets consistent)
 PANEL_PADDING_PX = 22
 MAIN_PADDING_PX = 22
-LEFT_PANEL_HEIGHT_PX = 200
+LEFT_PANEL_HEIGHT_PX = 400
+Right_PANEL_HEIGHT_PX = 400
+
 
 
 # =========================
@@ -150,7 +152,8 @@ margin: {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX + LEFT_
   border-radius: 16px !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
 
-  height: calc(50vh - {OUTER_GAP_PX * 2}px) !important;
+  height: {Right_PANEL_HEIGHT_PX}px = 400
+ !important;
   overflow-y: auto !important;
 }}
 
