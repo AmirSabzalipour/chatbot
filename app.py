@@ -31,6 +31,11 @@ MAIN_PADDING_PX = 22
 LEFT_PANEL_HEIGHT_PX = 400
 Right_PANEL_HEIGHT_PX = 400
 
+INPUT_LEFT_PX = OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX + MAIN_PADDING_PX
+INPUT_BOTTOM_PX = 28
+INPUT_WIDTH_PX = 760   # set this to whatever you want
+
+
 
 
 # =========================
@@ -162,24 +167,28 @@ div[data-testid="stChatMessage"] {{
 }}
 
 /* -----------------------------
-   Chat input aligned with main panel
+   Chat input with fixed width (manual control)
 -------------------------------- */
-div[data-testid="stChatInput"] {{
+div[data-testid="stChatInput"] {
   position: fixed !important;
   bottom: {OUTER_GAP_PX + MAIN_PADDING_PX}px !important;
-
-  /* ✅ align with the inner content of the main panel */
-  left: {OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX + MAIN_PADDING_PX}px !important;
-  right: {OUTER_GAP_PX + MAIN_PADDING_PX}px !important;
-
-  width: auto !important;
+  left:{OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX + MAIN_PADDING_PX}px !important;
+  width: 720px !important;      /* ✅ set your desired width */
+  right: auto !important;       /* ✅ prevent stretching */
   max-width: none !important;
   padding: 0 !important;
   background: transparent !important;
   border-top: 0 !important;
   margin: 0 !important;
-  z-index: 100 !important;
-}}
+  z-index: 10000 !important;
+}
+/* Same wrapper protection */
+div[data-testid="stChatInput"],
+div[data-testid="stChatInput"] > div,
+div[data-testid="stChatInput"] > div > div {
+  background: transparent !important;
+}
+
 
 div[data-testid="stChatInput"] > div {{
   background: transparent  !important;
