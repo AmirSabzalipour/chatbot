@@ -21,8 +21,8 @@ TOP_K = 5
 DEBUG = False
 
 # ✅ Control the width of the scrollable QA panel (smaller than the full-width top banner)
-PANEL_WIDTH_PX = 860  # try 760 / 820 / 900
 LEFT_PANEL_WIDTH_PX = 280  # width of left panel
+GAP_PX = 18  # gap between panels
 
 
 # =========================
@@ -82,18 +82,18 @@ section[data-testid="stSidebar"] {{
    LEFT PANEL: absolute positioning inside container
 -------------------------------- */
 .left-panel {{
-  position: absolute;
-  top: 18px;
-  left: 18px;
+  position: fixed;
+  top: {GAP_PX}px;
+  left: {GAP_PX}px;
   width: {LEFT_PANEL_WIDTH_PX}px;
-  height: calc(100vh - 36px);
+  height: calc(100vh - {GAP_PX * 2}px);
   background: #ffffff;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   padding: 22px;
   overflow-y: auto;
-  z-index: 10;
+  z-index: 1000;
 }}
 
 .left-panel h3 {{
@@ -132,23 +132,10 @@ section[data-testid="stSidebar"] {{
    MAIN QA PANEL: offset by left panel
 -------------------------------- */
 
-/* Container wrapper */
-.stApp > div:first-child {{
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-}}
-
 /* Remove Streamlit default paddings so we can control layout */
 .block-container {{
-  position: absolute !important;
-  top: 18px !important;
-  left: {LEFT_PANEL_WIDTH_PX + 36}px !important;
-  right: 18px !important;
-  bottom: 18px !important;
   max-width: none !important;
-  width: auto !important;
-  margin: 0 !important;
+  margin: {GAP_PX}px {GAP_PX}px {GAP_PX}px {LEFT_PANEL_WIDTH_PX + GAP_PX * 2}px !important;
   padding: 22px 22px 100px 22px !important;  /* Extra bottom padding for input */
   
   /* Make the block-container itself the white panel */
@@ -157,7 +144,7 @@ section[data-testid="stSidebar"] {{
   border-radius: 16px !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
   
-  height: auto !important;
+  height: calc(100vh - {GAP_PX * 2}px) !important;
   overflow-y: auto !important;
 }}
 
@@ -168,10 +155,10 @@ div[data-testid="stChatMessage"] {{
 
 /* Make the Streamlit chat input stay inside and at bottom */
 div[data-testid="stChatInput"] {{
-  position: absolute !important;
-  bottom: 22px !important;
-  left: 22px !important;
-  right: 22px !important;
+  position: fixed !important;
+  bottom: {GAP_PX + 22}px !important;
+  left: {LEFT_PANEL_WIDTH_PX + GAP_PX * 2 + 22}px !important;
+  right: {GAP_PX + 22}px !important;
   width: auto !important;
   max-width: none !important;
   padding: 0 !important;
