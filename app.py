@@ -81,6 +81,17 @@ section[data-testid="stSidebar"] {{
   
   height: calc(100vh - 36px) !important;
   overflow-y: auto !important;
+  
+  /* Flexbox to push input to bottom */
+  display: flex !important;
+  flex-direction: column !important;
+}}
+
+/* Chat messages area - takes up available space */
+.chat-messages {{
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 16px;
 }}
 
 /* Messages spacing */
@@ -90,24 +101,18 @@ div[data-testid="stChatMessage"] {{
 
 /* Make the Streamlit chat input look like a rounded floating input */
 div[data-testid="stChatInput"] {{
-  position: sticky !important;
-  bottom: 0 !important;
-  padding: 16px 0 0 0 !important;
-  background: #ffffff !important;
+  position: relative !important;
+  padding: 0 !important;
+  background: transparent !important;
   border-top: 0 !important;
-  margin-left: -22px !important;
-  margin-right: -22px !important;
-  padding-left: 22px !important;
-  padding-right: 22px !important;
-  margin-bottom: -22px !important;
-  padding-bottom: 22px !important;
+  margin: 0 !important;
 }}
 
 div[data-testid="stChatInput"] > div {{
   background: #ffffff !important;
   border: 1px solid rgba(0,0,0,0.10) !important;
   border-radius: 28px !important;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.10) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
   padding: 10px 14px !important;
 }}
 
@@ -217,7 +222,7 @@ for m in messages:
         st.markdown(m["content"])
 
 # =========================
-# CHAT INPUT (sticky at bottom)
+# CHAT INPUT (at bottom of container)
 # =========================
 prompt = st.chat_input("Ask about the document…")
 
