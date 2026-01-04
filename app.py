@@ -22,8 +22,8 @@ DEBUG = False
 # Layout controls
 LEFT_PANEL_WIDTH_PX = 280   # left panel outer width (because of border-box below)
 OUTER_GAP_PX = 18           # gap from browser edges (top/left/right/bottom)
-PANEL_GAP_PX = 100           # ✅ white space BETWEEN left and right panels
-RIGHT_PANEL_MAX_WIDTH_PX = 300
+PANEL_GAP_PX = 10          # ✅ white space BETWEEN left and right panels
+RIGHT_PANEL_MAX_WIDTH_PX = 500
 
 # Internal paddings (keeps offsets consistent)
 PANEL_PADDING_PX = 22
