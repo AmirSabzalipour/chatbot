@@ -27,6 +27,7 @@ PANEL_GAP_PX = 500           # ✅ white space BETWEEN left and right panels
 # Internal paddings (keeps offsets consistent)
 PANEL_PADDING_PX = 22
 MAIN_PADDING_PX = 22
+LEFT_PANEL_HEIGHT_PX = 200
 
 
 # =========================
@@ -90,8 +91,8 @@ section[data-testid="stSidebar"] {{
   top: {OUTER_GAP_PX}px;
   left: {OUTER_GAP_PX}px;
   width: {LEFT_PANEL_WIDTH_PX}px;
-  height: calc(100vh - {OUTER_GAP_PX * 2}px);
-  background: #ffffff;
+ height: {LEFT_PANEL_HEIGHT_PX}px;
+ background: #ffffff;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
