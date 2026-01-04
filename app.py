@@ -30,12 +30,12 @@ PANEL_PADDING_PX = 22
 MAIN_PADDING_PX = 22
 
 # Heights
-LEFT_PANEL_HEIGHT_PX = 400
-RIGHT_PANEL_HEIGHT_PX = 400  # ✅ fixed variable name (was Right_PANEL_HEIGHT_PX)
+LEFT_PANEL_HEIGHT_PX = 500
+RIGHT_PANEL_HEIGHT_PX = 500  # ✅ fixed variable name (was Right_PANEL_HEIGHT_PX)
 
 # Chat input controls
-INPUT_BOTTOM_PX = 300
-INPUT_WIDTH_PX = 400
+INPUT_BOTTOM_PX = 100
+INPUT_WIDTH_PX = 700
 
 
 # =========================
