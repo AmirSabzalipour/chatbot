@@ -71,7 +71,7 @@ section[data-testid="stSidebar"] {{
 .block-container {{
   max-width: {PANEL_WIDTH_PX}px !important;
   margin: 18px auto !important;
-  padding: 22px !important;
+  padding: 22px 22px 100px 22px !important;  /* Extra bottom padding for input */
   
   /* Make the block-container itself the white panel */
   background: #ffffff !important;
@@ -81,17 +81,7 @@ section[data-testid="stSidebar"] {{
   
   height: calc(100vh - 36px) !important;
   overflow-y: auto !important;
-  
-  /* Flexbox to push input to bottom */
-  display: flex !important;
-  flex-direction: column !important;
-}}
-
-/* Chat messages area - takes up available space */
-.chat-messages {{
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 16px;
+  position: relative !important;
 }}
 
 /* Messages spacing */
@@ -99,13 +89,19 @@ div[data-testid="stChatMessage"] {{
   padding: 0.35rem 0 !important;
 }}
 
-/* Make the Streamlit chat input look like a rounded floating input */
+/* Make the Streamlit chat input stay inside and at bottom */
 div[data-testid="stChatInput"] {{
-  position: relative !important;
+  position: fixed !important;
+  bottom: 18px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: {PANEL_WIDTH_PX - 44}px !important;
+  max-width: {PANEL_WIDTH_PX - 44}px !important;
   padding: 0 !important;
   background: transparent !important;
   border-top: 0 !important;
   margin: 0 !important;
+  z-index: 100 !important;
 }}
 
 div[data-testid="stChatInput"] > div {{
