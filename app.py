@@ -179,7 +179,7 @@ div[data-testid="stChatInput"] {{
 }}
 
 div[data-testid="stChatInput"] > div {{
-  background: #ffffff !important;
+  background: transparent  !important;
   border: 1px solid rgba(0,0,0,0.10) !important;
   border-radius: 24px !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
