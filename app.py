@@ -19,23 +19,23 @@ MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"  # Together model id
 TOP_K = 5
 DEBUG = False
 
-# ✅ Control the width of the scrollable QA panel (smaller than the full-width top banner)
-LEFT_PANEL_WIDTH_PX = 280  # width of left panel (content width)
-GAP_PX = 18  # gap between panels
+# Layout controls
+LEFT_PANEL_WIDTH_PX = 280   # left panel outer width (because of border-box below)
+OUTER_GAP_PX = 18           # gap from browser edges (top/left/right/bottom)
+PANEL_GAP_PX = 40           # ✅ white space BETWEEN left and right panels
 
-# Layout constants (keeps offsets correct)
+# Internal paddings (keeps offsets consistent)
 PANEL_PADDING_PX = 22
-PANEL_BORDER_PX = 1
 MAIN_PADDING_PX = 22
 
 
 # =========================
-# GLOBAL CSS (layout exactly as requested)
+# GLOBAL CSS
 # =========================
 st.markdown(
     f"""
 <style>
-/* ✅ Make widths include padding+border so math aligns */
+/* ✅ Make widths include padding+border so our math is exact */
 *, *::before, *::after {{
   box-sizing: border-box;
 }}
@@ -61,7 +61,7 @@ div[data-testid="stHeader"] {{
   display: none !important;
 }}
 
-/* Try to hide extra floating buttons some versions show */
+/* Hide extra floating buttons (varies by version) */
 button[title="View fullscreen"],
 button[title="Open in new tab"],
 button[title="Rerun"],
@@ -74,7 +74,7 @@ section[data-testid="stSidebar"] {{
   display: none !important;
 }}
 
-/* Main app wrapper */
+/* Remove Streamlit default paddings */
 .main {{
   padding: 0 !important;
 }}
@@ -87,10 +87,10 @@ section[data-testid="stSidebar"] {{
 -------------------------------- */
 .left-panel {{
   position: fixed;
-  top: {GAP_PX}px;
-  left: {GAP_PX}px;
-  width: {LEFT_PANEL_WIDTH_PX}px; /* ✅ with border-box, this is the OUTER width */
-  height: calc(100vh - {GAP_PX * 2}px);
+  top: {OUTER_GAP_PX}px;
+  left: {OUTER_GAP_PX}px;
+  width: {LEFT_PANEL_WIDTH_PX}px;
+  height: calc(100vh - {OUTER_GAP_PX * 2}px);
   background: #ffffff;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 16px;
@@ -138,8 +138,8 @@ section[data-testid="stSidebar"] {{
 .block-container {{
   max-width: none !important;
 
-  /* ✅ Offset equals: left gap + left panel outer width + gap */
-  margin: {GAP_PX}px {GAP_PX}px {GAP_PX}px {LEFT_PANEL_WIDTH_PX + GAP_PX * 2}px !important;
+  /* ✅ left edge = outer gap + left panel width + panel gap */
+  margin: {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX}px !important;
 
   padding: {MAIN_PADDING_PX}px {MAIN_PADDING_PX}px 100px {MAIN_PADDING_PX}px !important;
 
@@ -148,7 +148,7 @@ section[data-testid="stSidebar"] {{
   border-radius: 16px !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
 
-  height: calc(100vh - {GAP_PX * 2}px) !important;
+  height: calc(100vh - {OUTER_GAP_PX * 2}px) !important;
   overflow-y: auto !important;
 }}
 
@@ -156,15 +156,17 @@ div[data-testid="stChatMessage"] {{
   padding: 0.35rem 0 !important;
 }}
 
-/* Chat input fixed at bottom, aligned to main panel content */
+/* -----------------------------
+   Chat input aligned with main panel
+-------------------------------- */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
-  bottom: {GAP_PX + MAIN_PADDING_PX}px !important;
+  bottom: {OUTER_GAP_PX + MAIN_PADDING_PX}px !important;
 
-  /* ✅ left edge = left panel left + width + gap + main padding */
-  left: {LEFT_PANEL_WIDTH_PX + GAP_PX * 2 + MAIN_PADDING_PX}px !important;
+  /* ✅ align with the inner content of the main panel */
+  left: {OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX + MAIN_PADDING_PX}px !important;
+  right: {OUTER_GAP_PX + MAIN_PADDING_PX}px !important;
 
-  right: {GAP_PX + MAIN_PADDING_PX}px !important;
   width: auto !important;
   max-width: none !important;
   padding: 0 !important;
@@ -208,8 +210,9 @@ div[data-testid="stChatInput"] textarea {{
     unsafe_allow_html=True,
 )
 
+
 # =========================
-# LEFT PANEL
+# LEFT PANEL (static for now)
 # =========================
 st.markdown(
     """
@@ -226,11 +229,11 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+
 # =========================
 # LOAD DOC
 # =========================
 DOC_PATH = Path("data/document.txt")
-
 
 @st.cache_data
 def load_document(path: str) -> str:
@@ -239,17 +242,17 @@ def load_document(path: str) -> str:
         return ""
     return p.read_text(encoding="utf-8").strip()
 
-
 DOCUMENT = load_document(str(DOC_PATH))
 if not DOCUMENT:
     st.error("Document not found. Please add your file at: data/document.txt")
     st.stop()
 
+
 # =========================
 # RAG HELPERS
 # =========================
 def chunk_text_words(text: str, chunk_size: int = 120, overlap: int = 30):
-    """✅ Fix tail-duplication bug by stopping cleanly at end."""
+    """Stops cleanly at the end to avoid many near-duplicate tail chunks."""
     words = text.split()
     n = len(words)
     chunks = []
@@ -260,7 +263,7 @@ def chunk_text_words(text: str, chunk_size: int = 120, overlap: int = 30):
         chunks.append(" ".join(words[start:end]))
 
         if end == n:
-            break  # ✅ prevents many near-duplicate tail chunks
+            break
 
         start = max(0, end - overlap)
 
@@ -274,13 +277,12 @@ def build_rag(document_text: str):
     chunks = chunk_text_words(document_text, 120, 30)
     embs = embedder.encode(chunks, convert_to_numpy=True)
 
-    # ✅ Persist + avoid ID collisions when doc changes
+    # Persist + avoid ID collisions when doc changes
     doc_hash = hashlib.sha256(document_text.encode("utf-8")).hexdigest()[:12]
     db = chromadb.PersistentClient(path=".chroma")
     col_name = f"rag_{doc_hash}"
     col = db.get_or_create_collection(col_name, metadata={"hnsw:space": "cosine"})
 
-    # Only add if empty (prevents duplicate-id errors)
     if col.count() == 0:
         col.add(
             ids=[str(i) for i in range(len(chunks))],
@@ -330,6 +332,7 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
 # =========================
 llm, embedder, col = build_rag(DOCUMENT)
 
+
 # =========================
 # CHAT STATE
 # =========================
@@ -337,12 +340,14 @@ if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "assistant", "content": "Hi! Ask me about the document."}]
 messages = st.session_state.messages
 
+
 # =========================
 # CHAT MESSAGES
 # =========================
 for m in messages:
     with st.chat_message(m["role"]):
         st.markdown(m["content"])
+
 
 # =========================
 # CHAT INPUT
@@ -357,7 +362,6 @@ if prompt:
             ans, retrieved = rag_answer(llm, embedder, col, prompt, model_name=MODEL_NAME, top_k=TOP_K)
         st.markdown(ans)
 
-        # Optional: show sources even when not debugging
         if DEBUG:
             with st.expander("Retrieved context"):
                 for i, ch in enumerate(retrieved, 1):
