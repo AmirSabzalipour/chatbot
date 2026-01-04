@@ -15,27 +15,29 @@ st.set_page_config(page_title="Chatbot", layout="wide")
 # =========================
 # DEFAULTS
 # =========================
-MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"  # Together model id
+MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
 TOP_K = 5
 DEBUG = False
 
-# Layout controls
-LEFT_PANEL_WIDTH_PX = 320   # left panel outer width (due to border-box)
-OUTER_GAP_PX = -40        # gap from browser edges
-PANEL_GAP_PX = 10           # white space BETWEEN left and right panels
+# Layout controls (keep your values, but avoid negative gaps in production)
+LEFT_PANEL_WIDTH_PX = 320
+OUTER_GAP_PX = -40          # NOTE: negative gaps are risky; kept as you set it
+PANEL_GAP_PX = 10
 RIGHT_PANEL_MAX_WIDTH_PX = 600
 
-# Internal paddings
 PANEL_PADDING_PX = 40
 MAIN_PADDING_PX = 22
 
-# Heights
 LEFT_PANEL_HEIGHT_PX = 500
-RIGHT_PANEL_HEIGHT_PX = 500  # ✅ fixed variable name (was Right_PANEL_HEIGHT_PX)
+RIGHT_PANEL_HEIGHT_PX = 500
 
 # Chat input controls
 INPUT_BOTTOM_PX = 100
 INPUT_WIDTH_PX = 400
+
+# Derived positions (use same formula everywhere)
+RIGHT_PANEL_LEFT_PX = OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX
+INPUT_LEFT_PX = RIGHT_PANEL_LEFT_PX + MAIN_PADDING_PX
 
 
 # =========================
@@ -54,7 +56,7 @@ st.markdown(
 footer {{visibility: hidden;}}
 header {{visibility: hidden;}}
 
-/* ✅ Force consistent background everywhere (prevents random white areas) */
+/* ✅ Force consistent background everywhere */
 html, body,
 div[data-testid="stAppViewContainer"],
 div[data-testid="stAppViewBlockContainer"],
@@ -64,7 +66,11 @@ section.main,
   background: #f7f7f8 !important;
 }}
 
-/* Background */
+/* Avoid page scrollbars caused by fixed panels */
+html, body {{
+  overflow: hidden !important;
+}}
+
 .stApp {{
   overflow: hidden;
 }}
@@ -109,10 +115,12 @@ section[data-testid="stSidebar"] {{
   left: {OUTER_GAP_PX}px;
   width: {LEFT_PANEL_WIDTH_PX}px;
   height: {LEFT_PANEL_HEIGHT_PX}px;
+
   background: #ffffff;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+
   padding: {PANEL_PADDING_PX}px;
   overflow-y: auto;
   z-index: 1000;
@@ -152,15 +160,15 @@ section[data-testid="stSidebar"] {{
 
 /* -----------------------------
    MAIN QA PANEL (RIGHT PANEL)
+   IMPORTANT: Streamlit uses .block-container class (not .block-container selector only)
 -------------------------------- */
 .block-container {{
   max-width: {RIGHT_PANEL_MAX_WIDTH_PX}px !important;
   width: 100% !important;
 
-  /* left edge = outer gap + left panel width + panel gap */
-  margin: {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX}px !important;
+  margin: {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX}px {RIGHT_PANEL_LEFT_PX}px !important;
 
-  /* ✅ reduce big empty area at bottom; we'll manage spacing with height */
+  /* keep bottom padding small (your input is fixed, not inside flow) */
   padding: {MAIN_PADDING_PX}px {MAIN_PADDING_PX}px {MAIN_PADDING_PX}px {MAIN_PADDING_PX}px !important;
 
   background: #ffffff !important;
@@ -169,6 +177,7 @@ section[data-testid="stSidebar"] {{
   box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
 
   height: {RIGHT_PANEL_HEIGHT_PX}px !important;
+  min-height: {RIGHT_PANEL_HEIGHT_PX}px !important;   /* ✅ prevents “stretching” */
   overflow-y: auto !important;
 }}
 
@@ -178,16 +187,16 @@ div[data-testid="stChatMessage"] {{
 
 /* -----------------------------
    Chat input with fixed width (manual control)
-   IMPORTANT: inside f-string, braces must be doubled {{ }}
+   ✅ Must use double braces {{ }} because this is inside an f-string
 -------------------------------- */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
 
   bottom: {INPUT_BOTTOM_PX}px !important;
-  left: {OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX + MAIN_PADDING_PX}px !important;
+  left: {INPUT_LEFT_PX}px !important;
 
   width: {INPUT_WIDTH_PX}px !important;
-  right: auto !important;       /* prevent stretching */
+  right: auto !important;
   max-width: none !important;
 
   padding: 0 !important;
@@ -280,7 +289,6 @@ if not DOCUMENT:
 # RAG HELPERS
 # =========================
 def chunk_text_words(text: str, chunk_size: int = 120, overlap: int = 30):
-    """Stops cleanly at the end to avoid many near-duplicate tail chunks."""
     words = text.split()
     n = len(words)
     chunks = []
@@ -289,10 +297,8 @@ def chunk_text_words(text: str, chunk_size: int = 120, overlap: int = 30):
     while start < n:
         end = min(n, start + chunk_size)
         chunks.append(" ".join(words[start:end]))
-
         if end == n:
             break
-
         start = max(0, end - overlap)
 
     return chunks
