@@ -22,6 +22,7 @@ DEBUG = False
 
 # ✅ Control the width of the scrollable QA panel (smaller than the full-width top banner)
 PANEL_WIDTH_PX = 860  # try 760 / 820 / 900
+LEFT_PANEL_WIDTH_PX = 280  # width of left panel
 
 
 # =========================
@@ -58,19 +59,69 @@ button[title="Settings"] {{
   display: none !important;
 }}
 
-/* Hide sidebar completely */
+/* Hide default sidebar */
 section[data-testid="stSidebar"] {{
   display: none !important;
 }}
 
 /* -----------------------------
-   MAIN QA PANEL: centered + narrower
+   LEFT PANEL: fixed on the left
+-------------------------------- */
+.left-panel {{
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  width: {LEFT_PANEL_WIDTH_PX}px;
+  height: calc(100vh - 36px);
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 26px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  padding: 22px;
+  overflow-y: auto;
+  z-index: 100;
+}}
+
+.left-panel h3 {{
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}}
+
+.left-panel ul {{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}}
+
+.left-panel li {{
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 14px;
+  color: #374151;
+}}
+
+.left-panel li:hover {{
+  background: #f3f4f6;
+}}
+
+.left-panel li.active {{
+  background: #e5e7eb;
+  font-weight: 500;
+}}
+
+/* -----------------------------
+   MAIN QA PANEL: offset by left panel
 -------------------------------- */
 
 /* Remove Streamlit default paddings so we can control layout */
 .block-container {{
   max-width: {PANEL_WIDTH_PX}px !important;
-  margin: 18px auto !important;
+  margin: 18px 18px 18px {LEFT_PANEL_WIDTH_PX + 36}px !important;  /* offset by left panel */
   padding: 22px 22px 100px 22px !important;  /* Extra bottom padding for input */
   
   /* Make the block-container itself the white panel */
@@ -93,10 +144,9 @@ div[data-testid="stChatMessage"] {{
 div[data-testid="stChatInput"] {{
   position: fixed !important;
   bottom: 18px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: {PANEL_WIDTH_PX - 44}px !important;
-  max-width: {PANEL_WIDTH_PX - 44}px !important;
+  left: calc({LEFT_PANEL_WIDTH_PX + 36}px + 22px) !important;
+  width: calc({PANEL_WIDTH_PX}px - 44px) !important;
+  max-width: calc({PANEL_WIDTH_PX}px - 44px) !important;
   padding: 0 !important;
   background: transparent !important;
   border-top: 0 !important;
@@ -117,6 +167,25 @@ div[data-testid="stChatInput"] textarea {{
   padding: 0.85rem 1rem !important;
 }}
 </style>
+""",
+    unsafe_allow_html=True,
+)
+
+
+# =========================
+# LEFT PANEL
+# =========================
+st.markdown(
+    """
+<div class="left-panel">
+  <h3>Conversations</h3>
+  <ul>
+    <li class="active">Current Chat</li>
+    <li>Previous Chat 1</li>
+    <li>Previous Chat 2</li>
+    <li>Previous Chat 3</li>
+  </ul>
+</div>
 """,
     unsafe_allow_html=True,
 )
