@@ -150,7 +150,7 @@ margin: {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX + LEFT_
   border-radius: 16px !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
 
-  height: calc(10vh - {OUTER_GAP_PX * 2}px) !important;
+  height: calc(50vh - {OUTER_GAP_PX * 2}px) !important;
   overflow-y: auto !important;
 }}
 
