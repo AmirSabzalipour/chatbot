@@ -60,6 +60,29 @@ INPUT_LEFT_PX = RIGHT_PANEL_LEFT_PX + MAIN_PADDING_PX
 st.markdown(
     f"""
 <style>
+/* Hide Streamlit embed footer ("Built with Streamlit" + "Fullscreen") */
+div[data-testid="stDecoration"],
+div[data-testid="stToolbar"],
+footer,
+div[data-testid="stFooter"] {
+  display: none !important;
+  height: 0 !important;
+}
+
+/* Some versions render the embed bottom bar as a "viewer badge" */
+.viewerBadge_container__1QSob,
+.viewerBadge_link__1S137,
+.viewerBadge_text__1JaDK {
+  display: none !important;
+  height: 0 !important;
+}
+
+/* Prevent any reserved space at the bottom */
+.main, .stApp {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
 /* ✅ Make widths include padding+border so our math is exact */
 *, *::before, *::after {{
   box-sizing: border-box;
