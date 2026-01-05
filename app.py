@@ -100,7 +100,6 @@ section.main, .main, .stApp {{
 /* Hide Streamlit chrome */
 #MainMenu {{ visibility: hidden; }}
 header {{ visibility: hidden; }}
-/* (footer already handled above) */
 
 /* ✅ Force consistent background everywhere */
 html, body,
@@ -167,7 +166,7 @@ section[data-testid="stSidebar"] {{
   padding: {PANEL_PADDING_PX}px;
   overflow-y: auto;
   z-index: 1000;
-}}
+}}  /* ✅ fixed: only ONE closing brace block */
 
 /* -----------------------------
    MAIN QA PANEL (RIGHT PANEL)
@@ -238,6 +237,22 @@ div[data-testid="stChatInput"] textarea {{
     unsafe_allow_html=True,
 )
 
+# ✅ ADD THIS BACK: LEFT PANEL HTML
+st.markdown(
+    """
+<div class="left-panel">
+  <h3>Conversations</h3>
+  <ul>
+    <li class="active">Current Chat</li>
+    <li>Previous Chat 1</li>
+    <li>Previous Chat 2</li>
+    <li>Previous Chat 3</li>
+  </ul>
+</div>
+""",
+    unsafe_allow_html=True,
+)
+
 
 # =========================
 # LOAD DOC
@@ -265,21 +280,18 @@ def chunk_text_words(text: str, chunk_size: int = 120, overlap: int = 30):
     n = len(words)
     chunks = []
     start = 0
-
     while start < n:
         end = min(n, start + chunk_size)
         chunks.append(" ".join(words[start:end]))
         if end == n:
             break
         start = max(0, end - overlap)
-
     return chunks
 
 
 @st.cache_resource
 def build_rag(document_text: str):
     embedder = SentenceTransformer("all-MiniLM-L6-v2")
-
     chunks = chunk_text_words(document_text, 120, 30)
     embs = embedder.encode(chunks, convert_to_numpy=True)
 
