@@ -26,10 +26,10 @@ DEBUG = False
 LEFT_PANEL_WIDTH_PX = 320
 
 # ✅ Control outer margins independently (reduces left/right whitespace cleanly)
-OUTER_LEFT_GAP_PX = 8
-OUTER_RIGHT_GAP_PX = 8
-OUTER_TOP_GAP_PX = 8
-OUTER_BOTTOM_GAP_PX = 8
+OUTER_LEFT_GAP_PX = 0
+OUTER_RIGHT_GAP_PX = 0
+OUTER_TOP_GAP_PX = 0
+OUTER_BOTTOM_GAP_PX = 0
 
 # Space between panels
 PANEL_GAP_PX = 10
