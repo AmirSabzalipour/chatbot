@@ -238,10 +238,7 @@ div[data-testid="stChatInput"] textarea {{
    REMOVE EXTRA BOX BELOW CHAT INPUT
 -------------------------------- */
 div[data-testid="stBottomBlockContainer"],
-div[data-testid="stBottom"],
-.stBottom,
-div[data-testid="stChatInput"] + div,
-div[data-testid="stChatInput"] ~ div:not([data-testid="stChatInput"]) {{
+div[data-testid="stBottom"]{{
   display: none !important;
   height: 0 !important;
   margin: 0 !important;
