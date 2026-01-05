@@ -60,28 +60,37 @@ INPUT_LEFT_PX = RIGHT_PANEL_LEFT_PX + MAIN_PADDING_PX
 st.markdown(
     f"""
 <style>
-/* Hide Streamlit embed footer ("Built with Streamlit" + "Fullscreen") */
+/* -----------------------------
+   Hide Streamlit embed footer / viewer badge
+-------------------------------- */
+footer,
+div[data-testid="stFooter"],
 div[data-testid="stDecoration"],
 div[data-testid="stToolbar"],
-footer,
-div[data-testid="stFooter"] {
+div[data-testid="stStatusWidget"] {{
   display: none !important;
   height: 0 !important;
-}
+  margin: 0 !important;
+  padding: 0 !important;
+}}
 
-/* Some versions render the embed bottom bar as a "viewer badge" */
+/* Newer/older viewer badge variants */
+[class^="viewerBadge_"],
+[class*=" viewerBadge_"],
 .viewerBadge_container__1QSob,
 .viewerBadge_link__1S137,
-.viewerBadge_text__1JaDK {
+.viewerBadge_text__1JaDK {{
   display: none !important;
   height: 0 !important;
-}
+  margin: 0 !important;
+  padding: 0 !important;
+}}
 
 /* Prevent any reserved space at the bottom */
-.main, .stApp {
+section.main, .main, .stApp {{
   padding-bottom: 0 !important;
   margin-bottom: 0 !important;
-}
+}}
 
 /* ✅ Make widths include padding+border so our math is exact */
 *, *::before, *::after {{
@@ -89,9 +98,9 @@ div[data-testid="stFooter"] {
 }}
 
 /* Hide Streamlit chrome */
-#MainMenu {{visibility: hidden;}}
-footer {{visibility: hidden;}}
-header {{visibility: hidden;}}
+#MainMenu {{ visibility: hidden; }}
+header {{ visibility: hidden; }}
+/* (footer already handled above) */
 
 /* ✅ Force consistent background everywhere */
 html, body,
@@ -107,16 +116,13 @@ section.main,
 html, body {{
   overflow: hidden !important;
 }}
-
 .stApp {{
   overflow: hidden;
 }}
 
 /* Hide Streamlit toolbar/icons */
-div[data-testid="stToolbar"],
 div[data-testid="stToolbarActions"],
 div[data-testid="stToolbarActionButton"],
-div[data-testid="stStatusWidget"],
 header[data-testid="stHeader"],
 div[data-testid="stHeader"] {{
   display: none !important;
@@ -163,38 +169,6 @@ section[data-testid="stSidebar"] {{
   z-index: 1000;
 }}
 
-.left-panel h3 {{
-  margin: 0 0 16px 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: #111827;
-}}
-
-.left-panel ul {{
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}}
-
-.left-panel li {{
-  padding: 10px 12px;
-  margin-bottom: 4px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s;
-  font-size: 14px;
-  color: #374151;
-}}
-
-.left-panel li:hover {{
-  background: #f3f4f6;
-}}
-
-.left-panel li.active {{
-  background: #e5e7eb;
-  font-weight: 500;
-}}
-
 /* -----------------------------
    MAIN QA PANEL (RIGHT PANEL)
 -------------------------------- */
@@ -202,7 +176,6 @@ section[data-testid="stSidebar"] {{
   max-width: {RIGHT_PANEL_MAX_WIDTH_PX}px !important;
   width: 100% !important;
 
-  /* ✅ margins: top right bottom left */
   margin: {OUTER_TOP_GAP_PX}px {OUTER_RIGHT_GAP_PX}px {OUTER_BOTTOM_GAP_PX}px {RIGHT_PANEL_LEFT_PX}px !important;
 
   padding: {MAIN_PADDING_PX}px !important;
@@ -241,7 +214,6 @@ div[data-testid="stChatInput"] {{
   z-index: 10000 !important;
 }}
 
-/* Prevent outer wrappers from painting white (Streamlit version differences) */
 div[data-testid="stChatInput"],
 div[data-testid="stChatInput"] > div,
 div[data-testid="stChatInput"] > div > div {{
@@ -261,26 +233,11 @@ div[data-testid="stChatInput"] textarea {{
   padding: 0.7rem 1rem !important;
   font-size: 14px !important;
 }}
-
-/* Scrollbar styling */
-::-webkit-scrollbar {{
-  width: 8px;
-  height: 8px;
-}}
-::-webkit-scrollbar-track {{
-  background: transparent;
-}}
-::-webkit-scrollbar-thumb {{
-  background: #d1d5db;
-  border-radius: 4px;
-}}
-::-webkit-scrollbar-thumb:hover {{
-  background: #9ca3af;
-}}
 </style>
 """,
     unsafe_allow_html=True,
 )
+
 
 
 # =========================
