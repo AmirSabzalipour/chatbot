@@ -12,6 +12,7 @@ from together import Together
 # =========================
 st.set_page_config(page_title="Chatbot", layout="wide")
 
+
 # =========================
 # DEFAULTS
 # =========================
@@ -19,15 +20,28 @@ MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
 TOP_K = 5
 DEBUG = False
 
-# Layout controls (keep your values, but avoid negative gaps in production)
+# -------------------------
+# Layout controls (NO negative margins)
+# -------------------------
 LEFT_PANEL_WIDTH_PX = 320
-OUTER_GAP_PX = -40          # NOTE: negative gaps are risky; kept as you set it
+
+# ✅ Control outer margins independently (reduces left/right whitespace cleanly)
+OUTER_LEFT_GAP_PX = 8
+OUTER_RIGHT_GAP_PX = 8
+OUTER_TOP_GAP_PX = 8
+OUTER_BOTTOM_GAP_PX = 8
+
+# Space between panels
 PANEL_GAP_PX = 10
+
+# Right panel width cap
 RIGHT_PANEL_MAX_WIDTH_PX = 600
 
+# Internal paddings
 PANEL_PADDING_PX = 40
 MAIN_PADDING_PX = 40
 
+# Heights
 LEFT_PANEL_HEIGHT_PX = 500
 RIGHT_PANEL_HEIGHT_PX = 500
 
@@ -35,8 +49,8 @@ RIGHT_PANEL_HEIGHT_PX = 500
 INPUT_BOTTOM_PX = 300
 INPUT_WIDTH_PX = 400
 
-# Derived positions (use same formula everywhere)
-RIGHT_PANEL_LEFT_PX = OUTER_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX
+# Derived positions (keep alignment consistent)
+RIGHT_PANEL_LEFT_PX = OUTER_LEFT_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX
 INPUT_LEFT_PX = RIGHT_PANEL_LEFT_PX + MAIN_PADDING_PX
 
 
@@ -111,8 +125,8 @@ section[data-testid="stSidebar"] {{
 -------------------------------- */
 .left-panel {{
   position: fixed;
-  top: {OUTER_GAP_PX}px;
-  left: {OUTER_GAP_PX}px;
+  top: {OUTER_TOP_GAP_PX}px;
+  left: {OUTER_LEFT_GAP_PX}px;
   width: {LEFT_PANEL_WIDTH_PX}px;
   height: {LEFT_PANEL_HEIGHT_PX}px;
 
@@ -160,16 +174,15 @@ section[data-testid="stSidebar"] {{
 
 /* -----------------------------
    MAIN QA PANEL (RIGHT PANEL)
-   IMPORTANT: Streamlit uses .block-container class (not .block-container selector only)
 -------------------------------- */
 .block-container {{
   max-width: {RIGHT_PANEL_MAX_WIDTH_PX}px !important;
   width: 100% !important;
 
-  margin: {OUTER_GAP_PX}px {OUTER_GAP_PX}px {OUTER_GAP_PX}px {RIGHT_PANEL_LEFT_PX}px !important;
+  /* ✅ margins: top right bottom left */
+  margin: {OUTER_TOP_GAP_PX}px {OUTER_RIGHT_GAP_PX}px {OUTER_BOTTOM_GAP_PX}px {RIGHT_PANEL_LEFT_PX}px !important;
 
-  /* keep bottom padding small (your input is fixed, not inside flow) */
-  padding: {MAIN_PADDING_PX}px {MAIN_PADDING_PX}px {MAIN_PADDING_PX}px {MAIN_PADDING_PX}px !important;
+  padding: {MAIN_PADDING_PX}px !important;
 
   background: #ffffff !important;
   border: 1px solid rgba(0,0,0,0.08) !important;
@@ -177,7 +190,7 @@ section[data-testid="stSidebar"] {{
   box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
 
   height: {RIGHT_PANEL_HEIGHT_PX}px !important;
-  min-height: {RIGHT_PANEL_HEIGHT_PX}px !important;   /* ✅ prevents “stretching” */
+  min-height: {RIGHT_PANEL_HEIGHT_PX}px !important;
   overflow-y: auto !important;
 }}
 
@@ -187,7 +200,6 @@ div[data-testid="stChatMessage"] {{
 
 /* -----------------------------
    Chat input with fixed width (manual control)
-   ✅ Must use double braces {{ }} because this is inside an f-string
 -------------------------------- */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
