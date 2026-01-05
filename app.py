@@ -109,7 +109,7 @@ div[data-testid="stAppViewBlockContainer"],
 section.main,
 .main,
 .stApp {{
-  background: #ffffff !important;
+  background: #f7f7f8 !important;
 }}
 
 /* Avoid page scrollbars caused by fixed panels */
@@ -233,37 +233,7 @@ div[data-testid="stChatInput"] textarea {{
   padding: 0.7rem 1rem !important;
   font-size: 14px !important;
 }}
-
-/* -----------------------------
-   REMOVE EXTRA BOX BELOW CHAT INPUT
--------------------------------- */
-div[data-testid="stBottomBlockContainer"],
-div[data-testid="stBottom"]{{
-  display: none !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}}
 </style>
-""",
-    unsafe_allow_html=True,
-)
-
-
-# =========================
-# LEFT PANEL (static for now)
-# =========================
-st.markdown(
-    """
-<div class="left-panel">
-  <h3>Conversations</h3>
-  <ul>
-    <li class="active">Current Chat</li>
-    <li>Previous Chat 1</li>
-    <li>Previous Chat 2</li>
-    <li>Previous Chat 3</li>
-  </ul>
-</div>
 """,
     unsafe_allow_html=True,
 )
