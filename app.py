@@ -326,6 +326,54 @@ section.main, .main, .block-container{{
 div[data-testid="stAppViewBlockContainer"]{{
   padding-bottom: 0 !important;
 }}
+/* ===============================
+   REMOVE STREAMLIT EMBED FOOTER
+   ("Built with Streamlit" + Fullscreen)
+================================ */
+
+/* Main footer containers */
+footer,
+div[data-testid="stFooter"],
+div[data-testid="stDecoration"],
+div[data-testid="stToolbar"],
+div[data-testid="stStatusWidget"] {{
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}}
+
+/* Viewer badge (varies by Streamlit version) */
+[class^="viewerBadge_"],
+[class*=" viewerBadge_"],
+.viewerBadge_container__1QSob,
+.viewerBadge_link__1S137,
+.viewerBadge_text__1JaDK {{
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}}
+
+/* Remove reserved bottom space */
+html, body,
+section.main,
+.main,
+.stApp {{
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}}
+
+/* Prevent invisible footer overlay */
+.stApp > footer {{
+  display: none !important;
+}}
+
+
+
+
+
+
 </style>
 """,
     unsafe_allow_html=True,
