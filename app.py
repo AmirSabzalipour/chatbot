@@ -43,10 +43,10 @@ MAIN_PADDING_PX = 10
 
 # Heights
 LEFT_PANEL_HEIGHT_PX = 500
-RIGHT_PANEL_HEIGHT_PX = 300
+RIGHT_PANEL_HEIGHT_PX = 320
 
 # Chat input controls
-INPUT_BOTTOM_PX = 2
+INPUT_BOTTOM_PX = -20
 INPUT_WIDTH_PX = 600
 
 # Derived positions (keep alignment consistent)
