@@ -369,11 +369,39 @@ section.main,
   display: none !important;
 }}
 
+/* ✅ Hide the Streamlit embed bottom bar ("Built with Streamlit" + "Fullscreen") */
+div[data-testid="stToolbar"],
+div[data-testid="stDecoration"],
+div[data-testid="stStatusWidget"],
+div[data-testid="stFooter"],
+footer {{
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}}
 
+/* ✅ Viewer-badge variants (Streamlit changes classnames sometimes) */
+[class^="viewerBadge_"],
+[class*=" viewerBadge_"],
+.viewerBadge_container__1QSob,
+.viewerBadge_link__1S137,
+.viewerBadge_text__1JaDK {{
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}}
+/* ✅ Some builds render a bottom "toolbar container" wrapper */
+div[data-testid="stToolbar"] + div {{
+  display: none !important;
+}}
 
-
-
-
+/* ✅ Remove any reserved space at bottom */
+html, body, .stApp, section.main, .main {{
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}}
 </style>
 """,
     unsafe_allow_html=True,
