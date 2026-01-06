@@ -28,7 +28,7 @@ LEFT_PANEL_WIDTH_PX = 300
 # ✅ Control outer margins independently (reduces left/right whitespace cleanly)
 OUTER_LEFT_GAP_PX = 10
 OUTER_RIGHT_GAP_PX = 10
-OUTER_TOP_GAP_PX = 20
+OUTER_TOP_GAP_PX = 40
 OUTER_BOTTOM_GAP_PX = 20
 
 # Space between panels
