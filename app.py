@@ -46,7 +46,7 @@ LEFT_PANEL_HEIGHT_PX = 500
 RIGHT_PANEL_HEIGHT_PX = 420
 
 # Chat input controls
-INPUT_BOTTOM_PX = 0
+INPUT_BOTTOM_PX = 5
 INPUT_WIDTH_PX = 800
 
 # Derived positions (keep alignment consistent)
