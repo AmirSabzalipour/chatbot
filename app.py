@@ -261,6 +261,38 @@ div[data-testid="stChatInput"] textarea:focus {{
 div[data-testid="stChatInput"] div[contenteditable="true"] {{
   background: #ffffff !important;
 }}
+/* --- REMOVE the outer rounded wrapper around the chat input --- */
+
+/* 1) Make every wrapper layer transparent + no border/shadow */
+div[data-testid="stChatInput"],
+div[data-testid="stChatInput"] > div,
+div[data-testid="stChatInput"] > div > div,
+div[data-testid="stChatInput"] > div > div > div {{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}}
+
+/* 2) Keep only the real input box white (BaseWeb textarea wrapper) */
+div[data-testid="stChatInput"] [data-baseweb="textarea"],
+div[data-testid="stChatInput"] [data-baseweb="textarea"] > div {{
+  background: #ffffff !important;
+  border-radius: 20px !important;   /* adjust */
+  border: 1px solid rgba(0,0,0,0.10) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+}}
+
+/* 3) Text area itself */
+div[data-testid="stChatInput"] textarea {{
+  background: #ffffff !important;
+}}
+
+/* Optional: remove extra padding that makes the “wrapper” look bigger */
+div[data-testid="stChatInput"] > div {{
+  padding: 0 !important;
+  margin: 0 !important;
+}}
 </style>
 """,
     unsafe_allow_html=True,
