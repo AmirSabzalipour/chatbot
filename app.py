@@ -293,6 +293,39 @@ div[data-testid="stChatInput"] > div {{
   padding: 0 !important;
   margin: 0 !important;
 }}
+
+/* ✅ Remove the big reserved bottom container/strip (keeps your fixed input) */
+div[data-testid="stBottomBlockContainer"]{{
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+
+  height: 0 !important;
+  min-height: 0 !important;
+}}
+
+/* Some Streamlit versions wrap it again */
+div[data-testid="stBottomBlockContainer"] > div{{
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+
+  height: 0 !important;
+  min-height: 0 !important;
+}}
+
+/* Also remove any extra bottom spacing from main content */
+section.main, .main, .block-container{{
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}}
+
+/* Extra catch-all */
+div[data-testid="stAppViewBlockContainer"]{{
+  padding-bottom: 0 !important;
+}}
 </style>
 """,
     unsafe_allow_html=True,
