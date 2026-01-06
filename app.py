@@ -198,6 +198,10 @@ div[data-testid="stChatMessage"] {{
 -------------------------------- */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
+  
+div[data-testid="stChatInput"] button {
+display: none !important;
+}
 
   bottom: {INPUT_BOTTOM_PX}px !important;
   left: {INPUT_LEFT_PX}px !important;
