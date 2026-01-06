@@ -236,6 +236,31 @@ div[data-testid="stChatInput"] textarea {{
 div[data-testid="stChatInput"] button {{
 display: none !important;
 }}
+
+/* 1) Force ALL chat input layers to white */
+div[data-testid="stChatInput"],
+div[data-testid="stChatInput"] > div,
+div[data-testid="stChatInput"] > div > div {{
+  background: #ffffff !important;
+}}
+
+/* 2) BaseWeb textarea wrappers (common gray culprit) */
+div[data-testid="stChatInput"] [data-baseweb="textarea"],
+div[data-testid="stChatInput"] [data-baseweb="textarea"] > div,
+div[data-testid="stChatInput"] [data-baseweb="textarea"] > div > div {{
+  background: #ffffff !important;
+}}
+
+/* 3) The actual textarea element */
+div[data-testid="stChatInput"] textarea,
+div[data-testid="stChatInput"] textarea:focus {{
+  background: #ffffff !important;
+}}
+
+/* 4) Some Streamlit versions use contenteditable instead of textarea */
+div[data-testid="stChatInput"] div[contenteditable="true"] {{
+  background: #ffffff !important;
+}}
 </style>
 """,
     unsafe_allow_html=True,
