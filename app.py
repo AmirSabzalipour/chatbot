@@ -407,6 +407,8 @@ html, body, .stApp, section.main, .main {{
     unsafe_allow_html=True,
 )
 
+
+
 # ✅ ADD THIS BACK: LEFT PANEL HTML
 st.markdown(
     """
@@ -422,7 +424,38 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
+hide_streamlit_style = """
+<style>
+/* Hamburger menu */
+#MainMenu { visibility: hidden !important; }
 
+/* Standard footer */
+footer { visibility: hidden !important; }
+
+/* Streamlit header/top bar (sometimes leaves space) */
+header { visibility: hidden !important; }
+div[data-testid="stHeader"] { display: none !important; }
+
+/* Embed bottom bar ("Built with Streamlit" + "Fullscreen") */
+div[data-testid="stToolbar"],
+div[data-testid="stDecoration"],
+div[data-testid="stStatusWidget"],
+div[data-testid="stFooter"] {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Viewer badge variants (classnames change across versions) */
+[class^="viewerBadge_"],
+[class*=" viewerBadge_"] {
+  display: none !important;
+  height: 0 !important;
+}
+</style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 # =========================
 # LOAD DOC
