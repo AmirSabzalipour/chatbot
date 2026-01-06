@@ -233,9 +233,9 @@ div[data-testid="stChatInput"] textarea {{
   font-size: 14px !important;
 }}
 
-div[data-testid="stChatInput"] button {
+div[data-testid="stChatInput"] button {{
 display: none !important;
-}
+}}
 </style>
 """,
     unsafe_allow_html=True,
