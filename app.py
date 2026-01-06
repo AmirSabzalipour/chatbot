@@ -23,7 +23,7 @@ DEBUG = False
 # -------------------------
 # Layout controls (NO negative margins)
 # -------------------------
-LEFT_PANEL_WIDTH_PX = 400
+LEFT_PANEL_WIDTH_PX = 300
 
 # ✅ Control outer margins independently (reduces left/right whitespace cleanly)
 OUTER_LEFT_GAP_PX = 10
@@ -35,7 +35,7 @@ OUTER_BOTTOM_GAP_PX = 20
 PANEL_GAP_PX = 10
 
 # Right panel width cap
-RIGHT_PANEL_MAX_WIDTH_PX = 650
+RIGHT_PANEL_MAX_WIDTH_PX = 750
 
 # Internal paddings
 PANEL_PADDING_PX = 10
