@@ -199,10 +199,6 @@ div[data-testid="stChatMessage"] {{
 div[data-testid="stChatInput"] {{
   position: fixed !important;
   
-div[data-testid="stChatInput"] button {
-display: none !important;
-}
-
   bottom: {INPUT_BOTTOM_PX}px !important;
   left: {INPUT_LEFT_PX}px !important;
 
@@ -236,6 +232,10 @@ div[data-testid="stChatInput"] textarea {{
   padding: 0.7rem 1rem !important;
   font-size: 14px !important;
 }}
+
+div[data-testid="stChatInput"] button {
+display: none !important;
+}
 </style>
 """,
     unsafe_allow_html=True,
