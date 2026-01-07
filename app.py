@@ -238,17 +238,28 @@ div[data-testid="stChatInput"] div[contenteditable="true"] {{
   font-size: 14px !important;
 }}
 
-/* Hide send button */
-div[data-testid="stChatInput"] button {{
-  display: none !important;
-}}
-/* Nuclear option: make everything around chat input transparent */
-div[data-testid="stChatInput"],
-div[data-testid="stChatInput"] ~ *,
-div[data-testid="stChatInput"] + * {{
+/* REMOVE the outer BaseWeb container completely */
+div[data-testid="stChatInput"] [data-baseweb="textarea"],
+div[data-testid="stChatInput"] [data-baseweb="textarea"] > div,
+div[data-testid="stChatInput"] [data-baseweb="form-control"],
+div[data-testid="stChatInput"] [data-baseweb="base-input"] {{
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  outline: none !important;
+}}
+
+/* STYLE ONLY the actual editable area */
+div[data-testid="stChatInput"] textarea,
+div[data-testid="stChatInput"] div[contenteditable="true"] {{
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.12) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08) !important;
+  padding: 0.7rem 1rem !important;
+  font-size: 14px !important;
 }}
 </style>
 """,
