@@ -270,6 +270,22 @@ div.container_lupux_1 {{
   margin: 0 !important;
   border: 0 !important;
 }}
+/* Hide the embed bar: "Built with Streamlit 🎈" + "Fullscreen" */
+div[class^="container_"][class$="_1"] {{
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}}
+
+/* Prevent it from leaving a gap */
+div.streamlitAppContainer > div > div {{
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}}
 </style>
 """,
     unsafe_allow_html=True,
