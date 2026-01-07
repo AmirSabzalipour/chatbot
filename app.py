@@ -35,7 +35,7 @@ MAIN_PADDING_PX = 24
 
 # Better heights for chat interface
 LEFT_PANEL_HEIGHT_PX = 720
-RIGHT_PANEL_HEIGHT_PX = 720
+RIGHT_PANEL_HEIGHT_PX = 920
 
 # Chat input
 INPUT_BOTTOM_PX = 30
