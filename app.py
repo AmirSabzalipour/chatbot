@@ -242,6 +242,14 @@ div[data-testid="stChatInput"] div[contenteditable="true"] {{
 div[data-testid="stChatInput"] button {{
   display: none !important;
 }}
+/* Nuclear option: make everything around chat input transparent */
+div[data-testid="stChatInput"],
+div[data-testid="stChatInput"] ~ *,
+div[data-testid="stChatInput"] + * {{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}}
 </style>
 """,
     unsafe_allow_html=True,
