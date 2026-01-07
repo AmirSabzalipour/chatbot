@@ -261,6 +261,15 @@ div[data-testid="stChatInput"] div[contenteditable="true"] {{
   padding: 0.7rem 1rem !important;
   font-size: 14px !important;
 }}
+div.container_lupux_1 {{
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+}}
 </style>
 """,
     unsafe_allow_html=True,
