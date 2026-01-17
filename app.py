@@ -177,7 +177,7 @@ div[data-testid="stBottomBlockContainer"] > div {{
 .block-container {{
   max-width: {RIGHT_PANEL_MAX_WIDTH_PX}px !important;
   width: 100% !important;
-  margin: {OUTER_TOP_GAP_PX}px {OUTER_RIGHT_GAP_PX}px {OUTER_BOTTOM_GAP_PX}px {RIGHT_PANEL_LEFT_PX}px !important;
+  margin: {OUTER_TOP_GAP_PX+ 40}px {OUTER_RIGHT_GAP_PX}px {OUTER_BOTTOM_GAP_PX}px {RIGHT_PANEL_LEFT_PX}px !important;
   padding: {MAIN_PADDING_PX}px !important;
   background: #ffffff !important;
   border: 1px solid rgba(0,0,0,0.08) !important;
