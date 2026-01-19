@@ -56,38 +56,52 @@ CHAT_INPUT_RESERVED_PX = 120
 st.markdown(
     f"""
 <style>
-/* --- Hard stop: NO outer scrolling anywhere --- */
+/* =========================================================
+   GLOBAL: hard stop outer scrolling + remove outer frame
+========================================================= */
+
+/* Box sizing */
+*, *::before, *::after {{
+  box-sizing: border-box;
+}}
+
+/* No outer scrolling anywhere */
 html, body {{
   height: 100% !important;
   overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #ffffff !important;
 }}
 
+/* Streamlit app wrappers: remove padding/margins/borders/shadows */
 .stApp,
 div[data-testid="stAppViewContainer"],
 div[data-testid="stAppViewBlockContainer"],
 section.main,
-.main {{
+.main,
+section[data-testid="stMain"],
+section.stMain {{
   height: 100vh !important;
   overflow: hidden !important;
   padding: 0 !important;
   margin: 0 !important;
   background: #ffffff !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
 }}
 
-.block-container,
-.left-panel {{
-  background: #f3f4f6 !important;        /* light gray */
-}}
-
-/* Optional: keep borders looking clean on gray */
-.block-container,
-.left-panel {{
-  border: 1px solid rgba(0,0,0,0.06) !important;
-}}
-
-/* Box sizing for accurate calculations */
-*, *::before, *::after {{
-  box-sizing: border-box;
+/* Remove any “outer card” look from inner wrappers */
+div[data-testid="stAppViewBlockContainer"] > div,
+div[data-testid="stVerticalBlock"],
+div[data-testid="stVerticalBlock"] > div {{
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
 }}
 
 /* Hide Streamlit chrome */
@@ -108,16 +122,21 @@ div[data-testid="stToolbarActionButton"] {{
   padding: 0 !important;
 }}
 
-/* Hide viewer badge (all variants) */
+/* Hide viewer badge / embed controls */
 [class^="viewerBadge_"],
 [class*=" viewerBadge_"],
 .viewerBadge_container__1QSob,
 .viewerBadge_link__1S137,
-.viewerBadge_text__1JaDK {{
+.viewerBadge_text__1JaDK,
+div.container_lupux_1,
+div[class^="container_"][class$="_1"] {{
   display: none !important;
+  visibility: hidden !important;
   height: 0 !important;
-  margin: 0 !important;
+  min-height: 0 !important;
   padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
 }}
 
 /* Hide floating buttons */
@@ -144,17 +163,30 @@ div[data-testid="stBottomBlockContainer"] > div {{
   min-height: 0 !important;
 }}
 
-/* LEFT PANEL */
+/* =========================================================
+   COLORS
+   - Outer (3): white
+   - Panels (1,2): light gray
+========================================================= */
+.block-container,
+.left-panel {{
+  background: #f3f4f6 !important; /* light gray */
+}}
+
+/* =========================================================
+   LEFT PANEL
+========================================================= */
 .left-panel {{
   position: fixed;
   top: {OUTER_TOP_GAP_PX}px;
   left: {OUTER_LEFT_GAP_PX}px;
   width: {LEFT_PANEL_WIDTH_PX}px;
   height: {PANEL_HEIGHT_CSS};
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.08);
+
+  border: 0 !important;               /* no border */
+  box-shadow: none !important;        /* no shadow */
   border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+
   padding: {PANEL_PADDING_PX}px;
   overflow-y: auto;
   z-index: 1000;
@@ -184,7 +216,7 @@ div[data-testid="stBottomBlockContainer"] > div {{
 }}
 
 .left-panel li:hover {{
-  background: #f0f0f0;
+  background: rgba(0,0,0,0.04);
 }}
 
 .left-panel li.active {{
@@ -193,29 +225,28 @@ div[data-testid="stBottomBlockContainer"] > div {{
   font-weight: 500;
 }}
 
-/* RIGHT PANEL (Main Chat)
-   IMPORTANT:
-   - Use viewport height so it never forces outer scroll
-   - Keep only THIS scrollable
-*/
+/* =========================================================
+   RIGHT PANEL (Main Chat)
+   - Only this scrolls internally
+   - No outer scroll
+========================================================= */
 .block-container {{
   max-width: {RIGHT_PANEL_MAX_WIDTH_PX}px !important;
   width: 100% !important;
 
-  margin: {OUTER_TOP_GAP_PX }px {OUTER_RIGHT_GAP_PX}px {OUTER_BOTTOM_GAP_PX}px {RIGHT_PANEL_LEFT_PX}px !important;
+  margin: {OUTER_TOP_GAP_PX}px {OUTER_RIGHT_GAP_PX}px {OUTER_BOTTOM_GAP_PX}px {RIGHT_PANEL_LEFT_PX}px !important;
   padding: {MAIN_PADDING_PX}px !important;
 
-  background: #ffffff !important;
-  border: 1px solid rgba(0,0,0,0.08) !important;
+  border: 0 !important;               /* no border */
+  box-shadow: none !important;        /* no shadow */
   border-radius: 16px !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
 
   height: {RIGHT_PANEL_HEIGHT_CSS} !important;
   min-height: {RIGHT_PANEL_HEIGHT_CSS} !important;
 
   overflow-y: auto !important;
 
-  /* ✅ prevent fixed chat input overlapping last messages */
+  /* Prevent fixed input overlapping last messages */
   padding-bottom: {CHAT_INPUT_RESERVED_PX}px !important;
 }}
 
@@ -224,7 +255,9 @@ div[data-testid="stChatMessage"] {{
   padding: 0.5rem 0 !important;
 }}
 
-/* CHAT INPUT (fixed) */
+/* =========================================================
+   CHAT INPUT (fixed)
+========================================================= */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
   bottom: {INPUT_BOTTOM_PX}px !important;
@@ -250,7 +283,7 @@ div[data-testid="stChatInput"] > div > div > div {{
   margin: 0 !important;
 }}
 
-/* Style the actual input box */
+/* Style actual editable area */
 div[data-testid="stChatInput"] textarea,
 div[data-testid="stChatInput"] div[contenteditable="true"] {{
   background: #ffffff !important;
@@ -261,45 +294,10 @@ div[data-testid="stChatInput"] div[contenteditable="true"] {{
   font-size: 14px !important;
 }}
 
-/* Hide embed bar / viewer containers (best effort, safe) */
-div.container_lupux_1,
-div[class^="container_"][class$="_1"] {{
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: 0 !important;
-}}
-
-/* Remove border/shadow from the OUTER wrapper that encloses both panels */
-div[data-testid="stAppViewContainer"],
-div[data-testid="stAppViewBlockContainer"],
-div[data-testid="stAppViewBlockContainer"] > div,
-section.main,
-section.main > div {{
-  border: 0 !important;
-  box-shadow: none !important;
-  outline: none !important;
-  background: #ffffff !important;
-}}
-
-/* Sometimes the rounded “card” comes from vertical block wrappers */
-div[data-testid="stVerticalBlock"],
-div[data-testid="stVerticalBlock"] > div {{
-  border: 0 !important;
-  box-shadow: none !important;
-  outline: none !important;
-  background: transparent !important;
-}}
-
-/* If a faint top line remains */
+/* If a faint top line remains anywhere */
 div[data-testid="stAppViewBlockContainer"] * {{
   border-top: 0 !important;
 }}
-
-
 </style>
 """,
     unsafe_allow_html=True,
