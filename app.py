@@ -272,6 +272,34 @@ div[class^="container_"][class$="_1"] {{
   margin: 0 !important;
   border: 0 !important;
 }}
+
+/* Remove border/shadow from the OUTER wrapper that encloses both panels */
+div[data-testid="stAppViewContainer"],
+div[data-testid="stAppViewBlockContainer"],
+div[data-testid="stAppViewBlockContainer"] > div,
+section.main,
+section.main > div {{
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: #ffffff !important;
+}}
+
+/* Sometimes the rounded “card” comes from vertical block wrappers */
+div[data-testid="stVerticalBlock"],
+div[data-testid="stVerticalBlock"] > div {{
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+}}
+
+/* If a faint top line remains */
+div[data-testid="stAppViewBlockContainer"] * {{
+  border-top: 0 !important;
+}}
+
+
 </style>
 """,
     unsafe_allow_html=True,
