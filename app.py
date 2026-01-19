@@ -71,7 +71,18 @@ section.main,
   overflow: hidden !important;
   padding: 0 !important;
   margin: 0 !important;
-  background: #f7f7f8 !important;
+  background: #ffffff !important;
+}}
+
+.block-container,
+.left-panel {{
+  background: #f3f4f6 !important;        /* light gray */
+}}
+
+/* Optional: keep borders looking clean on gray */
+.block-container,
+.left-panel {{
+  border: 1px solid rgba(0,0,0,0.06) !important;
 }}
 
 /* Box sizing for accurate calculations */
