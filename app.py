@@ -152,16 +152,6 @@ section[data-testid="stSidebar"] {{
   display: none !important;
 }}
 
-/* Remove bottom spacing containers Streamlit may add */
-div[data-testid="stBottomBlockContainer"],
-div[data-testid="stBottomBlockContainer"] > div {{
-  background: transparent !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: 0 !important;
-  height: 0 !important;
-  min-height: 0 !important;
-}}
 
 /* =========================================================
    COLORS
