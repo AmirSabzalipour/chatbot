@@ -253,6 +253,9 @@ div[data-testid="stChatMessage"] {{
 /* =========================================================
    CHAT INPUT (fixed)
 ========================================================= */
+/* =========================================================
+   CHAT INPUT (fixed)
+========================================================= */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
   bottom: {INPUT_BOTTOM_PX}px !important;
@@ -287,6 +290,21 @@ div[data-testid="stChatInput"] div[contenteditable="true"] {{
   box-shadow: 0 2px 12px rgba(0,0,0,0.08) !important;
   padding: 0.7rem 1rem !important;
   font-size: 14px !important;
+}}
+
+/* ✅ HIDE THE SUBMIT ARROW BUTTON */
+div[data-testid="stChatInput"] button[kind="primary"],
+div[data-testid="stChatInput"] button[kind="secondary"],
+div[data-testid="stChatInput"] button[aria-label="Send message"],
+div[data-testid="stChatInput"] button {{
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  opacity: 0 !important;
 }}
 
 /* If a faint top line remains anywhere */
