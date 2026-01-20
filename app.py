@@ -36,7 +36,7 @@ MAIN_PADDING_PX = 24
 RIGHT_PANEL_TOP_EXTRA_PX = 40
 
 # Chat input
-INPUT_BOTTOM_PX = 90  # ✅ give it a little breathing room
+INPUT_BOTTOM_PX = 110  # ✅ give it a little breathing room
 INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX - (MAIN_PADDING_PX * 2)
 
 # Derived positions
