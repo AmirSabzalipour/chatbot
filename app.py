@@ -36,7 +36,7 @@ MAIN_PADDING_PX = 24
 RIGHT_PANEL_TOP_EXTRA_PX = 40
 
 # Chat input
-INPUT_BOTTOM_PX = 20  # ✅ give it a little breathing room
+INPUT_BOTTOM_PX = 90  # ✅ give it a little breathing room
 INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX - (MAIN_PADDING_PX * 2)
 
 # Derived positions
@@ -48,7 +48,7 @@ PANEL_HEIGHT_CSS = f"calc(100vh - {OUTER_TOP_GAP_PX}px - {OUTER_BOTTOM_GAP_PX}px
 RIGHT_PANEL_HEIGHT_CSS = f"calc(100vh - {OUTER_TOP_GAP_PX + RIGHT_PANEL_TOP_EXTRA_PX}px - {OUTER_BOTTOM_GAP_PX}px)"
 
 # ✅ Reserve space so the fixed input doesn’t cover last messages
-CHAT_INPUT_RESERVED_PX = 120
+CHAT_INPUT_RESERVED_PX = 200
 
 # =========================
 # GLOBAL CSS (CONSOLIDATED)
