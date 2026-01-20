@@ -47,7 +47,7 @@ INPUT_LEFT_PX = RIGHT_PANEL_LEFT_PX + MAIN_PADDING_PX
 PANEL_HEIGHT_CSS = f"calc(100vh - {OUTER_TOP_GAP_PX}px - {OUTER_BOTTOM_GAP_PX}px)"
 RIGHT_PANEL_HEIGHT_CSS = f"calc(100vh - {OUTER_TOP_GAP_PX + RIGHT_PANEL_TOP_EXTRA_PX}px - {OUTER_BOTTOM_GAP_PX}px)"
 
-# ✅ Reserve space so the fixed input doesn’t cover last messages
+# ✅ Reserve space so the fixed input doesn't cover last messages
 CHAT_INPUT_RESERVED_PX = 200
 
 # =========================
@@ -92,7 +92,7 @@ section.stMain {{
   outline: none !important;
 }}
 
-/* Remove any “outer card” look from inner wrappers */
+/* Remove any "outer card" look from inner wrappers */
 div[data-testid="stAppViewBlockContainer"] > div,
 div[data-testid="stVerticalBlock"],
 div[data-testid="stVerticalBlock"] > div {{
@@ -293,7 +293,9 @@ div[data-testid="stAppViewBlockContainer"] * {{
     unsafe_allow_html=True,
 )
 
+# =========================
 # LEFT PANEL HTML
+# =========================
 st.markdown(
     """
 <div class="left-panel">
@@ -308,3 +310,42 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
+
+# =========================
+# CHAT INTERFACE
+# =========================
+
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# Display chat messages from history
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+# Chat input
+if prompt := st.chat_input("Type your message here..."):
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    
+    # Display user message
+    with st.chat_message("user"):
+        st.markdown(prompt)
+    
+    # TODO: Add your RAG pipeline logic here
+    # This is where you'd:
+    # 1. Query your vector database (ChromaDB)
+    # 2. Retrieve relevant context
+    # 3. Send to LLM with context
+    # 4. Get response
+    
+    # For now, just echo back
+    response = f"You said: {prompt}"
+    
+    # Display assistant response
+    with st.chat_message("assistant"):
+        st.markdown(response)
+    
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": response})
