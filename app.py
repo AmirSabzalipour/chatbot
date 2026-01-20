@@ -22,6 +22,9 @@ DOC_PATH = Path("data/document.txt")
 # =========================
 # LAYOUT CONFIGURATION
 # =========================
+# =========================
+# LAYOUT CONFIGURATION
+# =========================
 LEFT_PANEL_WIDTH_PX = 280
 OUTER_LEFT_GAP_PX = 10
 OUTER_RIGHT_GAP_PX = 20
@@ -33,23 +36,24 @@ RIGHT_PANEL_MAX_WIDTH_PX = 800
 PANEL_PADDING_PX = 20
 MAIN_PADDING_PX = 24
 
-# ✅ Add extra top spacing ONLY for the right panel (your request)
+# ✅ Add extra top spacing ONLY for the right panel
 RIGHT_PANEL_TOP_EXTRA_PX = 40
 
-# Chat input
-INPUT_BOTTOM_PX = 110  # ✅ give it a little breathing room
+# Chat input positioning - ADJUST THESE VALUES
+INPUT_BOTTOM_PX = 40  # Distance from bottom of viewport
+INPUT_LEFT_OFFSET_PX = 0  # Additional left offset from panel edge
 INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX - (MAIN_PADDING_PX * 2)
 
 # Derived positions
 RIGHT_PANEL_LEFT_PX = OUTER_LEFT_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX
-INPUT_LEFT_PX = RIGHT_PANEL_LEFT_PX + MAIN_PADDING_PX
+INPUT_LEFT_PX = RIGHT_PANEL_LEFT_PX + MAIN_PADDING_PX + INPUT_LEFT_OFFSET_PX
 
 # ✅ Height math (viewport-based, prevents outer scrollbar)
 PANEL_HEIGHT_CSS = f"calc(100vh - {OUTER_TOP_GAP_PX}px - {OUTER_BOTTOM_GAP_PX}px)"
 RIGHT_PANEL_HEIGHT_CSS = f"calc(100vh - {OUTER_TOP_GAP_PX + RIGHT_PANEL_TOP_EXTRA_PX}px - {OUTER_BOTTOM_GAP_PX}px)"
 
 # ✅ Reserve space so the fixed input doesn't cover last messages
-CHAT_INPUT_RESERVED_PX = 200
+CHAT_INPUT_RESERVED_PX = 200200
 
 # =========================
 # GLOBAL CSS (CONSOLIDATED)
