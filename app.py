@@ -53,7 +53,7 @@ PANEL_HEIGHT_CSS = f"calc(100vh - {OUTER_TOP_GAP_PX}px - {OUTER_BOTTOM_GAP_PX}px
 RIGHT_PANEL_HEIGHT_CSS = f"calc(100vh - {OUTER_TOP_GAP_PX + RIGHT_PANEL_TOP_EXTRA_PX}px - {OUTER_BOTTOM_GAP_PX}px)"
 
 # ✅ Reserve space so the fixed input doesn't cover last messages
-CHAT_INPUT_RESERVED_PX = 200
+CHAT_INPUT_RESERVED_PX = 400
 
 # =========================
 # GLOBAL CSS (CONSOLIDATED)
