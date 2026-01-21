@@ -40,8 +40,8 @@ MAIN_PADDING_PX = 4
 RIGHT_PANEL_TOP_EXTRA_PX = 0
 
 # Chat input positioning - ADJUST THESE VALUES
-INPUT_BOTTOM_PX = 10  # Distance from bottom of viewport
-INPUT_LEFT_OFFSET_PX = 0  # Additional left offset from panel edge
+INPUT_BOTTOM_PX = 0  # Distance from bottom of viewport
+INPUT_LEFT_OFFSET_PX = 20  # Additional left offset from panel edge
 INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX - (MAIN_PADDING_PX * 2)
 
 # Derived positions
