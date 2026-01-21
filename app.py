@@ -37,7 +37,7 @@ PANEL_PADDING_PX = 20
 MAIN_PADDING_PX = 4
 
 # ✅ Add extra top spacing ONLY for the right panel
-RIGHT_PANEL_TOP_EXTRA_PX = 40
+RIGHT_PANEL_TOP_EXTRA_PX = 0
 
 # Chat input positioning - ADJUST THESE VALUES
 INPUT_BOTTOM_PX = 10  # Distance from bottom of viewport
