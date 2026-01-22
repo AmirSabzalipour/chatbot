@@ -33,17 +33,17 @@ LEFT_PANEL_GAP_BOTTOM_PX = 5   # Left panel -> viewport bottom edge (via height 
 LEFT_RIGHT_PANEL_GAP_PX =0   # Gap between left panel and right panel
 
 # RIGHT PANEL (main chat)
-RIGHT_PANEL_MAX_WIDTH_PX = 940
+RIGHT_PANEL_MAX_WIDTH_PX = 960
 
 RIGHT_PANEL_GAP_RIGHT_PX = 0   # Right panel -> viewport right edge (margin-right)
-RIGHT_PANEL_GAP_TOP_PX = 30     # Right panel -> viewport top edge (margin-top)
+RIGHT_PANEL_GAP_TOP_PX = 60     # Right panel -> viewport top edge (margin-top)
 RIGHT_PANEL_GAP_BOTTOM_PX =0  # Right panel -> viewport bottom edge (margin-bottom + height calc)
 
 # Optional extra top spacing ONLY for the right panel (added on top of RIGHT_PANEL_GAP_TOP_PX in height math)
 RIGHT_PANEL_TOP_EXTRA_PX = 0
 
 # INTERNAL PADDING
-PANEL_PADDING_PX = 10          # Inner padding inside the left panel
+PANEL_PADDING_PX = 5         # Inner padding inside the left panel
 MAIN_PADDING_PX = 4            # Inner padding inside the right panel container (.block-container)
 
 # =========================
@@ -51,7 +51,7 @@ MAIN_PADDING_PX = 4            # Inner padding inside the right panel container 
 # =========================
 INPUT_BOTTOM_PX = 0
 INPUT_LEFT_OFFSET_PX = 0
-INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX - (MAIN_PADDING_PX * 2)
+INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX 
 
 # =========================
 # DERIVED POSITIONS / HEIGHTS
