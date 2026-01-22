@@ -30,14 +30,14 @@ LEFT_PANEL_GAP_LEFT_PX = 0     # Left panel -> viewport left edge
 LEFT_PANEL_GAP_TOP_PX = 0      # Left panel -> viewport top edge
 LEFT_PANEL_GAP_BOTTOM_PX = 5   # Left panel -> viewport bottom edge (via height calc)
 
-LEFT_RIGHT_PANEL_GAP_PX = 5    # Gap between left panel and right panel
+LEFT_RIGHT_PANEL_GAP_PX =0   # Gap between left panel and right panel
 
 # RIGHT PANEL (main chat)
-RIGHT_PANEL_MAX_WIDTH_PX = 840
+RIGHT_PANEL_MAX_WIDTH_PX = 940
 
 RIGHT_PANEL_GAP_RIGHT_PX = 0   # Right panel -> viewport right edge (margin-right)
-RIGHT_PANEL_GAP_TOP_PX = 0     # Right panel -> viewport top edge (margin-top)
-RIGHT_PANEL_GAP_BOTTOM_PX = 5  # Right panel -> viewport bottom edge (margin-bottom + height calc)
+RIGHT_PANEL_GAP_TOP_PX = 10     # Right panel -> viewport top edge (margin-top)
+RIGHT_PANEL_GAP_BOTTOM_PX =0  # Right panel -> viewport bottom edge (margin-bottom + height calc)
 
 # Optional extra top spacing ONLY for the right panel (added on top of RIGHT_PANEL_GAP_TOP_PX in height math)
 RIGHT_PANEL_TOP_EXTRA_PX = 0
