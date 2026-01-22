@@ -444,26 +444,37 @@ messages = st.session_state.messages
 # CHAT MESSAGES
 # =========================
 for m in messages:
-    with st.chat_message(m["role"]):
+    avatar = m.get("avatar", None)
+    with st.chat_message(m["role"], avatar=avatar) if avatar else st.chat_message(m["role"]):
         st.markdown(m["content"])
 
 # =========================
 # CHAT INPUT
 # =========================
+# =========================
+# CHAT INPUT
+# =========================
 prompt = st.chat_input("Ask about the document…")
 if prompt:
+    # Store + render user message (no avatar)
     messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    with st.chat_message("assistant"):
+    # Generate assistant response (force emoji avatar so Streamlit never tries to render/clamp a text label)
+    with st.chat_message("assistant", avatar="🤖"):
         with st.spinner("Thinking…"):
-            ans, retrieved = rag_answer(llm, embedder, col, prompt, model_name=MODEL_NAME, top_k=TOP_K)
+            ans, retrieved = rag_answer(
+                llm, embedder, col, prompt,
+                model_name=MODEL_NAME, top_k=TOP_K
+            )
         st.markdown(ans)
+
         if DEBUG:
             with st.expander("Retrieved context"):
                 for i, ch in enumerate(retrieved, 1):
                     st.markdown(f"**{i}.** {ch[:500]}{'…' if len(ch) > 500 else ''}")
 
-    messages.append({"role": "assistant", "content": ans})
+    # Persist assistant message (include avatar info if you ever re-render from history)
+    messages.append({"role": "assistant", "content": ans, "avatar": "🤖"})
     st.rerun()
