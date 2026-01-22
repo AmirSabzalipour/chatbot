@@ -50,7 +50,7 @@ MAIN_PADDING_PX = 4            # Inner padding inside the right panel container 
 # CHAT INPUT POSITIONING
 # =========================
 INPUT_BOTTOM_PX = 0
-INPUT_LEFT_OFFSET_PX = 20
+INPUT_LEFT_OFFSET_PX = 0
 INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX - (MAIN_PADDING_PX * 2)
 
 # =========================
