@@ -20,64 +20,54 @@ DEBUG = False
 DOC_PATH = Path("data/document.txt")
 
 # =========================
-# LAYOUT CONFIGURATION
-# =========================
-# =========================
-# LAYOUT CONFIGURATION
-# =========================
-# LAYOUT CONFIGURATION
+# LAYOUT CONFIGURATION (Split per panel)
 # =========================
 
 # LEFT PANEL (sidebar)
-LEFT_PANEL_WIDTH_PX = 220          # Fixed width of the left panel
+LEFT_PANEL_WIDTH_PX = 220
 
-# OUTER GAPS (viewport edge spacing)
-OUTER_LEFT_GAP_PX = 0             # Horizontal gap between the LEFT panel and the left edge of the viewport
-OUTER_RIGHT_GAP_PX = 0            # Horizontal gap between the RIGHT panel and the right edge of the viewport
-OUTER_TOP_GAP_PX = 20              # Vertical gap from the top edge of the viewport (affects BOTH left & right panels)
-OUTER_BOTTOM_GAP_PX = 5            # Vertical gap from the bottom edge of the viewport (affects BOTH left & right panels)
+LEFT_PANEL_GAP_LEFT_PX = 0     # Left panel -> viewport left edge
+LEFT_PANEL_GAP_TOP_PX = 0      # Left panel -> viewport top edge
+LEFT_PANEL_GAP_BOTTOM_PX = 5   # Left panel -> viewport bottom edge (via height calc)
 
-# SPACE BETWEEN PANELS
-PANEL_GAP_PX = 10                  # Horizontal gap between the left panel and the right panel
+LEFT_RIGHT_PANEL_GAP_PX = 5    # Gap between left panel and right panel
 
-# RIGHT PANEL (main chat container)
-RIGHT_PANEL_MAX_WIDTH_PX = 840     # Max width of the right panel content area (chat panel)
+# RIGHT PANEL (main chat)
+RIGHT_PANEL_MAX_WIDTH_PX = 840
 
-# INTERNAL PADDING
-PANEL_PADDING_PX = 20              # Inner padding inside the left panel (and any other panel using it)
-MAIN_PADDING_PX = 4                # Inner padding inside the right panel container (.block-container)
+RIGHT_PANEL_GAP_RIGHT_PX = 0   # Right panel -> viewport right edge (margin-right)
+RIGHT_PANEL_GAP_TOP_PX = 0     # Right panel -> viewport top edge (margin-top)
+RIGHT_PANEL_GAP_BOTTOM_PX = 5  # Right panel -> viewport bottom edge (margin-bottom + height calc)
 
-# Notes on how these are used:
-# - Left panel position is controlled by:
-#     top  = OUTER_TOP_GAP_PX
-#     left = OUTER_LEFT_GAP_PX
-#
-# - Right panel position is controlled by:
-#     left margin  = OUTER_LEFT_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX
-#     right margin = OUTER_RIGHT_GAP_PX
-#     top margin   = OUTER_TOP_GAP_PX
-#
-# - Panel heights are derived from:
-#     height = calc(100vh - OUTER_TOP_GAP_PX - OUTER_BOTTOM_GAP_PX)
-
-
-# ✅ Add extra top spacing ONLY for the right panel
+# Optional extra top spacing ONLY for the right panel (added on top of RIGHT_PANEL_GAP_TOP_PX in height math)
 RIGHT_PANEL_TOP_EXTRA_PX = 0
 
-# Chat input positioning - ADJUST THESE VALUES
-INPUT_BOTTOM_PX = 0  # Distance from bottom of viewport
-INPUT_LEFT_OFFSET_PX = 20  # Additional left offset from panel edge
+# INTERNAL PADDING
+PANEL_PADDING_PX = 20          # Inner padding inside the left panel
+MAIN_PADDING_PX = 4            # Inner padding inside the right panel container (.block-container)
+
+# =========================
+# CHAT INPUT POSITIONING
+# =========================
+INPUT_BOTTOM_PX = 0
+INPUT_LEFT_OFFSET_PX = 20
 INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX - (MAIN_PADDING_PX * 2)
 
-# Derived positions
-RIGHT_PANEL_LEFT_PX = OUTER_LEFT_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX
+# =========================
+# DERIVED POSITIONS / HEIGHTS
+# =========================
+
+# Right panel "starts" after: left panel left gap + left panel width + inter-panel gap
+RIGHT_PANEL_LEFT_PX = LEFT_PANEL_GAP_LEFT_PX + LEFT_PANEL_WIDTH_PX + LEFT_RIGHT_PANEL_GAP_PX
+
+# Chat input aligned relative to right panel
 INPUT_LEFT_PX = RIGHT_PANEL_LEFT_PX + MAIN_PADDING_PX + INPUT_LEFT_OFFSET_PX
 
-# ✅ Height math (viewport-based, prevents outer scrollbar)
-PANEL_HEIGHT_CSS = f"calc(100vh - {OUTER_TOP_GAP_PX}px - {OUTER_BOTTOM_GAP_PX}px)"
-RIGHT_PANEL_HEIGHT_CSS = f"calc(100vh - {OUTER_TOP_GAP_PX + RIGHT_PANEL_TOP_EXTRA_PX}px - {OUTER_BOTTOM_GAP_PX}px)"
+# Height math (viewport-based, prevents outer scrollbar)
+LEFT_PANEL_HEIGHT_CSS = f"calc(100vh - {LEFT_PANEL_GAP_TOP_PX}px - {LEFT_PANEL_GAP_BOTTOM_PX}px)"
+RIGHT_PANEL_HEIGHT_CSS = f"calc(100vh - {RIGHT_PANEL_GAP_TOP_PX + RIGHT_PANEL_TOP_EXTRA_PX}px - {RIGHT_PANEL_GAP_BOTTOM_PX}px)"
 
-# ✅ Reserve space so the fixed input doesn't cover last messages
+# Reserve space so the fixed input doesn't cover last messages
 CHAT_INPUT_RESERVED_PX = 200
 
 # =========================
@@ -156,7 +146,7 @@ div[data-testid="stToolbarActionButton"] {{
 [class^="viewerBadge_"],
 [class*=" viewerBadge_"],
 .viewerBadge_container__1QSob,
-.viewerBadge_link__1S137,
+viewerBadge_link__1S137,
 .viewerBadge_text__1JaDK,
 div.container_lupux_1,
 div[class^="container_"][class$="_1"] {{
@@ -182,15 +172,12 @@ section[data-testid="stSidebar"] {{
   display: none !important;
 }}
 
-
 /* =========================================================
    COLORS
-   - Outer (3): white
-   - Panels (1,2): light gray
 ========================================================= */
 .block-container,
 .left-panel {{
-  background: #f3f4f6 !important; /* light gray */
+  background: #f3f4f6 !important;
 }}
 
 /* =========================================================
@@ -198,13 +185,13 @@ section[data-testid="stSidebar"] {{
 ========================================================= */
 .left-panel {{
   position: fixed;
-  top: {OUTER_TOP_GAP_PX}px;
-  left: {OUTER_LEFT_GAP_PX}px;
+  top: {LEFT_PANEL_GAP_TOP_PX}px;
+  left: {LEFT_PANEL_GAP_LEFT_PX}px;
   width: {LEFT_PANEL_WIDTH_PX}px;
-  height: {PANEL_HEIGHT_CSS};
+  height: {LEFT_PANEL_HEIGHT_CSS};
 
-  border: 0 !important;               /* no border */
-  box-shadow: none !important;        /* no shadow */
+  border: 0 !important;
+  box-shadow: none !important;
   border-radius: 16px;
 
   padding: {PANEL_PADDING_PX}px;
@@ -247,18 +234,16 @@ section[data-testid="stSidebar"] {{
 
 /* =========================================================
    RIGHT PANEL (Main Chat)
-   - Only this scrolls internally
-   - No outer scroll
 ========================================================= */
 .block-container {{
   max-width: {RIGHT_PANEL_MAX_WIDTH_PX}px !important;
   width: 100% !important;
 
-  margin: {OUTER_TOP_GAP_PX}px {OUTER_RIGHT_GAP_PX}px {OUTER_BOTTOM_GAP_PX}px {RIGHT_PANEL_LEFT_PX}px !important;
+  margin: {RIGHT_PANEL_GAP_TOP_PX}px {RIGHT_PANEL_GAP_RIGHT_PX}px {RIGHT_PANEL_GAP_BOTTOM_PX}px {RIGHT_PANEL_LEFT_PX}px !important;
   padding: {MAIN_PADDING_PX}px !important;
 
-  border: 0 !important;               /* no border */
-  box-shadow: none !important;        /* no shadow */
+  border: 0 !important;
+  box-shadow: none !important;
   border-radius: 16px !important;
 
   height: {RIGHT_PANEL_HEIGHT_CSS} !important;
@@ -266,18 +251,13 @@ section[data-testid="stSidebar"] {{
 
   overflow-y: auto !important;
 
-  /* Prevent fixed input overlapping last messages */
   padding-bottom: {CHAT_INPUT_RESERVED_PX}px !important;
 }}
 
-/* Chat message spacing */
 div[data-testid="stChatMessage"] {{
   padding: 0.5rem 0 !important;
 }}
 
-/* =========================================================
-   CHAT INPUT (fixed)
-========================================================= */
 /* =========================================================
    CHAT INPUT (fixed)
 ========================================================= */
@@ -293,7 +273,6 @@ div[data-testid="stChatInput"] {{
   z-index: 10000 !important;
 }}
 
-/* Make wrappers transparent */
 div[data-testid="stChatInput"],
 div[data-testid="stChatInput"] > div,
 div[data-testid="stChatInput"] > div > div,
@@ -306,7 +285,6 @@ div[data-testid="stChatInput"] > div > div > div {{
   margin: 0 !important;
 }}
 
-/* Style actual editable area */
 div[data-testid="stChatInput"] textarea,
 div[data-testid="stChatInput"] div[contenteditable="true"] {{
   background: #ffffff !important;
@@ -317,7 +295,6 @@ div[data-testid="stChatInput"] div[contenteditable="true"] {{
   font-size: 14px !important;
 }}
 
-/* ✅ HIDE THE SUBMIT ARROW BUTTON */
 div[data-testid="stChatInput"] button[kind="primary"],
 div[data-testid="stChatInput"] button[kind="secondary"],
 div[data-testid="stChatInput"] button[aria-label="Send message"],
@@ -332,7 +309,6 @@ div[data-testid="stChatInput"] button {{
   opacity: 0 !important;
 }}
 
-/* If a faint top line remains anywhere */
 div[data-testid="stAppViewBlockContainer"] * {{
   border-top: 0 !important;
 }}
@@ -466,7 +442,7 @@ if prompt:
     messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
-    
+
     with st.chat_message("assistant"):
         with st.spinner("Thinking…"):
             ans, retrieved = rag_answer(llm, embedder, col, prompt, model_name=MODEL_NAME, top_k=TOP_K)
@@ -475,6 +451,6 @@ if prompt:
             with st.expander("Retrieved context"):
                 for i, ch in enumerate(retrieved, 1):
                     st.markdown(f"**{i}.** {ch[:500]}{'…' if len(ch) > 500 else ''}")
-    
+
     messages.append({"role": "assistant", "content": ans})
     st.rerun()
