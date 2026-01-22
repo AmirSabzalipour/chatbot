@@ -26,8 +26,8 @@ FONT_FAMILY = "Inter"
 FONT_WEIGHT = 400
 
 LEFT_PANEL_FONT_SIZE_PX = 14      # ✅ Left panel content
-RIGHT_PANEL_FONT_SIZE_PX = 13     # ✅ Right panel content (chat/messages)
-INPUT_FONT_SIZE_PX = 13           # ✅ Input (recommended to match right panel)
+RIGHT_PANEL_FONT_SIZE_PX = 14     # ✅ Right panel content (chat/messages)
+INPUT_FONT_SIZE_PX = 14         # ✅ Input (recommended to match right panel)
 
 # =========================
 # LAYOUT CONFIGURATION (Split per panel)
@@ -38,9 +38,9 @@ LEFT_PANEL_WIDTH_PX = 220
 
 LEFT_PANEL_GAP_LEFT_PX = 0     # Left panel -> viewport left edge
 LEFT_PANEL_GAP_TOP_PX = 0      # Left panel -> viewport top edge
-LEFT_PANEL_GAP_BOTTOM_PX = 5   # Left panel -> viewport bottom edge (via height calc)
+LEFT_PANEL_GAP_BOTTOM_PX = 0   # Left panel -> viewport bottom edge (via height calc)
 
-LEFT_RIGHT_PANEL_GAP_PX = 3    # Gap between left panel and right panel
+LEFT_RIGHT_PANEL_GAP_PX = 10   # Gap between left panel and right panel
 
 # RIGHT PANEL (main chat)
 RIGHT_PANEL_MAX_WIDTH_PX = 960
@@ -257,7 +257,7 @@ section[data-testid="stSidebar"] {{
 
   border: 0 !important;
   box-shadow: none !important;
-  border-radius: 16px !important;
+  border-radius: 0x !important;
 
   height: {RIGHT_PANEL_HEIGHT_CSS} !important;
   min-height: {RIGHT_PANEL_HEIGHT_CSS} !important;
@@ -456,25 +456,13 @@ for m in messages:
 # =========================
 prompt = st.chat_input("Ask about the document…")
 if prompt:
-    # Store + render user message (no avatar)
     messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
 
-    # Generate assistant response (force emoji avatar so Streamlit never tries to render/clamp a text label)
-    with st.chat_message("assistant", avatar="🤖"):
-        with st.spinner("Thinking…"):
-            ans, retrieved = rag_answer(
-                llm, embedder, col, prompt,
-                model_name=MODEL_NAME, top_k=TOP_K
-            )
-        st.markdown(ans)
-
-        if DEBUG:
-            with st.expander("Retrieved context"):
-                for i, ch in enumerate(retrieved, 1):
-                    st.markdown(f"**{i}.** {ch[:500]}{'…' if len(ch) > 500 else ''}")
-
-    # Persist assistant message (include avatar info if you ever re-render from history)
+    ans, _retrieved = rag_answer(
+        llm, embedder, col, prompt,
+        model_name=MODEL_NAME, top_k=TOP_K
+    )
     messages.append({"role": "assistant", "content": ans, "avatar": "🤖"})
+
     st.rerun()
+
