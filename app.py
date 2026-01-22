@@ -20,6 +20,13 @@ DEBUG = False
 DOC_PATH = Path("data/document.txt")
 
 # =========================
+# TYPOGRAPHY (GLOBAL)
+# =========================
+FONT_FAMILY = "Inter"
+FONT_SIZE_PX = 16
+FONT_WEIGHT = 400
+
+# =========================
 # LAYOUT CONFIGURATION (Split per panel)
 # =========================
 
@@ -30,20 +37,19 @@ LEFT_PANEL_GAP_LEFT_PX = 0     # Left panel -> viewport left edge
 LEFT_PANEL_GAP_TOP_PX = 0      # Left panel -> viewport top edge
 LEFT_PANEL_GAP_BOTTOM_PX = 5   # Left panel -> viewport bottom edge (via height calc)
 
-LEFT_RIGHT_PANEL_GAP_PX =3   # Gap between left panel and right panel
+LEFT_RIGHT_PANEL_GAP_PX = 3    # Gap between left panel and right panel
 
 # RIGHT PANEL (main chat)
 RIGHT_PANEL_MAX_WIDTH_PX = 960
 
 RIGHT_PANEL_GAP_RIGHT_PX = 0   # Right panel -> viewport right edge (margin-right)
 RIGHT_PANEL_GAP_TOP_PX = 0     # Right panel -> viewport top edge (margin-top)
-RIGHT_PANEL_GAP_BOTTOM_PX =0  # Right panel -> viewport bottom edge (margin-bottom + height calc)
+RIGHT_PANEL_GAP_BOTTOM_PX = 0  # Right panel -> viewport bottom edge (margin-bottom + height calc)
 
-# Optional extra top spacing ONLY for the right panel (added on top of RIGHT_PANEL_GAP_TOP_PX in height math)
-RIGHT_PANEL_TOP_EXTRA_PX = 0
+RIGHT_PANEL_TOP_EXTRA_PX = 0   # Extra top spacing only for right panel (optional)
 
 # INTERNAL PADDING
-PANEL_PADDING_PX = 5         # Inner padding inside the left panel
+PANEL_PADDING_PX = 5           # Inner padding inside the left panel
 MAIN_PADDING_PX = 7            # Inner padding inside the right panel container (.block-container)
 
 # =========================
@@ -51,23 +57,16 @@ MAIN_PADDING_PX = 7            # Inner padding inside the right panel container 
 # =========================
 INPUT_BOTTOM_PX = 0
 INPUT_LEFT_OFFSET_PX = 0
-INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX 
+INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX
 
-# =========================
-# DERIVED POSITIONS / HEIGHTS
-# =========================
-
-# Right panel "starts" after: left panel left gap + left panel width + inter-panel gap
+# Derived positions
 RIGHT_PANEL_LEFT_PX = LEFT_PANEL_GAP_LEFT_PX + LEFT_PANEL_WIDTH_PX + LEFT_RIGHT_PANEL_GAP_PX
-
-# Chat input aligned relative to right panel
 INPUT_LEFT_PX = RIGHT_PANEL_LEFT_PX + MAIN_PADDING_PX + INPUT_LEFT_OFFSET_PX
 
-# Height math (viewport-based, prevents outer scrollbar)
+# Height math
 LEFT_PANEL_HEIGHT_CSS = f"calc(100vh - {LEFT_PANEL_GAP_TOP_PX}px - {LEFT_PANEL_GAP_BOTTOM_PX}px)"
 RIGHT_PANEL_HEIGHT_CSS = f"calc(100vh - {RIGHT_PANEL_GAP_TOP_PX + RIGHT_PANEL_TOP_EXTRA_PX}px - {RIGHT_PANEL_GAP_BOTTOM_PX}px)"
 
-# Reserve space so the fixed input doesn't cover last messages
 CHAT_INPUT_RESERVED_PX = 200
 
 # =========================
@@ -77,15 +76,20 @@ st.markdown(
     f"""
 <style>
 /* =========================================================
-   GLOBAL: hard stop outer scrolling + remove outer frame
+   LOAD INTER (Google Fonts)
 ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
 
-/* Box sizing */
+/* =========================================================
+   GLOBAL: typography + hard stop outer scrolling
+========================================================= */
 *, *::before, *::after {{
   box-sizing: border-box;
+  font-family: {FONT_FAMILY}, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+  font-size: {FONT_SIZE_PX}px !important;
+  font-weight: {FONT_WEIGHT} !important;
 }}
 
-/* No outer scrolling anywhere */
 html, body {{
   height: 100% !important;
   overflow: hidden !important;
@@ -94,7 +98,7 @@ html, body {{
   background: #ffffff !important;
 }}
 
-/* Streamlit app wrappers: remove padding/margins/borders/shadows */
+/* Streamlit app wrappers */
 .stApp,
 div[data-testid="stAppViewContainer"],
 div[data-testid="stAppViewBlockContainer"],
@@ -201,8 +205,9 @@ section[data-testid="stSidebar"] {{
 
 .left-panel h3 {{
   margin: 0 0 1rem 0;
-  font-size: 1.1rem;
-  font-weight: 600;
+  /* Force same typography for headings too */
+  font-size: {FONT_SIZE_PX}px !important;
+  font-weight: {FONT_WEIGHT} !important;
   color: #1a1a1a;
 }}
 
@@ -218,7 +223,6 @@ section[data-testid="stSidebar"] {{
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.2s;
-  font-size: 0.9rem;
   color: #4a4a4a;
 }}
 
@@ -229,7 +233,7 @@ section[data-testid="stSidebar"] {{
 .left-panel li.active {{
   background: #e8f0fe;
   color: #1a73e8;
-  font-weight: 500;
+  font-weight: {FONT_WEIGHT} !important;
 }}
 
 /* =========================================================
@@ -250,7 +254,6 @@ section[data-testid="stSidebar"] {{
   min-height: {RIGHT_PANEL_HEIGHT_CSS} !important;
 
   overflow-y: auto !important;
-
   padding-bottom: {CHAT_INPUT_RESERVED_PX}px !important;
 }}
 
@@ -292,7 +295,11 @@ div[data-testid="stChatInput"] div[contenteditable="true"] {{
   border-radius: 24px !important;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08) !important;
   padding: 0.7rem 1rem !important;
-  font-size: 14px !important;
+
+  /* Force same typography in the input too */
+  font-family: {FONT_FAMILY}, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+  font-size: {FONT_SIZE_PX}px !important;
+  font-weight: {FONT_WEIGHT} !important;
 }}
 
 div[data-testid="stChatInput"] button[kind="primary"],
