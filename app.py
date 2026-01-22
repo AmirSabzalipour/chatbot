@@ -36,7 +36,7 @@ LEFT_RIGHT_PANEL_GAP_PX =0   # Gap between left panel and right panel
 RIGHT_PANEL_MAX_WIDTH_PX = 960
 
 RIGHT_PANEL_GAP_RIGHT_PX = 0   # Right panel -> viewport right edge (margin-right)
-RIGHT_PANEL_GAP_TOP_PX = 60     # Right panel -> viewport top edge (margin-top)
+RIGHT_PANEL_GAP_TOP_PX = 40     # Right panel -> viewport top edge (margin-top)
 RIGHT_PANEL_GAP_BOTTOM_PX =0  # Right panel -> viewport bottom edge (margin-bottom + height calc)
 
 # Optional extra top spacing ONLY for the right panel (added on top of RIGHT_PANEL_GAP_TOP_PX in height math)
