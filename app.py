@@ -43,7 +43,7 @@ RIGHT_PANEL_GAP_BOTTOM_PX =0  # Right panel -> viewport bottom edge (margin-bott
 RIGHT_PANEL_TOP_EXTRA_PX = 0
 
 # INTERNAL PADDING
-PANEL_PADDING_PX = 20          # Inner padding inside the left panel
+PANEL_PADDING_PX = 10          # Inner padding inside the left panel
 MAIN_PADDING_PX = 4            # Inner padding inside the right panel container (.block-container)
 
 # =========================
