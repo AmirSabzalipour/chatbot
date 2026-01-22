@@ -25,16 +25,41 @@ DOC_PATH = Path("data/document.txt")
 # =========================
 # LAYOUT CONFIGURATION
 # =========================
-LEFT_PANEL_WIDTH_PX = 290
-OUTER_LEFT_GAP_PX = 10
-OUTER_RIGHT_GAP_PX = 20
-OUTER_TOP_GAP_PX = 10
-OUTER_BOTTOM_GAP_PX = -10
-PANEL_GAP_PX = 10
+# LAYOUT CONFIGURATION
+# =========================
 
-RIGHT_PANEL_MAX_WIDTH_PX = 840
-PANEL_PADDING_PX = 20
-MAIN_PADDING_PX = 4
+# LEFT PANEL (sidebar)
+LEFT_PANEL_WIDTH_PX = 220          # Fixed width of the left panel
+
+# OUTER GAPS (viewport edge spacing)
+OUTER_LEFT_GAP_PX = 0             # Horizontal gap between the LEFT panel and the left edge of the viewport
+OUTER_RIGHT_GAP_PX = 0            # Horizontal gap between the RIGHT panel and the right edge of the viewport
+OUTER_TOP_GAP_PX = 20              # Vertical gap from the top edge of the viewport (affects BOTH left & right panels)
+OUTER_BOTTOM_GAP_PX = 5            # Vertical gap from the bottom edge of the viewport (affects BOTH left & right panels)
+
+# SPACE BETWEEN PANELS
+PANEL_GAP_PX = 10                  # Horizontal gap between the left panel and the right panel
+
+# RIGHT PANEL (main chat container)
+RIGHT_PANEL_MAX_WIDTH_PX = 840     # Max width of the right panel content area (chat panel)
+
+# INTERNAL PADDING
+PANEL_PADDING_PX = 20              # Inner padding inside the left panel (and any other panel using it)
+MAIN_PADDING_PX = 4                # Inner padding inside the right panel container (.block-container)
+
+# Notes on how these are used:
+# - Left panel position is controlled by:
+#     top  = OUTER_TOP_GAP_PX
+#     left = OUTER_LEFT_GAP_PX
+#
+# - Right panel position is controlled by:
+#     left margin  = OUTER_LEFT_GAP_PX + LEFT_PANEL_WIDTH_PX + PANEL_GAP_PX
+#     right margin = OUTER_RIGHT_GAP_PX
+#     top margin   = OUTER_TOP_GAP_PX
+#
+# - Panel heights are derived from:
+#     height = calc(100vh - OUTER_TOP_GAP_PX - OUTER_BOTTOM_GAP_PX)
+
 
 # ✅ Add extra top spacing ONLY for the right panel
 RIGHT_PANEL_TOP_EXTRA_PX = 0
