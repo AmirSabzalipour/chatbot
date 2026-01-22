@@ -30,13 +30,13 @@ LEFT_PANEL_GAP_LEFT_PX = 0     # Left panel -> viewport left edge
 LEFT_PANEL_GAP_TOP_PX = 0      # Left panel -> viewport top edge
 LEFT_PANEL_GAP_BOTTOM_PX = 5   # Left panel -> viewport bottom edge (via height calc)
 
-LEFT_RIGHT_PANEL_GAP_PX =0   # Gap between left panel and right panel
+LEFT_RIGHT_PANEL_GAP_PX =3   # Gap between left panel and right panel
 
 # RIGHT PANEL (main chat)
 RIGHT_PANEL_MAX_WIDTH_PX = 960
 
 RIGHT_PANEL_GAP_RIGHT_PX = 0   # Right panel -> viewport right edge (margin-right)
-RIGHT_PANEL_GAP_TOP_PX = 40     # Right panel -> viewport top edge (margin-top)
+RIGHT_PANEL_GAP_TOP_PX = 0     # Right panel -> viewport top edge (margin-top)
 RIGHT_PANEL_GAP_BOTTOM_PX =0  # Right panel -> viewport bottom edge (margin-bottom + height calc)
 
 # Optional extra top spacing ONLY for the right panel (added on top of RIGHT_PANEL_GAP_TOP_PX in height math)
@@ -44,7 +44,7 @@ RIGHT_PANEL_TOP_EXTRA_PX = 0
 
 # INTERNAL PADDING
 PANEL_PADDING_PX = 5         # Inner padding inside the left panel
-MAIN_PADDING_PX = 4            # Inner padding inside the right panel container (.block-container)
+MAIN_PADDING_PX = 7            # Inner padding inside the right panel container (.block-container)
 
 # =========================
 # CHAT INPUT POSITIONING
@@ -192,7 +192,7 @@ section[data-testid="stSidebar"] {{
 
   border: 0 !important;
   box-shadow: none !important;
-  border-radius: 16px;
+  border-radius: 0px;
 
   padding: {PANEL_PADDING_PX}px;
   overflow-y: auto;
