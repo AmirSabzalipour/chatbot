@@ -20,11 +20,14 @@ DEBUG = False
 DOC_PATH = Path("data/document.txt")
 
 # =========================
-# TYPOGRAPHY (GLOBAL)
+# TYPOGRAPHY (GLOBAL + PER PANEL)
 # =========================
 FONT_FAMILY = "Inter"
-FONT_SIZE_PX = 16
 FONT_WEIGHT = 400
+
+LEFT_PANEL_FONT_SIZE_PX = 14      # ✅ Left panel content
+RIGHT_PANEL_FONT_SIZE_PX = 13     # ✅ Right panel content (chat/messages)
+INPUT_FONT_SIZE_PX = 13           # ✅ Input (recommended to match right panel)
 
 # =========================
 # LAYOUT CONFIGURATION (Split per panel)
@@ -81,12 +84,12 @@ st.markdown(
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
 
 /* =========================================================
-   GLOBAL: typography + hard stop outer scrolling
+   GLOBAL: base box sizing + font family/weight ONLY
+   (Do NOT set global font-size here since we want per-panel sizes)
 ========================================================= */
 *, *::before, *::after {{
   box-sizing: border-box;
   font-family: {FONT_FAMILY}, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
-  font-size: {FONT_SIZE_PX}px !important;
   font-weight: {FONT_WEIGHT} !important;
 }}
 
@@ -185,8 +188,13 @@ section[data-testid="stSidebar"] {{
 }}
 
 /* =========================================================
-   LEFT PANEL
+   LEFT PANEL (14px)
 ========================================================= */
+.left-panel,
+.left-panel * {{
+  font-size: {LEFT_PANEL_FONT_SIZE_PX}px !important;
+}}
+
 .left-panel {{
   position: fixed;
   top: {LEFT_PANEL_GAP_TOP_PX}px;
@@ -205,9 +213,6 @@ section[data-testid="stSidebar"] {{
 
 .left-panel h3 {{
   margin: 0 0 1rem 0;
-  /* Force same typography for headings too */
-  font-size: {FONT_SIZE_PX}px !important;
-  font-weight: {FONT_WEIGHT} !important;
   color: #1a1a1a;
 }}
 
@@ -233,12 +238,16 @@ section[data-testid="stSidebar"] {{
 .left-panel li.active {{
   background: #e8f0fe;
   color: #1a73e8;
-  font-weight: {FONT_WEIGHT} !important;
 }}
 
 /* =========================================================
-   RIGHT PANEL (Main Chat)
+   RIGHT PANEL (13px)
 ========================================================= */
+.block-container,
+.block-container * {{
+  font-size: {RIGHT_PANEL_FONT_SIZE_PX}px !important;
+}}
+
 .block-container {{
   max-width: {RIGHT_PANEL_MAX_WIDTH_PX}px !important;
   width: 100% !important;
@@ -262,7 +271,7 @@ div[data-testid="stChatMessage"] {{
 }}
 
 /* =========================================================
-   CHAT INPUT (fixed)
+   CHAT INPUT (13px)
 ========================================================= */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
@@ -296,10 +305,7 @@ div[data-testid="stChatInput"] div[contenteditable="true"] {{
   box-shadow: 0 2px 12px rgba(0,0,0,0.08) !important;
   padding: 0.7rem 1rem !important;
 
-  /* Force same typography in the input too */
-  font-family: {FONT_FAMILY}, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
-  font-size: {FONT_SIZE_PX}px !important;
-  font-weight: {FONT_WEIGHT} !important;
+  font-size: {INPUT_FONT_SIZE_PX}px !important;
 }}
 
 div[data-testid="stChatInput"] button[kind="primary"],
