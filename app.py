@@ -43,7 +43,7 @@ LEFT_PANEL_GAP_BOTTOM_PX = 0   # Left panel -> viewport bottom edge (via height 
 LEFT_RIGHT_PANEL_GAP_PX = 0  # Gap between left panel and right panel
 
 # RIGHT PANEL (main chat)
-RIGHT_PANEL_MAX_WIDTH_PX = 900
+RIGHT_PANEL_MAX_WIDTH_PX = 950
 
 RIGHT_PANEL_GAP_RIGHT_PX = 0   # Right panel -> viewport right edge (margin-right)
 RIGHT_PANEL_GAP_TOP_PX = 0     # Right panel -> viewport top edge (margin-top)
@@ -58,7 +58,7 @@ MAIN_PADDING_PX = 0       # Inner padding inside the right panel container (.blo
 # =========================
 # CHAT INPUT POSITIONING
 # =========================
-INPUT_BOTTOM_PX = 0
+INPUT_BOTTOM_PX = 10
 INPUT_LEFT_OFFSET_PX = 0
 INPUT_WIDTH_PX = INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX - (MAIN_PADDING_PX * 2)
 
