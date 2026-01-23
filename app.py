@@ -49,7 +49,7 @@ RIGHT_PANEL_GAP_RIGHT_PX = 0   # Right panel -> viewport right edge (margin-righ
 RIGHT_PANEL_GAP_TOP_PX = 0     # Right panel -> viewport top edge (margin-top)
 RIGHT_PANEL_GAP_BOTTOM_PX = 0  # Right panel -> viewport bottom edge (margin-bottom + height calc)
 
-RIGHT_PANEL_TOP_EXTRA_PX = 0   # Extra top spacing only for right panel (optional)
+RIGHT_PANEL_TOP_EXTRA_PX = 20   # Extra top spacing only for right panel (optional)
 
 # INTERNAL PADDING
 PANEL_PADDING_PX = 5           # Inner padding inside the left panel
