@@ -52,14 +52,14 @@ RIGHT_PANEL_GAP_BOTTOM_PX = 0  # Right panel -> viewport bottom edge (margin-bot
 RIGHT_PANEL_TOP_EXTRA_PX = 20   # Extra top spacing only for right panel (optional)
 
 # INTERNAL PADDING
-PANEL_PADDING_PX = 5           # Inner padding inside the left panel
-MAIN_PADDING_PX = 0       # Inner padding inside the right panel container (.block-container)
+PANEL_PADDING_PX = 10           # Inner padding inside the left panel
+MAIN_PADDING_PX = 20       # Inner padding inside the right panel container (.block-container)
 
 # =========================
 # CHAT INPUT POSITIONING
 # =========================
 INPUT_BOTTOM_PX = 10
-INPUT_LEFT_OFFSET_PX = 0
+INPUT_LEFT_OFFSET_PX = -20
 INPUT_WIDTH_PX = INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX - (MAIN_PADDING_PX * 2)
 
 # Derived positions
