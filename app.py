@@ -60,7 +60,7 @@ MAIN_PADDING_PX = 15          # Inner padding inside the right panel container (
 # =========================
 INPUT_BOTTOM_PX = 0
 INPUT_LEFT_OFFSET_PX = 0
-INPUT_WIDTH_PX = 1000
+INPUT_WIDTH_PX = INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX - (MAIN_PADDING_PX * 2)
 
 # Derived positions
 RIGHT_PANEL_LEFT_PX = LEFT_PANEL_GAP_LEFT_PX + LEFT_PANEL_WIDTH_PX + LEFT_RIGHT_PANEL_GAP_PX
