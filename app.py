@@ -162,9 +162,9 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
 /* Main container spacing */
 div[data-testid="stAppViewBlockContainer"] {{
   /* reduced top padding */
-  padding-top: 6px !important;
+  padding-top: 0px !important;
 
-  padding-bottom: 110px !important; /* reserve space for chat input */
+  padding-bottom: 100px !important; /* reserve space for chat input */
 }}
 
 /* Chat input at bottom */
