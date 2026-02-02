@@ -234,7 +234,7 @@ div[data-testid="stChatInput"] div[contenteditable="true"] {{
   border: 1px solid rgba(0,0,0,0.12) !important;
   border-radius: 24px !important;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08) !important;
-  padding: 0.3rem .4rem !important;
+  padding: 0.7rem 1.2rem !important;
   font-size: 14px !important;
 }}
 
