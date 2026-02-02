@@ -60,7 +60,7 @@ MAIN_PADDING_PX = 20       # Inner padding inside the right panel container (.bl
 # =========================
 INPUT_BOTTOM_PX = 10
 INPUT_LEFT_OFFSET_PX = -20
-INPUT_WIDTH_PX = INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX - (MAIN_PADDING_PX * 2)
+INPUT_WIDTH_PX = RIGHT_PANEL_MAX_WIDTH_PX - (MAIN_PADDING_PX * 2)
 
 # Derived positions
 RIGHT_PANEL_LEFT_PX = LEFT_PANEL_GAP_LEFT_PX + LEFT_PANEL_WIDTH_PX + LEFT_RIGHT_PANEL_GAP_PX
@@ -70,7 +70,7 @@ INPUT_LEFT_PX = RIGHT_PANEL_LEFT_PX + MAIN_PADDING_PX + INPUT_LEFT_OFFSET_PX
 LEFT_PANEL_HEIGHT_CSS = f"calc(100vh - {LEFT_PANEL_GAP_TOP_PX}px - {LEFT_PANEL_GAP_BOTTOM_PX}px)"
 RIGHT_PANEL_HEIGHT_CSS = f"calc(100vh - {RIGHT_PANEL_GAP_TOP_PX + RIGHT_PANEL_TOP_EXTRA_PX}px - {RIGHT_PANEL_GAP_BOTTOM_PX}px)"
 
-CHAT_INPUT_RESERVED_PX = 600
+CHAT_INPUT_RESERVED_PX = 120  # ✅ FIXED: Reduced from 600 to 120
 
 # =========================
 # GLOBAL CSS (CONSOLIDATED)
@@ -264,6 +264,7 @@ section[data-testid="stSidebar"] {{
 
   overflow-y: auto !important;
   padding-bottom: {CHAT_INPUT_RESERVED_PX}px !important;
+  padding-top: 40px !important;
 }}
 
 div[data-testid="stChatMessage"] {{
@@ -451,9 +452,6 @@ for m in messages:
 # =========================
 # CHAT INPUT
 # =========================
-# =========================
-# CHAT INPUT
-# =========================
 prompt = st.chat_input("Ask about the document…")
 if prompt:
     messages.append({"role": "user", "content": prompt})
@@ -465,4 +463,3 @@ if prompt:
     messages.append({"role": "assistant", "content": ans, "avatar": "🤖"})
 
     st.rerun()
-
