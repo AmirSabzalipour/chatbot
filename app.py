@@ -87,7 +87,7 @@ div[data-testid="stSidebarContent"] {{
   visibility: visible !important;
   background: #efefef !important;
 
-  padding-top: 6px !important;   /* sidebar top padding */
+  padding-top: 6px !important;
   padding-left: 16px !important;
   padding-right: 16px !important;
 }}
@@ -159,35 +159,55 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
 }}
 
 /* ============================================================
-   ✅ MAIN TOP GAP FIX (your main concern)
+   ✅ MAIN TOP GAP FIX + MAIN SCROLL FIX
    ============================================================ */
 
-/* Remove Streamlit default top padding in the outer container */
-div[data-testid="stAppViewBlockContainer"] {{
-  padding-top: 0px !important;     /* <<<<<< key */
-  padding-left: 12px !important;
-  padding-right: 12px !important;
-  padding-bottom: 110px !important; /* reserve space for chat input */
+/* Make page itself not scroll, main panel will scroll */
+html, body {{
+  height: 100% !important;
+  overflow: hidden !important;
 }}
 
-/* Also remove any top spacing on the first inner wrapper */
+div[data-testid="stAppViewContainer"] {{
+  height: 100vh !important;
+  overflow: hidden !important;
+}}
+
+section.main {{
+  height: 100vh !important;
+  overflow: hidden !important;
+}}
+
+/* ✅ Main scroll container (chat history) */
+div[data-testid="stAppViewBlockContainer"] {{
+  height: 100vh !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+
+  padding-top: 0px !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+
+  /* IMPORTANT: reserve enough space for fixed chat input */
+  padding-bottom: 190px !important;
+}}
+
 div[data-testid="stAppViewBlockContainer"] > div:first-child {{
   padding-top: 0 !important;
   margin-top: 0 !important;
 }}
 
-/* Streamlit centers content with .block-container; remove top padding/margins */
 section.main .block-container {{
   max-width: none !important;
-  padding-top: 0px !important;     /* <<<<<< key */
+  padding-top: 0px !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
-  margin-top: 0px !important;      /* <<<<<< key */
+  margin-top: 0px !important;
   margin-left: 0 !important;
   margin-right: auto !important;
 }}
 
-/* Tighten chat message spacing (especially first message) */
+/* Tighten chat message spacing */
 div[data-testid="stChatMessage"] {{
   margin-top: 0 !important;
   padding-top: 4px !important;
@@ -198,7 +218,7 @@ div[data-testid="stChatMessage"]:first-of-type {{
   padding-top: 0 !important;
 }}
 
-/* Chat input at bottom */
+/* Chat input fixed at bottom */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
   bottom: 14px !important;
