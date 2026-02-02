@@ -93,6 +93,15 @@ st.markdown(
   font-weight: {FONT_WEIGHT} !important;
 }}
 
+/* Emoji support for avatars */
+div[data-testid="stChatMessage"] img[alt="🤖"],
+div[data-testid="stChatMessage"] span[data-testid="chatAvatarIcon"],
+.stChatMessage img,
+.stChatMessage span {{
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif !important;
+  font-weight: 400 !important;
+}}
+
 html, body {{
   height: 100% !important;
   overflow: hidden !important;
@@ -460,6 +469,6 @@ if prompt:
         llm, embedder, col, prompt,
         model_name=MODEL_NAME, top_k=TOP_K
     )
-    messages.append({"role": "assistant", "content": ans, "avatar": "🤖"})
+    messages.append({"role": "assistant", "content": ans})
 
     st.rerun()
