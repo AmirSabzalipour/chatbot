@@ -76,8 +76,18 @@ st.markdown(
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
 
+/* IMPORTANT:
+   Do NOT set font-family on '*' because Streamlit uses Material icon fonts
+   that would then render as ligature text (e.g., "smart_toy") instead of icons.
+*/
 *, *::before, *::after {{
   box-sizing: border-box;
+}}
+
+/* Apply Inter to normal app containers only (safe for icons) */
+html, body, .stApp,
+div[data-testid="stAppViewContainer"],
+div[data-testid="stAppViewBlockContainer"] {{
   font-family: {FONT_FAMILY}, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
   font-weight: {FONT_WEIGHT} !important;
 }}
@@ -350,19 +360,23 @@ def build_rag(document_text: str):
     chunks = chunk_text_words(document_text, 120, 30)
     embs = embedder.encode(chunks, convert_to_numpy=True)
     doc_hash = hashlib.sha256(document_text.encode("utf-8")).hexdigest()[:12]
+
     db = chromadb.PersistentClient(path=".chroma")
     col_name = f"rag_{doc_hash}"
     col = db.get_or_create_collection(col_name, metadata={"hnsw:space": "cosine"})
+
     if col.count() == 0:
         col.add(
             ids=[str(i) for i in range(len(chunks))],
             documents=chunks,
             embeddings=embs.tolist(),
         )
+
     api_key = st.secrets.get("TOGETHER_API_KEY", "")
     if not api_key:
         st.error("Missing TOGETHER_API_KEY in Streamlit secrets.")
         st.stop()
+
     llm = Together(api_key=api_key)
     return llm, embedder, col
 
@@ -371,6 +385,7 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int = 5):
     res = col.query(query_embeddings=[q], n_results=top_k)
     chunks = res["documents"][0]
     ctx = "\n\n---\n\n".join(chunks)
+
     try:
         r = llm.chat.completions.create(
             model=model_name,
@@ -401,7 +416,9 @@ llm, embedder, col = build_rag(DOCUMENT)
 # CHAT STATE
 # =========================
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "Hi! Ask me about the document."}]
+    st.session_state.messages = [
+        {"role": "assistant", "content": "Hi! Ask me about the document."}
+    ]
 
 messages = st.session_state.messages
 
@@ -421,7 +438,8 @@ if prompt:
 
     ans, _retrieved = rag_answer(
         llm, embedder, col, prompt,
-        model_name=MODEL_NAME, top_k=TOP_K
+        model_name=MODEL_NAME,
+        top_k=TOP_K,
     )
     messages.append({"role": "assistant", "content": ans})
 
