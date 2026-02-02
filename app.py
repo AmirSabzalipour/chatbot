@@ -25,35 +25,31 @@ DOC_PATH = Path("data/document.txt")
 FONT_FAMILY = "Inter"
 FONT_WEIGHT = 400
 
-LEFT_PANEL_FONT_SIZE_PX = 14      # ✅ Left panel content
-RIGHT_PANEL_FONT_SIZE_PX = 14     # ✅ Right panel content (chat/messages)
-INPUT_FONT_SIZE_PX = 14         # ✅ Input (recommended to match right panel)
+LEFT_PANEL_FONT_SIZE_PX = 14
+RIGHT_PANEL_FONT_SIZE_PX = 14
+INPUT_FONT_SIZE_PX = 14
 
 # =========================
-# LAYOUT CONFIGURATION (Split per panel)
+# LAYOUT CONFIGURATION
 # =========================
 
-# LEFT PANEL (sidebar)
+# LEFT PANEL
 LEFT_PANEL_WIDTH_PX = 220
+LEFT_PANEL_GAP_LEFT_PX = 0
+LEFT_PANEL_GAP_TOP_PX = 0
+LEFT_PANEL_GAP_BOTTOM_PX = 0
+LEFT_RIGHT_PANEL_GAP_PX = 0
 
-LEFT_PANEL_GAP_LEFT_PX = 0     # Left panel -> viewport left edge
-LEFT_PANEL_GAP_TOP_PX = 0      # Left panel -> viewport top edge
-LEFT_PANEL_GAP_BOTTOM_PX = 0   # Left panel -> viewport bottom edge (via height calc)
-
-LEFT_RIGHT_PANEL_GAP_PX = 0  # Gap between left panel and right panel
-
-# RIGHT PANEL (main chat)
+# RIGHT PANEL
 RIGHT_PANEL_MAX_WIDTH_PX = 950
-
-RIGHT_PANEL_GAP_RIGHT_PX = 0   # Right panel -> viewport right edge (margin-right)
-RIGHT_PANEL_GAP_TOP_PX = 0     # Right panel -> viewport top edge (margin-top)
-RIGHT_PANEL_GAP_BOTTOM_PX = 0  # Right panel -> viewport bottom edge (margin-bottom + height calc)
-
-RIGHT_PANEL_TOP_EXTRA_PX = 0   # Extra top spacing only for right panel (optional)
+RIGHT_PANEL_GAP_RIGHT_PX = 0
+RIGHT_PANEL_GAP_TOP_PX = 0
+RIGHT_PANEL_GAP_BOTTOM_PX = 0
+RIGHT_PANEL_TOP_EXTRA_PX = 0
 
 # INTERNAL PADDING
-PANEL_PADDING_PX = 10           # Inner padding inside the left panel
-MAIN_PADDING_PX = 20       # Inner padding inside the right panel container (.block-container)
+PANEL_PADDING_PX = 10
+MAIN_PADDING_PX = 20
 
 # =========================
 # CHAT INPUT POSITIONING
@@ -70,36 +66,20 @@ INPUT_LEFT_PX = RIGHT_PANEL_LEFT_PX + MAIN_PADDING_PX + INPUT_LEFT_OFFSET_PX
 LEFT_PANEL_HEIGHT_CSS = f"calc(100vh - {LEFT_PANEL_GAP_TOP_PX}px - {LEFT_PANEL_GAP_BOTTOM_PX}px)"
 RIGHT_PANEL_HEIGHT_CSS = f"calc(100vh - {RIGHT_PANEL_GAP_TOP_PX + RIGHT_PANEL_TOP_EXTRA_PX}px - {RIGHT_PANEL_GAP_BOTTOM_PX}px)"
 
-CHAT_INPUT_RESERVED_PX = 120  # ✅ FIXED: Reduced from 600 to 120
+CHAT_INPUT_RESERVED_PX = 120
 
 # =========================
-# GLOBAL CSS (CONSOLIDATED)
+# GLOBAL CSS
 # =========================
 st.markdown(
     f"""
 <style>
-/* =========================================================
-   LOAD INTER (Google Fonts)
-========================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
 
-/* =========================================================
-   GLOBAL: base box sizing + font family/weight ONLY
-   (Do NOT set global font-size here since we want per-panel sizes)
-========================================================= */
 *, *::before, *::after {{
   box-sizing: border-box;
   font-family: {FONT_FAMILY}, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
   font-weight: {FONT_WEIGHT} !important;
-}}
-
-/* Emoji support for avatars */
-div[data-testid="stChatMessage"] img[alt="🤖"],
-div[data-testid="stChatMessage"] span[data-testid="chatAvatarIcon"],
-.stChatMessage img,
-.stChatMessage span {{
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif !important;
-  font-weight: 400 !important;
 }}
 
 html, body {{
@@ -110,7 +90,6 @@ html, body {{
   background: #ffffff !important;
 }}
 
-/* Streamlit app wrappers */
 .stApp,
 div[data-testid="stAppViewContainer"],
 div[data-testid="stAppViewBlockContainer"],
@@ -128,7 +107,6 @@ section.stMain {{
   outline: none !important;
 }}
 
-/* Remove any "outer card" look from inner wrappers */
 div[data-testid="stAppViewBlockContainer"] > div,
 div[data-testid="stVerticalBlock"],
 div[data-testid="stVerticalBlock"] > div {{
@@ -140,7 +118,6 @@ div[data-testid="stVerticalBlock"] > div {{
   background: transparent !important;
 }}
 
-/* Hide Streamlit chrome */
 #MainMenu,
 header,
 footer,
@@ -158,7 +135,6 @@ div[data-testid="stToolbarActionButton"] {{
   padding: 0 !important;
 }}
 
-/* Hide viewer badge / embed controls */
 [class^="viewerBadge_"],
 [class*=" viewerBadge_"],
 .viewerBadge_container__1QSob,
@@ -175,7 +151,6 @@ div[class^="container_"][class$="_1"] {{
   border: 0 !important;
 }}
 
-/* Hide floating buttons */
 button[title="View fullscreen"],
 button[title="Open in new tab"],
 button[title="Rerun"],
@@ -183,22 +158,15 @@ button[title="Settings"] {{
   display: none !important;
 }}
 
-/* Hide sidebar */
 section[data-testid="stSidebar"] {{
   display: none !important;
 }}
 
-/* =========================================================
-   COLORS
-========================================================= */
 .block-container,
 .left-panel {{
   background: #f3f4f6 !important;
 }}
 
-/* =========================================================
-   LEFT PANEL (14px)
-========================================================= */
 .left-panel,
 .left-panel * {{
   font-size: {LEFT_PANEL_FONT_SIZE_PX}px !important;
@@ -210,11 +178,9 @@ section[data-testid="stSidebar"] {{
   left: {LEFT_PANEL_GAP_LEFT_PX}px;
   width: {LEFT_PANEL_WIDTH_PX}px;
   height: {LEFT_PANEL_HEIGHT_CSS};
-
   border: 0 !important;
   box-shadow: none !important;
   border-radius: 0px;
-
   padding: {PANEL_PADDING_PX}px;
   overflow-y: auto;
   z-index: 1000;
@@ -249,9 +215,6 @@ section[data-testid="stSidebar"] {{
   color: #1a73e8;
 }}
 
-/* =========================================================
-   RIGHT PANEL (13px)
-========================================================= */
 .block-container,
 .block-container * {{
   font-size: {RIGHT_PANEL_FONT_SIZE_PX}px !important;
@@ -260,17 +223,13 @@ section[data-testid="stSidebar"] {{
 .block-container {{
   max-width: {RIGHT_PANEL_MAX_WIDTH_PX}px !important;
   width: 100% !important;
-
   margin: {RIGHT_PANEL_GAP_TOP_PX}px {RIGHT_PANEL_GAP_RIGHT_PX}px {RIGHT_PANEL_GAP_BOTTOM_PX}px {RIGHT_PANEL_LEFT_PX}px !important;
   padding: {MAIN_PADDING_PX}px !important;
-
   border: 0 !important;
   box-shadow: none !important;
-  border-radius: 0x !important;
-
+  border-radius: 0px !important;
   height: {RIGHT_PANEL_HEIGHT_CSS} !important;
   min-height: {RIGHT_PANEL_HEIGHT_CSS} !important;
-
   overflow-y: auto !important;
   padding-bottom: {CHAT_INPUT_RESERVED_PX}px !important;
   padding-top: 40px !important;
@@ -280,9 +239,6 @@ div[data-testid="stChatMessage"] {{
   padding: 0.5rem 0 !important;
 }}
 
-/* =========================================================
-   CHAT INPUT (13px)
-========================================================= */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
   bottom: {INPUT_BOTTOM_PX}px !important;
@@ -314,7 +270,6 @@ div[data-testid="stChatInput"] div[contenteditable="true"] {{
   border-radius: 24px !important;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08) !important;
   padding: 0.7rem 1rem !important;
-
   font-size: {INPUT_FONT_SIZE_PX}px !important;
 }}
 
@@ -455,6 +410,7 @@ messages = st.session_state.messages
 # =========================
 for m in messages:
     with st.chat_message(m["role"]):
+        st.markdown(m["content"])
 
 # =========================
 # CHAT INPUT
