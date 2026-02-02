@@ -454,9 +454,7 @@ messages = st.session_state.messages
 # CHAT MESSAGES
 # =========================
 for m in messages:
-    avatar = m.get("avatar", None)
-    with st.chat_message(m["role"], avatar=avatar) if avatar else st.chat_message(m["role"]):
-        st.markdown(m["content"])
+       with st.chat_message(m["role"]):
 
 # =========================
 # CHAT INPUT
