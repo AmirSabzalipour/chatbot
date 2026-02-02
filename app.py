@@ -23,10 +23,6 @@ DOC_PATH = Path("data/document.txt")
 
 SIDEBAR_WIDTH_PX = 290
 
-# tune these if you want even tighter
-MAIN_PAD_X = 12   # left/right padding of main content
-MAIN_PAD_TOP = 4  # top padding of main content
-
 # =========================
 # GLOBAL CSS
 # =========================
@@ -91,7 +87,7 @@ div[data-testid="stSidebarContent"] {{
   visibility: visible !important;
   background: #efefef !important;
 
-  padding-top: 6px !important;
+  padding-top: 6px !important;   /* sidebar top padding */
   padding-left: 16px !important;
   padding-right: 16px !important;
 }}
@@ -163,49 +159,51 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
 }}
 
 /* ============================================================
-   ✅ TIGHTEN MAIN CONTENT + CHAT (removes huge top/left gap)
+   ✅ MAIN TOP GAP FIX (your main concern)
    ============================================================ */
 
-/* Outer main container padding */
+/* Remove Streamlit default top padding in the outer container */
 div[data-testid="stAppViewBlockContainer"] {{
-  padding-top: {MAIN_PAD_TOP}px !important;
-  padding-left: {MAIN_PAD_X}px !important;
-  padding-right: {MAIN_PAD_X}px !important;
+  padding-top: 0px !important;     /* <<<<<< key */
+  padding-left: 12px !important;
+  padding-right: 12px !important;
   padding-bottom: 110px !important; /* reserve space for chat input */
 }}
 
-/* Streamlit centers content with .block-container (max-width + auto margins).
-   Force it to align to the left and remove extra internal padding. */
+/* Also remove any top spacing on the first inner wrapper */
+div[data-testid="stAppViewBlockContainer"] > div:first-child {{
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}}
+
+/* Streamlit centers content with .block-container; remove top padding/margins */
 section.main .block-container {{
   max-width: none !important;
+  padding-top: 0px !important;     /* <<<<<< key */
   padding-left: 0 !important;
   padding-right: 0 !important;
+  margin-top: 0px !important;      /* <<<<<< key */
   margin-left: 0 !important;
   margin-right: auto !important;
 }}
 
-/* Remove extra spacing before the first message */
+/* Tighten chat message spacing (especially first message) */
 div[data-testid="stChatMessage"] {{
-  padding: 6px 0 !important;
-  margin: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
 }}
 
 div[data-testid="stChatMessage"]:first-of-type {{
-  margin-top: 0 !important;
   padding-top: 0 !important;
 }}
 
-/* (Optional) tighten the message bubble column spacing a bit */
-div[data-testid="stChatMessage"] > div {{
-  gap: 10px !important;
-}}
-
-/* Chat input fixed at bottom */
+/* Chat input at bottom */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
   bottom: 14px !important;
-  left: calc({SIDEBAR_WIDTH_PX}px + {MAIN_PAD_X}px) !important;
-  right: {MAIN_PAD_X}px !important;
+  left: calc({SIDEBAR_WIDTH_PX}px + 12px) !important;
+  right: 12px !important;
   max-width: none !important;
   z-index: 10000 !important;
 }}
