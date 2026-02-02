@@ -23,6 +23,10 @@ DOC_PATH = Path("data/document.txt")
 
 SIDEBAR_WIDTH_PX = 290
 
+# tune these if you want even tighter
+MAIN_PAD_X = 12   # left/right padding of main content
+MAIN_PAD_TOP = 4  # top padding of main content
+
 # =========================
 # GLOBAL CSS
 # =========================
@@ -87,7 +91,6 @@ div[data-testid="stSidebarContent"] {{
   visibility: visible !important;
   background: #efefef !important;
 
-  /* reduced top padding */
   padding-top: 6px !important;
   padding-left: 16px !important;
   padding-right: 16px !important;
@@ -159,21 +162,51 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
   font-size: 12px;
 }}
 
-/* Main container spacing */
-div[data-testid="stAppViewBlockContainer"] {{
-  /* reduced top padding */
-  padding-top: 0px !important;
+/* ============================================================
+   ✅ TIGHTEN MAIN CONTENT + CHAT (removes huge top/left gap)
+   ============================================================ */
 
-  padding-bottom: 100px !important; /* reserve space for chat input */
+/* Outer main container padding */
+div[data-testid="stAppViewBlockContainer"] {{
+  padding-top: {MAIN_PAD_TOP}px !important;
+  padding-left: {MAIN_PAD_X}px !important;
+  padding-right: {MAIN_PAD_X}px !important;
+  padding-bottom: 110px !important; /* reserve space for chat input */
 }}
 
-/* Chat input at bottom */
+/* Streamlit centers content with .block-container (max-width + auto margins).
+   Force it to align to the left and remove extra internal padding. */
+section.main .block-container {{
+  max-width: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}}
+
+/* Remove extra spacing before the first message */
+div[data-testid="stChatMessage"] {{
+  padding: 6px 0 !important;
+  margin: 0 !important;
+}}
+
+div[data-testid="stChatMessage"]:first-of-type {{
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}}
+
+/* (Optional) tighten the message bubble column spacing a bit */
+div[data-testid="stChatMessage"] > div {{
+  gap: 10px !important;
+}}
+
+/* Chat input fixed at bottom */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
   bottom: 14px !important;
-  left: calc({SIDEBAR_WIDTH_PX}px + 24px) !important;
-  right: 24px !important;
-  max-width: 980px !important;
+  left: calc({SIDEBAR_WIDTH_PX}px + {MAIN_PAD_X}px) !important;
+  right: {MAIN_PAD_X}px !important;
+  max-width: none !important;
   z-index: 10000 !important;
 }}
 
