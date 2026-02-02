@@ -454,7 +454,7 @@ messages = st.session_state.messages
 # CHAT MESSAGES
 # =========================
 for m in messages:
-       with st.chat_message(m["role"]):
+    with st.chat_message(m["role"]):
 
 # =========================
 # CHAT INPUT
