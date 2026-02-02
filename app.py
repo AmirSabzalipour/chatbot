@@ -20,6 +20,7 @@ st.set_page_config(
 # =========================
 DEFAULT_MODEL = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
 DOC_PATH = Path("data/document.txt")
+
 SIDEBAR_WIDTH_PX = 290
 
 # =========================
@@ -30,6 +31,7 @@ st.markdown(
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
+/* IMPORTANT: don't set font-family on '*' (breaks Streamlit icon fonts) */
 *, *::before, *::after {{
   box-sizing: border-box;
 }}
@@ -40,8 +42,6 @@ html, body, .stApp {{
 
 html, body {{
   background: #ffffff !important;
-  height: 100% !important;
-  overflow: hidden !important; /* page doesn't scroll */
 }}
 
 /* Hide Streamlit chrome */
@@ -83,13 +83,18 @@ section[data-testid="stSidebar"] {{
 }}
 
 div[data-testid="stSidebarContent"] {{
+  display: block !important;
+  visibility: visible !important;
   background: #efefef !important;
+
   padding-top: 6px !important;
   padding-left: 16px !important;
   padding-right: 16px !important;
 }}
 
-/* Hide collapse arrow */
+/* =========================
+   ✅ NO COLLAPSE (hide arrow + disable collapse)
+   ========================= */
 button[kind="header"],
 button[data-testid="collapsedControl"],
 div[data-testid="stSidebarCollapseButton"],
@@ -110,6 +115,13 @@ div[data-testid="collapsedControl"] {{
   visibility: hidden !important;
   width: 0 !important;
   height: 0 !important;
+}}
+
+section[data-testid="stSidebar"][aria-expanded="false"] {{
+  width: {SIDEBAR_WIDTH_PX}px !important;
+  min-width: {SIDEBAR_WIDTH_PX}px !important;
+  max-width: {SIDEBAR_WIDTH_PX}px !important;
+  transform: none !important;
 }}
 
 /* Sidebar typography */
@@ -146,9 +158,16 @@ div[data-testid="collapsedControl"] {{
   font-size: 12px;
 }}
 
-/* =========================
-   MAIN PANEL SCROLL CONTAINER
-   ========================= */
+/* ============================================================
+   ✅ MAIN TOP GAP FIX + MAIN SCROLL FIX
+   ============================================================ */
+
+/* Make page itself not scroll, main panel will scroll */
+html, body {{
+  height: 100% !important;
+  overflow: hidden !important;
+}}
+
 div[data-testid="stAppViewContainer"] {{
   height: 100vh !important;
   overflow: hidden !important;
@@ -159,6 +178,7 @@ section.main {{
   overflow: hidden !important;
 }}
 
+/* ✅ Main scroll container (chat history) */
 div[data-testid="stAppViewBlockContainer"] {{
   height: 100vh !important;
   overflow-y: auto !important;
@@ -168,8 +188,13 @@ div[data-testid="stAppViewBlockContainer"] {{
   padding-left: 12px !important;
   padding-right: 12px !important;
 
-  /* reserve space so messages don't get hidden behind fixed input */
+  /* IMPORTANT: reserve enough space for fixed chat input */
   padding-bottom: 190px !important;
+}}
+
+div[data-testid="stAppViewBlockContainer"] > div:first-child {{
+  padding-top: 0 !important;
+  margin-top: 0 !important;
 }}
 
 section.main .block-container {{
@@ -177,23 +202,23 @@ section.main .block-container {{
   padding-top: 0px !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
-  margin: 0 !important;
+  margin-top: 0px !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
 }}
 
+/* Tighten chat message spacing */
 div[data-testid="stChatMessage"] {{
   margin-top: 0 !important;
-  padding: 4px 0 !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
 }}
 
 div[data-testid="stChatMessage"]:first-of-type {{
   padding-top: 0 !important;
 }}
 
-/* =========================
-   CHAT INPUT: ONE INNER CONTAINER ONLY (NO OUTER BOX)
-   ========================= */
-
-/* fixed positioning */
+/* Chat input fixed at bottom */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
   bottom: 14px !important;
@@ -201,27 +226,8 @@ div[data-testid="stChatInput"] {{
   right: 12px !important;
   max-width: none !important;
   z-index: 10000 !important;
-
-  /* remove outer container visuals + gap */
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
 }}
 
-/* remove wrapper padding/margins/borders that create the "outer container" */
-div[data-testid="stChatInput"] > div,
-div[data-testid="stChatInput"] > div > div,
-div[data-testid="stChatInput"] > div > div > div {{
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}}
-
-/* keep only the inner rounded input visible */
 div[data-testid="stChatInput"] textarea,
 div[data-testid="stChatInput"] div[contenteditable="true"] {{
   background: #ffffff !important;
@@ -232,7 +238,7 @@ div[data-testid="stChatInput"] div[contenteditable="true"] {{
   font-size: 14px !important;
 }}
 
-/* hide send button */
+/* Hide send button */
 div[data-testid="stChatInput"] button {{
   display: none !important;
   visibility: hidden !important;
