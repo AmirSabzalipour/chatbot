@@ -86,7 +86,9 @@ div[data-testid="stSidebarContent"] {{
   display: block !important;
   visibility: visible !important;
   background: #efefef !important;
-  padding-top: 18px !important;
+
+  /* reduced top padding */
+  padding-top: 6px !important;
   padding-left: 16px !important;
   padding-right: 16px !important;
 }}
@@ -94,8 +96,6 @@ div[data-testid="stSidebarContent"] {{
 /* =========================
    ✅ NO COLLAPSE (hide arrow + disable collapse)
    ========================= */
-
-/* Hide the collapse/expand arrow button (varies by Streamlit version) */
 button[kind="header"],
 button[data-testid="collapsedControl"],
 div[data-testid="stSidebarCollapseButton"],
@@ -111,7 +111,6 @@ button[aria-label="Open sidebar"] {{
   border: 0 !important;
 }}
 
-/* Some versions place a "collapsed control" overlay in main area */
 div[data-testid="collapsedControl"] {{
   display: none !important;
   visibility: hidden !important;
@@ -119,7 +118,6 @@ div[data-testid="collapsedControl"] {{
   height: 0 !important;
 }}
 
-/* Prevent any collapsed styling from shifting layout */
 section[data-testid="stSidebar"][aria-expanded="false"] {{
   width: {SIDEBAR_WIDTH_PX}px !important;
   min-width: {SIDEBAR_WIDTH_PX}px !important;
@@ -127,28 +125,29 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
   transform: none !important;
 }}
 
-/* =========================
-   Sidebar typography like screenshot
-   ========================= */
+/* Sidebar typography */
 .sidebar-title {{
   font-size: 28px;
   font-weight: 700;
   line-height: 1.1;
-  margin: 0;
+  margin: 0 !important;
 }}
+
 .sidebar-subtitle {{
   font-size: 14px;
   opacity: 0.75;
-  margin: 6px 0 0 0;
+  margin: 2px 0 0 0 !important;
 }}
+
 .settings-row {{
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 18px;
+  margin-top: 10px !important;
   margin-bottom: 6px;
   font-weight: 700;
 }}
+
 .settings-icon {{
   width: 18px;
   height: 18px;
@@ -162,8 +161,10 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
 
 /* Main container spacing */
 div[data-testid="stAppViewBlockContainer"] {{
-  padding-top: 18px !important;
-  padding-bottom: 110px !important;
+  /* reduced top padding */
+  padding-top: 6px !important;
+
+  padding-bottom: 110px !important; /* reserve space for chat input */
 }}
 
 /* Chat input at bottom */
