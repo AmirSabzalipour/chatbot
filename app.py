@@ -69,7 +69,7 @@ button[title="Settings"] {{
   display: none !important;
 }}
 
-/* Force sidebar visible */
+/* ✅ Sidebar always visible + fixed width */
 section[data-testid="stSidebar"] {{
   display: block !important;
   visibility: visible !important;
@@ -91,19 +91,56 @@ div[data-testid="stSidebarContent"] {{
   padding-right: 16px !important;
 }}
 
+/* =========================
+   ✅ NO COLLAPSE (hide arrow + disable collapse)
+   ========================= */
+
+/* Hide the collapse/expand arrow button (varies by Streamlit version) */
+button[kind="header"],
+button[data-testid="collapsedControl"],
+div[data-testid="stSidebarCollapseButton"],
+div[data-testid="stSidebarCollapseButton"] > button,
+button[aria-label="Close sidebar"],
+button[aria-label="Open sidebar"] {{
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+}}
+
+/* Some versions place a "collapsed control" overlay in main area */
+div[data-testid="collapsedControl"] {{
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+}}
+
+/* Prevent any collapsed styling from shifting layout */
+section[data-testid="stSidebar"][aria-expanded="false"] {{
+  width: {SIDEBAR_WIDTH_PX}px !important;
+  min-width: {SIDEBAR_WIDTH_PX}px !important;
+  max-width: {SIDEBAR_WIDTH_PX}px !important;
+  transform: none !important;
+}}
+
+/* =========================
+   Sidebar typography like screenshot
+   ========================= */
 .sidebar-title {{
   font-size: 28px;
   font-weight: 700;
   line-height: 1.1;
   margin: 0;
 }}
-
 .sidebar-subtitle {{
   font-size: 14px;
   opacity: 0.75;
   margin: 6px 0 0 0;
 }}
-
 .settings-row {{
   display: flex;
   align-items: center;
@@ -112,7 +149,6 @@ div[data-testid="stSidebarContent"] {{
   margin-bottom: 6px;
   font-weight: 700;
 }}
-
 .settings-icon {{
   width: 18px;
   height: 18px;
@@ -167,7 +203,7 @@ div[data-testid="stChatInput"] button {{
 )
 
 # =========================
-# SIDEBAR (like screenshot)
+# SIDEBAR
 # =========================
 with st.sidebar:
     st.markdown('<div class="sidebar-title">Orcabot</div>', unsafe_allow_html=True)
@@ -333,6 +369,6 @@ if prompt:
     assistant_msg = {"role": "assistant", "content": ans}
     if show_ctx:
         assistant_msg["retrieved"] = retrieved
-
     messages.append(assistant_msg)
+
     st.rerun()
