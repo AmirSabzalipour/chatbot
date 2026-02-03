@@ -308,6 +308,26 @@ div[data-testid="stChatInput"] button {{
   border: 0 !important;
   opacity: 0 !important;
 }}
+
+/* ✅ Remove the gray OUTER wrapper drawn by BaseWeb (Streamlit internal UI lib) */
+div[data-testid="stChatInput"] div[data-baseweb="base-input"],
+div[data-testid="stChatInput"] div[data-baseweb="textarea"],
+div[data-testid="stChatInput"] div[data-baseweb="form-control"],
+div[data-testid="stChatInput"] div[role="group"] {{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}}
+
+/* Sometimes the background is on a child wrapper inside the textarea */
+div[data-testid="stChatInput"] div[data-baseweb="textarea"] > div {{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}}
+
 </style>
 """,
     unsafe_allow_html=True,
