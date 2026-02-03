@@ -220,7 +220,7 @@ div[data-testid="stAppViewBlockContainer"] {{
   padding-right: 12px !important;
 
   /* Reserve space at bottom so fixed input doesn't cover last messages */
-  padding-bottom: 20px !important;
+  padding-bottom: 190px !important;
 }}
 
 /* Remove possible extra spacing in the first child wrapper */
@@ -338,19 +338,6 @@ div[data-testid="stChatInput"] div[data-baseweb="base-input"] {{
   border-radius: 24px !important;     /* match the inner input radius */
   overflow: hidden !important;        /* clip any inner gray corners */
 }}
-/* ✅ Hide the bottom embed/footer bar: "Built with Streamlit" / "Fullscreen" */
-div[data-testid="stBottom"],
-div[data-testid="stBottomBlockContainer"],
-div[data-testid="stToolbar"] {{
-  display: none !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}}
-
-
-
-
 </style>
 """,
     unsafe_allow_html=True,
