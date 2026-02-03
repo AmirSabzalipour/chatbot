@@ -199,9 +199,8 @@ html, body {{
 
 /* Root app container fills viewport and doesn't scroll */
 div[data-testid="stAppViewContainer"] {{
-  height: 100% !important;     /* instead of 100vh */
-  max-height: 100% !important;
-  overflow-y: auto !important;
+ height: 100vh !important;
+  overflow: hidden !important;
 }}
 
 /* Main section fills viewport and doesn't scroll */
