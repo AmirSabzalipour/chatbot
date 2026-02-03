@@ -199,8 +199,9 @@ html, body {{
 
 /* Root app container fills viewport and doesn't scroll */
 div[data-testid="stAppViewContainer"] {{
-  height: 100vh !important;
-  overflow: hidden !important;
+  height: 100% !important;     /* instead of 100vh */
+  max-height: 100% !important;
+  overflow-y: auto !important;
 }}
 
 /* Main section fills viewport and doesn't scroll */
@@ -220,7 +221,7 @@ div[data-testid="stAppViewBlockContainer"] {{
   padding-right: 12px !important;
 
   /* Reserve space at bottom so fixed input doesn't cover last messages */
-  padding-bottom: 190px !important;
+  padding-bottom: 110px !important;
 }}
 
 /* Remove possible extra spacing in the first child wrapper */
