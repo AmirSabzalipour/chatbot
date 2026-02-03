@@ -339,15 +339,6 @@ div[data-testid="stChatInput"] div[data-baseweb="base-input"] {{
   overflow: hidden !important;        /* clip any inner gray corners */
 }}
 
-/* ✅ Hide the bottom embed/footer bar: "Built with Streamlit" / "Fullscreen" */
-div[data-testid="stBottom"],
-div[data-testid="stBottomBlockContainer"],
-div[data-testid="stToolbar"] {{
-  display: none !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}}
 
 
 
