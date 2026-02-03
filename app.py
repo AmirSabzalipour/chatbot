@@ -221,7 +221,7 @@ div[data-testid="stChatMessage"]:first-of-type {{
 /* Chat input fixed at bottom */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
-  bottom: 14px !important;
+  bottom: 10px !important;
   left: calc({SIDEBAR_WIDTH_PX}px + 12px) !important;
   right: 12px !important;
   max-width: none !important;
