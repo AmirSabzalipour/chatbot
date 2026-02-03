@@ -7,8 +7,11 @@ from sentence_transformers import SentenceTransformer
 from together import Together
 
 # =========================
-# BASIC APP CONFIG
+# BASIC APP CONFIG (Streamlit)
 # =========================
+# - page_title: browser tab title
+# - layout="wide": use full width instead of centered "narrow" layout
+# - initial_sidebar_state="expanded": open the sidebar by default
 st.set_page_config(
     page_title="Orcabot",
     layout="wide",
@@ -16,35 +19,47 @@ st.set_page_config(
 )
 
 # =========================
-# DEFAULTS
+# DEFAULTS / CONSTANTS
 # =========================
 DEFAULT_MODEL = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
 DOC_PATH = Path("data/document.txt")
 
+# Used in CSS to size/position things (sidebar width, chat input left offset, etc.)
 SIDEBAR_WIDTH_PX = 290
 
 # =========================
-# GLOBAL CSS
+# GLOBAL CSS (Styling injected into Streamlit app)
 # =========================
+# Everything between <style> ... </style> is CSS.
+# It controls the look/spacing/visibility of Streamlit UI parts.
 st.markdown(
     f"""
 <style>
+/* Load the Inter font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-/* IMPORTANT: don't set font-family on '*' (breaks Streamlit icon fonts) */
+/* Apply "border-box" sizing everywhere:
+   width/height includes padding+border, making layout easier to reason about.
+   NOTE: We do NOT set font-family on '*' because it can break Streamlit icon fonts. */
 *, *::before, *::after {{
   box-sizing: border-box;
 }}
 
+/* Set the main font for the app (safe places that won't break icon fonts) */
 html, body, .stApp {{
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
 }}
 
+/* Base page background */
 html, body {{
   background: #ffffff !important;
 }}
 
-/* Hide Streamlit chrome */
+/* =========================
+   HIDE STREAMLIT "CHROME"
+   =========================
+   These selectors target Streamlit's built-in header/footer/toolbar/menu areas.
+   display:none removes them completely (they don't take space). */
 #MainMenu,
 header,
 footer,
@@ -62,6 +77,7 @@ div[data-testid="stToolbarActionButton"] {{
   padding: 0 !important;
 }}
 
+/* Hide some Streamlit UI buttons by title attribute */
 button[title="View fullscreen"],
 button[title="Open in new tab"],
 button[title="Rerun"],
@@ -69,7 +85,10 @@ button[title="Settings"] {{
   display: none !important;
 }}
 
-/* ✅ Sidebar always visible + fixed width */
+/* =========================
+   SIDEBAR LAYOUT (Left panel)
+   =========================
+   Force sidebar visible and give it a fixed width + background color. */
 section[data-testid="stSidebar"] {{
   display: block !important;
   visibility: visible !important;
@@ -82,6 +101,7 @@ section[data-testid="stSidebar"] {{
   border-right: 1px solid rgba(0,0,0,0.06) !important;
 }}
 
+/* Padding inside the sidebar content area */
 div[data-testid="stSidebarContent"] {{
   display: block !important;
   visibility: visible !important;
@@ -93,8 +113,10 @@ div[data-testid="stSidebarContent"] {{
 }}
 
 /* =========================
-   ✅ NO COLLAPSE (hide arrow + disable collapse)
-   ========================= */
+   SIDEBAR: DISABLE COLLAPSE
+   =========================
+   Streamlit has a collapse arrow/control. We hide it and also prevent the
+   collapsed state from shrinking the sidebar. */
 button[kind="header"],
 button[data-testid="collapsedControl"],
 div[data-testid="stSidebarCollapseButton"],
@@ -110,6 +132,7 @@ button[aria-label="Open sidebar"] {{
   border: 0 !important;
 }}
 
+/* Some Streamlit versions render a "collapsedControl" floating button */
 div[data-testid="collapsedControl"] {{
   display: none !important;
   visibility: hidden !important;
@@ -117,6 +140,7 @@ div[data-testid="collapsedControl"] {{
   height: 0 !important;
 }}
 
+/* If the sidebar ever goes to aria-expanded="false", keep its width anyway */
 section[data-testid="stSidebar"][aria-expanded="false"] {{
   width: {SIDEBAR_WIDTH_PX}px !important;
   min-width: {SIDEBAR_WIDTH_PX}px !important;
@@ -124,7 +148,10 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
   transform: none !important;
 }}
 
-/* Sidebar typography */
+/* =========================
+   CUSTOM SIDEBAR TYPOGRAPHY
+   =========================
+   These classes style ONLY the HTML you injected via st.markdown(...). */
 .sidebar-title {{
   font-size: 28px;
   font-weight: 700;
@@ -159,44 +186,51 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
 }}
 
 /* ============================================================
-   ✅ MAIN TOP GAP FIX + MAIN SCROLL FIX
-   ============================================================ */
+   MAIN TOP GAP FIX + MAIN SCROLL FIX
+   ============================================================
+   Goal: page doesn't scroll; the main content (chat history) scrolls.
+   Also reduce top padding so chat starts near the top. */
 
-/* Make page itself not scroll, main panel will scroll */
+/* Disable page scroll; we'll scroll only the main content container */
 html, body {{
   height: 100% !important;
   overflow: hidden !important;
 }}
 
+/* Root app container fills viewport and doesn't scroll */
 div[data-testid="stAppViewContainer"] {{
   height: 100vh !important;
   overflow: hidden !important;
 }}
 
+/* Main section fills viewport and doesn't scroll */
 section.main {{
   height: 100vh !important;
   overflow: hidden !important;
 }}
 
-/* ✅ Main scroll container (chat history) */
+/* Main scroll container (this contains the chat message history) */
 div[data-testid="stAppViewBlockContainer"] {{
   height: 100vh !important;
-  overflow-y: auto !important;
+  overflow-y: auto !important;          /* enables scrolling */
   overscroll-behavior: contain !important;
 
-  padding-top: 0px !important;
-  padding-left: 0px !important;
+  padding-top: 0px !important;          /* reduce top gap */
+  padding-left: 0px !important;         /* reduce left gap (container-level) */
   padding-right: 12px !important;
 
-  /* IMPORTANT: reserve enough space for fixed chat input */
+  /* Reserve space at bottom so fixed input doesn't cover last messages */
   padding-bottom: 190px !important;
 }}
 
+/* Remove possible extra spacing in the first child wrapper */
 div[data-testid="stAppViewBlockContainer"] > div:first-child {{
   padding-top: 0 !important;
   margin-top: 0 !important;
 }}
 
+/* Streamlit usually centers content with max-width and adds padding.
+   This rule removes that centering and extra padding. */
 section.main .block-container {{
   max-width: none !important;
   padding-top: 0px !important;
@@ -207,7 +241,12 @@ section.main .block-container {{
   margin-right: auto !important;
 }}
 
-/* Tighten chat message spacing */
+/* =========================
+   CHAT MESSAGE SPACING
+   =========================
+   Controls vertical spacing between messages.
+   NOTE: Left indentation is partly controlled by Streamlit's internal
+   chat layout (avatar column), not only this padding. */
 div[data-testid="stChatMessage"] {{
   margin-top: 0 !important;
   padding-top: 1px !important;
@@ -218,7 +257,11 @@ div[data-testid="stChatMessage"]:first-of-type {{
   padding-top: 0 !important;
 }}
 
-/* Chat input fixed at bottom */
+/* =========================
+   CHAT INPUT (fixed at bottom)
+   =========================
+   Position the input bar and style the inner rounded field.
+   The wrapper divs are set transparent to avoid an "outer box". */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
   bottom: 10px !important;
@@ -229,6 +272,7 @@ div[data-testid="stChatInput"] {{
   border-radius: 24px !important;
 }}
 
+/* Remove padding/margins/background from wrapper layers (outer container look) */
 div[data-testid="stChatInput"],
 div[data-testid="stChatInput"] > div,
 div[data-testid="stChatInput"] > div > div {{
@@ -237,6 +281,7 @@ div[data-testid="stChatInput"] > div > div {{
   background: transparent !important;
 }}
 
+/* Style the actual input field (textarea / contenteditable) */
 div[data-testid="stChatInput"] textarea,
 div[data-testid="stChatInput"] div[contenteditable="true"] {{
   background: #ffffff !important;
@@ -247,17 +292,11 @@ div[data-testid="stChatInput"] div[contenteditable="true"] {{
   font-size: 14px !important;
 }}
 
-div[data-testid="stChatInput"] textarea,
-div[data-testid="stChatInput"] div[contenteditable="true"] {{
-  background: #ffffff !important;
-  border: 1px solid rgba(0,0,0,0.12) !important;
-  border-radius: 2px !important;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08) !important;
-  padding: 2 rem 2rem !important;
-  font-size: 14px !important;
-}}
+/* ⚠️ NOTE: You had a duplicate rule below that overwrote border-radius to 2px
+   and had invalid padding "2 rem". If you want a second style, remove one of them.
+   Keeping only the single block above is usually correct. */
 
-/* Hide send button */
+/* Hide the send button to keep the minimal "input only" look */
 div[data-testid="stChatInput"] button {{
   display: none !important;
   visibility: hidden !important;
@@ -274,9 +313,10 @@ div[data-testid="stChatInput"] button {{
 )
 
 # =========================
-# SIDEBAR
+# SIDEBAR CONTENT (Streamlit widgets)
 # =========================
 with st.sidebar:
+    # These st.markdown calls inject HTML that is styled by .sidebar-title/.sidebar-subtitle/etc.
     st.markdown('<div class="sidebar-title">Orcabot</div>', unsafe_allow_html=True)
     st.markdown('<div class="sidebar-subtitle">Private demo</div>', unsafe_allow_html=True)
 
@@ -290,6 +330,7 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
 
+    # Streamlit widgets for model settings
     model = st.selectbox("Model", options=[DEFAULT_MODEL], index=0, key="ui_model")
 
     temperature = st.slider(
@@ -316,6 +357,7 @@ with st.sidebar:
 # =========================
 # DOCUMENT LOADING
 # =========================
+# cache_data: caches file read so it doesn't re-read every rerun
 @st.cache_data
 def load_document(path: str) -> str:
     p = Path(path)
@@ -332,6 +374,7 @@ if not DOCUMENT:
 # RAG HELPERS
 # =========================
 def chunk_text_words(text: str, chunk_size: int = 120, overlap: int = 30):
+    """Split document into overlapping word chunks for retrieval."""
     words = text.split()
     n = len(words)
     chunks = []
@@ -346,15 +389,18 @@ def chunk_text_words(text: str, chunk_size: int = 120, overlap: int = 30):
 
 @st.cache_resource
 def build_rag(document_text: str):
+    """Build embeddings + Chroma collection for retrieval; create Together client."""
     embedder = SentenceTransformer("all-MiniLM-L6-v2")
     chunks = chunk_text_words(document_text, 120, 30)
     embs = embedder.encode(chunks, convert_to_numpy=True)
 
+    # Hash document so different documents use different collection names
     doc_hash = hashlib.sha256(document_text.encode("utf-8")).hexdigest()[:12]
     db = chromadb.PersistentClient(path=".chroma")
     col_name = f"rag_{doc_hash}"
     col = db.get_or_create_collection(col_name, metadata={"hnsw:space": "cosine"})
 
+    # Only add vectors on first run (persisted in .chroma)
     if col.count() == 0:
         col.add(
             ids=[str(i) for i in range(len(chunks))],
@@ -362,6 +408,7 @@ def build_rag(document_text: str):
             embeddings=embs.tolist(),
         )
 
+    # Together API client
     api_key = st.secrets.get("TOGETHER_API_KEY", "")
     if not api_key:
         st.error("Missing TOGETHER_API_KEY in Streamlit secrets.")
@@ -371,6 +418,7 @@ def build_rag(document_text: str):
     return llm, embedder, col
 
 def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int, temperature: float):
+    """Retrieve top_k chunks from Chroma, then ask LLM using ONLY retrieved context."""
     q = embedder.encode([query], convert_to_numpy=True)[0]
     res = col.query(query_embeddings=[q], n_results=top_k)
     chunks = res["documents"][0]
@@ -403,7 +451,7 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int, temp
 llm, embedder, col = build_rag(DOCUMENT)
 
 # =========================
-# CHAT STATE
+# CHAT STATE (Streamlit session_state persists across reruns)
 # =========================
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "assistant", "content": "Hi! Ask me about the document."}]
@@ -411,7 +459,7 @@ if "messages" not in st.session_state:
 messages = st.session_state.messages
 
 # =========================
-# CHAT MESSAGES
+# CHAT MESSAGES RENDERING
 # =========================
 for m in messages:
     with st.chat_message(m["role"]):
@@ -421,12 +469,14 @@ for m in messages:
                 st.markdown("\n\n---\n\n".join(m["retrieved"]))
 
 # =========================
-# CHAT INPUT
+# CHAT INPUT (user prompt)
 # =========================
 prompt = st.chat_input("Ask about the document…")
 if prompt:
+    # Add user message to chat history
     messages.append({"role": "user", "content": prompt})
 
+    # Ask RAG pipeline for answer
     ans, retrieved = rag_answer(
         llm=llm,
         embedder=embedder,
@@ -437,9 +487,11 @@ if prompt:
         temperature=temperature,
     )
 
+    # Add assistant message (optionally include retrieved chunks for display)
     assistant_msg = {"role": "assistant", "content": ans}
     if show_ctx:
         assistant_msg["retrieved"] = retrieved
     messages.append(assistant_msg)
 
+    # Rerun app so new messages render immediately
     st.rerun()
