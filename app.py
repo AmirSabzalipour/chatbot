@@ -249,8 +249,8 @@ section.main .block-container {{
    chat layout (avatar column), not only this padding. */
 div[data-testid="stChatMessage"] {{
   margin-top: 0 !important;
-  padding-top: 1px !important;
-  padding-bottom: 1px !important;
+  padding: 1px 0 !important; 
+
 }}
 
 div[data-testid="stChatMessage"]:first-of-type {{
@@ -278,6 +278,8 @@ div[data-testid="stChatInput"] > div > div {{
   padding: 0 !important;
   margin: 0 !important;
   background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }}
 
 /* Style the actual input field (textarea / contenteditable) */
