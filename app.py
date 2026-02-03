@@ -251,9 +251,9 @@ div[data-testid="stChatInput"] textarea,
 div[data-testid="stChatInput"] div[contenteditable="true"] {{
   background: #ffffff !important;
   border: 1px solid rgba(0,0,0,0.12) !important;
-  border-radius: 24px !important;
+  border-radius: 2px !important;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08) !important;
-  padding: 0.7rem 1.2rem !important;
+  padding: 2 rem 2rem !important;
   font-size: 14px !important;
 }}
 
