@@ -148,14 +148,14 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
 }}
 
 .settings-icon {{
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: rgba(148, 91, 255, 0.18);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 14px;
 }}
 
 /* ============================================================
@@ -185,7 +185,7 @@ div[data-testid="stAppViewBlockContainer"] {{
   overscroll-behavior: contain !important;
 
   padding-top: 0px !important;
-  padding-left: 12px !important;
+  padding-left: 0px !important;
   padding-right: 12px !important;
 
   /* IMPORTANT: reserve enough space for fixed chat input */
@@ -210,8 +210,8 @@ section.main .block-container {{
 /* Tighten chat message spacing */
 div[data-testid="stChatMessage"] {{
   margin-top: 0 !important;
-  padding-top: 4px !important;
-  padding-bottom: 4px !important;
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
 }}
 
 div[data-testid="stChatMessage"]:first-of-type {{
