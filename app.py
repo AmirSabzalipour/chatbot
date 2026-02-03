@@ -328,6 +328,18 @@ div[data-testid="stChatInput"] div[data-baseweb="textarea"] > div {{
   box-shadow: none !important;
 }}
 
+/* Remove the last gray “corner bleed” around the rounded input */
+div[data-testid="stChatInput"],
+div[data-testid="stChatInput"] > div,
+div[data-testid="stChatInput"] > div > div,
+div[data-testid="stChatInput"] div[data-baseweb="textarea"],
+div[data-testid="stChatInput"] div[data-baseweb="base-input"] {{
+  background: #ffffff !important;     /* <- white instead of gray/transparent */
+  border-radius: 24px !important;     /* match the inner input radius */
+  overflow: hidden !important;        /* clip any inner gray corners */
+}}
+
+
 </style>
 """,
     unsafe_allow_html=True,
