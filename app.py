@@ -269,7 +269,6 @@ div[data-testid="stChatInput"] {{
   right: 12px !important;
   max-width: none !important;
   z-index: 10000 !important;
-  border-radius: 24px !important;
 }}
 
 /* Remove padding/margins/background from wrapper layers (outer container look) */
