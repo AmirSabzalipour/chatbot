@@ -215,9 +215,9 @@ div[data-testid="stAppViewBlockContainer"] {{
   overflow-y: auto !important;          /* enables scrolling */
   overscroll-behavior: contain !important;
 
-  padding-top: 8px !important;          /* reduce top gap */
-  padding-left: 8px !important;         /* reduce left gap (container-level) */
-  padding-right: 12px !important;
+  padding-top: 2px !important;          /* reduce top gap */
+  padding-left: 2px !important;         /* reduce left gap (container-level) */
+  padding-right: 2px !important;
 
   /* Reserve space at bottom so fixed input doesn't cover last messages */
   padding-bottom: 110px !important;
