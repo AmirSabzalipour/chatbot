@@ -347,45 +347,32 @@ div[data-testid="stChatInput"] div[data-baseweb="base-input"] {{
 # SIDEBAR CONTENT (Streamlit widgets)
 # =========================
 with st.sidebar:
-    # These st.markdown calls inject HTML that is styled by .sidebar-title/.sidebar-subtitle/etc.
+    # Title / subtitle
     st.markdown('<div class="sidebar-title">Orcabot</div>', unsafe_allow_html=True)
     st.markdown('<div class="sidebar-subtitle">Private demo</div>', unsafe_allow_html=True)
 
+    # New description section (replaces Settings button + sliders)
     st.markdown(
         """
-        <div class="settings-row">
-          <div class="settings-icon">⚙️</div>
-          <div>Settings</div>
+        <div style="margin-top:12px; font-size:14px; line-height:1.45; opacity:0.85;">
+          This demo shows how Orcabot operates using Rapid SCADA’s open-source documentation.
+          It highlights Orcabot’s ability to retrieve and reason over industrial automation materials.
+          <br><br>
+          In real deployments, Orcabot is configured with your own documentation, standards, and system knowledge.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-    # Streamlit widgets for model settings
+    # Keep only the model selector + show context toggle
     model = st.selectbox("Model", options=[DEFAULT_MODEL], index=0, key="ui_model")
-
-    temperature = st.slider(
-        "Temperature",
-        min_value=0.0,
-        max_value=1.0,
-        value=0.0,
-        step=0.01,
-        format="%.2f",
-        key="ui_temperature",
-    )
-
-    top_k = st.slider(
-        "Context chunks",
-        min_value=1,
-        max_value=20,
-        value=10,
-        step=1,
-        key="ui_top_k",
-    )
-
     show_ctx = st.toggle("Show retrieved context", value=False, key="ui_show_ctx")
 
-# =========================
+    # Set fixed values (since sliders were removed)
+    temperature = 0.0
+    top_k = 10
+    
+    # =========================
 # DOCUMENT LOADING
 # =========================
 # cache_data: caches file read so it doesn't re-read every rerun
