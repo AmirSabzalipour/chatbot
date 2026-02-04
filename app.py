@@ -355,6 +355,63 @@ div[data-testid="stChatInput"] div[data-baseweb="base-input"] {{
   border-radius: 24px !important;     /* match the inner input radius */
   overflow: hidden !important;        /* clip any inner gray corners */
 }}
+
+/* =========================================================
+   FORCE CHAT TO START FLUSH (TOP-LEFT)
+   Put this at the VERY END of the <style> block
+========================================================= */
+
+/* 1) Absolutely kill any remaining top padding/margin above content */
+div[data-testid="stAppViewContainer"],
+section.main,
+div[data-testid="stAppViewBlockContainer"],
+section.main .block-container {{
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}}
+
+/* 2) Control the main content inset (THIS is your knob) */
+div[data-testid="stAppViewBlockContainer"] {{
+  padding-top: 0px !important;     /* <-- change TOP here */
+  padding-left: 0px !important;    /* <-- change LEFT here */
+  padding-right: 12px !important;
+  padding-bottom: 110px !important;
+}}
+
+/* 3) Remove Streamlit chat “centering/max-width/indent” */
+div[data-testid="stChatMessage"] {{
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}}
+
+/* Streamlit often nests multiple wrappers; flatten all of them */
+div[data-testid="stChatMessage"] * {{
+  max-width: none !important;
+}}
+
+/* Common inner wrappers that add the left indent */
+div[data-testid="stChatMessage"] > div,
+div[data-testid="stChatMessage"] > div > div,
+div[data-testid="stChatMessage"] > div > div > div {{
+  margin: 0 !important;
+  padding: 0 !important;
+}}
+
+/* If the message content has its own testid (varies by version) */
+div[data-testid="stChatMessageContent"],
+div[data-testid="stChatMessageContent"] > div {{
+  margin: 0 !important;
+  padding: 0 !important;
+}}
+
+/* If Streamlit uses BaseWeb/Emotion wrappers inside the message */
+div[data-testid="stChatMessage"] [data-baseweb],
+div[data-testid="stChatMessage"] [class*="st-emotion-cache"] {{
+  margin: 0 !important;
+  padding: 0 !important;
+}}
 </style>
 """,
     unsafe_allow_html=True,
