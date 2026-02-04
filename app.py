@@ -248,16 +248,21 @@ section.main .block-container {{
    NOTE: Left indentation is partly controlled by Streamlit's internal
    chat layout (avatar column), not only this padding. */
 div[data-testid="stChatMessage"] {{
-  margin-top: 0 !important;
-  padding-left: 0px !important;   /* <-- reduce left indent */
-  margin-left: 0px !important;
+  margin: 0 !important;
+  padding: 0 !important;
 
 }}
 
 /* Make the message content wrapper flush */
 div[data-testid="stChatMessage"] > div {{
-  padding-left: 0px !important;
-  margin-left: 0px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}}
+
+div[data-testid="stChatMessage"] > div > div {{
+  margin: 0 !important;
+  padding-top: 0 !important;
+  padding-left: 0 !important;   /* ✅ this is the big one */
 }}
 
 /* If there is a BaseWeb inner wrapper adding padding */
