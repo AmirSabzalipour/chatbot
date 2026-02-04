@@ -215,7 +215,7 @@ div[data-testid="stAppViewBlockContainer"] {{
   overflow-y: auto !important;          /* enables scrolling */
   overscroll-behavior: contain !important;
 
-  padding-top: -20px !important;          /* reduce top gap */
+  padding-top: -80px !important;          /* reduce top gap */
   padding-left: 2px !important;         /* reduce left gap (container-level) */
   padding-right: 2px !important;
 
