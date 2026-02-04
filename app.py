@@ -215,8 +215,8 @@ div[data-testid="stAppViewBlockContainer"] {{
   overflow-y: auto !important;          /* enables scrolling */
   overscroll-behavior: contain !important;
 
-  padding-top: 0px !important;          /* reduce top gap */
-  padding-left: 0px !important;         /* reduce left gap (container-level) */
+  padding-top: 8px !important;          /* reduce top gap */
+  padding-left: 8px !important;         /* reduce left gap (container-level) */
   padding-right: 12px !important;
 
   /* Reserve space at bottom so fixed input doesn't cover last messages */
@@ -249,8 +249,20 @@ section.main .block-container {{
    chat layout (avatar column), not only this padding. */
 div[data-testid="stChatMessage"] {{
   margin-top: 0 !important;
-  padding: 1px 0 !important; 
+  padding-left: 0px !important;   /* <-- reduce left indent */
+  margin-left: 0px !important;
 
+}}
+
+/* Make the message content wrapper flush */
+div[data-testid="stChatMessage"] > div {{
+  padding-left: 0px !important;
+  margin-left: 0px !important;
+}}
+
+/* If there is a BaseWeb inner wrapper adding padding */
+div[data-testid="stChatMessage"] [data-baseweb] {{
+  padding-left: 0px !important;
 }}
 
 div[data-testid="stChatMessage"]:first-of-type {{
