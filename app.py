@@ -105,7 +105,7 @@ section[data-testid="stSidebar"] {{
 div[data-testid="stSidebarContent"] {{
   display: block !important;
   visibility: visible !important;
-  background: #efefef !important;
+  background: #ffffff !important;
 
   padding-top: 0px !important;
   padding-left: 10px !important;
@@ -162,15 +162,15 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
 .sidebar-subtitle {{
   font-size: 14px;
   opacity: 1;
-  margin: 2px 0 0 0 !important;
+  margin: 0px 0 0 0 !important;
 }}
 
 .settings-row {{
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1px;
   margin-top: 0px !important;
-  margin-bottom: 6px;
+  margin-bottom: 0px;
   font-weight: 700;
 }}
 
@@ -215,7 +215,7 @@ div[data-testid="stAppViewBlockContainer"] {{
   overflow-y: auto !important;          /* enables scrolling */
   overscroll-behavior: contain !important;
 
-  padding-top: 10px !important;          /* reduce top gap */
+  padding-top: 0px !important;          /* reduce top gap */
   padding-left: 10px !important;         /* reduce left gap (container-level) */
   padding-right: 2px !important;
 
