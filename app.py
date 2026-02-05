@@ -97,7 +97,7 @@ section[data-testid="stSidebar"] {{
   min-width: {SIDEBAR_WIDTH_PX}px !important;
   max-width: {SIDEBAR_WIDTH_PX}px !important;
 
-  background: #efefef !important;
+  background: #ffffff !important;
   border-right: 1px solid rgba(0,0,0,0.06) !important;
 }}
 
