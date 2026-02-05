@@ -105,7 +105,7 @@ section[data-testid="stSidebar"] {{
 div[data-testid="stSidebarContent"] {{
   display: block !important;
   visibility: visible !important;
-  background: #ffffff !important;
+  background: #898989 !important;
 
   padding-top: 0px !important;
   padding-left: 10px !important;
