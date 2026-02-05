@@ -220,7 +220,7 @@ div[data-testid="stAppViewBlockContainer"] {{
   padding-right: 2px !important;
 
   /* Reserve space at bottom so fixed input doesn't cover last messages */
-  padding-bottom: 130px !important;
+  padding-bottom: 10px !important;
 }}
 
 /* Remove possible extra spacing in the first child wrapper */
