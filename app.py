@@ -417,6 +417,12 @@ div[data-testid="stChatMessage"] [class*="st-emotion-cache"] {{
     unsafe_allow_html=True,
 )
 
+st.markdown("""
+<style>
+footer {display: none !important;}
+</style>
+""", unsafe_allow_html=True)
+
 # =========================
 # SIDEBAR CONTENT (Streamlit widgets)
 # =========================
