@@ -169,7 +169,7 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 10px !important;
+  margin-top: 0px !important;
   margin-bottom: 6px;
   font-weight: 700;
 }}
@@ -215,8 +215,8 @@ div[data-testid="stAppViewBlockContainer"] {{
   overflow-y: auto !important;          /* enables scrolling */
   overscroll-behavior: contain !important;
 
-  padding-top: -100px !important;          /* reduce top gap */
-  padding-left: -50px !important;         /* reduce left gap (container-level) */
+  padding-top: 10px !important;          /* reduce top gap */
+  padding-left: 10px !important;         /* reduce left gap (container-level) */
   padding-right: 2px !important;
 
   /* Reserve space at bottom so fixed input doesn't cover last messages */
