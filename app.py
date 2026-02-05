@@ -97,7 +97,7 @@ section[data-testid="stSidebar"] {{
   min-width: {SIDEBAR_WIDTH_PX}px !important;
   max-width: {SIDEBAR_WIDTH_PX}px !important;
 
-  background: #E8E9E8 !important;
+  background: #ffffff !important;
   border-right: 1px solid rgba(0,0,0,0.06) !important;
 }}
 
@@ -105,7 +105,7 @@ section[data-testid="stSidebar"] {{
 div[data-testid="stSidebarContent"] {{
   display: block !important;
   visibility: visible !important;
-  background: #898989 !important;
+  background: #ffffff !important;
 
   padding-top: 0px !important;
   padding-left: 10px !important;
@@ -153,14 +153,14 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
    =========================
    These classes style ONLY the HTML you injected via st.markdown(...). */
 .sidebar-title {{
-  font-size: 22px;
+  font-size: 25px;
   font-weight: 900;
   line-height: 1.1;
   margin: 0 !important;
 }}
 
 .sidebar-subtitle {{
-  font-size: 14px;
+  font-size: 13px;
   opacity: 1;
   margin: 0px 0 0 0 !important;
 }}
