@@ -107,9 +107,9 @@ div[data-testid="stSidebarContent"] {{
   visibility: visible !important;
   background: #efefef !important;
 
-  padding-top: 6px !important;
-  padding-left: 16px !important;
-  padding-right: 16px !important;
+  padding-top: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }}
 
 /* =========================
