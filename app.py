@@ -97,7 +97,7 @@ section[data-testid="stSidebar"] {{
   min-width: {SIDEBAR_WIDTH_PX}px !important;
   max-width: {SIDEBAR_WIDTH_PX}px !important;
 
-  background: #ffffff !important;
+  background: #F2F2F2 !important;
   border-right: 1px solid rgba(0,0,0,0.06) !important;
 }}
 
@@ -105,7 +105,7 @@ section[data-testid="stSidebar"] {{
 div[data-testid="stSidebarContent"] {{
   display: block !important;
   visibility: visible !important;
-  background: #ffffff !important;
+  background: #F2F2F2 !important;
 
   padding-top: 0px !important;
   padding-left: 10px !important;
