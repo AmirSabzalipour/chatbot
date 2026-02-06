@@ -487,11 +487,11 @@ div[data-testid="stChatMessage"].stChatMessage-assistant div[data-testid="stChat
 div[data-testid="stChatMessage"].stChatMessage--user,
 div[data-testid="stChatMessage"].stChatMessage-user,
 div[data-testid="stChatMessage"].user,
-div[data-testid="stChatMessage"].is-user {
+div[data-testid="stChatMessage"].is-user {{
   /* remove any outer spacing that makes the gray area huge */
   margin: 0 !important;
   padding: 0 !important;
-}
+}}
 
 /* 2) Remove padding from the nested wrappers inside the user message */
 div[data-testid="stChatMessage"].stChatMessage--user > div,
