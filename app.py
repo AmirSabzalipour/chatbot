@@ -421,6 +421,40 @@ div[data-testid="stChatMessage"] [class*="st-emotion-cache"] {{
   margin: 0 !important;
   padding: 0 !important;
 }}
+
+
+/* === KILL THE BIG TOP/LEFT GAPS (put at very end) === */
+
+/* 1) Remove Streamlit's default page padding/centering */
+section.main .block-container {{
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;              /* <- biggest source of gap */
+}}
+
+/* 2) Remove the internal view container padding (also a big source) */
+div[data-testid="stAppViewBlockContainer"] {{
+  padding: 0 !important;              /* <- kills top + left inset */
+  margin: 0 !important;
+}}
+
+/* 3) Some versions add padding on inner wrappers */
+div[data-testid="stAppViewBlockContainer"] > div,
+div[data-testid="stAppViewBlockContainer"] > div > div {{
+  padding: 0 !important;
+  margin: 0 !important;
+}}
+
+/* 4) If chat messages still look indented, flatten them */
+div[data-testid="stChatMessage"],
+div[data-testid="stChatMessage"] > div,
+div[data-testid="stChatMessage"] > div > div {{
+  margin: 0 !important;
+  padding: 0 !important;
+}}
+
+
+
 </style>
 """,
     unsafe_allow_html=True,
