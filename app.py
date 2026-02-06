@@ -483,7 +483,54 @@ div[data-testid="stChatMessage"].stChatMessage-assistant div[data-testid="stChat
   background: transparent !important;
   padding: 0 !important;
 }}
+/* 1) Identify "user" messages (Streamlit uses one of these classes depending on version) */
+div[data-testid="stChatMessage"].stChatMessage--user,
+div[data-testid="stChatMessage"].stChatMessage-user,
+div[data-testid="stChatMessage"].user,
+div[data-testid="stChatMessage"].is-user {
+  /* remove any outer spacing that makes the gray area huge */
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
+/* 2) Remove padding from the nested wrappers inside the user message */
+div[data-testid="stChatMessage"].stChatMessage--user > div,
+div[data-testid="stChatMessage"].stChatMessage-user > div,
+div[data-testid="stChatMessage"].user > div,
+div[data-testid="stChatMessage"].is-user > div,
+div[data-testid="stChatMessage"].stChatMessage--user > div > div,
+div[data-testid="stChatMessage"].stChatMessage-user > div > div,
+div[data-testid="stChatMessage"].user > div > div,
+div[data-testid="stChatMessage"].is-user > div > div {{
+  margin: 0 !important;
+  padding: 0 !important;
+}}
+
+/* 3) Apply the gray background ONLY to the content box, with tight padding */
+div[data-testid="stChatMessage"].stChatMessage--user div[data-testid="stChatMessageContent"],
+div[data-testid="stChatMessage"].stChatMessage-user div[data-testid="stChatMessageContent"],
+div[data-testid="stChatMessage"].user div[data-testid="stChatMessageContent"],
+div[data-testid="stChatMessage"].is-user div[data-testid="stChatMessageContent"]{{
+  background: #f3f4f6 !important;
+  border-radius: 14px !important;
+
+  /* top right bottom left */
+  padding: 4px 10px 4px 16px !important;
+
+  display: inline-block !important; /* prevents full-width big gray blocks */
+  width: auto !important;
+  max-width: 85% !important;
+}}
+
+/* 4) Kill extra paragraph spacing inside the bubble */
+div[data-testid="stChatMessage"].stChatMessage--user div[data-testid="stChatMessageContent"] p,
+div[data-testid="stChatMessage"].stChatMessage-user div[data-testid="stChatMessageContent"] p,
+div[data-testid="stChatMessage"].user div[data-testid="stChatMessageContent"] p,
+div[data-testid="stChatMessage"].is-user div[data-testid="stChatMessageContent"] p {{
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.25 !important;
+}}
 
 
 </style>
