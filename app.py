@@ -509,6 +509,25 @@ div[data-testid="stChatMessage"][class*="--user"] div[data-testid="stChatMessage
   font-weight: 700 !important;
 }}
 
+/* ===== Remove outer rounded frame (app container) ===== */
+.stApp,
+div[data-testid="stAppViewContainer"],
+div[data-testid="stAppViewContainer"] > div,
+section.main,
+section.main .block-container {{
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  overflow: visible !important;
+}}
+
+/* Some versions apply rounding to a root emotion container */
+div[class*="st-emotion-cache"] {{
+  border-radius: 0 !important;
+}}
+
+
+
 
 </style>
 """,
