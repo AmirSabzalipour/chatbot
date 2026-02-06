@@ -452,84 +452,61 @@ div[data-testid="stChatMessage"] > div > div {{
   margin: 0 !important;
   padding: 0 !important;
 }}
-/* ========= Chat: hide icons/avatars ========= */
-/* Newer Streamlit versions: the avatar container */
+* =========================
+   CHAT CLEANUP (put at the VERY END)
+   ========================= */
+
+/* 1) Remove the big default block padding/centering */
+section.main .block-container {{
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}}
+
+/* 2) Control the main scroll container padding (THIS is your gap control) */
+div[data-testid="stAppViewBlockContainer"] {{
+  padding-top: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 12px !important;
+
+  /* reserve space for your FIXED chat input */
+  padding-bottom: 90px !important;
+}}
+
+/* 3) Hide chat avatars/icons (works across versions) */
 div[data-testid="stChatMessageAvatar"] {{
   display: none !important;
 }}
 
-/* Some versions wrap avatar in the first column of the message row */
+/* Some versions: avatar is the first column */
 div[data-testid="stChatMessage"] > div:first-child {{
   display: none !important;
 }}
 
-/* Ensure message content uses full width after hiding avatar */
-div[data-testid="stChatMessageContent"] {{
-  width: 100% !important;
-  margin-left: 0 !important;
+/* 4) Make messages flush */
+div[data-testid="stChatMessage"],
+div[data-testid="stChatMessage"] > div,
+div[data-testid="stChatMessage"] > div > div {{
+  margin: 0 !important;
+  padding: 0 !important;
 }}
 
-/* ========= User message: light gray background ========= */
-div[data-testid="stChatMessage"][data-testid="stChatMessage-user"] div[data-testid="stChatMessageContent"],
-div[data-testid="stChatMessage"].stChatMessage-user div[data-testid="stChatMessageContent"] {{
-  background: #f3f4f6 !important;   /* light gray */
-  border-radius: 14px !important;
-  padding: 12px 14px !important;
+/* Kill default paragraph spacing inside messages */
+div[data-testid="stChatMessageContent"] p {{
+  margin: 0 !important;
 }}
 
-/* Optional: keep assistant plain (no bubble) */
-div[data-testid="stChatMessage"][data-testid="stChatMessage-assistant"] div[data-testid="stChatMessageContent"],
-div[data-testid="stChatMessage"].stChatMessage-assistant div[data-testid="stChatMessageContent"] {{
+/* 5) USER messages: bold (no bubble/background) */
+div[data-testid="stChatMessage"][class*="user"] div[data-testid="stChatMessageContent"],
+div[data-testid="stChatMessage"][class*="--user"] div[data-testid="stChatMessageContent"] {{
   background: transparent !important;
   padding: 0 !important;
-}}
-/* 1) Identify "user" messages (Streamlit uses one of these classes depending on version) */
-div[data-testid="stChatMessage"].stChatMessage--user,
-div[data-testid="stChatMessage"].stChatMessage-user,
-div[data-testid="stChatMessage"].user,
-div[data-testid="stChatMessage"].is-user {{
-  /* remove any outer spacing that makes the gray area huge */
   margin: 0 !important;
-  padding: 0 !important;
 }}
 
-/* 2) Remove padding from the nested wrappers inside the user message */
-div[data-testid="stChatMessage"].stChatMessage--user > div,
-div[data-testid="stChatMessage"].stChatMessage-user > div,
-div[data-testid="stChatMessage"].user > div,
-div[data-testid="stChatMessage"].is-user > div,
-div[data-testid="stChatMessage"].stChatMessage--user > div > div,
-div[data-testid="stChatMessage"].stChatMessage-user > div > div,
-div[data-testid="stChatMessage"].user > div > div,
-div[data-testid="stChatMessage"].is-user > div > div {{
-  margin: 0 !important;
-  padding: 0 !important;
-}}
-
-/* 3) Apply the gray background ONLY to the content box, with tight padding */
-div[data-testid="stChatMessage"].stChatMessage--user div[data-testid="stChatMessageContent"],
-div[data-testid="stChatMessage"].stChatMessage-user div[data-testid="stChatMessageContent"],
-div[data-testid="stChatMessage"].user div[data-testid="stChatMessageContent"],
-div[data-testid="stChatMessage"].is-user div[data-testid="stChatMessageContent"]{{
-  background: #f3f4f6 !important;
-  border-radius: 14px !important;
-
-  /* top right bottom left */
-  padding: 4px 10px 4px 16px !important;
-
-  display: inline-block !important; /* prevents full-width big gray blocks */
-  width: auto !important;
-  max-width: 85% !important;
-}}
-
-/* 4) Kill extra paragraph spacing inside the bubble */
-div[data-testid="stChatMessage"].stChatMessage--user div[data-testid="stChatMessageContent"] p,
-div[data-testid="stChatMessage"].stChatMessage-user div[data-testid="stChatMessageContent"] p,
-div[data-testid="stChatMessage"].user div[data-testid="stChatMessageContent"] p,
-div[data-testid="stChatMessage"].is-user div[data-testid="stChatMessageContent"] p {{
-  margin: 0 !important;
-  padding: 0 !important;
-  line-height: 1.25 !important;
+div[data-testid="stChatMessage"][class*="user"] div[data-testid="stChatMessageContent"] *,
+div[data-testid="stChatMessage"][class*="--user"] div[data-testid="stChatMessageContent"] * {{
+  font-weight: 700 !important;
 }}
 
 
