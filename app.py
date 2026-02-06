@@ -452,6 +452,37 @@ div[data-testid="stChatMessage"] > div > div {{
   margin: 0 !important;
   padding: 0 !important;
 }}
+/* ========= Chat: hide icons/avatars ========= */
+/* Newer Streamlit versions: the avatar container */
+div[data-testid="stChatMessageAvatar"] {{
+  display: none !important;
+}}
+
+/* Some versions wrap avatar in the first column of the message row */
+div[data-testid="stChatMessage"] > div:first-child {{
+  display: none !important;
+}}
+
+/* Ensure message content uses full width after hiding avatar */
+div[data-testid="stChatMessageContent"] {{
+  width: 100% !important;
+  margin-left: 0 !important;
+}}
+
+/* ========= User message: light gray background ========= */
+div[data-testid="stChatMessage"][data-testid="stChatMessage-user"] div[data-testid="stChatMessageContent"],
+div[data-testid="stChatMessage"].stChatMessage-user div[data-testid="stChatMessageContent"] {{
+  background: #f3f4f6 !important;   /* light gray */
+  border-radius: 14px !important;
+  padding: 12px 14px !important;
+}}
+
+/* Optional: keep assistant plain (no bubble) */
+div[data-testid="stChatMessage"][data-testid="stChatMessage-assistant"] div[data-testid="stChatMessageContent"],
+div[data-testid="stChatMessage"].stChatMessage-assistant div[data-testid="stChatMessageContent"] {{
+  background: transparent !important;
+  padding: 0 !important;
+}}
 
 
 
