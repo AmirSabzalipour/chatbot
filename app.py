@@ -370,6 +370,15 @@ section.main .block-container {{
   margin-top: 0 !important;
 }}
 
+/* 1b) Force those wrappers to be white (removes Streamlit gray strip) */
+.stApp,
+div[data-testid="stAppViewContainer"],
+section.main,
+div[data-testid="stAppViewBlockContainer"],
+section.main .block-container {{
+  background: #ffffff !important;
+}}
+
 /* 2) Control the main content inset (THIS is your knob) */
 div[data-testid="stAppViewBlockContainer"] {{
   padding-top: 0px !important;     /* <-- change TOP here */
