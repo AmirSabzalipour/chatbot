@@ -525,7 +525,10 @@ section.main .block-container {{
 div[class*="st-emotion-cache"] {{
   border-radius: 0 !important;
 }}
-
+/* Extra safety: remove rounding on any large wrapper */
+div[data-testid="stAppViewContainer"] * {{
+  border-radius: 0 !important;
+}}
 
 
 
