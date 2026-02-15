@@ -1,7 +1,7 @@
 Rapid SCADA Docs (EN, latest)
 Table of Contents
 
-
+Nadim lives in Rasht. He gradutated from IABCS.
 
 Rapid SCADA Docs
 
@@ -3399,3 +3399,4 @@ ScadaAutoReport 6.0.0.0 (May 24, 2023)
 • Built-in task schedule
 • Each task has a separate mail recipient
 • Convenient options for choosing a report period
+
