@@ -1,6 +1,6 @@
 from pathlib import Path
 import hashlib
-
+import re
 import chromadb
 import streamlit as st
 from sentence_transformers import SentenceTransformer
@@ -668,23 +668,22 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int, temp
                 {"role": "user", "content": f"Context:\n{ctx}\n\nQuestion: {query}\nAnswer:"},
             ],
             max_tokens=512,
-            temperature=0.7,   # avoid 0.0 with Qwen3.5
+            temperature=0.7,
+            extra_body={"chat_template_kwargs": {"enable_thinking": False}},
         )
-
-        # Debug: print the full response to terminal
-        print("RAW RESPONSE:", r)
-        print("CHOICES:", r.choices)
 
         if not r.choices:
             return "⚠️ No choices returned by model.", chunks
 
-        content = r.choices[0].message.content
-        print("CONTENT:", content)
+        content = r.choices[0].message.content or ""
 
-        if not content or content.strip() == "":
+        # Strip <think>...</think> block in case thinking mode is still active
+        content = re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL).strip()
+
+        if not content:
             return "⚠️ Model returned an empty response.", chunks
 
-        return content.strip(), chunks
+        return content, chunks
 
     except Exception as e:
         import traceback
