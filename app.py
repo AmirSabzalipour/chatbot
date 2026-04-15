@@ -648,7 +648,6 @@ def build_rag(document_text: str):
     return llm, embedder, col
 
 def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int, temperature: float):
-    """Retrieve top_k chunks from Chroma, then ask LLM using ONLY retrieved context."""
     q = embedder.encode([query], convert_to_numpy=True)[0]
     res = col.query(query_embeddings=[q], n_results=top_k)
     chunks = res["documents"][0]
@@ -668,13 +667,29 @@ def rag_answer(llm, embedder, col, query: str, model_name: str, top_k: int, temp
                 },
                 {"role": "user", "content": f"Context:\n{ctx}\n\nQuestion: {query}\nAnswer:"},
             ],
-            max_tokens=250,
-            temperature=temperature,
+            max_tokens=512,
+            temperature=0.7,   # avoid 0.0 with Qwen3.5
         )
-        return r.choices[0].message.content, chunks
-    except Exception as e:
-        return f"⚠️ Model request failed: {e}", chunks
 
+        # Debug: print the full response to terminal
+        print("RAW RESPONSE:", r)
+        print("CHOICES:", r.choices)
+
+        if not r.choices:
+            return "⚠️ No choices returned by model.", chunks
+
+        content = r.choices[0].message.content
+        print("CONTENT:", content)
+
+        if not content or content.strip() == "":
+            return "⚠️ Model returned an empty response.", chunks
+
+        return content.strip(), chunks
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return f"⚠️ Model request failed: {e}", chunks
 # =========================
 # INIT RAG
 # =========================
