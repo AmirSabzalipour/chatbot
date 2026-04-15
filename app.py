@@ -21,7 +21,7 @@ st.set_page_config(
 # =========================
 # DEFAULTS / CONSTANTS
 # =========================
-DEFAULT_MODEL = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
+DEFAULT_MODEL = "Qwen/Qwen3.5-9B"
 DOC_PATH = Path("data/document.txt")
 
 # Used in CSS to size/position things (sidebar width, chat input left offset, etc.)
