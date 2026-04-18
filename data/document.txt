@@ -127,7 +127,53 @@ Sample modules with source code
 ?
 Developer documentation
 ?
+.............
+Mara worked in a factory where everything moved except the people.
 
+Boxes rolled, arms lifted, belts carried, lights blinked—every motion perfectly timed. Yet dozens of workers stood along the lines, pressing buttons, fixing jams, repeating the same actions hour after hour. It wasn’t really automation, Mara thought. It was just faster boredom.
+
+One evening, after her shift, she stayed behind. Watching the machines, she noticed something: they weren’t smart—they were obedient. They followed instructions perfectly, but the moment something unexpected happened, everything stopped.
+
+That’s when she had an idea.
+
+“What if the machines didn’t just follow instructions,” she whispered, “but made decisions?”
+
+Mara began building in secret.
+
+She took spare sensors, discarded processors, and rewired an old robotic arm. But instead of programming it with fixed steps, she designed something different—a system that could observe, decide, and adapt.
+
+At first, it failed. The arm hesitated. It dropped items. It froze at unfamiliar shapes. But Mara kept refining it, feeding it data, teaching it patterns.
+
+Then one night, something changed.
+
+A box came down the belt, slightly crushed—something that usually caused a shutdown. The arm paused… adjusted its grip… and moved it aside without stopping the line.
+
+Mara stared.
+
+It had figured it out.
+
+Within weeks, her invention could handle variations, fix minor errors, and even reroute items when problems appeared. It didn’t need constant human correction.
+
+She called it the Adaptive Loop.
+
+When the factory manager discovered her work, he was furious at first—until he saw it in action. Production increased. Errors dropped. The line never stopped.
+
+Soon, Mara’s system replaced the old rigid automation.
+
+But something unexpected happened.
+
+Instead of losing their jobs, workers were reassigned—to design, improve, and supervise systems like hers. The factory didn’t need button-pushers anymore. It needed thinkers.
+
+One day, a coworker asked her, “So… you made machines that don’t need us?”
+
+Mara smiled.
+
+“No,” she said. “I made machines that don’t need us to be machines.”
+
+And for the first time, the factory truly became what it was meant to be:
+
+Automated—not just in motion, but in intelligence.
+.........................................
 Applications
 Server
 Server manages the data archives, performs mathematical calculations and provides information to the client applications. Server writes data to the main archive and makes the backup copy simultaneously.
