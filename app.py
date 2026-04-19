@@ -494,7 +494,7 @@ def rag_answer_stream(llm, embedder, col, query: str, model_name: str, top_k: in
                 },
                 {"role": "user", "content": f"Context:\n{ctx}\n\nQuestion: {query}\nAnswer:"},
             ],
-            max_tokens=512,
+            max_tokens=2048,
             temperature=0.7,
             stream=True,
             extra_body={"chat_template_kwargs": {"enable_thinking": False}},
