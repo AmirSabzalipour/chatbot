@@ -128,51 +128,128 @@ Sample modules with source code
 Developer documentation
 ?
 .............
-Mara worked in a factory where everything moved except the people.
 
-Boxes rolled, arms lifted, belts carried, lights blinked—every motion perfectly timed. Yet dozens of workers stood along the lines, pressing buttons, fixing jams, repeating the same actions hour after hour. It wasn’t really automation, Mara thought. It was just faster boredom.
 
-One evening, after her shift, she stayed behind. Watching the machines, she noticed something: they weren’t smart—they were obedient. They followed instructions perfectly, but the moment something unexpected happened, everything stopped.
+Intervention 1
+Technician: Marc Dubois
+Machine: Filling_Unit_A
+Production Line: ProdLine_01
+Start Date and Time: 2026-02-14 08:12
+Problem Description:
+Machine stopped during operation. SCADA alarm "Level Sensor Fault – Tank A".
+No valid signal received from analog input AI_03 (level transmitter). Filling cycle blocked for safety.
+Resolution:
+System stopped safely
+Control cabinet opened
+Terminal connections re-tightened on AI module
+Signal verified stable (4–20 mA restored)
+Filling process restarted
+End Date and Time: 2026-02-14 08:47
+________________________________________
+Intervention 2
+Technician: Sophie Lambert
+Machine: Packaging_Unit_B
+Production Line: ProdLine_01
+Start Date and Time: 2026-02-16 14:03
+Problem Description:
+Repeated emergency stop activation. Alarm "Safety Gate Open – Zone 2" while gate physically closed.
+Resolution:
+Safety gate inspected
+Actuator realigned
+Safety circuit continuity verified
+Functional test cycles executed
+Alarm cleared and production resumed
+End Date and Time: 2026-02-16 14:39
+________________________________________
 
-That’s when she had an idea.
+Intervention 3
+Technician: Karim El Haddad
+Machine: Filling_Unit_A
+Production Line: ProdLine_01
+Start Date and Time: 2026-02-18 10:25
+Problem Description:
+Filling volumes inconsistent. SCADA warning "Filling Deviation greater than 5 percent".
+Resolution:
+Manual volume verification performed
+Flow meter recalibrated (FM_01)
+PLC parameters updated
+Multiple validation cycles executed
+End Date and Time: 2026-02-18 11:30
+________________________________________
+Intervention 4
+Technician: Lucas Van den Berg
+Machine: Packaging_Unit_B
+Production Line: ProdLine_01
+Start Date and Time: 2026-02-20 07:55
+Problem Description:
+Line stopped. Alarm "Conveyor Motor Overload".
+Resolution:
+Product jam removed manually
+Conveyor alignment checked
+Motor protection relay reset
+System restarted
+End Date and Time: 2026-02-20 08:20
+________________________________________
+Intervention 5
+Technician: Elena Rossi
+Machine: Filling_Unit_A
+Production Line: ProdLine_01
+Start Date and Time: 2026-02-22 16:10
+Problem Description:
+Loss of communication between SCADA and PLC. Alarm "PLC Not Responding".
+Resolution:
+Network diagnostics performed
+Faulty Ethernet switch port identified
+Connection rerouted
+Communication module restarted
+SCADA link restored
+End Date and Time: 2026-02-22 16:55
+________________________________________
+Intervention 6
+Technician: Thomas Leroy
+Machine: Packaging_Unit_B
+Production Line: ProdLine_01
+Start Date and Time: 2026-02-24 11:40
+Problem Description:
+Labeling system inactive. Alarm "Label Sensor Not Detected".
+Resolution:
+Optical sensor cleaned
+Signal checked in PLC diagnostics
+Sensor sensitivity adjusted
+Labeling cycle tested successfully
+End Date and Time: 2026-02-24 12:05
+________________________________________
+Intervention 7
+Technician: Marc Dubois
+Machine: Filling_Unit_A
+Production Line: ProdLine_01
+Start Date and Time: 2026-02-26 09:15
+Problem Description:
+Unexpected stop. Alarm "Pressure Low – Supply Line".
+Resolution:
+Pneumatic system inspected
+Leak located on connector
+Fitting replaced
+Pressure restored
+Production restarted
+End Date and Time: 2026-02-26 10:00
+________________________________________
+Intervention 8
+Technician: Sophie Lambert
+Machine: Packaging_Unit_B
+Production Line: ProdLine_01
+Start Date and Time: 2026-02-28 15:22
+Problem Description:
+HMI freeze during operation. Operators unable to interact with the system.
+Resolution:
+HMI panel restarted
+Log buffer cleared
+Logging frequency reduced
+System stability verified
+End Date and Time: 2026-02-28 15:50
 
-“What if the machines didn’t just follow instructions,” she whispered, “but made decisions?”
 
-Mara began building in secret.
 
-She took spare sensors, discarded processors, and rewired an old robotic arm. But instead of programming it with fixed steps, she designed something different—a system that could observe, decide, and adapt.
-
-At first, it failed. The arm hesitated. It dropped items. It froze at unfamiliar shapes. But Mara kept refining it, feeding it data, teaching it patterns.
-
-Then one night, something changed.
-
-A box came down the belt, slightly crushed—something that usually caused a shutdown. The arm paused… adjusted its grip… and moved it aside without stopping the line.
-
-Mara stared.
-
-It had figured it out.
-
-Within weeks, her invention could handle variations, fix minor errors, and even reroute items when problems appeared. It didn’t need constant human correction.
-
-She called it the Adaptive Loop.
-
-When the factory manager discovered her work, he was furious at first—until he saw it in action. Production increased. Errors dropped. The line never stopped.
-
-Soon, Mara’s system replaced the old rigid automation.
-
-But something unexpected happened.
-
-Instead of losing their jobs, workers were reassigned—to design, improve, and supervise systems like hers. The factory didn’t need button-pushers anymore. It needed thinkers.
-
-One day, a coworker asked her, “So… you made machines that don’t need us?”
-
-Mara smiled.
-
-“No,” she said. “I made machines that don’t need us to be machines.”
-
-And for the first time, the factory truly became what it was meant to be:
-
-Automated—not just in motion, but in intelligence.
 .........................................
 Applications
 Server
