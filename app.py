@@ -501,6 +501,8 @@ def rag_answer_stream(llm, embedder, col, query: str, model_name: str, top_k: in
         )
 
         for chunk in r:
+            if not chunk.choices:
+                continue
             delta = chunk.choices[0].delta.content or ""
             # Strip any stray <think>...</think> tokens mid-stream
             delta = re.sub(r"<think>.*?</think>", "", delta, flags=re.DOTALL)
