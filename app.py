@@ -267,11 +267,10 @@ div[data-testid="stChatInput"] div[data-baseweb="textarea"] > div {{
    ══════════════════════════════════════════════════════ */
 @media (max-width: 768px) {{
 
-  /* FIX: Use transform to slide the sidebar off-screen instead of
-     setting width:0. Streamlit's layout engine measures the sidebar
-     width and offsets the main content — zeroing the width breaks
-     that calculation and leaves a blank gap or clips the main area.
-     translateX(-100%) removes it visually while keeping layout intact. */
+  /* Step 1: pull the sidebar completely out of flow and hide it.
+     position:fixed removes it from the flex row so it no longer
+     pushes section.main to the right. width stays at the real value
+     so translateX(-100%) slides it exactly off-screen. */
   section[data-testid="stSidebar"],
   section[data-testid="stSidebar"][aria-expanded="false"],
   section[data-testid="stSidebar"][aria-expanded="true"] {{
@@ -281,47 +280,66 @@ div[data-testid="stChatInput"] div[data-baseweb="textarea"] > div {{
     width: {SIDEBAR_WIDTH_PX}px !important;
     min-width: {SIDEBAR_WIDTH_PX}px !important;
     max-width: {SIDEBAR_WIDTH_PX}px !important;
-    height: 100% !important;
-    overflow: hidden !important;
-    border-right: none !important;
-    z-index: 99999 !important;
+    height: 100dvh !important;
     transform: translateX(-100%) !important;
     visibility: hidden !important;
+    z-index: 99999 !important;
+    overflow: hidden !important;
+    border-right: none !important;
   }}
 
-  /* FIX: Main area must fill the full viewport since the sidebar
-     is now off-screen (fixed + translated). Streamlit may still
-     inject a left margin equal to the sidebar width — override it. */
-  div[data-testid="stAppViewContainer"],
-  section.main {{
+  /* Step 2: The outermost flex container that Streamlit renders —
+     force it to start at the left edge with no gap. */
+  div[data-testid="stAppViewContainer"] {{
+    position: relative !important;
+    left: 0 !important;
     width: 100vw !important;
     max-width: 100vw !important;
-    margin-left: 0 !important;
-    padding-left: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
     overflow-x: hidden !important;
   }}
 
+  /* Step 3: section.main is the flex child that Streamlit offsets.
+     Streamlit injects margin-left = sidebar width via inline style
+     or an emotion class — override every possible path. */
+  section.main,
+  section[data-testid="stMain"],
+  div[data-testid="stAppViewContainer"] > section,
+  div[data-testid="stAppViewContainer"] > div > section {{
+    position: relative !important;
+    left: 0 !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    flex: 1 1 100% !important;
+    transform: none !important;
+    overflow-x: hidden !important;
+  }}
+
+  /* Step 4: inner block container */
   div[data-testid="stAppViewBlockContainer"],
   section.main .block-container {{
     width: 100% !important;
     max-width: 100% !important;
+    margin-left: 0 !important;
     padding-left: 8px !important;
     padding-right: 8px !important;
-    /* FIX: Add safe-area-inset-bottom for iPhone home bar / notch.
-       Without this, the input bar overlaps content on newer iPhones. */
     padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)) !important;
     overflow-x: hidden !important;
   }}
 
-  /* FIX: Chat input — full width with safe-area bottom clearance.
-     env(safe-area-inset-bottom) is 0 on non-notch devices so it's safe everywhere. */
+  /* Step 5: chat input — full width, clear iPhone home bar */
   div[data-testid="stChatInput"] {{
     left: 8px !important;
     right: 8px !important;
     bottom: calc(8px + env(safe-area-inset-bottom, 0px)) !important;
   }}
 
-  /* FIX: 16px prevents iOS Safari auto-zoom on input focus */
+  /* 16px prevents iOS Safari auto-zoom on input focus */
   div[data-testid="stChatInput"] textarea,
   div[data-testid="stChatInput"] div[contenteditable="true"] {{
     font-size: 16px !important;
