@@ -12,7 +12,7 @@ from together import Together
 st.set_page_config(
     page_title="Orcabot",
     layout="wide",
-    initial_sidebar_state="collapsed",   # collapsed by default → no sidebar crush on mobile
+    initial_sidebar_state="collapsed",
 )
 
 # =========================
@@ -115,11 +115,7 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
   margin: 0 !important;
 }}
 
-/* ── Main layout ──
-   IMPORTANT: Do NOT set overflow:hidden on html/body on mobile.
-   Mobile browsers (Safari, Chrome) resize the viewport when the
-   address bar shows/hides; overflow:hidden traps content off-screen.
-   Instead, let the page scroll naturally and use dvh units.          */
+/* ── Main layout ── */
 html, body {{
   height: 100% !important;
 }}
@@ -127,6 +123,10 @@ html, body {{
 div[data-testid="stAppViewContainer"] {{
   min-height: 100vh !important;
   min-height: 100dvh !important;
+  /* FIX: was overflow: hidden — that clips the whole page on mobile.
+     Use overflow-x: hidden so the page can scroll vertically. */
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
 }}
 
 section.main {{
@@ -140,7 +140,7 @@ div[data-testid="stAppViewBlockContainer"] {{
   padding-top: 0 !important;
   padding-left: 10px !important;
   padding-right: 12px !important;
-  padding-bottom: 90px !important;   /* room for fixed input bar */
+  padding-bottom: 90px !important;
 }}
 
 section.main .block-container {{
@@ -163,10 +163,6 @@ section.main .block-container {{
 
 div[class*="st-emotion-cache"] {{
   border-radius: 0 !important;
-}}
-
-div[data-testid="stAppViewContainer"] {{
-  overflow: hidden !important;
 }}
 
 /* ── Chat messages ── */
@@ -212,11 +208,11 @@ div[data-testid="stAppViewBlockContainer"] > div > div {{
   margin: 0 !important;
 }}
 
-/* ── Chat input bar ── */
+/* ── Chat input bar (desktop) ── */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
   bottom: 10px !important;
-  left: calc({SIDEBAR_WIDTH_PX}px + 12px) !important;   /* desktop: clear sidebar */
+  left: calc({SIDEBAR_WIDTH_PX}px + 12px) !important;
   right: 12px !important;
   z-index: 10000 !important;
 }}
@@ -271,53 +267,61 @@ div[data-testid="stChatInput"] div[data-baseweb="textarea"] > div {{
    ══════════════════════════════════════════════════════ */
 @media (max-width: 768px) {{
 
-  /* Collapse sidebar to zero width — it should never eat space on mobile */
+  /* FIX: Use transform to slide the sidebar off-screen instead of
+     setting width:0. Streamlit's layout engine measures the sidebar
+     width and offsets the main content — zeroing the width breaks
+     that calculation and leaves a blank gap or clips the main area.
+     translateX(-100%) removes it visually while keeping layout intact. */
   section[data-testid="stSidebar"],
   section[data-testid="stSidebar"][aria-expanded="false"],
   section[data-testid="stSidebar"][aria-expanded="true"] {{
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: 0 !important;
-    min-width: 0 !important;
-    max-width: 0 !important;
+    width: {SIDEBAR_WIDTH_PX}px !important;
+    min-width: {SIDEBAR_WIDTH_PX}px !important;
+    max-width: {SIDEBAR_WIDTH_PX}px !important;
     height: 100% !important;
     overflow: hidden !important;
     border-right: none !important;
     z-index: 99999 !important;
+    transform: translateX(-100%) !important;
+    visibility: hidden !important;
   }}
 
-  /* Remove the inline transform Streamlit may inject */
-  section[data-testid="stSidebar"] > div {{
-    transform: none !important;
-  }}
-
-  /* Main area: full viewport width */
+  /* FIX: Main area must fill the full viewport since the sidebar
+     is now off-screen (fixed + translated). Streamlit may still
+     inject a left margin equal to the sidebar width — override it. */
   div[data-testid="stAppViewContainer"],
   section.main {{
     width: 100vw !important;
     max-width: 100vw !important;
     margin-left: 0 !important;
+    padding-left: 0 !important;
     overflow-x: hidden !important;
   }}
 
   div[data-testid="stAppViewBlockContainer"],
   section.main .block-container {{
     width: 100% !important;
+    max-width: 100% !important;
     padding-left: 8px !important;
     padding-right: 8px !important;
-    padding-bottom: 100px !important;
+    /* FIX: Add safe-area-inset-bottom for iPhone home bar / notch.
+       Without this, the input bar overlaps content on newer iPhones. */
+    padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)) !important;
     overflow-x: hidden !important;
   }}
 
-  /* Chat input: full width, no sidebar offset */
+  /* FIX: Chat input — full width with safe-area bottom clearance.
+     env(safe-area-inset-bottom) is 0 on non-notch devices so it's safe everywhere. */
   div[data-testid="stChatInput"] {{
     left: 8px !important;
     right: 8px !important;
-    bottom: 8px !important;
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px)) !important;
   }}
 
-  /* 16 px prevents iOS Safari auto-zoom when the input is tapped */
+  /* FIX: 16px prevents iOS Safari auto-zoom on input focus */
   div[data-testid="stChatInput"] textarea,
   div[data-testid="stChatInput"] div[contenteditable="true"] {{
     font-size: 16px !important;
