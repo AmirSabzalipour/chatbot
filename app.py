@@ -12,7 +12,7 @@ from together import Together
 st.set_page_config(
     page_title="Orcabot",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",   # collapsed by default → no sidebar crush on mobile
 )
 
 # =========================
@@ -38,15 +38,11 @@ st.markdown(
 
 html, body, .stApp {{
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
-}}
-
-html, body {{
   background: #ffffff !important;
 }}
 
-#MainMenu,
-header,
-footer,
+/* ── Hide Streamlit chrome ── */
+#MainMenu, header, footer,
 div[data-testid="stHeader"],
 div[data-testid="stFooter"],
 div[data-testid="stDecoration"],
@@ -55,7 +51,6 @@ div[data-testid="stStatusWidget"],
 div[data-testid="stToolbarActions"],
 div[data-testid="stToolbarActionButton"] {{
   display: none !important;
-  visibility: hidden !important;
   height: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -68,10 +63,8 @@ button[title="Settings"] {{
   display: none !important;
 }}
 
-/* ── Sidebar: fixed width on desktop, collapsed/overlay on mobile ── */
+/* ── Sidebar ── */
 section[data-testid="stSidebar"] {{
-  display: block !important;
-  visibility: visible !important;
   width: {SIDEBAR_WIDTH_PX}px !important;
   min-width: {SIDEBAR_WIDTH_PX}px !important;
   max-width: {SIDEBAR_WIDTH_PX}px !important;
@@ -80,22 +73,21 @@ section[data-testid="stSidebar"] {{
 }}
 
 div[data-testid="stSidebarContent"] {{
-  display: block !important;
-  visibility: visible !important;
   background: #F2F2F2 !important;
-  padding-top: 0px !important;
+  padding-top: 0 !important;
   padding-left: 10px !important;
   padding-right: 10px !important;
 }}
 
+/* Hide the collapse toggle button */
 button[kind="header"],
 button[data-testid="collapsedControl"],
 div[data-testid="stSidebarCollapseButton"],
 div[data-testid="stSidebarCollapseButton"] > button,
 button[aria-label="Close sidebar"],
-button[aria-label="Open sidebar"] {{
+button[aria-label="Open sidebar"],
+div[data-testid="collapsedControl"] {{
   display: none !important;
-  visibility: hidden !important;
   width: 0 !important;
   height: 0 !important;
   padding: 0 !important;
@@ -103,20 +95,14 @@ button[aria-label="Open sidebar"] {{
   border: 0 !important;
 }}
 
-div[data-testid="collapsedControl"] {{
-  display: none !important;
-  visibility: hidden !important;
-  width: 0 !important;
-  height: 0 !important;
-}}
-
+/* Keep sidebar visible even when Streamlit marks it collapsed */
 section[data-testid="stSidebar"][aria-expanded="false"] {{
   width: {SIDEBAR_WIDTH_PX}px !important;
   min-width: {SIDEBAR_WIDTH_PX}px !important;
-  max-width: {SIDEBAR_WIDTH_PX}px !important;
   transform: none !important;
 }}
 
+/* ── Sidebar text ── */
 .sidebar-title {{
   font-size: 25px;
   font-weight: 900;
@@ -126,86 +112,125 @@ section[data-testid="stSidebar"][aria-expanded="false"] {{
 
 .sidebar-subtitle {{
   font-size: 13px;
-  opacity: 1;
-  margin: 0px 0 0 0 !important;
+  margin: 0 !important;
 }}
 
+/* ── Main layout ──
+   IMPORTANT: Do NOT set overflow:hidden on html/body on mobile.
+   Mobile browsers (Safari, Chrome) resize the viewport when the
+   address bar shows/hides; overflow:hidden traps content off-screen.
+   Instead, let the page scroll naturally and use dvh units.          */
 html, body {{
   height: 100% !important;
-  overflow: hidden !important;
 }}
 
 div[data-testid="stAppViewContainer"] {{
-  height: 100vh !important;
-  overflow: hidden !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
 }}
 
 section.main {{
-  height: 100vh !important;
-  overflow: hidden !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
 }}
 
 div[data-testid="stAppViewBlockContainer"] {{
-  height: 100vh !important;
   overflow-y: auto !important;
   overscroll-behavior: contain !important;
-  padding-top: 0px !important;
-  padding-left: 10px !important;
-  padding-right: 2px !important;
-  padding-bottom: 10px !important;
-}}
-
-div[data-testid="stAppViewBlockContainer"] > div:first-child {{
   padding-top: 0 !important;
-  margin-top: 0 !important;
+  padding-left: 10px !important;
+  padding-right: 12px !important;
+  padding-bottom: 90px !important;   /* room for fixed input bar */
 }}
 
 section.main .block-container {{
   max-width: none !important;
-  padding-top: 0px !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  margin-top: 0px !important;
-  margin-left: 0 !important;
-  margin-right: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }}
 
+/* ── Colours ── */
+.stApp,
+div[data-testid="stAppViewContainer"],
+div[data-testid="stAppViewContainer"] > div,
+section.main,
+section.main .block-container {{
+  background: #ffffff !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}}
+
+div[class*="st-emotion-cache"] {{
+  border-radius: 0 !important;
+}}
+
+div[data-testid="stAppViewContainer"] {{
+  overflow: hidden !important;
+}}
+
+/* ── Chat messages ── */
 div[data-testid="stChatMessage"] {{
+  width: 100% !important;
+  max-width: none !important;
   margin: 0 !important;
   padding: 0 !important;
 }}
 
-div[data-testid="stChatMessage"] > div {{
+div[data-testid="stChatMessage"] * {{
+  max-width: none !important;
+}}
+
+div[data-testid="stChatMessage"] > div,
+div[data-testid="stChatMessage"] > div > div,
+div[data-testid="stChatMessage"] > div > div > div,
+div[data-testid="stChatMessageContent"],
+div[data-testid="stChatMessageContent"] > div,
+div[data-testid="stChatMessage"] [data-baseweb],
+div[data-testid="stChatMessage"] [class*="st-emotion-cache"] {{
   margin: 0 !important;
   padding: 0 !important;
 }}
 
-div[data-testid="stChatMessage"] > div > div {{
+div[data-testid="stChatMessageContent"] p {{
   margin: 0 !important;
-  padding-top: 0 !important;
-  padding-left: 0 !important;
 }}
 
-div[data-testid="stChatMessage"] [data-baseweb] {{
-  padding-left: 0px !important;
+div[data-testid="stChatMessageAvatar"],
+div[data-testid="stChatMessage"] > div:first-child {{
+  display: none !important;
 }}
 
-/* ── Chat input: desktop (sidebar visible) ── */
+div[data-testid="stChatMessage"][class*="user"] div[data-testid="stChatMessageContent"] *,
+div[data-testid="stChatMessage"][class*="--user"] div[data-testid="stChatMessageContent"] * {{
+  font-weight: 700 !important;
+}}
+
+div[data-testid="stAppViewBlockContainer"] > div,
+div[data-testid="stAppViewBlockContainer"] > div > div {{
+  padding: 0 !important;
+  margin: 0 !important;
+}}
+
+/* ── Chat input bar ── */
 div[data-testid="stChatInput"] {{
   position: fixed !important;
   bottom: 10px !important;
-  left: calc({SIDEBAR_WIDTH_PX}px + 12px) !important;
+  left: calc({SIDEBAR_WIDTH_PX}px + 12px) !important;   /* desktop: clear sidebar */
   right: 12px !important;
-  max-width: none !important;
   z-index: 10000 !important;
 }}
 
 div[data-testid="stChatInput"],
 div[data-testid="stChatInput"] > div,
-div[data-testid="stChatInput"] > div > div {{
+div[data-testid="stChatInput"] > div > div,
+div[data-testid="stChatInput"] div[data-baseweb="textarea"],
+div[data-testid="stChatInput"] div[data-baseweb="base-input"] {{
+  background: #ffffff !important;
+  border-radius: 24px !important;
+  overflow: hidden !important;
   padding: 0 !important;
   margin: 0 !important;
-  background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
 }}
@@ -222,7 +247,6 @@ div[data-testid="stChatInput"] div[contenteditable="true"] {{
 
 div[data-testid="stChatInput"] button {{
   display: none !important;
-  visibility: hidden !important;
   width: 0 !important;
   height: 0 !important;
   padding: 0 !important;
@@ -232,183 +256,58 @@ div[data-testid="stChatInput"] button {{
 }}
 
 div[data-testid="stChatInput"] div[data-baseweb="base-input"],
-div[data-testid="stChatInput"] div[data-baseweb="textarea"],
 div[data-testid="stChatInput"] div[data-baseweb="form-control"],
-div[data-testid="stChatInput"] div[role="group"] {{
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}}
-
+div[data-testid="stChatInput"] div[role="group"],
 div[data-testid="stChatInput"] div[data-baseweb="textarea"] > div {{
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
-}}
-
-div[data-testid="stChatInput"],
-div[data-testid="stChatInput"] > div,
-div[data-testid="stChatInput"] > div > div,
-div[data-testid="stChatInput"] div[data-baseweb="textarea"],
-div[data-testid="stChatInput"] div[data-baseweb="base-input"] {{
-  background: #ffffff !important;
-  border-radius: 24px !important;
-  overflow: hidden !important;
-}}
-
-div[data-testid="stAppViewContainer"],
-section.main,
-div[data-testid="stAppViewBlockContainer"],
-section.main .block-container {{
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-}}
-
-.stApp,
-div[data-testid="stAppViewContainer"],
-div[data-testid="stAppViewContainer"] > div,
-section.main,
-section.main .block-container {{
-  background: #ffffff !important;
-}}
-
-div[data-testid="stAppViewBlockContainer"] {{
-  padding-top: 0px !important;
-  padding-left: 0px !important;
-  padding-right: 12px !important;
-  padding-bottom: 110px !important;
-}}
-
-div[data-testid="stChatMessage"] {{
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}}
-
-div[data-testid="stChatMessage"] * {{
-  max-width: none !important;
-}}
-
-div[data-testid="stChatMessage"] > div,
-div[data-testid="stChatMessage"] > div > div,
-div[data-testid="stChatMessage"] > div > div > div {{
-  margin: 0 !important;
-  padding: 0 !important;
-}}
-
-div[data-testid="stChatMessageContent"],
-div[data-testid="stChatMessageContent"] > div {{
-  margin: 0 !important;
-  padding: 0 !important;
-}}
-
-div[data-testid="stChatMessage"] [data-baseweb],
-div[data-testid="stChatMessage"] [class*="st-emotion-cache"] {{
-  margin: 0 !important;
-  padding: 0 !important;
-}}
-
-section.main .block-container {{
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}}
-
-div[data-testid="stAppViewBlockContainer"] > div,
-div[data-testid="stAppViewBlockContainer"] > div > div {{
   padding: 0 !important;
   margin: 0 !important;
 }}
 
-div[data-testid="stChatMessageAvatar"] {{
-  display: none !important;
-}}
-
-div[data-testid="stChatMessage"] > div:first-child {{
-  display: none !important;
-}}
-
-div[data-testid="stChatMessageContent"] p {{
-  margin: 0 !important;
-}}
-
-div[data-testid="stChatMessage"][class*="user"] div[data-testid="stChatMessageContent"],
-div[data-testid="stChatMessage"][class*="--user"] div[data-testid="stChatMessageContent"] {{
-  background: transparent !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}}
-
-div[data-testid="stChatMessage"][class*="user"] div[data-testid="stChatMessageContent"] *,
-div[data-testid="stChatMessage"][class*="--user"] div[data-testid="stChatMessageContent"] * {{
-  font-weight: 700 !important;
-}}
-
-.stApp,
-div[data-testid="stAppViewContainer"],
-div[data-testid="stAppViewContainer"] > div,
-section.main,
-section.main .block-container {{
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  border: 0 !important;
-  overflow: visible !important;
-}}
-
-div[class*="st-emotion-cache"] {{
-  border-radius: 0 !important;
-}}
-
-.stApp {{
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}}
-
-div[data-testid="stAppViewContainer"] {{
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  overflow: hidden !important;
-}}
-
-section.main {{
-  border-radius: 0 !important;
-}}
-
-/* ══════════════════════════════════════════
-   RESPONSIVE — small screens (≤ 768 px)
-   The sidebar collapses away and the chat
-   input bar spans the full viewport width.
-   ══════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   MOBILE  ≤ 768 px
+   ══════════════════════════════════════════════════════ */
 @media (max-width: 768px) {{
 
-  /* Let the sidebar slide off-screen rather than squishing content */
+  /* Collapse sidebar to zero width — it should never eat space on mobile */
   section[data-testid="stSidebar"],
-  section[data-testid="stSidebar"][aria-expanded="false"] {{
-    width: 0 !important;
-    min-width: 0 !important;
-    max-width: 0 !important;
-    overflow: hidden !important;
-    border-right: none !important;
-    transform: translateX(-100%) !important;
-    transition: transform 0.2s ease !important;
-  }}
-
-  /* When Streamlit explicitly keeps it open (aria-expanded=true), show it as
-     a floating overlay so it never pushes/squishes the main area */
+  section[data-testid="stSidebar"][aria-expanded="false"],
   section[data-testid="stSidebar"][aria-expanded="true"] {{
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: {SIDEBAR_WIDTH_PX}px !important;
-    min-width: {SIDEBAR_WIDTH_PX}px !important;
-    max-width: {SIDEBAR_WIDTH_PX}px !important;
-    height: 100vh !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    border-right: none !important;
     z-index: 99999 !important;
-    transform: translateX(0) !important;
-    box-shadow: 4px 0 20px rgba(0,0,0,0.15) !important;
+  }}
+
+  /* Remove the inline transform Streamlit may inject */
+  section[data-testid="stSidebar"] > div {{
+    transform: none !important;
+  }}
+
+  /* Main area: full viewport width */
+  div[data-testid="stAppViewContainer"],
+  section.main {{
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: 0 !important;
+    overflow-x: hidden !important;
+  }}
+
+  div[data-testid="stAppViewBlockContainer"],
+  section.main .block-container {{
+    width: 100% !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    padding-bottom: 100px !important;
+    overflow-x: hidden !important;
   }}
 
   /* Chat input: full width, no sidebar offset */
@@ -418,34 +317,16 @@ section.main {{
     bottom: 8px !important;
   }}
 
-  /* Give the message list enough bottom padding so the last message
-     isn't hidden behind the fixed input bar */
-  div[data-testid="stAppViewBlockContainer"] {{
-    padding-bottom: 90px !important;
-    padding-left: 6px !important;
-    padding-right: 6px !important;
-  }}
-
-  /* Make sure the main content column fills the whole width */
-  section.main,
-  div[data-testid="stAppViewContainer"],
-  div[data-testid="stAppViewBlockContainer"] {{
-    width: 100vw !important;
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
-  }}
-
-  /* Slightly smaller font for the chat input on mobile */
+  /* 16 px prevents iOS Safari auto-zoom when the input is tapped */
   div[data-testid="stChatInput"] textarea,
   div[data-testid="stChatInput"] div[contenteditable="true"] {{
-    font-size: 16px !important; /* 16 px prevents iOS auto-zoom */
+    font-size: 16px !important;
     padding: 0.65rem 0.9rem !important;
   }}
 }}
 
-/* ── Very small phones (≤ 480 px) ── */
 @media (max-width: 480px) {{
-  .sidebar-title  {{ font-size: 20px; }}
+  .sidebar-title   {{ font-size: 20px; }}
   .sidebar-subtitle {{ font-size: 12px; }}
 }}
 </style>
@@ -453,11 +334,7 @@ section.main {{
     unsafe_allow_html=True,
 )
 
-st.markdown("""
-<style>
-footer {display: none !important;}
-</style>
-""", unsafe_allow_html=True)
+st.markdown("<style>footer {display: none !important;}</style>", unsafe_allow_html=True)
 
 # =========================
 # SIDEBAR CONTENT
@@ -503,7 +380,6 @@ if not DOCUMENT:
 # RAG HELPERS
 # =========================
 def chunk_text_words(text: str, chunk_size: int = 120, overlap: int = 30):
-    """Split document into overlapping word chunks for retrieval."""
     words = text.split()
     n = len(words)
     chunks = []
@@ -518,7 +394,6 @@ def chunk_text_words(text: str, chunk_size: int = 120, overlap: int = 30):
 
 @st.cache_resource
 def build_rag(document_text: str):
-    """Build embeddings + Chroma collection for retrieval; create Together client."""
     embedder = SentenceTransformer("all-MiniLM-L6-v2")
     chunks = chunk_text_words(document_text, 120, 30)
     embs = embedder.encode(chunks, convert_to_numpy=True)
@@ -544,14 +419,11 @@ def build_rag(document_text: str):
     return llm, embedder, col
 
 def rag_answer_stream(llm, embedder, col, query: str, model_name: str, top_k: int, temperature: float):
-    """Retrieve context, call LLM with stream=True, yield tokens one by one.
-    Also stores retrieved chunks in st.session_state['_last_chunks']."""
     q = embedder.encode([query], convert_to_numpy=True)[0]
     res = col.query(query_embeddings=[q], n_results=top_k)
     chunks = res["documents"][0]
     ctx = "\n\n---\n\n".join(chunks)
 
-    # Store chunks so the caller can decide whether to display them
     st.session_state["_last_chunks"] = chunks
 
     try:
@@ -578,7 +450,6 @@ def rag_answer_stream(llm, embedder, col, query: str, model_name: str, top_k: in
             if not chunk.choices:
                 continue
             delta = chunk.choices[0].delta.content or ""
-            # Strip any stray <think>...</think> tokens mid-stream
             delta = re.sub(r"<think>.*?</think>", "", delta, flags=re.DOTALL)
             if delta:
                 yield delta
@@ -589,7 +460,6 @@ def rag_answer_stream(llm, embedder, col, query: str, model_name: str, top_k: in
         yield f"⚠️ Model request failed: {e}"
 
 def knows_answer(text: str) -> bool:
-    """Return False if the answer is a 'don't know' variant."""
     lowered = text.lower()
     return not any(phrase in lowered for phrase in DUNNO_PHRASES)
 
@@ -612,7 +482,6 @@ messages = st.session_state.messages
 for m in messages:
     with st.chat_message(m["role"]):
         st.markdown(m["content"])
-        # Only show context expander if answer was known AND show_ctx is on
         if show_ctx and m.get("retrieved"):
             with st.expander("Retrieved context", expanded=False):
                 st.markdown("\n\n---\n\n".join(m["retrieved"]))
@@ -622,12 +491,10 @@ for m in messages:
 # =========================
 prompt = st.chat_input("Ask about the document…")
 if prompt:
-    # Show user message immediately
     messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Stream assistant response
     with st.chat_message("assistant"):
         stream = rag_answer_stream(
             llm=llm,
@@ -640,16 +507,13 @@ if prompt:
         )
         ans = st.write_stream(stream)
 
-        # Retrieve chunks stored during streaming
         retrieved = st.session_state.pop("_last_chunks", [])
         answered = knows_answer(ans)
 
-        # Only show context expander if the model actually knew the answer
         if show_ctx and answered and retrieved:
             with st.expander("Retrieved context", expanded=False):
                 st.markdown("\n\n---\n\n".join(retrieved))
 
-    # Persist message — only attach retrieved chunks if answer was known
     assistant_msg = {"role": "assistant", "content": ans}
     if show_ctx and answered and retrieved:
         assistant_msg["retrieved"] = retrieved
